@@ -1,0 +1,89 @@
+.header{
+    display: flex;
+    justify-content: center;
+    height: var(--heightHeader);
+    background-color: var(--BGR-header);
+    box-shadow: 1px 1px 10px #ccc;
+
+
+
+    .nav-header{
+        display: flex;
+        height: var(--heightHeader);
+        align-items: center;
+        justify-content:space-between;
+     
+        .nav-icon-home{
+            text-decoration: none;
+            color: var(--default-color-iconSVG);
+            display: block;
+            align-items: center;
+            height: 80%;
+            
+        }
+
+
+        .language{
+            display: flex;
+            align-items: center;
+        }
+
+        
+        .list-icon-controll{
+            display: flex;
+            height: var(--heightHeader);
+            align-items: center;
+            
+            .icon-system{
+                color: var(--default-color-iconSVG);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 110px;
+                height: calc(var(--heightHeader) - 10px);
+                
+               
+                &:hover{
+                    border-radius: 6px;
+                    background-color: rgba(238, 238, 238, 0.837);
+                }
+        
+            }
+            .icon-system.active{
+                color: var(--iconSVG-active);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 110px;
+                height: calc(var(--heightHeader) - 10px);
+                
+            }
+        }
+
+
+        
+        
+        .List-icon-right{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 170px;
+            
+            .log-out{
+                padding: 15px;
+                margin-right: -15px;
+    
+    
+                .icon-log-out{
+                    color: var(--default-color-iconSVG);
+                    display: flex;
+                    align-items: center;
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+
+
+

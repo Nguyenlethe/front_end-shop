@@ -1,0 +1,76 @@
+.heading-manage-user{
+    text-align: center;
+    font-size: var(--size-heading-manage);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.sub-heading{
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    background-color: rgb(0, 123, 195);
+    color: white;
+    font-weight: 500;
+    border-radius: 50px;
+    box-shadow: 1px 1px 10px rgb(173, 172, 172);
+    cursor: pointer;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    .icon-user{
+        margin-left:14px;
+    }
+}
+
+
+.list-input{
+
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content:space-between;
+
+    .form-input{
+        margin: 0 0 5px 0;
+        position: relative;
+        
+        
+        .input-label{
+            font-size: var(--font-size-label);
+            height: var(--height-label);
+        }
+        
+        .input{
+            border-radius:6px;
+            outline: none;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: var(--height-input);
+            padding-left: var(--padding-left);
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 999;
+            background-color:transparent;
+        }
+        .planceholder_input{
+            position: absolute;
+            top: calc(50% );
+            transform: translateY(-10%);
+            width: 100%;
+            left: calc(var(--padding-left) * 2);
+            font-size: var(--font-size-label);
+            color:rgb(159, 157, 157);
+        }
+    }
+    .form-input.full{
+        margin: 0 0 20px 0;
+        width: 100%;
+    }
+}
+
+
+
+
+ 

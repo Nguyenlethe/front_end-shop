@@ -1,0 +1,114 @@
+{
+    "nav": {
+        "home": "Bố cục mặc định ",
+        "news": "Xin Chào Cả Nhà 1",
+        "contact": "Xin Chào Cả Nhà 2",
+        "about": "Xin Chào Cả Nhà 3",
+        "homee": {
+            "content": "Xin Chào Cả Nhà 6",
+            "home": "Xin Chào Cả Nhà",
+            "news": "Xin Chào Cả Nhà 1",
+            "contact": "Xin Chào Cả Nhà 2",
+            "about": "Xin Chào Cả Nhà 3",
+            "blog":{
+                "title": "Xin chào Blog",
+                "content": "Xin chào Blog 2",
+                "footer": "Xin chào Blog 3",
+                "element": {
+                    "R1":"Quan Tri Vien 1",
+                    "R2":"Quan Tri Vien 2",
+                    "R3":"Quan Tri Vien 3",
+                    "position": {
+                        "P1":"Bac Si 1",
+                        "P2":"Bac Si 2",
+                        "P3":"Bac Si 3",
+                        "blog":"Con sóng dưới lòng sâu  Con sóng trên mặt nước Ôi con sóng nhớ bờ Ngày đêm không ngủ được Lòng em nhớ đến anhCả trong mơ còn thức Dẫu xuôi về phương bắc Dẫu ngược về phương nam nào em cũng nghĩ Hướng về anh - một phương"
+                    }
+                }
+            }
+        }
+    },
+    "footer": {
+        "home": "Xin Chào Cả Nhà",
+        "news": "Xin Chào Cả Nhà 1",
+        "contact": "Xin Chào Cả Nhà 2",
+        "about": "Xin Chào Cả Nhà 3",
+        "homee": {
+            "content": "Xin Chào Cả Nhà 6",
+            "home": "Xin Chào Cả Nhà",
+            "news": "Xin Chào Cả Nhà 1",
+            "contact": "Xin Chào Cả Nhà 2",
+            "about": "Xin Chào Cả Nhà 3",
+            "blog":{
+                "title": "Xin chào Blog",
+                "content": "Xin chào Blog 2",
+                "footer": "Xin chào Blog 3",
+                "element": {
+                    "R1":"Quan Tri Vien 1",
+                    "R2":"Quan Tri Vien 2",
+                    "R3":"Quan Tri Vien 3",
+                    "position": {
+                        "P1":"Bac Si 1",
+                        "P2":"Bac Si 2",
+                        "P3":"Bac Si 3"
+                    }
+                }
+            }
+        }
+    },
+    "manageAdmin": {
+        "language": "Ngôn ngữ",
+        "home":"Trang chủ",
+        "manageShop":"Quản lý Shop",
+        "manageUsers":"Quản lý người dùng",
+        "logout":"Đăng xuất",
+        "createUser": "Tạo Người Dùng",
+        "form":{
+            "email":"Email",
+            "password":"Mật Khẩu",
+            "firstName":"Họ/Tên Đệm",
+            "lastName":"Tên",
+            "phone":"Số Điện Thoại",
+            "gender":"Giới Tính",
+            "avata":"Ảnh Đại Diện",
+            "avataLink":"Link Ảnh Đại Diện",
+            "permission":"Quyền",
+            "Province":"Tỉnh/Thành Phố",
+            "district":"Quận/Huyện",
+            "wards":"Xã/Phường",
+            "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
+
+            "planceholder_email":" Nhập Email",
+            "planceholder_password":" Nhập Mật Khẩu",
+            "planceholder_firstName":" Nhập Họ/Tên Đệm",
+            "planceholder_lastName":" Nhập Tên",
+            "planceholder_phone":" Nhập Số Điện Thoại",
+            "planceholder_gender":" Nhập Giới Tính",
+            "planceholder_avata":" Nhập Ảnh Đại Diện",
+            "planceholder_avataLink":" Nhập Link Ảnh Đại Diện",
+            "planceholder_permission":" Nhập Quyền",
+            "planceholder_Province":" Nhập Tỉnh/Thành Phố",
+            "planceholder_district":" Nhập Quận/Huyện",
+            "planceholder_wards":" Nhập Xã/Phường",
+            "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
+
+
+
+            "btn":"Thêm Mới"
+
+           
+
+
+
+
+
+
+        }
+
+
+
+    }
+}
+
+ 
+

@@ -1,0 +1,66 @@
+@import 'normalize.css';
+
+:root{
+    --primary: #fe2c55;
+    --black : #000;
+    --white : #fff;
+    --color-text: #333;
+
+    //input 
+    --padding-left: 12px;
+    --height-label: 1.9rem; 
+    --font-size-label: 1.6rem;
+    
+    // Tippy
+    --font-size-tippy: 1.4rem;
+    
+    // ManageUser
+    --default-color-iconSVG: #65676B;
+    --iconSVG-hover: #2b72ff;
+    --iconSVG-active: #1B74E4;
+    --size-heading-manage: 22px;
+    --height-input: 40px;
+    --heightHeader: 50px;
+    --BGR-header: #fff;
+
+    // select 
+    --font-size: 1.6rem;
+  
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed; 
+    overflow-y: overlay;
+}
+
+
+
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+}
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+ 

@@ -1,0 +1,76 @@
+
+       
+$border-radius: 20px;
+$paddingBTN: 4px 2px;
+$transitionBTN:all .35s ease;
+
+.flag{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: $border-radius;
+    width: 110px;
+    box-shadow: 1px 1px 5px rgb(233, 233, 233);
+    padding: 4px 4px;
+    
+    .flag-btn{
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 50%;
+        padding: $paddingBTN;
+        display: flex;
+        justify-content: center;
+        opacity: .6;
+        transition: $transitionBTN;
+        border-radius: $border-radius;
+        
+
+
+        .img-flag{
+            height: 14px;
+            
+        }
+
+        &:hover {
+            background: rgb(167, 229, 254);
+            opacity: 1;
+        }
+    }
+
+    
+
+    .active {
+        border: none;
+        outline: none;
+        background: rgb(255, 180, 180);
+        width: 50%;
+        padding: $paddingBTN;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        opacity: 1;
+        transition: $transitionBTN;
+        border-radius: $border-radius;
+        
+        
+        .img-flag{
+            height: 14px;
+        }
+    }
+
+
+
+    #Vi{
+        &:hover{
+            
+        }
+    }
+
+    #En{
+
+    }
+
+
+
+}

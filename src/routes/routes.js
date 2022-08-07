@@ -1,32 +1,33 @@
 
-import {path} from '../utils/constant';
 
+import {path} from '../utils/constant';
 import Home from '../pages/Home';
-import Login from '../pages/Login';
+import Login from '../pages/System/Login';
+import Register from '../pages/System/Register';
+import LayoutLogin_Register from '../layouts/Login_Register'
+import NotFound404 from '../pages/NotFound404'
 import News from '../pages/News';
 import ManageUser from '../pages/Admin/ManageSystem/ManageSystem';
+import ForgotPassword from '../pages/System/ForgotPassword';
 
 
-// Chứa những routes không cần đăng nhập vẫn xem được
-const publicRoutes = [
+
+const routes = [
     { path: path.HOME, components: Home },
     { path: path.HOMEPAGE, components: Home },
-    { path: path.LOGINPAGE, components: Login, layout: null}, // Cái path nào có kí tự là /@.... sẽ lọt vào trang profile
+    { path: path.LOGINPAGE, components: Login, layout: LayoutLogin_Register}, 
+    { path: path.REGISTERPAGE, components: Register, layout: LayoutLogin_Register},
     { path: path.NEWSPAGE, components: News },
-];
-
-// Chứa những routes cần đăng nhập
-const privateRoutes = [];
-
-const adminRoutes = [
-    { path: path.MANAGE_USER, components: ManageUser },
-];
+    { path: path.MANAGE_USER, components: ManageUser , layout: null},
+    { path: path.FORGOTPASS, components: ForgotPassword , layout: LayoutLogin_Register},
 
 
-const sellerRoutes = [
+    { path: path.NOTFOUND, components: NotFound404 ,layout: null}
+]
 
-];
 
 
-export { privateRoutes, publicRoutes, adminRoutes,sellerRoutes};
+
+
+export { routes};
  

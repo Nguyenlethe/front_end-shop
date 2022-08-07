@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-
 import classNames from 'classnames/bind';
-import styles from './Login.module.scss';
+import styles from './Register.module.scss';
 const cx = classNames.bind(styles);
 
 class Login extends Component {
@@ -30,7 +29,7 @@ class Login extends Component {
     render() {
         return (
             <>
-              Login
+                register
             </>
         )
     }

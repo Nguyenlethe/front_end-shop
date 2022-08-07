@@ -4,9 +4,6 @@ import * as action from '../../store/action'
 import {languages} from '../../utils/constant'
 import VNFlag from '../../assets/flag/VNFlag.png'
 import ENFlag from '../../assets/flag/ENFlag.png'
-import SwitchLanguage from '../../SwitchLanguage'
-
-import Tippy from '../Tippy/Tippy';
 
 
 import classNames from 'classnames/bind';
@@ -58,7 +55,6 @@ class ListLanguage extends Component {
                 <button id='En' className={cx(isActive ? 'flag-btn' : 'active')} onClick={() => this.handleClick('en')}>
                   <img className={cx('img-flag')} src={ENFlag} alt='ENG'/>   
                 </button>
-
             </div>
         )
     }

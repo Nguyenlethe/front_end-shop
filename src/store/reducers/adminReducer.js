@@ -18,7 +18,6 @@ const adminReducer = (state = initialState, action) => {
     switch (action.type) {
         // Reduce Lưu trữ AllCode (Gender, Province, Permission)
         case actionTypes.GET_DATA_ALLCODE_SUCCESS:  
-            console.log(action.dataAllCode)
             state.dataForm.listGender = action.dataAllCode.gender
             state.dataForm.listProvince = action.dataAllCode.province
             state.dataForm.listPermission = action.dataAllCode.resPermission

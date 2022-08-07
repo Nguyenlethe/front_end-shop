@@ -8,15 +8,11 @@ export const fetchAllDataWardsStart = (inputWards) => {
     return async (dispatch, getState) => {
         try{
             let resWards = await adminService.getDataWards(inputWards);
-         
-            console.log(resWards)
             if( resWards && resWards.data.errCode === 0 ){
                 dispatch(fetchAllDataWardsSuscess(resWards.data.data))
             }else{
                 dispatch(fetchAllDataWardsFailed())
             }
-
-
         }catch(err) {
             console.log("fetchAllDoctor"+ err)
             dispatch(fetchAllDataWardsFailed())
@@ -42,8 +38,6 @@ export const fetchAllDataProvinceStart = (inputProvince) => {
     return async (dispatch, getState) => {
         try{
             let resProvince = await adminService.getDataDistrict(inputProvince);
-         
-            console.log(resProvince)
             if( resProvince && resProvince.data.errCode === 0 ){
                 dispatch(fetchAllDataProvinceSuscess(resProvince.data.data))
             }else{

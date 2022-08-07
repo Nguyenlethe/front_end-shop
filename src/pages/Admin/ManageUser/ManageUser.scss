@@ -9,7 +9,7 @@
     font-size: 1.6rem;
     text-transform: uppercase;
     padding: 8px 20px;
-    background-color: rgb(0, 123, 195);
+    background-color: var(--BGR-color-btn-manageuser);
     color: white;
     font-weight: 500;
     border-radius: 50px;
@@ -17,7 +17,9 @@
     cursor: pointer;
     border: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-
+    margin: 20px 0;
+    display: block;
+    text-align: center;
     .icon-user{
         margin-left:14px;
     }
@@ -25,11 +27,11 @@
 
 
 .list-input{
-
     display: flex;
     align-items: center;
     width: 100%;
     justify-content:space-between;
+    margin-top: 10px;
 
     .form-input{
         margin: 0 0 5px 0;
@@ -42,6 +44,8 @@
         }
         
         .input{
+            width: calc(100% - var(--width-eye));
+            float: left;
             border-radius:6px;
             outline: none;
             border: 1px solid #ccc;
@@ -54,16 +58,85 @@
             z-index: 999;
             background-color:transparent;
         }
+        .input[type='file']{
+            padding: 0;
+            
+            &::-webkit-file-upload-button {
+                visibility: hidden;
+            }
+
+            &::before {
+                content: 'Select some files';
+                display: inline-block;
+                background:  var(--BGR-color-btn-manageuser);
+                width: 25%;
+                border-right: 1px solid rgb(153, 153, 153);
+                border-radius: 3px;
+                padding: 10px 8px;
+                outline: none;
+                white-space: nowrap;
+                text-align: center;
+                -webkit-user-select: none;
+                cursor: pointer;
+                color: rgb(255, 255, 255);
+                text-shadow: 1px 1px rgb(0, 0, 0);
+                font-weight: 500;
+                font-size: 1.6rem;
+                height: 100%;
+            }
+
+           
+            &:active::before {
+                background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+            }
+        }
+
+        
         .planceholder_input{
             position: absolute;
             top: calc(50% );
             transform: translateY(-10%);
-            width: 100%;
+            width: calc(100% - var(--width-eye) );
             left: calc(var(--padding-left) * 2);
             font-size: var(--font-size-label);
             color:rgb(159, 157, 157);
         }
+        .err{
+            color: red;
+            display: block;
+            width: 100%;
+            font-size: var(--font-size-label);
+            height: var(--height-label);
+        }
+
+
     }
+    .form-input.password{
+        .input[name='password']{
+            width: calc(100% - var(--width-eye));
+            border-right: transparent;
+            border-top-right-radius: 0 ;
+            border-bottom-right-radius: 0 ;
+            float: left;
+        }
+        .eye-password{
+            position: relative;
+            z-index: 2;
+            display: flex;
+            width: var(--width-eye);
+            font-size: var(--font-size-label);
+            height: var(--height-input);
+            float: right;
+            align-items: center;
+            justify-content:center;
+            border: 1px solid #ccc;
+            border-radius:6px;
+            border-left: 0px;
+            border-top-left-radius: 0 ;
+            border-bottom-left-radius: 0 ;
+        }
+    }
+   
     .form-input.full{
         margin: 0 0 20px 0;
         width: 100%;
@@ -73,4 +146,23 @@
 
 
 
- 
+.pewview-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 30px;
+
+    .pewview-border-img{
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 50%;
+
+        .avata-img{
+            width: 100%;
+        }
+    }
+}

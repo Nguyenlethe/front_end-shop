@@ -1,60 +1,6 @@
 {
     "nav": {
-        "home": "Bố cục mặc định ",
-        "news": "Xin Chào Cả Nhà 1",
-        "contact": "Xin Chào Cả Nhà 2",
-        "about": "Xin Chào Cả Nhà 3",
-        "homee": {
-            "content": "Xin Chào Cả Nhà 6",
-            "home": "Xin Chào Cả Nhà",
-            "news": "Xin Chào Cả Nhà 1",
-            "contact": "Xin Chào Cả Nhà 2",
-            "about": "Xin Chào Cả Nhà 3",
-            "blog":{
-                "title": "Xin chào Blog",
-                "content": "Xin chào Blog 2",
-                "footer": "Xin chào Blog 3",
-                "element": {
-                    "R1":"Quan Tri Vien 1",
-                    "R2":"Quan Tri Vien 2",
-                    "R3":"Quan Tri Vien 3",
-                    "position": {
-                        "P1":"Bac Si 1",
-                        "P2":"Bac Si 2",
-                        "P3":"Bac Si 3",
-                        "blog":"Con sóng dưới lòng sâu  Con sóng trên mặt nước Ôi con sóng nhớ bờ Ngày đêm không ngủ được Lòng em nhớ đến anhCả trong mơ còn thức Dẫu xuôi về phương bắc Dẫu ngược về phương nam nào em cũng nghĩ Hướng về anh - một phương"
-                    }
-                }
-            }
-        }
-    },
-    "footer": {
-        "home": "Xin Chào Cả Nhà",
-        "news": "Xin Chào Cả Nhà 1",
-        "contact": "Xin Chào Cả Nhà 2",
-        "about": "Xin Chào Cả Nhà 3",
-        "homee": {
-            "content": "Xin Chào Cả Nhà 6",
-            "home": "Xin Chào Cả Nhà",
-            "news": "Xin Chào Cả Nhà 1",
-            "contact": "Xin Chào Cả Nhà 2",
-            "about": "Xin Chào Cả Nhà 3",
-            "blog":{
-                "title": "Xin chào Blog",
-                "content": "Xin chào Blog 2",
-                "footer": "Xin chào Blog 3",
-                "element": {
-                    "R1":"Quan Tri Vien 1",
-                    "R2":"Quan Tri Vien 2",
-                    "R3":"Quan Tri Vien 3",
-                    "position": {
-                        "P1":"Bac Si 1",
-                        "P2":"Bac Si 2",
-                        "P3":"Bac Si 3"
-                    }
-                }
-            }
-        }
+        "home": "Bố cục mặc định "
     },
     "manageAdmin": {
         "language": "Ngôn ngữ",
@@ -63,7 +9,10 @@
         "manageUsers":"Quản lý người dùng",
         "logout":"Đăng xuất",
         "createUser": "Tạo Người Dùng",
+        "btnLG":"Đăng Nhập",
+        "btnRGT":"Đăng Ký",
         "form":{
+            "idUser":"Mã Người Dùng",
             "email":"Email",
             "password":"Mật Khẩu",
             "firstName":"Họ/Tên Đệm",
@@ -77,7 +26,7 @@
             "district":"Quận/Huyện",
             "wards":"Xã/Phường",
             "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
-
+            "planceholder_idUser":" Nhập Mã Người Dùng",
             "planceholder_email":" Nhập Email",
             "planceholder_password":" Nhập Mật Khẩu",
             "planceholder_firstName":" Nhập Họ/Tên Đệm",
@@ -91,22 +40,43 @@
             "planceholder_district":" Nhập Quận/Huyện",
             "planceholder_wards":" Nhập Xã/Phường",
             "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
-
-
-
-            "btn":"Thêm Mới"
-
-           
-
-
-
-
-
+            "btn":"Thêm Mới",
+            "heading":"Đăng Nhập",
+            "account":"Tài Khoản",
+            "passwordLogin":"Mật Khẩu",
+            "ETaccount":"Nhập tài khoỏa",
+            "ETpassword":"Nhập mật khẩu",
+            "ForgotPW":"Quên mật khẩu ?",
+            "Orsing":"Đăng nhập bằng cách sử dụng",
+            "CRaccount":"Đăng nhập bằng cách tạo một tài khoản",
+            "SingUp":"ĐĂNG KÝ",
+            "confirm":"XÁC NHẬN"
+        },
+        "toast": {
+            "success":"Thêm người dùng thành công",
+            "warn":"Có lỗi sảy ra !!!"
+        },
+        "found": {
+            "back":"Trở Lại Trang Home",
+            "wanr":"Có lỗi sảy ra !!!"
+        }
+    },
+    "app": {
+        "found": {
+            "back":"Trở Lại Trang Home",
+            "heading":"404 Trang không tồn tại",
+            "sub":"Có vẻ như bạn đang truy cập vào địa chỉ không tồn tại "
+        },
+        "editPass":{
+            "heading":"Quên Mật Khẩu",
+            "labelEmail":"Nhập tài khoản/Email của bạn",
+            "labelNewPass":"Nhập mật khẩu mới",
+            "labelRetype":"Nhập lại mật khẩu",
+            "labelCode":"Nhập mã xác minh của bạn",
+            "goLogin":"Về Trang Login",
+            "ntfSuccess": "Đổi mật khẩu thành công"
 
         }
-
-
-
     }
 }
 

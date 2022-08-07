@@ -1,60 +1,6 @@
 {
     "nav": {
-        "home": "Default Layout",
-        "news": "Hello All Family 1",
-        "contact": "Hello All Family 2",
-        "about": "Hello All Family 3",
-        "homee": {
-            "content": "Hello All Family 6",
-            "home": "Hello All Family",
-            "news": "Hello All Family 1",
-            "contact": "Hello All Family 2",
-            "about": "Hello All Family 3",
-            "blog":{
-                "title": "Hello Blog",
-                "content": "Hello Blog 2",
-                "footer": "Hello Blog 3",
-                "element": {
-                    "R1":"Admin 1",
-                    "R2":"Admin 2",
-                    "R3":"Admin 3",
-                    "position": {
-                        "P1":"Docter 1",
-                        "P2":"Docter 2",
-                        "P3":"Docter 3",
-                        "blog": "Waves on the water Oh the waves miss the shore Can't sleep day and night Waves in the depths My heart misses you Even in my dreams I'm awake Even to the north Though to the south Everywhere I think Towards you - one way"
-                    }
-                }
-            }
-        }
-    },
-    "footer": {
-        "home": "Hello All Family",
-        "news": "Hello All Family 1",
-        "contact": "Hello All Family 2",
-        "about": "Hello All Family 3",
-        "homee": {
-            "content": "Hello All Family 6",
-            "home": "Hello All Family",
-            "news": "Hello All Family 1",
-            "contact": "Hello All Family 2",
-            "about": "Hello All Family 3",
-            "blog":{
-                "title": "Hello Blog",
-                "content": "Hello Blog 2",
-                "footer": "Hello Blog 3",
-                "element": {
-                    "R1":"Admin 1",
-                    "R2":"Admin 2",
-                    "R3":"Admin 3",
-                    "position": {
-                        "P1":"Docter 1",
-                        "P2":"Docter 2",
-                        "P3":"Docter 3"
-                    }
-                }
-            }
-        }
+        "home": "Default Layout"
     },
     "manageAdmin": {
         "language": "Languages",
@@ -63,7 +9,10 @@
         "manageUsers": "Manage Users",
         "logout": "Log Out",
         "createUser": "Create New User",
+        "btnLG":"Login",
+        "btnRGT":"Register",
         "form":{
+            "idUser":"ID User",
             "email":"Email",
             "password":"Password",
             "firstName":"First Name",
@@ -78,7 +27,7 @@
             "wards":"Wards",
 
             "AddressDetails":"Address Detail",
-
+            "planceholder_idUser":"Please Enter ID User",
             "planceholder_email":"Please Enter Email",
             "planceholder_password":"Please Enter Password",
             "planceholder_firstName":"Please Enter First Name",
@@ -92,18 +41,39 @@
             "planceholder_district":"Please Enter District",
             "planceholder_wards":"Please Enter Wards",
             "planceholder_AddressDetails":"Please Enter Address Detail",
-
-            "btn":"Create New"
-
-       
-           
-
-
-
-
-
-
+            "btn":"Create New",
+            "heading":"Login",
+            "account":"Account",
+            "passwordLogin":"Password",
+            "ETaccount":"Enter account",
+            "ETpassword":"Enter password",
+            "ForgotPW":"Forgot password ?",
+            "Orsing":"Sign in using",
+            "CRaccount":"Sign in by creating an account",
+            "SingUp":"REGISTER",
+            "confirm":"CONFIRM"
+        },
+        "toast": {
+            "success":"Add user successfully !!!",
+            "warn":"An error occurred"
         }
 
+    },
+    "app": {
+
+        "found": {
+            "back":"Back To Home Page",
+            "heading":"404 Page Not Found",
+            "sub":"Looks like you're accessing a non-existent address"
+        },
+        "editPass":{
+            "heading":"Forgot password",
+            "labelEmail":"Enter your account/Email",
+            "labelNewPass":"Enter your new password",
+            "labelRetype":"Enter the password",
+            "labelCode":"Enter your verification code",
+            "goLogin":"Back to login page",
+            "ntfSuccess": "Change password successfully"
+        }
     }
 }

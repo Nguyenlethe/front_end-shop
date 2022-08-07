@@ -16,11 +16,16 @@ function getDataWards (inputType) {
     return axios.get(`/admin/get-data-wards?type=${inputType}`);
 }
 
+// Lấy Dl từ bảng Allcode
+function createNewUser (data) {
+    return axios.post(`/admin/create-user`, data);
+}
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    createNewUser,
     getAllCode,
     getDataWards,
     getDataDistrict

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 
 import './Tippy.scss';
-
 class Tippy extends Component {
     constructor(props) {
         super(props);
@@ -13,19 +12,6 @@ class Tippy extends Component {
         }
     }
 
-   
-
-    componentDidMount = async ()=>  {
-    }
-    
-    
-    componentDidUpdate= async(prevProps, prevState)=> {
-        if(prevProps.language !== this.props.language){
-            
-        }
-        
-    }
-    
     handleHover = () => {
         const { innerWidth: width} = window;
         const node = this.myRef.current;
@@ -37,7 +23,6 @@ class Tippy extends Component {
             node.style.display = 'block';
             node.classList.add('keyfame');
         }
-
     }
     
     onHover = () => {
@@ -58,7 +43,7 @@ class Tippy extends Component {
             <div className='tippy' onMouseLeave={() => this.onHover()} onMouseOver={() => this.handleHover()}>
                 {children}
 
-               <div style={{bottom: `calc(-${height}% )`}} ref={this.myRef} className='content'>
+               <div style={{bottom: `calc(-${height}% )`}} ref={this.myRef} className='contents'>
                     <span>{content}</span>
                 </div>
 

@@ -3,8 +3,9 @@
 
 .tippy{
     position: relative;
+    display: inline-block;
 
-    .content{
+    .contents{
         bottom: calc(-100% );
         right: 50%;
         transform: translateX(50%) translateY(5px);
@@ -41,7 +42,7 @@
     }
 
 
-    .content.keyfame{
+    .contents.keyfame{
         animation:showTippy .17s linear forwards;
     }
 

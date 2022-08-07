@@ -1,0 +1,29 @@
+#Modal{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(95, 95, 95, 0.334);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s linear;
+
+    svg{
+        width: 35px;
+        animation: rotation .8s infinite linear;
+        transition: transform linear .4s;
+    }
+
+    @keyframes rotation {
+        from {
+          transform: rotate(0deg) scale(1.5);
+        }
+        to {
+          transform: rotate(359deg) scale(1.5);
+        }
+    }
+}

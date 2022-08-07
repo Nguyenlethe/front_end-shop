@@ -6,10 +6,13 @@
     --white : #fff;
     --color-text: #333;
 
+   
+
     //input 
     --padding-left: 12px;
     --height-label: 1.9rem; 
     --font-size-label: 1.6rem;
+    --height-input: 40px;
     
     // Tippy
     --font-size-tippy: 1.4rem;
@@ -19,13 +22,60 @@
     --iconSVG-hover: #2b72ff;
     --iconSVG-active: #1B74E4;
     --size-heading-manage: 22px;
-    --height-input: 40px;
     --heightHeader: 50px;
     --BGR-header: #fff;
-
+    --BGR-color-btn-manageuser: rgb(0, 123, 195);
+    
     // select 
     --font-size: 1.6rem;
-  
+
+    // Mắt
+    --width-eye: 40px;
+
+    //Btn
+    --font-size-btn: 1.6rem;
+    --BGR-frimary-btn-LG: rgba(254, 44, 85, 1.0);
+    --color-frimary-btn-LG: rgba(255, 255, 255, 1.0);
+    --BGR-frimary-btn-hover-LG:rgb(242, 47, 86);
+    --font-weight: 500;
+
+    --BGR-close-btn-LG: rgb(240, 240, 240);
+    --color-close-btn-LG: rgb(44, 44, 44);
+    --BGR-close-btn-hover-LG:rgb(242, 47, 86);
+    --color-close-btn-hover-LG: #fff ;
+    
+    --BGR-close-transparent-btn-LG: rgba(0, 213, 255, 0.048);
+    --color-close-transparent-btn-LG: rgb(255, 255, 255);
+    --BGR-close-transparent-btn-hover-LG:rgb(242, 47, 86);
+    --color-close-transparent-btn-hover-LG: #fff ;
+    
+    
+    
+    // BTN submit login 
+    --font-size-btn-submit: 2rem;
+    --BGR-btn-submit-LG:  linear-gradient( rgba(254, 44, 85, 1.0),rgb(144, 12, 38));
+    --color-btn-submit-LG: rgb(255, 255, 255);
+    --BGR-btn-submit-hover-LG: rgba(254, 44, 85, 1.0);
+    --color-btn-submit-hover-LG: #fff ;
+
+    --BGR-btn-ban-LG: rgba(159, 224, 255, 0.44);
+    --color-btn-ban-LG: rgb(255, 255, 255);
+    --color-btn-ban-hover-LG: #fff ;
+
+
+    // Form system
+    --width-form-system: 450px;
+    --font-size-heading: 3.2rem;
+    --color-heading: rgb(0, 73, 145);
+    --font-size-label:1.8rem;
+
+
+    // link
+    --color-hover-link: rgb(6, 67, 136);
+
+
+    // Font family btn
+    --font-family-primary:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 *{

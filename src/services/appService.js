@@ -25,8 +25,16 @@ function updatePassword (data) {
 }
 
 
+// Đăng ký tài khoản 
+function createNewUser (data) {
+    return axios.post(`/system/create-user`,data);
+}
+
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    createNewUser,
     updatePassword,
     retrievalPassword,
     loginSystem,

@@ -10,9 +10,11 @@ import Modal from '../../../components/Modal/Modal'
 import SwitchLanguage from '../../../SwitchLanguage'
 import _ from 'lodash'
 
+
 import classNames from 'classnames/bind';
 import styles from './ForgotPassword.module.scss';
 const cx = classNames.bind(styles);
+
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -23,6 +25,7 @@ class ForgotPassword extends Component {
             isErrForm: false,
             isSuccess: false,
             erroToken: {},
+            erroSearchEmail: {},
             form: {
                 valueAccount: '',
                 newPassword: '',
@@ -35,7 +38,6 @@ class ForgotPassword extends Component {
     componentDidMount = async ()=>  {
       
     }
-
 
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
@@ -65,7 +67,6 @@ class ForgotPassword extends Component {
         e.preventDefault()
         let {newPassword,retypePassword} = this.state.form
         this.setState({isModal: true})
-
         if(type === true){
             if(newPassword === retypePassword){
                 let res = await this.props.updatePassword(this.state.form)
@@ -78,7 +79,7 @@ class ForgotPassword extends Component {
                 if(res && res.data.errCode === 1){
                     this.setState({
                         isModal: false,
-                        erroToken: {...res.data.data}
+                        erroToken: res.data.data
                     })
                 }
             }else{
@@ -96,7 +97,14 @@ class ForgotPassword extends Component {
                     isModal: false,
                     isFormCreateNewPassword: true,
                 })
-            }else{
+            }
+            if(res && res.data.errCode === 1){
+                this.setState({
+                    isModal: false,
+                    erroSearchEmail:{...res.data.data}
+                })
+            }
+            if(res && res.data.errCode === 1 || res.data.errCode === 0) {
                 this.setState({
                     isModal: false
                 })
@@ -107,23 +115,32 @@ class ForgotPassword extends Component {
       
     render() {
     let {valueAccount,newPassword,retypePassword,token} = this.state.form
-    let {isModal,isFormCreateNewPassword,isErrForm,erroToken,isSuccess} = this.state
+    let {isModal,isFormCreateNewPassword,isErrForm,erroToken,isSuccess,erroSearchEmail} = this.state
     let {language} = this.props
-   
     return (
         <>
             <Modal isShow={isModal}/> 
+
+            
+
+
             {!isSuccess ? <form className={cx('forgotpassword')}>
                 <span className={cx('heading')}><SwitchLanguage id='app.editPass.heading'/></span>
                 <div className={cx('form-input')}>
+
                     {!isFormCreateNewPassword && 
                         <>
                             <label><SwitchLanguage id='app.editPass.labelEmail'/></label>
                             <input type="text" name='valueAccount' value={valueAccount} className={cx('input')}  placeholder={language === languages.EN ? 'Enter Email' : 'Nhập email/Tài khoản của bạn'}
                                 onChange={(e) => this.handleChangeInputAccount(e.target.value,e.target.name)}
                             />
+                            <span className={cx('error-input-login')}>
+                                {!_.isEmpty(erroSearchEmail) ? <FontAwesomeIcon icon={faCircleExclamation} /> : ''}
+                                {!_.isEmpty(erroSearchEmail) ? language === languages.EN ? `${erroSearchEmail.account.valueEn}` : `${erroSearchEmail.account.valueVi}` : ''}
+                            </span>
                         </>
                     }
+
                    {isFormCreateNewPassword && 
                         <>
                             <label><SwitchLanguage id='app.editPass.labelNewPass'/></label>

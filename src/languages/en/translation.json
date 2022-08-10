@@ -11,6 +11,7 @@
         "createUser": "Create New User",
         "btnLG":"Login",
         "btnRGT":"Register",
+        "createShop":"Create New Shop",
         "form":{
             "idUser":"ID User",
             "email":"Email",
@@ -25,7 +26,13 @@
             "Province":"Province",
             "district":"District",
             "wards":"Wards",
-
+            "email-edit":"Not Change !",
+            "password-edit":"Not Change !",
+            "fullName":"Full Name",
+            "Address":"Address",
+            "Permission":"Permission",
+            "Detail":"Detail",
+            "Actions":"Actions",
             "AddressDetails":"Address Detail",
             "planceholder_idUser":"Please Enter ID User",
             "planceholder_email":"Please Enter Email",
@@ -42,6 +49,7 @@
             "planceholder_wards":"Please Enter Wards",
             "planceholder_AddressDetails":"Please Enter Address Detail",
             "btn":"Create New",
+            "btn_edit":"Save Change",
             "heading":"Login",
             "account":"Account",
             "passwordLogin":"Password",
@@ -49,13 +57,35 @@
             "ETpassword":"Enter password",
             "ForgotPW":"Forgot password ?",
             "Orsing":"Sign in using",
+            "OrsingUp":"Sign up using",
             "CRaccount":"Sign in by creating an account",
+            "RGaccount":"You already have an account ?",
             "SingUp":"REGISTER",
-            "confirm":"CONFIRM"
+            "confirm":"CONFIRM",
+            "errAccount":"Incorrect email format",
+            "emptyData":"User not enter data ",
+            "listUser":"List All User",
+
+            "manageId":"ManageId",
+            "nameShop":"Name Shop",
+            "addressShop":"Address Shop",
+            "emailShop":"Email Shop",
+            "phoneNumber":"Phone Number",
+            "pay":"Pay",
+            "province":"Province",
+            "payType":"Pay Type",
+            "viewDetail":"View detail user",
+            "manager":"Manager Shop"
+           
+        
+
+
+           
         },
         "toast": {
             "success":"Add user successfully !!!",
-            "warn":"An error occurred"
+            "warn":"An error occurred",
+            "success_change":"Change successfully"
         }
 
     },

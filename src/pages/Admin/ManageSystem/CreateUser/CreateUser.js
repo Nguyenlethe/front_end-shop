@@ -1,17 +1,23 @@
+ 
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import SwitchLanguage from '../../../SwitchLanguage';
+import SwitchLanguage from '../../../../SwitchLanguage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUserPlus,faEye,faEyeSlash,faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
-import * as actions from '../../../store/action';
-import {languages } from '../../../utils/constant'
-import {default as adminService} from '../../../services/adminService'
+import * as actions from '../../../../store/action';
+import {languages } from '../../../../utils/constant'
+import {default as adminService} from '../../../../services/adminService'
 import _ from 'lodash'
 import { toast } from 'react-toastify';
+import ListUser from '../ListUser'
+
+import './CreateUser.scss';
 
 
-import './ManageUser.scss';
-class ManageUser extends Component {
+
+
+
+class CreateUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +29,7 @@ class ManageUser extends Component {
             listDistrict: [],
             listDataWards: [],
             imgPreview: '',
+            isEditUser: false,
             File: {
                 name: '',
                 file: '',
@@ -66,8 +73,8 @@ class ManageUser extends Component {
     componentDidMount = async ()=>  {
         await this.props.fetchAllDataAllCode()
         this.heandleDataForm()
-    }
 
+    }
 
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
@@ -93,7 +100,6 @@ class ManageUser extends Component {
         }
 
     }
-
 
     // XL Gán Gtri (Gender, Province, Permission)
     heandleDataForm = ()  => {
@@ -142,67 +148,114 @@ class ManageUser extends Component {
     
     // Xl ẩn hiện form
     handleShowHideInputsUser = () => {
-        setTimeout(()=> {
+        let {isEditUser} = this.state
+        let stateCopy = this.state.users
+        for(let key in stateCopy){
+            stateCopy[key] = ''
+        }
+        if(isEditUser === true && this.state.isShowListsInput) {
             this.setState({
-                ...this.state,
+                users: {...stateCopy},
+                imgPreview: '',
+                isEditUser: false,
+            })
+        }else{
+            this.setState({       
                 isShowListsInput: !this.state.isShowListsInput
             })
-        },100)
+        }
     }
 
     // Xl submit form
     handleSubmitFormData = async (e) => {
         e.preventDefault() 
-        let dataUser = JSON.stringify(this.state.users)
-        let {file} = this.state.File
-        let data = new FormData()
-        data.append("name", 'file')
-        data.append("file", file )
-        data.append("name", 'dataUser')
-        data.append("dataUser", dataUser ? dataUser : '')
-        let res = await adminService.createNewUser(data)
-        if(res.data.errCode !== 0){
-            toast.error(<SwitchLanguage id='manageAdmin.toast.warn'/>)
-            let stateCopy = this.state.dataError
-            for(let key in res.data.data){
-                stateCopy[key] = res.data.data[key]
-            }
-            this.setState({
-                dataError: {...stateCopy}
-            })
-        }else{
-            toast.success(<SwitchLanguage id='manageAdmin.toast.success'/>)
-            this.setState({
-                imgPreview: '',
-                users: {
-                    email: '',
-                    password: '',
-                    firstName: '',
-                    lastName: '',
-                    gender: '',
-                    permission: '',
-                    phoneNumber: '',
-                    avata: '',
-                    avataLink: '',
-                    province: '',
-                    district: '',
-                    wards: '',
-                    addressDetails: '',
+        let {isEditUser,users} = this.state
+        if(!isEditUser){
+            let dataUser = JSON.stringify(this.state.users)
+            let {file} = this.state.File
+            let data = new FormData()
+            data.append("name", 'file')
+            data.append("file", file )
+            data.append("name", 'dataUser')
+            data.append("dataUser", dataUser ? dataUser : '')
+            let res = await adminService.createNewUser(data)
+            await this.props.getAllUser('ALL')
+            if(res.data.errCode !== 0){
+                toast.error(<SwitchLanguage id='manageAdmin.toast.warn'/>)
+                let stateCopy = this.state.dataError
+                for(let key in res.data.data){
+                    stateCopy[key] = res.data.data[key]
                 }
-            })
+                this.setState({
+                    dataError: {...stateCopy}
+                })
+            }else{
+                let stateCopy = this.state.users
+                for(let key in stateCopy){
+                    stateCopy[key] = ''
+                }
+                this.setState({
+                    imgPreview: '',
+                    users: {...stateCopy}
+                })
+                toast.success(<SwitchLanguage id='manageAdmin.toast.success'/>)
+            }
+        }else {
+            let res = await adminService.changeUser(users)
+            if(res && res.data.errCode === 0){
+                await this.props.getAllUser('ALL')
+                toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>)
+            }
         }
+        
+        
+
+
     }
+
+    // Ấn sửa User load dữ liệu nguười dùng lên
+    handleSetValueForm  = (data) => {
+        let stateCopy = this.state.dataError
+        for(let key in stateCopy){
+            stateCopy[key] = ''
+        }
+        this.setState({
+            isShowListsInput: true,
+            dataError: {...stateCopy},
+            imgPreview: `${process.env.REACT_APP_BACKEND_IMAGES_URL}/${data.avata}`,
+            
+            users: {
+                email: data.email ? data.email :'',
+                password: '',
+                avata: '',
+                firstName: data.firstName ? data.firstName :'',
+                lastName: data.lastName ? data.lastName :'',
+                gender: data.gender ? data.gender :'',
+                permission: data.permission ? data.permission :'',
+                phoneNumber: data.phoneNumber ? data.phoneNumber :'',
+                avataLink: data.avataLink ? data.avataLink :'',
+                province: data.province ? data.province :'',
+                district: data.district ? data.district :'',
+                wards: data.wards ? data.wards :'',
+                addressDetails: data.addressDetails ? data.addressDetails :'',
+            },
+            isEditUser: true,
+        })
+    }
+
+
+    
+    
 
 render() {
 
-let {language,dataDistrict,dataUser} = this.props
-let {listGender,listProvince,listPermission,listDataWards,isShowListsInput,imgPreview,isShowPass,dataError} = this.state
+
+let {language,dataDistrict} = this.props
+let {listGender,listProvince,listPermission,listDataWards,isShowListsInput,imgPreview,isShowPass,dataError,isEditUser} = this.state
 let {email,password,firstName,lastName,gender, permission, phoneNumber, avata,avataLink, province,district,wards,addressDetails} = this.state.users
 
-console.log()
 
 return (
-
 
 <div className='grid'>
 <div className='grid wide'>
@@ -218,28 +271,26 @@ return (
             <FontAwesomeIcon className='icon-user' icon={faUserPlus} />
         </span>
     </div>
-                                  
-{isShowListsInput && <>
-    
-
+                    
+    <div style={{height: isShowListsInput ? '1160'+'px' : '0'+'px'}} className='all-input l-12'>
 
     <div className='list-input'>
-        <div className='form-input col l-6'>
+        <div className='form-input col l-6' style={{ display:  isEditUser ? 'none' : 'block'}}>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.email'/></label>
-            <input type='text' className='input' name='email'
-                style={email !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}} 
-                value={email} 
+            <input  type='text' className='input' name='email'
+                style={{backgroundColor: email !== '' ? 'white' : 'transparent'}} 
+                value={email}  disabled={isEditUser ? true : false }
                 onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                          
             />
             <span name='email' className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_email' /></span>
             <span className='err'>{!_.isEmpty(dataError.email) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.email) ? language === languages.VI ? dataError.email.valueVi : dataError.email.valueEn : ''}</span>
         </div>
 
-        <div className='form-input password col l-6'>
+        <div className='form-input password col l-6 ' style={{ display: isEditUser ? 'none' : 'block'}}>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.password'/></label>
             <input type={isShowPass ? 'password' : 'text'} className='input' name='password'
-                style={password !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={password}
+                style={{backgroundColor: password !== '' ? 'white' : 'transparent' }}
+                value={password} disabled={isEditUser ? true : false }
                 onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}         
             />
             <p className='eye-password' onClick={() => this.setState({isShowPass: !this.state.isShowPass})}>
@@ -248,8 +299,8 @@ return (
             <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_password' /></span>
             <span className='err'>{!_.isEmpty(dataError.password) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.password) ? language === languages.VI ? dataError.password.valueVi : dataError.password.valueEn : ''}</span>
         </div>
-    </div>
 
+    </div>
 
     <div className='list-input'>
         <div className='form-input col l-6'>
@@ -312,7 +363,6 @@ return (
         </div>
     </div>
 
-
     <div className='list-input'>
         <div className='form-input col l-6'>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.avataLink'/></label>
@@ -342,8 +392,9 @@ return (
             <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_Province' /></span>
             <span className='err'>{!_.isEmpty(dataError.province) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.province) ? language === languages.VI ? dataError.province.valueVi : dataError.province.valueEn : ''}</span>
         </div>
-    </div>
 
+
+    </div>
 
     <div className='list-input'>
         <div className='form-input col l-6'>
@@ -389,7 +440,6 @@ return (
         </div>
     </div>
 
-
     <div className='list-input'>
         <div className='form-input col l-12'>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.AddressDetails'/></label>
@@ -403,13 +453,12 @@ return (
         </div>
     </div>
 
-
     <div className='list-input'>
         <div className='form-input col l-6'>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.phone'/></label>
             <input type='text' className='input' name='phoneNumber'
                 style={phoneNumber !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={phoneNumber}
+                value={phoneNumber} 
                 onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                              
             />
             <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_phone' /></span>
@@ -421,48 +470,49 @@ return (
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.avata'/></label>
             <input type='file' className='input' name='avata'
                 style={avata !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={avata}
+                value={avata} disabled={isEditUser ? true : false }
                 onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name,e)}                                                                                                                         
             />
             <span className='err'>{!_.isEmpty(dataError.avata) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.avata) ? language === languages.VI ? dataError.avata.valueVi : dataError.avata.valueEn : ''}</span>
         </div>
     </div>
 
-
-    
-    <div className='pewview-img'>
+    <div className='pewview-img l-3'>
         <div className='pewview-border-img' >
             <img className='avata-img' src={imgPreview} alt='' />
         </div>
     </div>
-        
-
 
     <div className='col l-12'>
-        <button className='sub-heading'
-            onClick={(e) => this.handleSubmitFormData(e)}
-        >
-            <SwitchLanguage id='manageAdmin.form.btn'/>
-        </button>
+        {isEditUser ? 
+            <button className='sub-heading edit' onClick={(e) => this.handleSubmitFormData(e)}>
+                {language === languages.EN ? 'Save Change':'Lưu Thay Đổi'} 
+            </button>
+            :
+            <button className='sub-heading' onClick={(e) => this.handleSubmitFormData(e)}>
+                <SwitchLanguage  id={'manageAdmin.form.btn'}/> 
+            </button>
+        }
     </div>
-</>}
 
 
-
-        </div>
-    </div>
+</div>
+    <ListUser handleSetValueForm={this.handleSetValueForm} heandleChangeInput={this.heandleChangeInput}/>
+</div>
+</div>
 </div>
         
 )}}
 
 
 const mapStateToProps = state => {
+    
     return {
         dataForm: state.admin.dataForm,
         dataDistrict: state.admin.dataDistrict,
         dataWards: state.admin.dataWards,
         language: state.app.language,
-        dataUser: state.app.loginUser
+        dataUser: state.app.loginUser,
     }
 }
 
@@ -470,8 +520,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDataAllCode: () => dispatch(actions.fetchAllDataAllCodeStart()),
         fetchAllDataProvince: (data) => dispatch(actions.fetchAllDataProvinceStart(data)),
-        fetchAllDataWards: (data) => dispatch(actions.fetchAllDataWardsStart(data))
+        fetchAllDataWards: (data) => dispatch(actions.fetchAllDataWardsStart(data)),
+        getAllUser: (type) => dispatch(actions.getAllUserStart(type))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);

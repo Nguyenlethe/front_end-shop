@@ -21,7 +21,7 @@
             width: 100%;
             display: block;
             font-size: var(--font-size-label);
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         
@@ -90,6 +90,7 @@
             display: flex;
             align-items: center;
             color: red;
+            height: 2rem;
             
             svg{
                 margin-right: 10px;

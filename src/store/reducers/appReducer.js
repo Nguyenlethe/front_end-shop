@@ -4,8 +4,8 @@ import actionTypes from '../action/actionTypes';
 const initState = {
     language: localStorage.getItem('language') ? localStorage.getItem('language') : 'en',
     loginUser: {
-        islogin: false,
-        isError: false,
+        islogin: localStorage.getItem('islogin') ? localStorage.getItem('islogin') : false,
+        isError: localStorage.getItem('isError') ? localStorage.getItem('isError') : false,
         id: localStorage.getItem('id') ? localStorage.getItem('id') : '',
         email: localStorage.getItem('email') ? localStorage.getItem('email') : '',
         permission: localStorage.getItem('permission') ? localStorage.getItem('permission') : '',
@@ -41,6 +41,8 @@ const appReducer = (state = initState, action) => {
 
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
             state.loginUser.id = action.dataLogin.id
+            localStorage.setItem('islogin', true)
+            localStorage.setItem('isError', false)
             localStorage.setItem('id', action.dataLogin.id)
             localStorage.setItem('email',action.dataLogin.email)
             localStorage.setItem('permission',action.dataLogin.permission)
@@ -54,8 +56,8 @@ const appReducer = (state = initState, action) => {
             state.loginUser.fullNameVi = localStorage.getItem('fullNameVi')
             state.loginUser.fullNameEn = localStorage.getItem('fullNameEn')
             state.loginUser.province = localStorage.getItem('province')
-            state.loginUser.islogin = true
-            state.loginUser.isError = false
+            state.loginUser.islogin = localStorage.getItem('islogin')
+            state.loginUser.isError = localStorage.getItem('isError')
             return {
                 ...state
             }
@@ -66,6 +68,11 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state
             }
+
+
+
+
+            
 
 
         default:

@@ -6,12 +6,11 @@ export const path = {
     LOGINPAGE: '/login',
     REGISTERPAGE: '/register',
     FORGOTPASS: '/forgot/password',
-    NOTFOUND: '/*',
-
-
+    
     // ADMIN
-    MANAGE_USER: '/system/management'
+    MANAGE_USER: '/system/management',
 
+    NOTFOUND: '/*',
 };  
 
 

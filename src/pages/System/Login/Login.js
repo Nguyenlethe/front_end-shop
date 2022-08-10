@@ -80,7 +80,6 @@ class Login extends Component {
             this.setState({
                 errMessage: {...errMessageCoppy}
             })
-    
             let res = await this.props.loginSystem(data)
             if(res && res.data.errCode !== 0){
                 this.setState({isModal:false})
@@ -109,20 +108,20 @@ class Login extends Component {
     let {isShowPass,isModal,errMessage} = this.state
     let {account,password} = this.state.form
 
-       
+
+
     return (
     <>
 
     <Modal isShow={isModal}/> 
-    {dataUser.islogin === true && handleCheckPermission(PERMISSIONS.ADMIN,dataUser.permission)  && <Navigate to={path.MANAGE_USER}/>}
-    {dataUser.islogin === true && handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
-    {dataUser.islogin === true && handleCheckPermission(PERMISSIONS.SELLER,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
+
+    {dataUser.islogin && handleCheckPermission(PERMISSIONS.ADMIN,dataUser.permission) && <Navigate to={path.MANAGE_USER}/>}
+    {dataUser.islogin && handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
+    {dataUser.islogin && handleCheckPermission(PERMISSIONS.SELLER,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
 
         <form className={cx('form-login')}>
             <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.heading'/></p>
             <div className={cx('form-input')}>
-
-
                 <label><SwitchLanguage id='manageAdmin.form.account'/></label>
                 <div className={cx('wrap-input')}>
                     <FontAwesomeIcon className={cx('icon-input')} icon={faUser}/> 

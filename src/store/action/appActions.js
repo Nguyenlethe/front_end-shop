@@ -49,31 +49,18 @@ export const loginSystemFailed = () => ({
 // RETRIEVAL_PASSWORD_SUSCESS: 'RETRIEVAL_PASSWORD_SUSCESS:',
 // RETRIEVAL_PASSWORD_FAILED: 'RETRIEVAL_PASSWORD_FAILED',
 
+
+// Actions gửi data (email để lấy lại password)
 export const retrievalPasswordStart = (email) => {
     return async (dispatch, getState) => {
         try{
             let result  = await appService.retrievalPassword(email)
-            if( result && result.data.errCode === 0){
-                dispatch(retrievalPasswordSuscess(result.data.data))
-            }else{
-                dispatch(retrievalPasswordFailed())
-            }
             return result
         }catch(err) {
             console.log("retrievalPasswordStart"+err)
-            dispatch(retrievalPasswordFailed())
         }
     }
 }
-
-export const retrievalPasswordSuscess = (data) => ({
-    type: actionTypes.RETRIEVAL_PASSWORD_SUSCESS,
-    dataRetrieval: data
-})
-
-export const retrievalPasswordFailed = () => ({
-    type: actionTypes.RETRIEVAL_PASSWORD_FAILED,
-})
 
 
 
@@ -81,28 +68,34 @@ export const retrievalPasswordFailed = () => ({
 // UPDATE_PASSWORD_SUSCESS: 'UPDATE_PASSWORD_SUSCESS:',
 // UPDATE_PASSWORD_FAILED: 'UPDATE_PASSWORD_FAILED',
 
+
+// Actions update Password
 export const updatePasswordStart = (data) => {
     return async (dispatch, getState) => {
         try{
             let result  = await appService.updatePassword(data)
-            if( result && result.data.errCode === 0){
-                dispatch(updatePasswordSuscess(result.data.data))
-            }else{
-                dispatch(updatePasswordFailed())
-            }
             return result
         }catch(err) {
             console.log("updatePasswordStart"+err)
-            dispatch(updatePasswordFailed())
         }
     }
 }
 
-export const updatePasswordSuscess = (data) => ({
-    type: actionTypes.UPDATE_PASSWORD_SUSCESS,
-    dataRetrieval: data
-})
 
-export const updatePasswordFailed = () => ({
-    type: actionTypes.UPDATE_PASSWORD_FAILED,
-})
+
+
+// CREATE_USER_SUSCESS: 'CREATE_USER_SUSCESS:',
+// CREATE_USER_FAILED: 'CREATE_USER_FAILED',
+
+// Actions đăng ký Account
+export const createNewUserStart = (data) => {
+    return async (dispatch, getState) => {
+        try{
+            let result  = await appService.createNewUser(data)
+            return result
+        }catch(err) {
+            console.log("createNewUserStart"+err)
+        }
+    }
+}
+

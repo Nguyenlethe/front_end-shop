@@ -11,6 +11,7 @@
         "createUser": "Tạo Người Dùng",
         "btnLG":"Đăng Nhập",
         "btnRGT":"Đăng Ký",
+        "createShop":"Tạo Mới Shop",
         "form":{
             "idUser":"Mã Người Dùng",
             "email":"Email",
@@ -25,6 +26,11 @@
             "Province":"Tỉnh/Thành Phố",
             "district":"Quận/Huyện",
             "wards":"Xã/Phường",
+            "email-edit":"Không được sửa trường này !",
+            "password-edit":"Không được sửa trường này !",
+
+
+
             "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
             "planceholder_idUser":" Nhập Mã Người Dùng",
             "planceholder_email":" Nhập Email",
@@ -40,7 +46,9 @@
             "planceholder_district":" Nhập Quận/Huyện",
             "planceholder_wards":" Nhập Xã/Phường",
             "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
+
             "btn":"Thêm Mới",
+            "btn_edit":"Lưu Thay Đổi",
             "heading":"Đăng Nhập",
             "account":"Tài Khoản",
             "passwordLogin":"Mật Khẩu",
@@ -48,13 +56,39 @@
             "ETpassword":"Nhập mật khẩu",
             "ForgotPW":"Quên mật khẩu ?",
             "Orsing":"Đăng nhập bằng cách sử dụng",
+            "OrsingUp":"Đăng kí bằng cách sử dụng",
             "CRaccount":"Đăng nhập bằng cách tạo một tài khoản",
+            "RGaccount":"Bạn đã có sẵn một tài khoản ?",
             "SingUp":"ĐĂNG KÝ",
-            "confirm":"XÁC NHẬN"
+            "confirm":"XÁC NHẬN",
+            "errAccount":"Email sai định dạng",
+            "emptyData":"Người dùng chưa nhập",
+            "fullName":"Họ và tên",
+            "Address": "Địa chỉ",
+            "Permission":"Quyền",
+            "Detail":"Mô tả",
+            "Actions":"Trạng thái",
+            "listUser":"Danh Sách Người Dùng",
+            
+            "manageId":"Người quản lý",
+            "nameShop":"Tên Shop",
+            "addressShop":"Địa Chỉ Shop",
+            "emailShop":"Email Shop",
+            "phoneNumber":"Số Điện Thoại",
+            "pay":"Phương Thức Thanh Toán",
+            "province":"Tỉnh /Thành Phố",
+            "payType":"Phương thức thay toán",
+            "viewDetail":"Xem chi tiết",
+
+            "seller":"Chủ cửa hàng",
+            "manager":"Người Quản Lý"
+
+        
         },
         "toast": {
             "success":"Thêm người dùng thành công",
-            "warn":"Có lỗi sảy ra !!!"
+            "warn":"Có lỗi sảy ra !!!",
+            "success_change":"Thay đổi thành công !!!"
         },
         "found": {
             "back":"Trở Lại Trang Home",

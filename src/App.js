@@ -7,16 +7,13 @@ import DefaultLayout from './layouts/DefaultLayout'
 
 
 
-
 class App extends Component {
-  
     render() {
     return ( 
         <>
         <div className="App">
             <Routes>
-                {   
-                    routes.map((route, index) => {
+                { routes.map((route, index) => {
                     const Page = route.components;
                     let Layout = DefaultLayout; 
                     if (route.layout) {
@@ -37,6 +34,7 @@ class App extends Component {
 
 const mapStateToProps = state => { 
     return {
+        dataUser: state.app.loginUser
     }
 }
 const mapDispatchToProps = dispatch => {

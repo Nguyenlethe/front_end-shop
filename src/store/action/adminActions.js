@@ -69,16 +69,19 @@ export const fetchAllDataProvinceFailed = () => ({
 export const fetchAllDataAllCodeStart = () => {
     return async (dispatch, getState) => {
         try{
-            let resGender = await adminService.getAllCode('GENDER');
+            let resPay = await adminService.getAllCode('PAY')
+            let resGender = await adminService.getAllCode('GENDER')
             let resPermission = await adminService.getAllCode('ROLE')
             let resProvince = await adminService.getAllCode('TTP')
             
 
             if( resGender && resGender.data.errCode === 0 &&
                 resPermission && resPermission.data.errCode === 0 &&
-                resProvince && resProvince.data.errCode === 0
+                resProvince && resProvince.data.errCode === 0 &&
+                resPay && resPay.data.errCode === 0
             ){
                 let data = {
+                    pay: resPay.data.data.inputType,
                     gender: resGender.data.data.inputType,
                     province: resProvince.data.data.inputType,
                     resPermission: resPermission.data.data.inputType
@@ -103,4 +106,81 @@ export const fetchAllDataAllCodeSuscess = (data) => ({
 
 export const fetchAllDataAllCodeFailed = () => ({
     type: actionTypes.GET_DATE_ALLCODE_FAILED,
+})
+
+
+
+
+//  GET_ALL_USER_SUSCESS: 'GET_ALL_USER_SUSCESS',
+//  GET_ALL_USER_FAILED: 'GET_ALL_USER_FAILED',
+
+
+
+// Actions lấy AllCode (Gender, Province, Permission)
+export const getAllUserStart = (type) => {
+    return async (dispatch, getState) => {
+        try{
+            if(type === 'ALL'){
+                let allUser = await adminService.getAllUser(type);
+                if( allUser && allUser.data.errCode === 0){
+                    let data = allUser.data.data.listAllUser
+                    dispatch(getAllUserSuscess(data))
+                }else{
+                    dispatch(getAllUserFailed())
+                }
+            }
+        }catch(err) {
+            console.log("fetchAllDoctor"+ err)
+            dispatch(getAllUserFailed())
+        }
+    }
+}
+
+export const getAllUserSuscess = (data) => ({
+    type: actionTypes.GET_ALL_USER_SUSCESS,
+    users: data
+})
+
+export const getAllUserFailed = () => ({
+    type: actionTypes.GET_ALL_USER_FAILED,
+})
+
+
+
+// GET_ALL_SHOP_SUSCESS: 'GET_ALL_SHOP_SUSCESS',
+// GET_ALL_SHOP_FAILED: 'GET_ALL_SHOP_FAILED',
+
+
+
+// Actions lấy AllCode (Gender, Province, Permission)
+export const getAllShopStart = (type) => {
+    return async (dispatch, getState) => {
+        try{
+            if(type === 'ALL'){
+                
+                let allShop = await adminService.getAllShop(type);
+
+                console.log(allShop)
+                
+                if( allShop && allShop.data.errCode === 0){
+                    let data = allShop.data.data.listAllShop
+                    dispatch(getAllShopSuscess(data))
+                }else{
+                    dispatch(getAllShopFailed())
+                }
+            }
+        }catch(err) {
+            console.log("fetchAllDoctor"+ err)
+            dispatch(getAllShopFailed())
+        }
+    }
+}
+
+export const getAllShopSuscess = (data) => ({
+    type: actionTypes.GET_ALL_SHOP_SUSCESS,
+    shops: data
+})
+
+export const getAllShopFailed = () => ({
+    type: actionTypes.GET_ALL_SHOP_FAILED,
 })

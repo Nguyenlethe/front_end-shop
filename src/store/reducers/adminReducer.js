@@ -7,7 +7,14 @@ const initialState = {
     dataForm: {
         listGender: [],
         listProvince: [],
-        listPermission: []
+        listPermission: [],
+        listPay: [],
+    },
+    listUser: {
+        allUser: [],
+    },
+    listShops: {
+        allShops: []
     }
 }
 
@@ -21,6 +28,7 @@ const adminReducer = (state = initialState, action) => {
             state.dataForm.listGender = action.dataAllCode.gender
             state.dataForm.listProvince = action.dataAllCode.province
             state.dataForm.listPermission = action.dataAllCode.resPermission
+            state.dataForm.listPay = action.dataAllCode.pay
             return {
                 ...state
             }
@@ -67,6 +75,43 @@ const adminReducer = (state = initialState, action) => {
             }
 
 
+        //  GET_ALL_USER_SUSCESS: 'GET_ALL_USER_SUSCESS',
+        //  GET_ALL_USER_FAILED: 'GET_ALL_USER_FAILED',
+
+        
+        case actionTypes.GET_ALL_USER_SUSCESS:  
+            state.listUser.allUser = action.users
+            
+            return {
+                ...state
+            }
+
+        
+        case actionTypes.GET_ALL_USER_FAILED:  
+            state.listUser.allUser = []
+            
+            return {
+                ...state
+            }
+
+        // GET_ALL_SHOP_SUSCESS: 'GET_ALL_SHOP_SUSCESS',
+        // GET_ALL_SHOP_FAILED: 'GET_ALL_SHOP_FAILED',
+
+
+        case actionTypes.GET_ALL_SHOP_SUSCESS:  
+            state.listShops.allShops = action.shops
+            
+            return {
+                ...state
+            }
+
+        
+        case actionTypes.GET_ALL_SHOP_FAILED:  
+            state.listShops.allShops = []
+            
+            return {
+                ...state
+            }
 
 
 

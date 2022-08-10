@@ -25,6 +25,7 @@
     --heightHeader: 50px;
     --BGR-header: #fff;
     --BGR-color-btn-manageuser: rgb(0, 123, 195);
+    --BGR-color-btn-manageuser-edit: rgb(255, 153, 0);
     
     // select 
     --font-size: 1.6rem;
@@ -113,4 +114,21 @@ html *::-webkit-scrollbar-track {
 }
 
 
- 
+.heading-manage-user{
+    text-align: center;
+    font-size: var(--size-heading-manage);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.list-input{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content:space-between;
+    margin-top: 10px;
+}
+
+a{
+    text-decoration: none;
+}

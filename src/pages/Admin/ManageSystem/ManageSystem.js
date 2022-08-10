@@ -4,8 +4,8 @@ import ListLanguage from '../../../components/ListLanguage';
 import { Link ,Navigate} from 'react-router-dom';
 import {path, PERMISSIONS} from '../../../utils/constant'
 import {HomeIcons, ShopIcons,ListUserIcons,ShopIconsActive,ListUserIconsActive} from '../../../components/Icons'
-import ManageShop from '../ManageShop'
-import ManageUser from '../ManageUser';
+import ManageShop from './ManageShop'
+import ManageUser from './CreateUser';
 import Tippy from '../../../components/Tippy/Tippy';
 import SwitchLanguage from '../../../SwitchLanguage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,6 +41,12 @@ class ManageSystem extends Component {
         
     }
 
+    componentWillUnmount = async ()=> {
+        let {islogin, isError, permission} = this.props.dataUser
+
+        console.log(islogin, isError, permission)
+    }
+
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
 
@@ -50,14 +56,16 @@ class ManageSystem extends Component {
       
 render() {
     let {showManageShop,showManageUser} = this.state
-    let {islogin, isError, permission} = this.props.dataUser
+    let {islogin, permission} = this.props.dataUser
+
+    
     return (
     <>
-    {islogin && !isError && comparativeHandling(PERMISSIONS.ADMIN, permission) ? 
+    {islogin && comparativeHandling(PERMISSIONS.ADMIN, permission) ? 
     <>
         <div className='header grid'>
             <div className='grid wide'>
-                <div className=' l-12'>
+                <div className='l-12'>
         
                     <div className='nav-header'>
                         <div className='list-icon-controll'>
@@ -80,8 +88,6 @@ render() {
                             </Tippy>
                         </div>
     
-    
-    
                         <div className='List-icon-right'>
                             <Tippy content={<SwitchLanguage id='manageAdmin.language'/>}>
                                 <div className='language'>
@@ -96,13 +102,15 @@ render() {
                         </div>
     
                     </div>
+
+                    {showManageShop && <ManageShop/>}
+                    {showManageUser && <ManageUser/>} 
+
                 </div>
             </div>
         </div>
-        {showManageShop && <ManageShop/>}
-        {showManageUser && <ManageUser/>} 
     </>
-    :  <Navigate to={path.HOMEPAGE} /> }
+    :  <Navigate to={path.NOTFOUND} /> }
     </>
 )}}
 

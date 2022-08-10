@@ -11,19 +11,17 @@ import ManageUser from '../pages/Admin/ManageSystem/ManageSystem';
 import ForgotPassword from '../pages/System/ForgotPassword';
 
 
-
 const routes = [
     { path: path.HOME, components: Home },
     { path: path.HOMEPAGE, components: Home },
     { path: path.LOGINPAGE, components: Login, layout: LayoutLogin_Register}, 
     { path: path.REGISTERPAGE, components: Register, layout: LayoutLogin_Register},
     { path: path.NEWSPAGE, components: News },
-    { path: path.MANAGE_USER, components: ManageUser , layout: null},
     { path: path.FORGOTPASS, components: ForgotPassword , layout: LayoutLogin_Register},
-
-
+    { path: path.MANAGE_USER, components: ManageUser , layout: null},
     { path: path.NOTFOUND, components: NotFound404 ,layout: null}
 ]
+
 
 
 

@@ -50,6 +50,7 @@
     --BGR-close-transparent-btn-hover-LG:rgb(242, 47, 86);
     --color-close-transparent-btn-hover-LG: #fff ;
     
+    --BGR-color-btn-manageuser-close: rgba(153, 152, 152, 0.692);
     
     
     // BTN submit login 
@@ -66,9 +67,9 @@
 
     // Form system
     --width-form-system: 450px;
-    --font-size-heading: 3.2rem;
+    --font-size-heading: 2.9rem;
     --color-heading: rgb(0, 73, 145);
-    --font-size-label:1.8rem;
+    --font-size-label:1.6rem;
 
 
     // link
@@ -77,6 +78,15 @@
 
     // Font family btn
     --font-family-primary:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+
+    // Login or Register
+    --font-size-label-form-login: 1.8rem;   // Font size input + laybel + icon + plancehoder 
+    --color-text-forgot: rgb(100, 100, 100);
+    --height-input-form-login: 4rem;      // height input + btn submit
+
+
+
 }
 
 *{

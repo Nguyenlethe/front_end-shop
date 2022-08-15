@@ -67,6 +67,9 @@ class ForgotPassword extends Component {
         e.preventDefault()
         let {newPassword,retypePassword} = this.state.form
         this.setState({isModal: true})
+
+        console.log(type)
+
         if(type === true){
             if(newPassword === retypePassword){
                 let res = await this.props.updatePassword(this.state.form)
@@ -90,8 +93,15 @@ class ForgotPassword extends Component {
             }
         }
         if(type === false){
+
+            
             let { language} = this.props
+
+
             let res = await this.props.retrievalPassword({...this.state.form,valueLanguage:language})
+
+
+
             if(res && res.data.errCode === 0){
                 this.setState({
                     isModal: false,
@@ -105,6 +115,12 @@ class ForgotPassword extends Component {
                 })
             }
             if(res && res.data.errCode === 1 || res.data.errCode === 0) {
+                this.setState({
+                    isModal: false
+                })
+            }
+
+            if(res && res.data.code === 'EAUTH') {
                 this.setState({
                     isModal: false
                 })

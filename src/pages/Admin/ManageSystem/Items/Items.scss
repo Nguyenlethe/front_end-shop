@@ -1,0 +1,111 @@
+.list-btn{
+  
+    button{
+        margin: 30px 30px 30px 0;
+    }
+}
+
+.rc-md-editor.full {
+    height:calc(100vh -  var(--heightHeader)) !important;
+    top: var(--heightHeader)
+}
+
+
+.ct__product-show{
+    position: relative;
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 2px;
+    border-top-right-radius:2px;
+
+    &:hover .icon-close{
+        opacity: 1;
+
+    }
+
+    .icon-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color:rgb(255, 251, 251);
+        font-size: 40px;
+        transform: rotate(45deg);
+        opacity: 0;
+
+        &:hover{
+            color: red;
+        }
+    }
+    
+}
+.list-input.img{
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .select-color{
+        margin-top: 12px;
+    }
+    
+    #add{
+        position: relative;
+        height: 180px;
+        width: 100%;
+
+        .border-add-img{
+            height: 180px;
+            width: 90%;
+   
+            border: 1px dotted #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            text-align: center;
+            background-color: rgb(255, 251, 251);
+            position: absolute;
+            top: 0;
+
+            &:hover{
+                svg{
+                   color: var(--iconSVG-hover);
+                }
+                span{
+                    color: var(--iconSVG-hover);
+                }
+            }
+    
+            svg{
+                color: var( --color-text-forgot);
+                opacity: .7;
+                font-size: 5.6rem;
+                display: block;
+                margin-bottom: 20px;
+            }
+            span{
+                color: var( --color-text-forgot);
+                opacity: .7;
+
+            }
+        }
+
+        input[type='file']{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: transparent;
+
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+
+
+        }
+    }
+}

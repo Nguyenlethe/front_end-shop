@@ -26,32 +26,32 @@ class ListShops extends Component {
 
    
     componentDidMount = async () => { 
-       await this.props.getAllShop('ALL')
+        await this.props.getAllShop()
+
+        this.setState({
+            listAllShops : [...this.props.allShops]
+        })
     }
 
+
     componentDidUpdate= async (prevProps, prevState) => {
-        let {allShops} = this.props
-        if(prevProps.language !== this.props.language){
-            
-        }
-        
         if(prevProps.allShops !== this.props.allShops){
             this.setState({
-                listAllShops: [...allShops]
+                listAllShops: [...this.props.allShops]
             })
         }
     }
 
+
     // Xóa user
-    handleDelete =  async (user) =>  {
+    handleDelete =  async(user) =>  {
         this.setState({isModal: true})
-
         let res = await adminService.deleteShop(user)
-
-        console.log(res)
-
+ 
         if(res && res.data.errCode === 0) {
-            await this.props.getAllShop('ALL')
+            await this.props.getAllShop()
+            await this.props.handleActionsListShop('Re-Load')
+
             this.setState({isModal: false})
         }else{
             this.setState({isModal: false})
@@ -59,33 +59,32 @@ class ListShops extends Component {
     }
 
     // Click Sửa user
-    handleEditUser = (data) => {
-        let {handleSetValueForm,heandleChangeInput} = this.props
-        heandleChangeInput(data.province, 'province')
-        heandleChangeInput(data.district, 'district')        
-        handleSetValueForm(data)
+    handleEditUser = async(data) => {
+        await this.props.handleActionsListShop('Edit-Shop', data)
     }
 
 
 render() { 
 let {listAllShops,isModal} = this.state
-let {language} = this.props
+let {language,allShops} = this.props
 
 
 
 
 return (
     <>
-        <Modal isShow={isModal}/>
+        {/* <Modal isShow={isModal}/> */}
         <div className='col l-12'>
-            <p className={cx('heading-manage-user')}><SwitchLanguage id='manageAdmin.form.listUser' /></p> 
+            <p className={cx('heading-manage-user')}><SwitchLanguage id='manageAdmin.form.listSeller' /></p> 
         </div> 
 
          <div className='col l-12'>
             <div className={cx('tabel')}>
                 <table id={cx('customers')}>
                     <tbody>
+
                         <tr>
+
                             <th>STT</th>
                             <th>Email</th>
                             <th><SwitchLanguage id='manageAdmin.form.manager' /></th>
@@ -93,7 +92,7 @@ return (
                             <th><SwitchLanguage id='manageAdmin.form.phoneNumber' /></th>
                             <th><SwitchLanguage id='manageAdmin.form.Detail' /></th>
                             <th><SwitchLanguage id='manageAdmin.form.Actions' /></th>
-                           
+
                         </tr>
 
                         {listAllShops && listAllShops.length > 0 && listAllShops.map((shop, index) => {
@@ -131,7 +130,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllShop: (type) => dispatch(actions.getAllShopStart(type))
+        getAllShop: () => dispatch(actions.getAllShopStart())
     }
 }
 

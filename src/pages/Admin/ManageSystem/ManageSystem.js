@@ -100,12 +100,16 @@ render() {
                                 </span>
                             </Tippy>
                         </div>
-    
                     </div>
+                </div>
+            </div>
+        </div>
 
+        <div className='grid'>
+            <div className='grid wide'>
+                <div className='l-12'>
                     {showManageShop && <ManageShop/>}
                     {showManageUser && <ManageUser/>} 
-
                 </div>
             </div>
         </div>

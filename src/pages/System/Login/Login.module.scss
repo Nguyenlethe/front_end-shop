@@ -14,13 +14,14 @@
         font-weight: 600;
         width: 100%;
         text-align: center;
+        text-transform: uppercase;
     }
 
     .form-input{
         label{
             width: 100%;
             display: block;
-            font-size: var(--font-size-label);
+            font-size: var(--font-size-label-form-login);
             margin-top: 10px;
         }
 
@@ -35,7 +36,7 @@
            
 
             .icon-input{
-                font-size: var(--font-size-label);
+                font-size: var(--font-size-label-form-login);
                 color: rgb(2, 129, 188);
                 opacity: 0.5;
                 width: auto;
@@ -44,19 +45,20 @@
             }
 
             .input{
-                height: 40px;
+                height: var(--height-input-form-login);
                 width: calc(100% - 30px);
-                font-size: calc( var(--font-size-label) - 0.2rem);
+                font-size:  var(--font-size-label-form-login);
                 padding-left: 12px;
                 border: none;
                 outline: none;
                 position: relative;
+                font-family: var(--font-family-primary);
             }
 
             .input[name='password']{
-                height: 40px;
+                height: var(--height-input-form-login);
                 width: calc(100% - 50px);
-                font-size: calc( var(--font-size-label) - 0.2rem);
+                font-size:  var(--font-size-label-form-login);
                 padding-left: 12px;
                 border: none;
                 outline: none;
@@ -66,12 +68,12 @@
             display: inline-block;
             float: right;
             margin: 12px  0;
-            font-size: var(--font-size-label);
             cursor: pointer;
             
             a{
+                font-size: var(--font-size-label-form-login);
                 text-decoration: none;
-                color: var(--color-text);
+                color: var( --color-text-forgot);
                 &:hover{
                     color: var(--color-hover-link);
                 }
@@ -80,7 +82,7 @@
         }
         .btn-submit{
             width: 100%;
-            height: 40px;
+            height: var(--height-input-form-login);
             margin: 20px 0;
             border: none;
             outline: none;
@@ -107,7 +109,7 @@
 
         .login-society-sub{
             color: var(--color-text);
-            font-size: var(--font-size-label);
+            font-size: var(--font-size-label-form-login);
         }
         
         .list-icon-society{
@@ -120,13 +122,19 @@
     }
 
     .text-footer-form{
+        
         p{
             text-align: center;
             color:rgba(42, 42, 42, 0.56);
+            font-size: 1.6rem;
+
             a{
                 color:rgba(42, 42, 42, 0.56);
                 text-decoration: none;
+                font-size: 1.6rem;
+
                 &:hover{
+                    font-size: 1.6rem;
                     color: var(--color-hover-link);
                 }
             }

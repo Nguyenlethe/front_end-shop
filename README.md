@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Get all shop
+await this.props.getAllShop('ALL')
+getAllShop: (type) => dispatch(actions.getAllShopStart(type))
+
+
+# Get all user != R2
+await this.props.getAllUser('!R2')
+getAllUser: (type) => dispatch(actions.getAllUserStart(type)),
+
+
+# Get all user 
+await this.props.getAllUser('ALL')
+getAllUser: (type) => dispatch(actions.getAllUserStart(type)),
+
+
+

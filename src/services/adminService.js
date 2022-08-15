@@ -26,14 +26,13 @@ function createNewShop (data) {
     return axios.post(`/admin/create-shop`, data);
 }
 
-
 // Lấy Danh Sách User
 function getAllUser (type) {
     return axios.get(`/admin/get-all-user?type=${type}`);
 }
 
 
-// Lấy Danh Sách User
+// Lấy Danh Sách Shop
 function getAllShop (type) {
     return axios.get(`/admin/get-all-shop?type=${type}`);
 }
@@ -47,7 +46,6 @@ function deleteUser (user) {
         },
     });
 }
-
 
 // Change User
 function changeUser (data) {
@@ -64,9 +62,38 @@ function deleteShop (shop) {
     });
 }
 
+// Change shop IMG
+function editInfoShop (data) {
+    return axios.post(`/admin/change-shop`, data);
+}
+
+// Change shop Not Img
+function editInfoShopNotIMG (data) {
+    return axios.post(`/admin/change-shop-notIMG`, data);
+}
+
+
+// Get one User
+function getOneUser (id) {
+    return axios.get(`/admin/get-one-user?id=${id}`);
+}
+
+
+// Post data Items
+function addNewItems (id) {
+    return axios.post(`/admin/create-new-items`,data);
+}
+
+
+
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    addNewItems,
+    getOneUser,
+    editInfoShopNotIMG,
+    editInfoShop,
     deleteShop,
     getAllShop,
     createNewShop,

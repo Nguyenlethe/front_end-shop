@@ -12,6 +12,8 @@
         "btnLG":"Login",
         "btnRGT":"Register",
         "createShop":"Create New Shop",
+        "createItems":"Create New Items",
+
         "form":{
             "idUser":"ID User",
             "email":"Email",
@@ -34,6 +36,7 @@
             "Detail":"Detail",
             "Actions":"Actions",
             "AddressDetails":"Address Detail",
+
             "planceholder_idUser":"Please Enter ID User",
             "planceholder_email":"Please Enter Email",
             "planceholder_password":"Please Enter Password",
@@ -48,6 +51,20 @@
             "planceholder_district":"Please Enter District",
             "planceholder_wards":"Please Enter Wards",
             "planceholder_AddressDetails":"Please Enter Address Detail",
+            "planceholder_category":"Click Select Shop",
+            "planceholder_type":"Click Select Sectors",
+            "planceholder_sale":"Click Select Add Discount Code",
+            "planceholder_price": "Enter Price",
+            "planceholder_idItems":"Enter The Identifier",
+
+            "planceholder_trademark":"Choose Brand",
+            "planceholder_production":"Exodus...",
+            "planceholder_sentFrom":"Place of Shipment",
+            "planceholder_texture":"Select Product Material",
+            "planceholder_itemsSizeAmount":"Type Size...",
+            "planceholder_color":"Select Color...",
+
+
             "btn":"Create New",
             "btn_edit":"Save Change",
             "heading":"Login",
@@ -75,8 +92,44 @@
             "province":"Province",
             "payType":"Pay Type",
             "viewDetail":"View detail user",
-            "manager":"Manager Shop"
+            "manager":"Manager Shop",
+            "seller":"User Seller",
            
+            "listSeller":"List User Seller",
+            "category":"Catalog Of Goods",
+            "type": "Sectors",
+            "sale":"Discount",
+            "nameItems":"Enter Name Items",
+            "price":"Price",
+            "idItems":"Code Identifier",
+
+            "trademark":"Trademark",
+            "production":"Exodus",
+            "sentFrom":"Sent from",
+            "texture":"Product material",
+            "itemsSizeAmount":"Type Size",
+            "amount":"Amount",
+            "description":"Product Description",
+            "descriptionVi":"VN Description",
+            "descriptionEn":"EN Description",
+            "addImg":"Add IMG",
+            "addItems":"Add Items",
+            "errorEmpty":"Not Empty !!!"
+
+
+
+
+
+
+
+          
+
+
+      
+
+
+
+
         
 
 

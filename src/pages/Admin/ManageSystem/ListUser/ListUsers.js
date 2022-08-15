@@ -47,7 +47,6 @@ class ListUsers extends Component {
         let res = await adminService.deleteUser(user)
         console.log(res)
         if(res && res.data.errCode === 0) {
-
             await this.props.getAllUser('ALL')
             
             this.setState({isModal: false})

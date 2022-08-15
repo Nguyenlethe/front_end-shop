@@ -121,7 +121,7 @@
     .btn-submit-link{
         display: block;
         font-weight: var(--font-weight);
-        padding: 10px 20px;
+        padding: 8px 20px;
         font-size: var(--font-size-btn-submit);
         text-decoration: none;
         width: 100%;
@@ -173,5 +173,45 @@
         &:hover{
             transition: all .2s ease;
         }
+    }
+}
+
+
+.btn-form-input{
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    text-align: center;
+    overflow: hidden;
+    background:var(--BGR-btn-ban-LG);
+    transition: all .2s ease;
+    min-width: 120px;
+
+    .content-btn-form-input{
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        background-color: var(--BGR-color-btn-manageuser);
+        color: white;
+        font-weight: 500;
+        border-radius: 50px;
+        box-shadow: 1px 1px 10px rgb(173, 172, 172);
+        cursor: pointer;
+        border: none;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        display: block;
+        text-align: center;
+        padding: 6px 20px;
+
+        .icon-user{
+            margin-left:14px;
+        }
+    }
+    
+    .content-btn-form-input.edit{
+        background-color: var(--BGR-color-btn-manageuser-edit);
+    }
+
+    .content-btn-form-input.close{
+        background-color: var(--BGR-color-btn-manageuser-close);
     }
 }

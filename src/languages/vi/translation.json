@@ -12,6 +12,8 @@
         "btnLG":"Đăng Nhập",
         "btnRGT":"Đăng Ký",
         "createShop":"Tạo Mới Shop",
+        "createItems":"Tạo mới sản phẩm",
+
         "form":{
             "idUser":"Mã Người Dùng",
             "email":"Email",
@@ -28,7 +30,7 @@
             "wards":"Xã/Phường",
             "email-edit":"Không được sửa trường này !",
             "password-edit":"Không được sửa trường này !",
-
+            "listSeller":"Danh Sách Người Bán",
 
 
             "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
@@ -46,6 +48,22 @@
             "planceholder_district":" Nhập Quận/Huyện",
             "planceholder_wards":" Nhập Xã/Phường",
             "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
+
+            "planceholder_category":"Chọn Shop",
+            "planceholder_type":"Chọn Danh Mục Sản Phẩm",
+            "planceholder_sale":"Giảm Giá Sản Phẩm",
+            "planceholder_price": "Nhập Giá Sản Phẩm",
+            "planceholder_idItems":"Nhập Mã Định Danh Sản Phẩm",
+
+            "planceholder_trademark":"Chọn Thương Hiệu",
+            "planceholder_production":"Xuất Sứ...",
+            "planceholder_sentFrom":"Nơi Gửi Hàng",
+            "planceholder_texture":"Chọn Chất Liệu Sản Phẩm",
+            "planceholder_itemsSizeAmount":"Chọn Kiểu Cỡ...",
+            "planceholder_color":"Chọn Màu...",
+
+
+       
 
             "btn":"Thêm Mới",
             "btn_edit":"Lưu Thay Đổi",
@@ -79,9 +97,35 @@
             "province":"Tỉnh /Thành Phố",
             "payType":"Phương thức thay toán",
             "viewDetail":"Xem chi tiết",
-
             "seller":"Chủ cửa hàng",
-            "manager":"Người Quản Lý"
+            "manager":"Người Quản Lý",
+            "category":"Danh Mục Hàng",
+            "type": "Loại Hàng",
+            "sale":"Giảm Giá",
+            "nameItems":"Nhập Tên Sản Phẩm",
+            "price":"Giá",
+            "idItems":"Mã  Định Danh",
+
+            "trademark":"Thương Hiệu",
+            "production":"Xuất Sứ",
+            "sentFrom":"Nơi Gửi",
+            "texture":"Chất Liệu Sản Phẩm",
+            "itemsSizeAmount":"Kiểu Cỡ",
+            "amount":"Số Lượng",
+            "description":"Mô Tả Sản Phẩm",
+            "descriptionVi":"Mô Tả VI",
+            "descriptionEn":"Mô Tả EN",
+            "addImg":"Thêm Ảnh",
+            "addItems":"Thêm Sản Phẩm",
+            "errorEmpty":"Không được để trống trường này !!!"
+
+
+
+
+
+
+           
+
 
         
         },

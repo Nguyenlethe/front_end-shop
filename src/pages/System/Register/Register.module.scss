@@ -20,7 +20,7 @@
         label{
             width: 100%;
             display: block;
-            font-size: var(--font-size-label);
+            font-size: var(--font-size-label-form-login);
             margin-top: 10px;
         }
 
@@ -35,7 +35,7 @@
            
 
             .icon-input{
-                font-size: var(--font-size-label);
+                font-size: var(--font-size-label-form-login);
                 color: rgb(2, 129, 188);
                 opacity: 0.5;
                 width: auto;
@@ -46,18 +46,19 @@
             .input{
                 height: 40px;
                 width: calc(100% - 30px);
-                font-size: calc( var(--font-size-label) - 0.2rem);
+                font-size: var(--font-size-label-form-login);
                 padding-left: 12px;
                 border: none;
                 outline: none;
                 position: relative;
                 flex: 26 1;
+                font-family: var(--font-family-primary);
             }
 
             .input[name='password']{
                 height: 40px;
                 width: calc(100% - 50px);
-                font-size: calc( var(--font-size-label) - 0.2rem);
+                font-size: var(--font-size-label-form-login);
                 padding-left: 12px;
                 border: none;
                 outline: none;
@@ -67,7 +68,7 @@
             display: inline-block;
             float: right;
             margin: 12px  0;
-            font-size: var(--font-size-label);
+            font-size: var(--font-size-label-form-login);
             cursor: pointer;
             
             a{
@@ -108,7 +109,7 @@
 
         .login-society-sub{
             color: var(--color-text);
-            font-size: var(--font-size-label);
+            font-size: var(--font-size-label-form-login);
         }
         
         .list-icon-society{
@@ -121,6 +122,7 @@
     }
 
     .text-footer-form{
+        font-size: 1.6rem;
         p{
             text-align: center;
             color:rgba(42, 42, 42, 0.56);

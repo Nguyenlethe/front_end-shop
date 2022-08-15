@@ -54,6 +54,8 @@ export const loginSystemFailed = () => ({
 export const retrievalPasswordStart = (email) => {
     return async (dispatch, getState) => {
         try{
+            console.log(email)
+
             let result  = await appService.retrievalPassword(email)
             return result
         }catch(err) {

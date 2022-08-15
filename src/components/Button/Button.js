@@ -30,7 +30,14 @@ type === 'close-transparent' ? <button className='btn-close-transparent'> <Link 
 type === 'btn-submit' ? <button className='btn-submit'> <Link className='btn-submit-link' to={to ? to : ''}><span>{content}</span></Link> </button>
     :
 type === 'btn-ban' ? <button className='btn-ban'> <Link className='btn-ban-link' to={to ? to : ''}><span>{content}</span></Link> </button>
-: ""
+    :
+type === 'submit-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input'>{content}</span> </button>
+    : 
+type === 'edit-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input edit'>{content}</span> </button>
+    : 
+type === 'close-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input close'>{content}</span> </button>
+    : ""
+
                 }
             </>
         )

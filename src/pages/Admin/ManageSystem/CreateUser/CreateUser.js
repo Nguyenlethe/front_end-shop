@@ -10,11 +10,7 @@ import {default as adminService} from '../../../../services/adminService'
 import _ from 'lodash'
 import { toast } from 'react-toastify';
 import ListUser from '../ListUser'
-
 import './CreateUser.scss';
-
-
-
 
 
 class CreateUser extends Component {
@@ -75,6 +71,7 @@ class CreateUser extends Component {
         this.heandleDataForm()
 
     }
+
 
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
@@ -173,6 +170,7 @@ class CreateUser extends Component {
         if(!isEditUser){
             let dataUser = JSON.stringify(this.state.users)
             let {file} = this.state.File
+            
             let data = new FormData()
             data.append("name", 'file')
             data.append("file", file )
@@ -195,6 +193,7 @@ class CreateUser extends Component {
                     stateCopy[key] = ''
                 }
                 this.setState({
+                    isShowListsInput: false,
                     imgPreview: '',
                     users: {...stateCopy}
                 })
@@ -203,6 +202,15 @@ class CreateUser extends Component {
         }else {
             let res = await adminService.changeUser(users)
             if(res && res.data.errCode === 0){
+                let stateCopy = this.state.users
+                for(let key in stateCopy){
+                    stateCopy[key] = ''
+                }
+                this.setState({
+                    isShowListsInput: false,
+                    imgPreview: '',
+                    users: {...stateCopy}
+                })
                 await this.props.getAllUser('ALL')
                 toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>)
             }
@@ -242,11 +250,7 @@ class CreateUser extends Component {
             isEditUser: true,
         })
     }
-
-
     
-    
-
 render() {
 
 
@@ -513,6 +517,7 @@ const mapStateToProps = state => {
         dataWards: state.admin.dataWards,
         language: state.app.language,
         dataUser: state.app.loginUser,
+        allShops: state.admin.listShops.allShops
     }
 }
 

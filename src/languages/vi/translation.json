@@ -84,7 +84,7 @@
             "fullName":"Họ và tên",
             "Address": "Địa chỉ",
             "Permission":"Quyền",
-            "Detail":"Mô tả",
+            "Detail":"Chi tiết",
             "Actions":"Trạng thái",
             "listUser":"Danh Sách Người Dùng",
             
@@ -117,10 +117,16 @@
             "descriptionEn":"Mô Tả EN",
             "addImg":"Thêm Ảnh",
             "addItems":"Thêm Sản Phẩm",
-            "errorEmpty":"Không được để trống trường này !!!"
+            "errorEmpty":"Không được để trống trường này !!!",
+
+
+            "nameItemsListItems":"Tên Sản Phẩm",
+            "codeItems":"Mã Sản Phẩm"
+          
 
 
 
+            
 
 
 

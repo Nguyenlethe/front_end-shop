@@ -30,6 +30,9 @@ const initialState = {
         SIZEData:[],
         SZNBData: [],
         COLORData: [],
+    },
+    items: {
+        itemsAll: [],
     }
 }
 
@@ -271,15 +274,26 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.GET_DATA_ALLCODE_COLOR_SUCCESS:  
             state.listAllCodeItems.COLORData = action.COLORData
-            console.log('Data COLORData',state.listAllCodeItems.COLORData)
+            // console.log('Data COLORData',state.listAllCodeItems.COLORData)
             
             return {
                 ...state
             }
         
 
-    
             
+        // GET_DATA_ITEMS_SUCCESS: 'GET_DATA_ITEMS_SUCCESS',
+        // GET_DATA_ITEMS_FAILED: 'GET_DATA_ITEMS_FAILED',
+
+        case actionTypes.GET_DATA_ITEMS_SUCCESS:  
+            state.items.itemsAll = action.dataAllItems
+            //console.log('Data TYPESIZEData',state.listAllCodeItems.SZNBData)
+            
+            return {
+                ...state
+            }
+        
+        
 
 
 

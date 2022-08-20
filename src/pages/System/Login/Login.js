@@ -115,9 +115,9 @@ class Login extends Component {
 
     <Modal isShow={isModal}/> 
 
-    {dataUser.islogin && handleCheckPermission(PERMISSIONS.ADMIN,dataUser.permission) && <Navigate to={path.MANAGE_USER}/>}
-    {dataUser.islogin && handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
-    {dataUser.islogin && handleCheckPermission(PERMISSIONS.SELLER,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
+    {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.ADMIN,dataUser.permission) && <Navigate to={path.MANAGE_USER}/>}
+    {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
+    {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.SELLER,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
 
         <form className={cx('form-login')}>
             <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.heading'/></p>

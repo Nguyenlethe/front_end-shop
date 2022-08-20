@@ -236,13 +236,6 @@ export const getAllShopFailed = () => ({
 
 
 
-        // GET_DATA_ALLCODE_FBS_SUCCESS
-        // GET_DATA_ALLCODE_FSAM_SUCCESS
-        // GET_DATA_ALLCODE_FSM_SUCCESS
-        // GET_DATA_ALLCODE_FSAW_SUCCESS
-        // GET_DATE_ALLCODE_ITEMS_FAILED
-
-
 
 // Actions lấy AllCode (category)
 export const getAllCodeInToItemsStart = (inputType) => {
@@ -371,8 +364,6 @@ export const getAllCodeInToItemsStart = (inputType) => {
                 }
             }
             
-            
-
 
         }catch(err) {
             console.log("Error Actions getAllCodeInToItemsStart :"+ err)
@@ -445,5 +436,36 @@ export const getAllCodeInToItemsCOLORDataSuscess = (data) => ({
 
 
 
+// GET_DATA_ITEMS_SUCCESS: 'GET_DATA_ITEMS_SUCCESS',
+// GET_DATA_ITEMS_FAILED: 'GET_DATA_ITEMS_FAILED',
+
+// Actions lấy AllCode (category)
+export const getDataItemsStart = (inputType) => {
+    return async (dispatch, getState) => {
+        try{
+
+            let res = await adminService.getDataItems(inputType)
+            console.log(res)
 
 
+            if(inputType === 'All'){
+                if(res && res.data.errCode === 0 ){
+                    let dataAllItems = res.data.data.inputType
+                    console.log(dataAllItems)
+                    dispatch(getDataItemsSuscess(dataAllItems))
+                }else{
+                    dispatch(getDataItemsSuscess([]))
+                }
+            }
+
+        }
+        catch(err){
+            console.log("Error Actions getDataItemsStart :"+ err)
+        }
+    }
+}
+
+export const getDataItemsSuscess = (data) => ({
+    type: actionTypes.GET_DATA_ITEMS_SUCCESS,
+    dataAllItems: data
+})

@@ -100,6 +100,7 @@ class ForgotPassword extends Component {
 
             let res = await this.props.retrievalPassword({...this.state.form,valueLanguage:language})
 
+            console.log(res)
 
 
             if(res && res.data.errCode === 0){

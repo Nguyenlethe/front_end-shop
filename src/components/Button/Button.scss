@@ -200,7 +200,7 @@
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         display: block;
         text-align: center;
-        padding: 6px 20px;
+        padding: 10px 20px;
 
         .icon-user{
             margin-left:14px;
@@ -213,5 +213,10 @@
 
     .content-btn-form-input.close{
         background-color: var(--BGR-color-btn-manageuser-close);
+    }
+
+    .content-btn-form-input.ban{
+        background-color: var(--BGR-btn-ban-LG);
+        cursor: no-drop;
     }
 }

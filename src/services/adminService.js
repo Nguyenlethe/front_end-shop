@@ -11,17 +11,17 @@ function getDataDistrict (inputType) {
     return axios.get(`/admin/get-data-district?type=${inputType}`);
 }
 
-// Lấy Dl từ bảng Allcode
+// Lấy data wards
 function getDataWards (inputType) {
     return axios.get(`/admin/get-data-wards?type=${inputType}`);
 }
 
-// Lấy Dl từ bảng Allcode
+// Tạo user
 function createNewUser (data) {
     return axios.post(`/admin/create-user`, data);
 }
 
-// Lấy Dl từ bảng Allcode
+// Tạo Shop
 function createNewShop (data) {
     return axios.post(`/admin/create-shop`, data);
 }
@@ -80,16 +80,22 @@ function getOneUser (id) {
 
 
 // Post data Items
-function addNewItems (id) {
+function addNewItems (data) {
     return axios.post(`/admin/create-new-items`,data);
 }
 
+
+// Get items
+function getDataItems (type) {
+    return axios.get(`/admin/get-data-items?type=${type}`);
+}
 
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    getDataItems,
     addNewItems,
     getOneUser,
     editInfoShopNotIMG,

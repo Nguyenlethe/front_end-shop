@@ -114,9 +114,10 @@
             "descriptionEn":"EN Description",
             "addImg":"Add IMG",
             "addItems":"Add Items",
-            "errorEmpty":"Not Empty !!!"
+            "errorEmpty":"Not Empty !!!",
 
-
+            "nameItemsListItems":"Name items",
+            "codeItems":"Code items"
 
 
 

@@ -5,10 +5,9 @@ import { Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUser,faLock,faEyeSlash,faEye,faUnlock,faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../../components/Button/Button';
-import {path, languages,PERMISSIONS} from '../../../utils/constant'
+import {path, languages} from '../../../utils/constant'
 import * as actions from '../../../store/action';
 import Modal from '../../../components/Modal/Modal'
-import handleCheckPermission from '../../../utils/comparativeHandling'
 import SwitchLanguage from '../../../SwitchLanguage'
 
 import classNames from 'classnames/bind';

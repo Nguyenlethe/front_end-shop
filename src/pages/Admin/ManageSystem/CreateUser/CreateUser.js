@@ -215,10 +215,6 @@ class CreateUser extends Component {
                 toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>)
             }
         }
-        
-        
-
-
     }
 
     // Ấn sửa User load dữ liệu nguười dùng lên

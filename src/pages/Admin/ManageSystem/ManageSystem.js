@@ -61,7 +61,7 @@ render() {
     
     return (
     <>
-    {islogin && comparativeHandling(PERMISSIONS.ADMIN, permission) ? 
+    {islogin && comparativeHandling.handleCheckPermission(PERMISSIONS.ADMIN, permission) ? 
     <>
         <div className='header grid'>
             <div className='grid wide'>

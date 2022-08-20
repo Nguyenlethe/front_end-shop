@@ -36,6 +36,8 @@ type === 'submit-form-data' ? <button className='btn-form-input'> <span classNam
 type === 'edit-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input edit'>{content}</span> </button>
     : 
 type === 'close-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input close'>{content}</span> </button>
+    : 
+type === 'ban-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input ban'>{content}</span> </button>
     : ""
 
                 }

@@ -153,7 +153,7 @@ const adminReducer = (state = initialState, action) => {
        
         // GET_ALL_CATEGORY_SUSCESS: 'GET_ALL_CATEGORY_SUSCESS',
         // GET_ALL_CATEGORY_FAILED: 'GET_ALL_CATEGORY_FAILED',
-
+ 
 
         case actionTypes.GET_ALL_CATEGORY_SUSCESS:  
             state.dataForm.category = action.dataAllCode.category
@@ -226,7 +226,7 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.GET_DATA_ALLCODE_DCC_SUCCESS:  
             state.listAllCodeItems.DCCData = action.DCCData
-            //console.log('Data DCCData',state.listAllCodeItems.DCCData)
+            // console.log('Data DCCData',state.listAllCodeItems.DCCData)
             
             return {
                 ...state
@@ -244,7 +244,7 @@ const adminReducer = (state = initialState, action) => {
            
         case actionTypes.GET_DATA_ALLCODE_TYPESIZE_SUCCESS:  
             state.listAllCodeItems.TYPESIZEData = action.TYPESIZEData
-            //console.log('Data TYPESIZEData',state.listAllCodeItems.TYPESIZEData)
+            // console.log('Data TYPESIZEData',state.listAllCodeItems.TYPESIZEData)
             
             return {
                 ...state

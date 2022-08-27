@@ -97,11 +97,14 @@ class ManageShop extends Component {
         }
 
         if(actions === 'LIST_CATEGORY'){
+
+            
             listObject.map(item => {
-                newObject.value = item.keyMap
+                newObject.value = item.code
                 newObject.label = language === languages.EN ?  item.valueEn : item.valueVi
                 newObject.push({value: newObject.value ,label: newObject.label})
             })
+           
         }
         
         if(actions === undefined){
@@ -388,11 +391,11 @@ class ManageShop extends Component {
     customStyles = {
         menu: (provided, state) => ({
             ...provided,
-            zIndex: 99999,
+            // zIndex: 9999999,
         }),
     }
 
-
+   
     
     render() {
     let {permission,nameShop,addressShop,emailShop, phoneNumber,pay,province,avata,valueOptions} = this.state.dataShop
@@ -420,6 +423,7 @@ class ManageShop extends Component {
             <div className='form-input col l-6'>
                 <label className='input-label'><SwitchLanguage id='manageAdmin.form.manageId'/></label>
                 <Select
+                    zIndex={100000}
                     value={valueOptions}
                     onChange={this.handlChangeSlelect}
                     options={listUser}
@@ -577,7 +581,7 @@ class ManageShop extends Component {
     </InputStyle>
     </>       
 )}}
-
+ 
 
 const mapStateToProps = state => {
     return {
@@ -597,3 +601,23 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageShop);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

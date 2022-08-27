@@ -9,6 +9,8 @@ import {languages } from '../../../../utils/constant'
 import {default as adminService} from '../../../../services/adminService'
 import _ from 'lodash'
 import { toast } from 'react-toastify';
+import Select from 'react-select';
+
 import ListUser from '../ListUser'
 import './CreateUser.scss';
 
@@ -72,8 +74,8 @@ class CreateUser extends Component {
 
     }
 
-
     componentDidUpdate= async(prevProps, prevState)=> {
+        
         if(prevProps.language !== this.props.language){
 
         }
@@ -110,6 +112,8 @@ class CreateUser extends Component {
 
     // Xl Khi change Input
     heandleChangeInput = (value, name,e) => {
+
+        // Change avata
         if(name === 'avata'){    
             let file = e.target.files[0]
             let src = URL.createObjectURL(file) 
@@ -120,27 +124,32 @@ class CreateUser extends Component {
                 }
             })
         }
+
+        // Change province
         if(name === 'province'){
             this.props.fetchAllDataProvince(value)
         }
+
+        // Change district
         if(name === 'district'){
             this.props.fetchAllDataWards(value)
         }
 
         let stateCopy = this.state.users
         let stateCopyErr = this.state.dataError
-
-
         for(let key in stateCopy){
             if(key === name){
                 stateCopy[name] = value
                 stateCopyErr[name] = {}
             }
         }
+
+        // Set state
         this.setState({
             dataError: {...stateCopyErr},
             users: {...stateCopy}
         })
+
     }
     
     // Xl ẩn hiện form
@@ -254,6 +263,12 @@ let {language,dataDistrict} = this.props
 let {listGender,listProvince,listPermission,listDataWards,isShowListsInput,imgPreview,isShowPass,dataError,isEditUser} = this.state
 let {email,password,firstName,lastName,gender, permission, phoneNumber, avata,avataLink, province,district,wards,addressDetails} = this.state.users
 
+console.log('Data :',listGender)
+console.log('Data :',listProvince)
+console.log('Data :',listPermission)
+console.log('Data :',listDataWards)
+
+
 
 return (
 
@@ -286,6 +301,8 @@ return (
             <span className='err'>{!_.isEmpty(dataError.email) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.email) ? language === languages.VI ? dataError.email.valueVi : dataError.email.valueEn : ''}</span>
         </div>
 
+        
+
         <div className='form-input password col l-6 ' style={{ display: isEditUser ? 'none' : 'block'}}>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.password'/></label>
             <input type={isShowPass ? 'password' : 'text'} className='input' name='password'
@@ -299,7 +316,6 @@ return (
             <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_password' /></span>
             <span className='err'>{!_.isEmpty(dataError.password) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.password) ? language === languages.VI ? dataError.password.valueVi : dataError.password.valueEn : ''}</span>
         </div>
-
     </div>
 
     <div className='list-input'>
@@ -329,7 +345,17 @@ return (
     <div className='list-input'>
         <div className='form-input col l-6'>
             <label className='input-label'><SwitchLanguage id='manageAdmin.form.gender'/></label>
-            <select id='input-select' className='input' name='gender'
+
+            <Select
+                value={gender}
+                onChange={this.handlChangeSlelect}
+                options={listGender}
+                styles={this.customStyles}
+                name='gender'
+                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_gender' />}
+            />
+
+            {/* <select id='input-select' className='input' name='gender'
                 style={gender !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
                 value={gender}
                 onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                            
@@ -340,8 +366,11 @@ return (
                     return (<option key={item.id} value={item.keyMap}>{value}</option>)
                 })}
 
-            </select>
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_gender' /></span>
+            </select> */}
+
+
+
+            {/* <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_gender' /></span> */}
             <span className='err'>{!_.isEmpty(dataError.gender) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.gender) ? language === languages.VI ? dataError.gender.valueVi : dataError.gender.valueEn : ''}</span>
         </div>
 
@@ -439,6 +468,8 @@ return (
             <span className='err'>{!_.isEmpty(dataError.wards) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.wards) ? language === languages.VI ? dataError.wards.valueVi : dataError.wards.valueEn : ''}</span>
         </div>
     </div>
+
+
 
     <div className='list-input'>
         <div className='form-input col l-12'>

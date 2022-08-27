@@ -13,6 +13,8 @@
         "btnRGT":"Đăng Ký",
         "createShop":"Tạo Mới Shop",
         "createItems":"Tạo mới sản phẩm",
+        "listItem":"Danh Sách sản phẩm",
+
 
         "form":{
             "idUser":"Mã Người Dùng",
@@ -31,6 +33,7 @@
             "email-edit":"Không được sửa trường này !",
             "password-edit":"Không được sửa trường này !",
             "listSeller":"Danh Sách Người Bán",
+            "startDay":"Ngày bắt đầu",
 
 
             "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
@@ -48,6 +51,8 @@
             "planceholder_district":" Nhập Quận/Huyện",
             "planceholder_wards":" Nhập Xã/Phường",
             "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
+            "planceholder_sreachCode":"Nhập mã sản phẩm để tìm kiếm",
+            
 
             "planceholder_category":"Chọn Shop",
             "planceholder_type":"Chọn Danh Mục Sản Phẩm",
@@ -61,6 +66,10 @@
             "planceholder_texture":"Chọn Chất Liệu Sản Phẩm",
             "planceholder_itemsSizeAmount":"Chọn Kiểu Cỡ...",
             "planceholder_color":"Chọn Màu...",
+            "planceholder_startDay":"Chọn ngày bắt đầu áp dụng ",
+            "planceholder_ifDiscount":"Chọn điều kiện giảm",
+
+            
 
 
        
@@ -87,6 +96,8 @@
             "Detail":"Chi tiết",
             "Actions":"Trạng thái",
             "listUser":"Danh Sách Người Dùng",
+            "endDay":"Ngày kết thúc",
+            "sreachCode":"Tìm kiếm sản phẩm bằng mã",
             
             "manageId":"Người quản lý",
             "nameShop":"Tên Shop",
@@ -103,6 +114,7 @@
             "type": "Loại Hàng",
             "sale":"Giảm Giá",
             "nameItems":"Nhập Tên Sản Phẩm",
+            "nameItemsEn":"Nhập Tên English Sản Phẩm ",
             "price":"Giá",
             "idItems":"Mã  Định Danh",
 
@@ -118,16 +130,18 @@
             "addImg":"Thêm Ảnh",
             "addItems":"Thêm Sản Phẩm",
             "errorEmpty":"Không được để trống trường này !!!",
+            "ifDiscount":"Điều kiện giảm",
 
-
-            "nameItemsListItems":"Tên Sản Phẩm",
-            "codeItems":"Mã Sản Phẩm"
+            "nameItemsListItems":"Tên Sản Phẩm ",
+            "codeItems":"Mã Sản Phẩm",
           
+            "craeteDiscount":"Tạo voucher giảm giá ",
+            "deleteAllListInput":"Xóa tất cả"
 
 
 
             
-
+ 
 
 
            
@@ -138,7 +152,11 @@
         "toast": {
             "success":"Thêm người dùng thành công",
             "warn":"Có lỗi sảy ra !!!",
-            "success_change":"Thay đổi thành công !!!"
+            "success_change":"Thay đổi thành công !!!",
+            "successItems":"Thêm sản phẩm thành công !",
+            "successEditItems":"Thay đổi thành công !!!",
+            "deleteSuccessItems":"Xóa thành công !"
+
         },
         "found": {
             "back":"Trở Lại Trang Home",

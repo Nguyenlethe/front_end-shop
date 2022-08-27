@@ -19,6 +19,7 @@ import bcrypt from 'bcryptjs'
 
 import './Items.scss'
 import ListItems from './ListItems/ListItems';
+import Discounts from './Discounts/Discounts';
 const salt = bcrypt.genSaltSync(8) 
 class Items extends Component {
     constructor(props) {
@@ -38,6 +39,8 @@ class Items extends Component {
             listImg: [],
             listColor: [],
            
+
+            coating: false,
             optionsColor: null,
             optionsSize: null,
             optionsItemsSizeAmount: null,
@@ -48,6 +51,7 @@ class Items extends Component {
             optionsCategory: null,
             optionsSelectUser: null,
 
+            editItems: false,
             isShowListsInput: false,
             isEmptykeyObjectSizeItems: false,
             isImgColor: false,
@@ -62,6 +66,7 @@ class Items extends Component {
                 type: '',
                 discount: '',
                 name: '',
+                nameEn: '',
                 price: '',
                 newPrice: '',
             },
@@ -121,12 +126,15 @@ class Items extends Component {
                 itemsSizeAmount: {},
                 manageId: {},
                 name: {},
+                nameEn: {},
                 price: {},
                 sentFrom: {},
                 trademark: {},
                 type: {},
                 file: {}
-            }
+            },
+            dataEdit: '',
+            dataSizeEdit: []
         };
     }
    
@@ -193,7 +201,7 @@ class Items extends Component {
         // Khi thay dổi ngôn ngữ
         if(prevProps.language !== this.props.language){
             let allTypeCategory = []
-            let {optionsCategory, optionsSelectUser, optionsCategoryType,optionsItemsSizeAmount,optionsColor,itemsColorImgages,listImg} = this.state
+            let {optionsCategory, optionsSelectUser, optionsCategoryType,optionsItemsSizeAmount,dataEdit,listImg} = this.state
             let {allUserEdit,allcategory,TYPESIZEData,COLORData} = this.props
 
             if(optionsCategory){
@@ -228,11 +236,12 @@ class Items extends Component {
                 }
             }
 
-          
+            this.handleEditItems(dataEdit)
             let newListColor = handlConvertObject(COLORData, 'LIST_CATEGORY');
             let newListCategory = handlConvertObject(allcategory, 'LIST_CATEGORY');
             let newListAllCategoryType = handlConvertObject(allTypeCategory, 'LIST_CATEGORY');
             let newlistItemsSizeAmount = handlConvertObject(TYPESIZEData, 'LIST_CATEGORY');
+
 
             // Thay đổi  ngôn ngữ sửa option
             let dataImgColorChangeLanguage = []
@@ -286,6 +295,7 @@ class Items extends Component {
 
             
             this.setState({
+                isShowListsInput: false,
                 optionsItemsSizeAmount: setItemsSizeAmount,
                 optionsCategoryType: newCategoryType,
                 optionsCategory: categoryName,
@@ -307,7 +317,9 @@ class Items extends Component {
         }
 
         if(prevProps.allcategory !== this.props.allcategory){
+
             let newListCategory = handlConvertObject(allcategory, 'LIST_CATEGORY')
+
             this.setState({
                 listAllCategory: newListCategory
             })
@@ -364,6 +376,7 @@ class Items extends Component {
             })
         }
 
+        // ..............
         if(prevProps.TYPESIZEData !== this.props.TYPESIZEData){
             let newTYPESIZEData = handlConvertObject(TYPESIZEData, 'LIST_CATEGORY')
             this.setState({
@@ -373,13 +386,14 @@ class Items extends Component {
 
         if(prevProps.SIZEData !== this.props.SIZEData){
 
+    
             this.setState({
                 listSIZEData: SIZEData
             })
         }
 
         if(prevProps.SZNBData !== this.props.SZNBData){
-
+                 
             this.setState({
                 listSIZEData: SZNBData
             })
@@ -398,14 +412,19 @@ class Items extends Component {
     heandleChangeInput = async(value, name,e) => {
         let stateCopy = this.state.items
         let stateItemsInfoCopy = this.state.itemsInfo
-        let {listImg,listImgFormData,listErrorForm} = this.state
+        let {listImg,listErrorForm,editItems} = this.state
+
+
 
         //  onchange input của items
-        if(name === 'name' || name === 'price'  || name === 'newPrice' || name === 'idItems'){
+        if(name === 'name' || name === 'price'  || name === 'newPrice' || name === 'idItems' || name === 'nameEn'){
             let valueIdItems = ''
             for(let key in stateCopy){
                 if(key === 'idItems'){
                     valueIdItems = value
+                }
+                if(editItems){
+                    stateCopy['newPrice'] = value
                 }
                 if(key === name){
                     stateCopy[name] = value
@@ -417,6 +436,14 @@ class Items extends Component {
                 this.setState({
                     items: {...stateCopy},
                     listErrorForm: {...listErrorForm,name: {}},
+                })
+            }
+
+            // Name
+            if(name === 'nameEn'){
+                this.setState({
+                    items: {...stateCopy},
+                    listErrorForm: {...listErrorForm,nameEn: {}},
                 })
             }
     
@@ -482,6 +509,9 @@ class Items extends Component {
                 listImgPewViews.push({src,file})
             })
 
+
+          
+
             
             // Khi onChange file
             if(listImgPewViews.length !== 0){
@@ -492,7 +522,6 @@ class Items extends Component {
                         return item.file
                     })
     
-                    // console.log(listImgFile)
                     if(listImg.length > 0){
                         this.setState({
                             isImgColor: false,
@@ -521,6 +550,7 @@ class Items extends Component {
                 }
             }
 
+
         }
     }
 
@@ -541,11 +571,12 @@ class Items extends Component {
 
     // Xl change input select
     handlChangeSlelect = async (valueOptions, name) => {
-        let {items,itemsInfo,listImg,listErrorForm} = this.state
+        let {items,itemsInfo,listImg,listErrorForm,listImgFormData,editItems} = this.state
         let {allShops} = this.props
         let {idItems} = this.state.items
         
         if(name.name === 'idShop') {   
+
             let res = await this.handleGetOneUser(valueOptions.value)
 
             let addressShop = allShops.filter(item => {
@@ -572,7 +603,7 @@ class Items extends Component {
             })
         }
    
-        if(name.name === 'category') {
+        if(name.name === 'category' || name === 'category') {
             await this.props.getAllCodeInToItems(valueOptions.value)
 
             this.setState({
@@ -639,9 +670,9 @@ class Items extends Component {
         }
 
         if(name.name !== 'itemsSizeAmount' &&  name.name !== 'trademark' && name.name !== 'sale' && name.name !== 'type' &&name.name !== 'category' && name.name !== 'idShop'){
-
             let stateCoppyitemsColorImgages = []
     
+            
             // Gán màu cho input select màu
             listImg.map(img => {
                 if(img.file.id === name.name){
@@ -658,82 +689,117 @@ class Items extends Component {
                     isImgColor = false
                 }
             })
-            
-
-            console.log(stateCoppyitemsColorImgages)
-            
+          
             this.setState({
+                coating: false,
                 isImgColor: isImgColor,
                 listImg: [...listImg],
                 itemsColorImgages: {...stateCoppyitemsColorImgages},
             })
+            
+
+        
+            let dataImgFormData = []
+            listImg.map(item => {
+                dataImgFormData.push(item.file)
+            })
+
+           
+
+
+            if(editItems){
+                this.setState({
+                    coating: false,
+                    isImgColor: isImgColor,
+                    listImg: [...listImg],
+                    listImgFormData: dataImgFormData,
+                    itemsColorImgages: {...stateCoppyitemsColorImgages},
+                })
+            }
+            
+
+           
         }
     }
 
 
-    // SustomStyle select react
-    customStyles = {
-        menu: (provided, state) => ({
-            ...provided,
-            zIndex: 99999,
-        }),
-    }
-
-
     // changeInput size
-    heandleChangeInputSize = (value,keyMap, type) => {
-        let {SIZE,SZNB,notSize,itemsSizeAmount,listErrorForm} = this.state
+    heandleChangeInputSize = (value,item) => {
+        let {SIZE,SZNB,notSize,itemsSizeAmount,listErrorForm,listSIZEData} = this.state
         let {idItems} = this.state.items
 
         let stateSIZECoppy = SIZE
         let stateSZNBCoppy = SZNB
         let statenotSizeCoppy = notSize
 
+        if(typeof value !== 'object'){
+            
+            // Set kieu size
+            if(item.sizeId === 'SIZE'){
 
-        // Set kieu size
-        if(type === 'SIZE'){
-            for(let key in stateSIZECoppy){
-                if(key === keyMap){
-                    stateSIZECoppy[key] = {itemsId:idItems, typeSize:type,size: keyMap, amount: value,}
+                for(let key in stateSIZECoppy){
+                    if(key === item.code){
+                        stateSIZECoppy[key] = {itemsId: idItems, typeSize: item.sizeId,size: item.code,  amount: value,}
+                    }
                 }
+                this.setState({
+                    itemsSizeAmount: {...stateSIZECoppy},
+                    listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
+                })
             }
-            this.setState({
-                itemsSizeAmount: {...stateSIZECoppy},
-                listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
-            })
-        }
 
-        if(type === 'SZNB'){
-            for(let key in stateSZNBCoppy){
-                if(key === keyMap){
-                    stateSZNBCoppy[key] = {itemsId:idItems, typeSize:type,size: keyMap, amount: value,}
+
+            if(item.sizeId === 'SZNB'){
+                for(let key in stateSZNBCoppy){
+                    if(key === item.code){
+                        stateSZNBCoppy[key] = {itemsId:idItems, typeSize: item.sizeId,size: item.code, amount: value,}
+                    }
                 }
+                this.setState({
+                    itemsSizeAmount: {...stateSZNBCoppy},
+                    listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
+                })
             }
-            this.setState({
-                itemsSizeAmount: {...stateSZNBCoppy},
-                listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
-            })
-        }
 
-        if(keyMap === 'FRSZ'){
-            for(let key in statenotSizeCoppy){
-                if(key === keyMap){
+
+            if(item === 'FRSZ'){
+                for(let key in statenotSizeCoppy){
                     statenotSizeCoppy[key] = {itemsId:idItems, typeSize: 'FRSZ',size: 'FRSZ', amount: value,}
                 }
+    
+                this.setState({
+                    itemsSizeAmount: {...statenotSizeCoppy},
+                    listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
+                })
             }
+
+        }else{
+
+            // Ấn sửa add thêm thông tin amount
+            var data = []
+            listSIZEData.map(itemSize => {
+                value.map(itemCount => {
+                    if(itemSize.code === itemCount.code) {
+                        data.push({...itemSize, amount: itemCount.amount})
+                        itemSize.amount = itemCount.amount
+                    }
+                })
+            })
+
             this.setState({
-                itemsSizeAmount: {...statenotSizeCoppy},
-                listErrorForm: {...listErrorForm,itemsSizeAmount: {}},
+                listSIZEData: listSIZEData
             })
         }
-
+        
 
         let isEmptykeyObjectSizeItems = false
         for(let key in itemsSizeAmount){
+
             if(!_.isEmpty(itemsSizeAmount[key])){
                 isEmptykeyObjectSizeItems = true
             }
         }
+  
         this.setState({
             isEmptykeyObjectSizeItems: isEmptykeyObjectSizeItems
         })
@@ -744,11 +810,17 @@ class Items extends Component {
     deleteImgPewView = (img) => {
         let {listImg} = this.state
 
+        console.log(listImg)
+        console.log(img)
+
+
         let newListImg = listImg.filter(item => {
             if(item !== img){
                 return item
             }
         })
+
+        console.log(newListImg)
 
         let listImgFile =  newListImg.map(item => {
             return item.file
@@ -765,8 +837,11 @@ class Items extends Component {
     // Submit 
     handleOnSubmit = async(e) => {
         e.preventDefault()
-        let {items,itemsInfo, itemsSizeAmount, itemsColorImgages,listImgFormData,listErrorForm} = this.state
+        let {items,itemsInfo, itemsSizeAmount, itemsColorImgages,listImgFormData,listErrorForm,editItems,listImg} = this.state
         let listErrorFromCoppy = listErrorForm
+        
+        let res = ''
+       
 
         // Loại bỏ PT rỗng size cỡ
         for(let key in itemsSizeAmount){
@@ -775,51 +850,101 @@ class Items extends Component {
             }
         }
 
-        // Chuyển data về string
-        let dataItems = JSON.stringify(items)
-        let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
-        let datItemsSizeAmount = JSON.stringify(itemsSizeAmount)
-     
 
-        // Lặp gán lại tên file và tên file trong {} itemsColorImgages
-        let listImgFormDataArray =  listImgFormData
-        let data = new FormData()
-        for(let key in itemsColorImgages){
-            if(listImgFormData[key]){
-                data.append("name", 'file')
-                itemsColorImgages[key].image = `name${new Date().getTime()}${Math.floor(1000 + Math.random() * 9000)}.jpg`
-                data.append("file", listImgFormDataArray[key],`${itemsColorImgages[key].image}`)
+        // Edit true
+        if(editItems){
+
+            let data = new FormData()
+            let emptyData = JSON.stringify({data: 'EMPTY'})
+
+            // Set data form Data cho img file,đổi tên và lưu tên ảnh + màu
+            let dataImgColor = []
+            listImgFormData = [...listImgFormData]
+            listImgFormData.length > 0 && listImgFormData.map(item => {
+                if(!item.type){
+                    dataImgColor.push({itemId: items.idItems,color: item.option.value, image: item.id})
+                }else{
+                    let nameImg = `name${new Date().getTime()}${Math.floor(1000 + Math.random() * 9000)}.jpg`
+                    dataImgColor.push({itemId: items.idItems,color: item.option.value, image: nameImg})
+                    data.append("name", 'file')
+                    data.append("file", item, nameImg )
+                }
+            })
+
+
+            // Gửi data form bảng dataItemsColorImages
+            if(dataImgColor.length > 0){
+                let dataItemsColorImgages = JSON.stringify(dataImgColor)
+                data.append("dataItemsColorImgages", dataItemsColorImgages)
+            }else{
+                data.append("dataItemsColorImgages",emptyData)
             }
+
+
+            // Nếu sửa size
+            if(!_.isEmpty(itemsSizeAmount)){
+                let datItemsSizeAmount = JSON.stringify(itemsSizeAmount)
+                data.append("dataItemsSizeAmount", datItemsSizeAmount)
+            }else{
+                data.append("dataItemsSizeAmount", emptyData)
+            }
+
+
+            let dataItems = JSON.stringify(items)
+            let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
+
+            // Gửi data form bảng dataItems && dataItemsInfo
+            data.append("dataItems", dataItems)
+            data.append("dataItemsInfo", dataItemsInfo)
+
+            res = await adminService.editDataItems(data)
+
+
+        }
+        
+
+        // Create items
+        if(!editItems){
+            // Chuyển data về string
+            let dataItems = JSON.stringify(items)
+            let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
+            let datItemsSizeAmount = JSON.stringify(itemsSizeAmount)
+
+    
+            // Lặp gán lại tên file và tên file trong {} itemsColorImgages
+            let listImgFormDataArray = listImgFormData
+            let data = new FormData()
+            for(let key in itemsColorImgages){
+                if(listImgFormData[key]){
+                    data.append("name", 'file')
+                    itemsColorImgages[key].image = `name${new Date().getTime()}${Math.floor(1000 + Math.random() * 9000)}.jpg`
+                    data.append("file", listImgFormDataArray[key],`${itemsColorImgages[key].image}`)
+                }
+            }
+    
+    
+            // Append form data
+            let dataItemsColorImgages = JSON.stringify(itemsColorImgages)
+            data.append("dataItemsColorImgages", dataItemsColorImgages)
+            data.append("dataItems", dataItems)
+            data.append("dataItemsInfo", dataItemsInfo)
+            data.append("datItemsSizeAmount", datItemsSizeAmount) 
+    
+    
+            // Truyền data xuống backend
+            res = await adminService.addNewItems(data)
+
         }
 
-        // Append form data
-        let dataItemsColorImgages = JSON.stringify(itemsColorImgages)
-        data.append("dataItemsColorImgages", dataItemsColorImgages)
-        data.append("dataItems", dataItems)
-        data.append("dataItemsInfo", dataItemsInfo)
-        data.append("datItemsSizeAmount", datItemsSizeAmount) 
 
-
-        // Truyền data xuống backend
-
-        
-        let res = await adminService.addNewItems(data)
-        console.log(res)
-
-
+        // Nếu thành công
         if(res && res.data.errCode === 0) {
-
             let newDataItems = handleResetState.resetDefaultState(items)
             let newDataItemsInfo = handleResetState.resetDefaultState(itemsInfo)
             let newDataErr = handleResetState.resetDefaultState(listErrorForm)
-            // let newDataItems = handleResetState.resetDefaultState()
-
-
-
-
-
 
             this.setState({
+                isShowListsInput: false,
                 itemsSizeAmount:{},
                 listImg: [],
                 items: {...newDataItems},
@@ -837,36 +962,26 @@ class Items extends Component {
                 isEmptykeyObjectSizeItems: false,
                 isImgColor: false,
                 isBTNVi: true,
-               
             })
-
-            toast.success(<SwitchLanguage id='manageAdmin.toast.success'/>)
+            !editItems ? toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>) :  toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>)
         }
 
-        console.log(res.data.errCode)
+        // Nếu Thất bại  -1
         if(res && res.data.errCode === -1){
             let dataErr = res.data.data
-            
-
-            console.log(dataErr)
-            console.log(listErrorForm)
-
-
             for(let key in listErrorFromCoppy){
                 if(key !== 'file') {
                     listErrorFromCoppy[key] = dataErr[key]
                 }
             }
 
-            // console.log(listErrorFromCoppy)
-
-
             this.setState({
                 listErrorForm: {...listErrorFromCoppy}
             })
-
             toast.error(<SwitchLanguage id='manageAdmin.toast.warn'/>)
         }
+
+        // Nếu thất bại -2
         if(res && res.data.data && res.data.data.errCode === -2){
             this.setState({
                 listErrorForm: {
@@ -881,24 +996,168 @@ class Items extends Component {
     }
 
 
-
-    
-
-
     // Xl ẩn hiện form
     handleShowHideInputsUser = () => {
-   
+
+        let {items,itemsInfo,listErrorForm} = this.state
+        let newDataItems = handleResetState.resetDefaultState(items)
+        let newDataItemsInfo = handleResetState.resetDefaultState(itemsInfo)
+        let newDataErr = handleResetState.resetDefaultState(listErrorForm)
+
         this.setState({       
-            isShowListsInput: !this.state.isShowListsInput
+            editItems: false,
+            isShowListsInput: !this.state.isShowListsInput,
+            itemsSizeAmount:{},
+            listImg: [],
+            items: {...newDataItems},
+            itemsInfo: {...newDataItemsInfo},
+            listErrorForm: {...newDataErr},
+            optionsColor: null,
+            optionsSize: null,
+            optionsItemsSizeAmount: null,
+            optionsTrademark: null,
+            optionsSele: null,
+            optionsCategoryType: null,
+            optionsSelect: null,
+            optionsCategory: null,
+            optionsSelectUser: null,
+            isEmptykeyObjectSizeItems: false,
+            isImgColor: false,
+            isBTNVi: true,
         })
-        
     }
+
+    // Edit Items
+    handleEditItems = async(dataItems) => {
+
+        let {  
+            items,
+            editItems,
+            itemsInfo
+        } = this.state
+        let {language} = this.props
+
+        if(editItems) {
+    
+            // 
+            let res = await this.handleGetOneUser(dataItems.idShop)
+            let nameShop = {value: dataItems.idShop, label: dataItems.storeData && dataItems.storeData.nameShop}
+            let sentFromEdit = dataItems.infoItemsData && dataItems.infoItemsData.sentFrom
+            let idItemsEdit = dataItems.idItems
+    
+            let optionsCategoryEdit = {value: dataItems.categoryData && dataItems.categoryData.code,
+                label: dataItems.categoryData && language === languages.EN ? dataItems.categoryData.valueEn : dataItems.categoryData.valueVi}
+    
+                
+            let optionsCategoryTypeEdit = {value: dataItems.typeData && dataItems.typeData.code,
+                label: dataItems.typeData && language === languages.EN ? dataItems.typeData.valueEn : dataItems.typeData.valueVi}
+            let optionsSeleEdit = {value: dataItems.discountData && dataItems.discountData.code,
+                label: dataItems.discountData && language === languages.EN ? dataItems.discountData.valueEn : dataItems.discountData.valueVi}
+            let nameEdit = dataItems.name
+            let nameEnEdit = dataItems.nameEn
+            let optionsTrademarkEdit = {value: dataItems.infoItemsData && dataItems.infoItemsData.trademarkData && dataItems.infoItemsData.trademarkData.code,
+                label: dataItems.infoItemsData.trademarkData && language === languages.EN ? dataItems.infoItemsData.trademarkData.valueEn : dataItems.infoItemsData.trademarkData.valueVi}
+            let productionEdit =  dataItems.infoItemsData && dataItems.infoItemsData.production
+            let textureEdit =  dataItems.infoItemsData && dataItems.infoItemsData.texture
+    
+            // 
+            let optionsItemsSizeAmountEdit = {
+                value: dataItems.dataSizeAmount && dataItems.dataSizeAmount[0].typeSizeData && dataItems.dataSizeAmount[0].typeSizeData.code,
+                label: dataItems.dataSizeAmount[0].typeSizeData && language === languages.EN ? dataItems.dataSizeAmount[0].typeSizeData.valueEn : dataItems.dataSizeAmount[0].typeSizeData.valueVi}
+            await this.props.getAllCodeInToItems(optionsItemsSizeAmountEdit.value)
+    
+            let priceEdit = dataItems.price
+            let newPrice = dataItems.newPrice
+            let dataSizeAmount = dataItems.dataSizeAmount
+    
+            // 
+            let newData = []
+            dataSizeAmount.map(item => {
+                if(item.sizeData){
+                    let result = {...item.sizeData,amount: item.amount}
+                    newData.push(result)
+                }
+            })
+            this.heandleChangeInputSize(newData)
+    
+            //
+            let describeTextEnEdit = dataItems.infoItemsData && dataItems.infoItemsData.describeTextEn
+            let describeTextViEdit = dataItems.infoItemsData && dataItems.infoItemsData.describeTextVi
+            let describeHtmlEnEdit = dataItems.infoItemsData && dataItems.infoItemsData.describeHtmlEn
+            let describeHtmlViEdit = dataItems.infoItemsData && dataItems.infoItemsData.describeTextVi
+    
+            // List img
+            let listImgColor = []
+    
+            dataItems.dataColorImg.map(item => {
+                listImgColor.push({
+                    src: `${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${item.image}`, 
+                    file:{
+                        option: {value: item.colorData.code, label: language === languages.EN ? item.colorData.valueEn : item.colorData.valueVi },
+                        id: item.image
+                    }}
+                )
+            })
+    
+    
+            this.setState({
+                isImgColor: true,
+                isEmptykeyObjectSizeItems: true,
+                dataEdit: dataItems,
+                editItems: true,
+                isShowListsInput: true,
+                optionsSelect: nameShop,
+                optionsSelectUser: res,
+                itemsInfo: {
+                    ...itemsInfo,
+                    sentFrom: sentFromEdit,
+                    production: productionEdit,
+                    texture: textureEdit,
+                    describeTextEn:describeTextEnEdit,
+                    describeTextVi: describeTextViEdit,
+                    describeHtmlEn:describeHtmlEnEdit,
+                    describeHtmlVi: describeHtmlViEdit,
+                    trademark: optionsTrademarkEdit.value,
+                },
+                items: {
+                    ...items,
+                    idShop: dataItems.idShop,
+                    idItems: idItemsEdit,
+                    name: nameEdit,
+                    nameEn: nameEnEdit,
+                    price: newPrice ? newPrice : priceEdit,
+                    category: optionsCategoryEdit.value,
+                    type: optionsCategoryTypeEdit.value,
+                    manageId: res.value
+                },
+                optionsCategory: optionsCategoryEdit,
+                optionsCategoryType: optionsCategoryTypeEdit,
+                optionsSele: optionsSeleEdit || '0',
+                optionsTrademark: optionsTrademarkEdit,
+                optionsItemsSizeAmount: optionsItemsSizeAmountEdit,
+                dataSizeEdit: newData,
+                listImg: listImgColor,
+            })
+        }
+    }
+
+    // Set Edit (True)
+    setEditItems = () => {
+        this.setState({       
+            editItems: true,
+        })
+    }
+
+
 
 
     render() {
     let {language} = this.props
-    let {name,price,idItems} = this.state.items
+    let {name,price,idItems,nameEn} = this.state.items
     let {sentFrom,production,texture} = this.state.itemsInfo
+
+
+  
 
     let {
         listAllShops,
@@ -922,28 +1181,34 @@ class Items extends Component {
         isImgColor,
         isEmptykeyObjectSizeItems,
         listErrorForm,
-        isShowListsInput
+        isShowListsInput,
+        editItems,
+
     } = this.state
 
-    // console.log(listImg)
 
+    
 
     const mdParser = new MarkdownIt();
     return (
         <>
-        <div className='l-12'>
-            <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.createItems' /></p> 
-        </div> 
         
+        {/* Thêm mới items */}
         <div className='col l-3'>
             <span className='sub-heading' onClick={() => this.handleShowHideInputsUser()}>
                 <SwitchLanguage id='manageAdmin.createItems'/>
                 <FontAwesomeIcon className='icon-user' icon={faStore} />
             </span>
         </div>
+
+        {/* Title */}
+        <div className='l-12'>
+            <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.listItem' /></p> 
+        </div> 
        
+        {/* Bảng thêm items */}
         { isShowListsInput && 
-            <div style={{height:'auto'}} className='all-input l-12'>
+            <div style={{height:'auto'}} className='all-input items l-12'>
                 <div className='list-input'>
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameShop'/></label>
@@ -953,6 +1218,7 @@ class Items extends Component {
                             options={listAllShops}
                             styles={this.customStyles}
                             name='idShop'
+                            isDisabled={editItems ? true : false}
                             placeholder={<SwitchLanguage id='manageAdmin.form.nameShop'/>}
                         />
                         <span className='err'> {!_.isEmpty(listErrorForm.idShop) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
@@ -980,10 +1246,10 @@ class Items extends Component {
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.idItems'/></label>
                         <input  type='text' className='input' name='idItems'  value={idItems}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
-                            style={idItems !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                            style={idItems !== '' ? editItems ? {backgroundColor: 'hsl(0, 0%, 95%)'}: {backgroundColor: 'white'} : {backgroundColor: 'transparent'}} disabled={editItems ? true : false}
                         />
                         <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_idItems' /></span>
-                        <span className='err'> {!_.isEmpty(listErrorForm.idItems) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                        <span className='err '> {!_.isEmpty(listErrorForm.idItems) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
                             {!_.isEmpty(listErrorForm.idItems) ? language === languages.VI ? listErrorForm.idItems.valueVi : listErrorForm.idItems.valueEn : ''}
                         </span>
                     </div>
@@ -1003,6 +1269,7 @@ class Items extends Component {
                             {!_.isEmpty(listErrorForm.category) ? language === languages.VI ? listErrorForm.category.valueVi : listErrorForm.category.valueEn : ''}
                         </span>
                     </div>
+
                 </div>
 
                 
@@ -1040,17 +1307,6 @@ class Items extends Component {
 
                 <div className='list-input'>
                     <div className='form-input col l-6'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.price'/></label>
-                        <input  type='text' className='input' name='price'  value={price}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
-                            style={price !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                        />
-                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_price' /></span>
-                        <span className='err'> {!_.isEmpty(listErrorForm.price) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
-                            {!_.isEmpty(listErrorForm.price) ? language === languages.VI ? listErrorForm.price.valueVi : listErrorForm.price.valueEn : ''}
-                        </span>
-                    </div>
-
-                    <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameItems'/></label>
                         <input  type='text' className='input' name='name' value={name} onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
                             style={name !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
@@ -1058,6 +1314,17 @@ class Items extends Component {
                         <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.nameItems' /></span>
                         <span className='err'> {!_.isEmpty(listErrorForm.name) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
                             {!_.isEmpty(listErrorForm.name) ? language === languages.VI ? listErrorForm.name.valueVi : listErrorForm.name.valueEn : ''}
+                        </span>
+                    </div>
+
+                    <div className='form-input col l-6'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameItemsEn'/></label>
+                        <input  type='text' className='input' name='nameEn' value={nameEn} onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
+                            style={nameEn !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                        />
+                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.nameItemsEn' /></span>
+                        <span className='err'> {!_.isEmpty(listErrorForm.nameEn) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                            {!_.isEmpty(listErrorForm.nameEn) ? language === languages.VI ? listErrorForm.nameEn.valueVi : listErrorForm.nameEn.valueEn : ''}
                         </span>
                     </div>
                 </div>
@@ -1129,40 +1396,54 @@ class Items extends Component {
                         <span className='err'></span>
                     </div>
 
-
                     <div className='form-input col l-6'>
-                        {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value === 'FRSZ' &&
-                            <>
-                                <label className='input-label'><SwitchLanguage id='manageAdmin.form.amount'/></label>
-                                <input  type='number' className='input' onChange={(e) => this.heandleChangeInputSize(e.target.value,'FRSZ',)}
-                                    placeholder={languages.EN === language  ? 'Enter amount...' : 'Nhập số lượng cỡ...'} 
-                                />
-                            </>
-                        }
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.price'/></label>
+                        <input  type='text' className='input' name='price'  value={price}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
+                            style={price !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                        />
+                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_price' /></span>
+                        <span className='err'> {!_.isEmpty(listErrorForm.price) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                            {!_.isEmpty(listErrorForm.price) ? language === languages.VI ? listErrorForm.price.valueVi : listErrorForm.price.valueEn : ''}
+                        </span>
                     </div>
+
                 </div>
 
 
-                {/* List size */}
-                {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value !== 'FRSZ' &&
-                    <div className='list-input size'> 
-                        {listSIZEData && listSIZEData.length > 0 && listSIZEData.map((item , index) => {
-                            return (
-                                <div key={index} className='list-input-size col l-3'>
-                                    <span className='input-label'>{languages.EN === language  ? 'Size' : 'Cỡ'} {item.valueEn}</span>
-                                    <input type='number' name={item.value} 
-                                        placeholder={languages.EN === language  ? 'Enter amount...' : 'Nhập số lượng cỡ...'} className='input l-9' 
-                                        onChange={(e) => this.heandleChangeInputSize(e.target.value,item.keyMap,item.type)}
+                <div className='list-input'>
+
+                    {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value === 'FRSZ' &&
+                        <div className='form-input col l-6'>
+                                <>
+                                    <label className='input-label'><SwitchLanguage id='manageAdmin.form.amount'/></label>
+                                    <input type='number' className='input' onChange={(e) => this.heandleChangeInputSize(e.target.value,'FRSZ',)}
+                                        placeholder={languages.EN === language  ? 'Enter amount...' : 'Nhập số lượng cỡ...'} 
                                     />
-                                    
-                                </div>
-                            )
-                        })} 
-                    </div>
-                }
-                <span className='err'> {!_.isEmpty(listErrorForm.itemsSizeAmount) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
-                    {!_.isEmpty(listErrorForm.itemsSizeAmount) ? language === languages.VI ? listErrorForm.itemsSizeAmount.valueVi : listErrorForm.itemsSizeAmount.valueEn : ''}
-                </span>
+                                </>
+                        </div>
+                    }
+
+                    {/* List size */}
+                    {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value !== 'FRSZ' &&
+                        <div className='list-input size'> 
+                            {listSIZEData && listSIZEData.length > 0 && listSIZEData.map((item , index) => {
+                                return (
+                                    <div key={index} className='list-input-size col l-3'>
+                                        <span className='input-label'>{languages.EN === language  ? 'Size' : 'Cỡ'} {item.valueEn}</span>
+                                            <input type='number' name={item.value} 
+                                                placeholder={languages.EN === language  ? item.amount ? `${item.amount}` : 'Enter amount...' : item.amount ? `${item.amount}` :'Nhập số lượng...'} className='input l-9' 
+                                                onChange={(e) => this.heandleChangeInputSize(e.target.value,item,e.target)}
+                                            />
+                                    </div>
+                                )
+                            })} 
+                        </div>
+                    }
+                    <span className='err'> {!_.isEmpty(listErrorForm.itemsSizeAmount) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                        {!_.isEmpty(listErrorForm.itemsSizeAmount) ? language === languages.VI ? listErrorForm.itemsSizeAmount.valueVi : listErrorForm.itemsSizeAmount.valueEn : ''}
+                    </span>
+                </div>
+
 
                 {/* Description items */}
                 <div className='list-input'>
@@ -1202,20 +1483,23 @@ class Items extends Component {
                     </div>
                 </div> 
 
+
                 {/* Pewview img */}
                 {idItems &&
                 <div className='list-input img'>
                     {listImg  && listImg.length > 0 && listImg.map((srcImg,index) => {
                         return (
-                            <div key={srcImg.src} className="col l-2-4">
+                            <div key={`${srcImg.src}${index}`} className="col l-2-4">
                                 <div className='ct__product-show'
-                                    style={{ backgroundImage: `url(${srcImg.src})`, height: '500', opacity: srcImg.file.option === '' ? .3 : 1}}>
+                                    style={{ backgroundImage: `url(${srcImg.src})`, 
+                                    opacity: `${srcImg.file.option ? '1' : '.4'}`,
+                                    height: '500', }}>
                                     <FontAwesomeIcon icon={faPlus} className='icon-close' onClick={() => this.deleteImgPewView(srcImg)}/>
                                 </div>
-
+                                {/* color */}
                                 <Select
                                     className='select-color'
-                                    value={srcImg.file.option || ''}
+                                    value={srcImg.file.option}
                                     onChange={this.handlChangeSlelect}
                                     options={listColor}
                                     styles={this.customStyles}
@@ -1242,40 +1526,42 @@ class Items extends Component {
                 </span>
 
 
+                {/* Buuton */}
                 <div className='col l-12'>
                     <div className='list-btn'>
                         <span onClick={(e) =>   
-                            this.state.itemsInfo.describeTextVi && 
+                        this.state.itemsInfo.describeTextVi && 
                             this.state.itemsInfo.describeTextEn &&
                             listImg.length > 0 && isImgColor && 
-                            isEmptykeyObjectSizeItems && 
+                            isEmptykeyObjectSizeItems && name && nameEn && price &&
                             this.handleOnSubmit(e)}
                         >
-                            
-
                             <Button 
                                 type={
                                     this.state.itemsInfo.describeTextVi && this.state.itemsInfo.describeTextEn &&
-                                    listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems
-                                    ? 'submit-form-data' : 'ban-form-data'
+                                    listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems && name && nameEn && price
+                                    ? editItems ? 'edit-form-data' : 'submit-form-data' : 'ban-form-data' 
                                 }
-                                content={<SwitchLanguage id='manageAdmin.form.addItems'/>} 
+                                content={ !editItems ? <SwitchLanguage id='manageAdmin.form.addItems'/> : <SwitchLanguage id='manageAdmin.form.btn_edit'/>} 
                             />
                         </span>
                     </div>
                 </div>
 
-
             </div>
         }
        
-       <ListItems/>
+        {/* List Items */}
+        {!isShowListsInput && 
+            <ListItems  handleEditItems={this.handleEditItems} setStateItems={this.setEditItems}/>
+        }
 
-                
+        <Discounts listSale={listSale} listAllShops={listAllShops} listAllCategory={listAllCategory} listAllCategoryType={listAllCategoryType} handlChangeSlelect={this.handlChangeSlelect}/>
+        
 
+        
 
-
-   
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <p>
         {/* <div class="col l-2-4 m-4 c-6">
             <a href="#/" class="ct__product">
@@ -1314,7 +1600,7 @@ class Items extends Component {
         </div> */} 
     </p>
    
-
+ 
     </>       
 )}}
 

@@ -40,6 +40,7 @@
         .form-input{
             margin: 0 0 5px 0;
             position: relative;
+            height: 106px;
             
             
             .input-label{
@@ -48,6 +49,7 @@
             }
             
             .input{
+                padding-right: 12px;
                 width: calc(100% - var(--width-eye));
                 float: left;
                 border-radius:6px;
@@ -59,7 +61,7 @@
                 font-size: 1.6rem;
                 cursor: pointer;
                 position: relative;
-                z-index: 999;
+                z-index: 9;
                 background-color:transparent;
             }
             .input[type='file']{
@@ -104,7 +106,7 @@
             .planceholder_input{
                 position: absolute;
                 top: calc(50% );
-                transform: translateY(-10%);
+                transform: translateY(-50%);
                 width: calc(100% - var(--width-eye) );
                 left: calc(var(--padding-left) * 2);
                 font-size: var(--font-size-label);

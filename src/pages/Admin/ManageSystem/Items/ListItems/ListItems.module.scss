@@ -5,6 +5,26 @@
     border-radius: 8px;
     overflow: hidden;
 
+
+    .idItems{
+        text-transform: uppercase;
+    }
+    .wraper-name{
+        width: 300px;
+
+        .name{
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 6px 0 6px  6px;
+            line-height: 1.9rem; 
+            height: 1.9rem;       
+            overflow: hidden;     
+            display: block;      
+            display: -webkit-box ;
+            -webkit-box-orient: vertical; 
+            -webkit-line-clamp: 1;  
+        }
+    }
     td, #customers th {
         border-right: 1px solid #ddd;
         padding: 8px;

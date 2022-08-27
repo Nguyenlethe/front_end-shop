@@ -121,6 +121,7 @@ class Login extends Component {
 
         <form className={cx('form-login')}>
             <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.heading'/></p>
+            
             <div className={cx('form-input')}>
                 <label><SwitchLanguage id='manageAdmin.form.account'/></label>
                 <div className={cx('wrap-input')}>
@@ -155,11 +156,9 @@ class Login extends Component {
 
 
                 <span  className={cx('forget')}>
-
                     <Link to={path.FORGOTPASS}>
                         <SwitchLanguage id='manageAdmin.form.ForgotPW'/> 
                     </Link>
-
                 </span>
 
                 <p onClick={(e) => this.handleSubmitLogin(e)}>

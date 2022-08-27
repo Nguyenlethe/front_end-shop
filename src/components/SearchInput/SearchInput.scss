@@ -1,0 +1,37 @@
+.search{
+
+    .input_search{
+        position: relative;
+        
+        .input{
+            width: calc(100% - var(--width-eye));
+            border-radius:6px;
+            float: left;
+            overflow: hidden;
+            outline: none;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: var(--height-input);
+            padding-left: var(--padding-left);
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 999;
+            background-color:transparent;
+            padding-right: 64px;
+        }
+        svg{
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            padding: calc( calc(var(--height-input) - 22px) / 2) 0;
+            width: 60px;
+            height: 18px;
+            color: rgb(224, 220, 220);
+            background-color: var(--BGR-btn-submit-hover-LG);
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            opacity: .6;
+        }
+    }
+}

@@ -101,31 +101,38 @@ class ForgotPassword extends Component {
             let res = await this.props.retrievalPassword({...this.state.form,valueLanguage:language})
 
             console.log(res)
+            if(!res){
+                this.setState({
+                    isModal: false
+                })
+            }
 
 
-            if(res && res.data.errCode === 0){
+            if(res && res.data && res.data.errCode === 0){
                 this.setState({
                     isModal: false,
                     isFormCreateNewPassword: true,
                 })
             }
-            if(res && res.data.errCode === 1){
+            if(res && res.data &&  res.data.errCode === 1){
                 this.setState({
                     isModal: false,
                     erroSearchEmail:{...res.data.data}
                 })
             }
-            if(res && res.data.errCode === 1 || res.data.errCode === 0) {
+            if(res && res.data && res.data.errCode === 1 || res.data.errCode === 0) {
                 this.setState({
                     isModal: false
                 })
             }
 
-            if(res && res.data.code === 'EAUTH') {
+            if(res && res.data &&  res.data.code === 'EAUTH') {
                 this.setState({
                     isModal: false
                 })
             }
+
+          
         }
     }
 

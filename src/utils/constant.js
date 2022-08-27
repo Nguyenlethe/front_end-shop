@@ -33,3 +33,15 @@ export const PERMISSIONS = {
     PATIENT: "R3",
 }; 
 
+export const DISCOUNTTEXT = {
+    VN_DISCOUNT: 'Đơn trên',
+    VN_DISCOUNT_SUB: 'VNĐ',
+    EN_DISCOUNT: 'Price above',
+    EN_DISCOUNT_SUB: 'USD'
+}
+
+export const SEARCH = {
+    DELAY: 600,
+    TYPESEARCH: 'idItems',
+    TABELSEARCH: 'Items'
+}

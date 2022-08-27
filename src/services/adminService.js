@@ -1,4 +1,4 @@
-import axios from "../utils/axios";
+import axios from "../utils/axios"; 
 
 
 // Lấy Dl từ bảng Allcode
@@ -30,7 +30,6 @@ function createNewShop (data) {
 function getAllUser (type) {
     return axios.get(`/admin/get-all-user?type=${type}`);
 }
-
 
 // Lấy Danh Sách Shop
 function getAllShop (type) {
@@ -91,10 +90,43 @@ function getDataItems (type) {
 }
 
 
+// Xoa items
+function deleteDataItems (id) {
+    return axios.post(`/admin/delete-items`,id);
+}
+
+// Edit items
+function editDataItems (data) {
+    return axios.post(`/admin/change-items`,data);
+}
+
+
+// Lấy Danh Sách items theo DK
+function getItemsWhere (data) {
+    return axios.get(`/admin/get-all-items-where?category=${data.category}&type=${data.type}`);
+}
+
+
+// Lấy Danh Sách items Discount
+function getAllDiscountItems (type) {
+    return axios.get(`/admin/get-data-discount?type=${type}`);
+}
+
+
+// Search items
+function searchData (data) {
+    return axios.get(`/admin/search-data-items?table=${data.tabel}&type=${data.type}&value=${data.value}&idShop=${data.idShop}`);
+}
+
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    searchData,
+    getAllDiscountItems,
+    getItemsWhere,
+    editDataItems,
+    deleteDataItems,
     getDataItems,
     addNewItems,
     getOneUser,

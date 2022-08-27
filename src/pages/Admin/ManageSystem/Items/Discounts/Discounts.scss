@@ -1,0 +1,46 @@
+.list_all_discount{
+
+    display: flex;
+    flex-wrap: wrap;
+
+
+  
+
+    .fixCss{
+        width: 100%;
+        height: calc(var(--height-input) - 3px);
+        outline: none;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 0 12px;
+        font-family: var(--font-family-primary); 
+        font-size: 1.6rem;
+    }
+    .react-datepicker__month-container {
+        float: left;
+        width: 272px;
+    }
+
+    .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+        font-size: 1.6rem;
+    }
+    .react-datepicker__navigation-icon--next {
+        left: 2px;
+    }
+
+    .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+        display: inline-block;
+        width: 2.8rem;
+        line-height: 1.7rem;
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
+        border-radius: 0.3rem;
+        background-color: #2579ba;
+        color: #fff;
+    }
+}

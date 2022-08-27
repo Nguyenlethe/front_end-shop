@@ -13,6 +13,7 @@
         "btnRGT":"Register",
         "createShop":"Create New Shop",
         "createItems":"Create New Items",
+        "listItem":"List All Items",
 
         "form":{
             "idUser":"ID User",
@@ -36,6 +37,9 @@
             "Detail":"Detail",
             "Actions":"Actions",
             "AddressDetails":"Address Detail",
+            "startDay":"Day start",
+
+
 
             "planceholder_idUser":"Please Enter ID User",
             "planceholder_email":"Please Enter Email",
@@ -56,6 +60,8 @@
             "planceholder_sale":"Click Select Add Discount Code",
             "planceholder_price": "Enter Price",
             "planceholder_idItems":"Enter The Identifier",
+            "planceholder_sreachCode":"Enter search code product",
+
 
             "planceholder_trademark":"Choose Brand",
             "planceholder_production":"Exodus...",
@@ -63,6 +69,10 @@
             "planceholder_texture":"Select Product Material",
             "planceholder_itemsSizeAmount":"Type Size...",
             "planceholder_color":"Select Color...",
+            "planceholder_startDay":"Select day start",
+            "planceholder_ifDiscount":"Select condition discount",
+
+
 
 
             "btn":"Create New",
@@ -82,6 +92,8 @@
             "errAccount":"Incorrect email format",
             "emptyData":"User not enter data ",
             "listUser":"List All User",
+            "endDay":"Day end",
+            "sreachCode":"Product code search",
 
             "manageId":"ManageId",
             "nameShop":"Name Shop",
@@ -99,7 +111,10 @@
             "category":"Catalog Of Goods",
             "type": "Sectors",
             "sale":"Discount",
-            "nameItems":"Enter Name Items",
+            "nameItems":"Enter Name VietNamese Items",
+            "nameItemsEn":"Enter Name Items",
+            "ifDiscount":"Condition discount",
+
             "price":"Price",
             "idItems":"Code Identifier",
 
@@ -117,7 +132,10 @@
             "errorEmpty":"Not Empty !!!",
 
             "nameItemsListItems":"Name items",
-            "codeItems":"Code items"
+            "codeItems":"Code items",
+            "craeteDiscount":"Create voucher discount",
+            "deleteAllListInput":"Delete All "
+
 
 
 
@@ -127,7 +145,7 @@
 
 
       
-
+ 
 
 
 
@@ -139,7 +157,13 @@
         "toast": {
             "success":"Add user successfully !!!",
             "warn":"An error occurred",
-            "success_change":"Change successfully"
+            "success_change":"Change successfully",
+            "successItems":"Create items successfully !!!",
+            "successEditItems":"Thay đổi thành công !!!",
+            "deleteSuccessItems":"Xóa thành công !"
+
+
+  
         }
 
     },

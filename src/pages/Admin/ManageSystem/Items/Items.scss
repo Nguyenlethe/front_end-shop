@@ -40,76 +40,84 @@
     }
     
 }
-.list-input.img{
-    justify-content: flex-start;
-    flex-wrap: wrap;
 
-    .select-color{
-        margin-top: 12px;
-    }
-    
-    #add{
-        position: relative;
-        height: 180px;
-        width: 100%;
+.all-input.items{
+    height: 0px;
+    overflow: visible !important;
+    transition: height .5s linear;
+    -webkit-transition: height .5s linear;
 
-        .border-add-img{
+    .list-input.img{
+        
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+
+        .select-color{
+            margin-top: 12px;
+        }
+        
+        #add{
+            position: relative;
             height: 180px;
-            width: 90%;
-   
-            border: 1px dotted #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin: auto;
-            text-align: center;
-            background-color: rgb(255, 251, 251);
-            position: absolute;
-            top: 0;
+            width: 100%;
 
-            &:hover{
+            .border-add-img{
+                height: 180px;
+                width: 90%;
+    
+                border: 1px dotted #ccc;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                margin: auto;
+                text-align: center;
+                background-color: rgb(255, 251, 251);
+                position: absolute;
+                top: 0;
+
+                &:hover{
+                    svg{
+                    color: var(--iconSVG-hover);
+                    }
+                    span{
+                        color: var(--iconSVG-hover);
+                    }
+                }
+        
                 svg{
-                   color: var(--iconSVG-hover);
+                    color: var( --color-text-forgot);
+                    opacity: .7;
+                    font-size: 5.6rem;
+                    display: block;
+                    margin-bottom: 20px;
                 }
                 span{
-                    color: var(--iconSVG-hover);
+                    color: var( --color-text-forgot);
+                    opacity: .7;
+
                 }
             }
-    
-            svg{
-                color: var( --color-text-forgot);
-                opacity: .7;
-                font-size: 5.6rem;
+
+            input[type='file']{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                background-color: transparent;
+
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
                 display: block;
-                margin-bottom: 20px;
-            }
-            span{
-                color: var( --color-text-forgot);
-                opacity: .7;
+
 
             }
-        }
-
-        input[type='file']{
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            background-color: transparent;
-
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            background: white;
-            cursor: inherit;
-            display: block;
-
-
         }
     }
 }
-
 .err{
     color: red;
     svg{

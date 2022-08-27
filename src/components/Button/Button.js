@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faStore,faPlus,faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 import './Button.scss';
 class Button extends Component {
@@ -38,7 +39,9 @@ type === 'edit-form-data' ? <button className='btn-form-input'> <span className=
 type === 'close-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input close'>{content}</span> </button>
     : 
 type === 'ban-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input ban'>{content}</span> </button>
-    : ""
+    : 
+type === 'create' ? <button className='craete-input'> <span className='content-btn-form-input create'>{content}</span> <FontAwesomeIcon icon={faPlus}/></button>
+    : ''
 
                 }
             </>

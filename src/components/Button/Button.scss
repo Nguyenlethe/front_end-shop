@@ -159,7 +159,7 @@
         cursor: no-drop;
         display: block;
         font-weight: var(--font-weight);
-        padding: 10px 20px;
+        padding: 8px 20px;
         font-size: var(--font-size-btn-submit);
         font-family: var(--font-family-primary);
         text-transform: uppercase;
@@ -200,10 +200,15 @@
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         display: block;
         text-align: center;
-        padding: 10px 20px;
+        padding: 8px 20px;
+        opacity: .8;
 
         .icon-user{
             margin-left:14px;
+        }
+
+        &:hover{
+            opacity: 1
         }
     }
     
@@ -218,5 +223,37 @@
     .content-btn-form-input.ban{
         background-color: var(--BGR-btn-ban-LG);
         cursor: no-drop;
+    }
+}
+
+
+
+
+.craete-input{
+    border: none;
+    outline: none;
+    border-radius: 79px;
+    text-align: center;
+    overflow: hidden;
+    background:var(--BGR-close-btn-LG);
+    transition: all .2s ease;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--default-color-iconSVG);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    .content-btn-form-input.create{
+        padding: 10px 10px 10px 20px;
+        text-transform: uppercase;
+    }
+    svg{
+        margin-right: 20px;
+    }
+
+    &:hover{
+        color: var(--color-btn-ban-hover-LG);
+        background: var(--BGR-color-btn-manageuser);
     }
 }

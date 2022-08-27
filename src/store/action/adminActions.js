@@ -69,6 +69,7 @@ export const fetchAllDataProvinceFailed = () => ({
 export const fetchAllDataAllCodeStart = () => {
     return async (dispatch, getState) => {
         try{
+            
             let resPay = await adminService.getAllCode('PAY')
             let resGender = await adminService.getAllCode('GENDER')
             let resPermission = await adminService.getAllCode('ROLE')
@@ -117,7 +118,9 @@ export const fetchAllDataAllCodeFailed = () => ({
 export const getCategoryAllCodeStart = () => {
     return async (dispatch, getState) => {
         try{
+
             let category = await adminService.getAllCode('CATEGRORY')
+            // console.log(category)
             
             if(category && category.data.errCode === 0 ){
                 let data = {
@@ -152,7 +155,7 @@ export const getCategoryAllCodeFailed = () => ({
 
 
 
-// Actions lấy AllCode (Gender, Province, Permission)
+// Actions lấy user All và !R2
 export const getAllUserStart = (type) => {
     return async (dispatch, getState) => {
         try{
@@ -245,10 +248,14 @@ export const getAllCodeInToItemsStart = (inputType) => {
             let res = await adminService.getAllCode(inputType)
             // console.log(res)
             
+            
             // Thoi trang nam
             if(inputType === 'FSB'){
                 if(res && res.data.errCode === 0 ){
                     let FSBData = res.data.data.inputType
+
+                    // console.log(FSBData)
+
                     dispatch(getAllCodeInToItemsFSBDataSuscess(FSBData))
                 }else{
                     dispatch(getAllCodeInToItemsFSBDataSuscess([]))
@@ -259,6 +266,8 @@ export const getAllCodeInToItemsStart = (inputType) => {
             if(inputType === 'FSAM'){
                 if(res && res.data.errCode === 0 ){
                     let FSAMData = res.data.data.inputType
+                    // console.log(FSAMData)
+
                     dispatch(getAllCodeInToItemsFSAMDataSuscess(FSAMData))
                 }else{
                     dispatch(getAllCodeInToItemsFSAMDataSuscess([]))
@@ -269,6 +278,9 @@ export const getAllCodeInToItemsStart = (inputType) => {
             if(inputType === 'FSM'){
                 if(res && res.data.errCode === 0 ){
                     let  FSMData = res.data.data.inputType
+
+                    // console.log(FSMData)
+                    
                     dispatch(getAllCodeInToItemsFSMDataSuscess(FSMData))
                 }else{
                     dispatch(getAllCodeInToItemsFSMDataSuscess([]))
@@ -279,6 +291,7 @@ export const getAllCodeInToItemsStart = (inputType) => {
             if(inputType === 'FSAW'){
                 if(res && res.data.errCode === 0 ){
                     let FSAWData = res.data.data.inputType
+                    // console.log(FSAWData)
                 
                     dispatch(getAllCodeInToItemsFSAWDataSuscess(FSAWData))
                 }else{
@@ -340,7 +353,6 @@ export const getAllCodeInToItemsStart = (inputType) => {
                     dispatch(getAllCodeInToItemsSIZEDataSuscess([]))
                 }
             }
-
 
             // Kiểu cỡ so
             if(inputType === 'SZNB'){
@@ -445,13 +457,13 @@ export const getDataItemsStart = (inputType) => {
         try{
 
             let res = await adminService.getDataItems(inputType)
-            console.log(res)
+            // console.log(res)
 
 
             if(inputType === 'All'){
                 if(res && res.data.errCode === 0 ){
                     let dataAllItems = res.data.data.inputType
-                    console.log(dataAllItems)
+                    // console.log(dataAllItems)
                     dispatch(getDataItemsSuscess(dataAllItems))
                 }else{
                     dispatch(getDataItemsSuscess([]))

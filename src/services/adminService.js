@@ -1,6 +1,5 @@
 import axios from "../utils/axios"; 
 
-
 // Lấy Dl từ bảng Allcode
 function getAllCode (inputType) {
     return axios.get(`/admin/get-data-allcode?type=${inputType}`);
@@ -71,24 +70,20 @@ function editInfoShopNotIMG (data) {
     return axios.post(`/admin/change-shop-notIMG`, data);
 }
 
-
 // Get one User
 function getOneUser (id) {
     return axios.get(`/admin/get-one-user?id=${id}`);
 }
-
 
 // Post data Items
 function addNewItems (data) {
     return axios.post(`/admin/create-new-items`,data);
 }
 
-
 // Get items
 function getDataItems (type) {
     return axios.get(`/admin/get-data-items?type=${type}`);
 }
-
 
 // Xoa items
 function deleteDataItems (id) {
@@ -100,22 +95,24 @@ function editDataItems (data) {
     return axios.post(`/admin/change-items`,data);
 }
 
-
 // Lấy Danh Sách items theo DK
 function getItemsWhere (data) {
-    return axios.get(`/admin/get-all-items-where?category=${data.category}&type=${data.type}`);
+    return axios.get(`/admin/get-all-items-where?idShop=${data.idShop}&category=${data.category}&type=${data.type}`);
 }
-
 
 // Lấy Danh Sách items Discount
 function getAllDiscountItems (type) {
     return axios.get(`/admin/get-data-discount?type=${type}`);
 }
 
-
 // Search items
 function searchData (data) {
-    return axios.get(`/admin/search-data-items?table=${data.tabel}&type=${data.type}&value=${data.value}&idShop=${data.idShop}`);
+    return axios.get(`/admin/search-data-items?table=${data.TABEL}&type=${data.TYPE}&value=${data.value}&idShop=${data.IDSHOP}`);
+}
+
+// Search items
+function addNewDisCounts (data) {
+    return axios.post(`/admin/create-new-discount`);
 }
 
 

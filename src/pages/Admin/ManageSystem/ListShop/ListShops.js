@@ -110,10 +110,9 @@ return (
                             </tr>
                             )
                         })}
-                        
+    
                     </tbody>
                 </table>
-        
             </div> 
         </div>   
     </>

@@ -7,10 +7,9 @@ import {faUser,faLock,faEyeSlash,faEye,faUnlock,faCircleExclamation} from '@fort
 import Button from '../../../components/Button/Button';
 import {path, languages,PERMISSIONS} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import Modal from '../../../components/Modal/Modal'
-import handleCheckPermission from '../../../utils/comparativeHandling'
+import LoadScroll from '../../../components/LoadData/LoadScroll'
+import handleCheckPermission from '../../../utils/generalHandling'
 import SwitchLanguage from '../../../SwitchLanguage'
-
 
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
@@ -19,6 +18,7 @@ const cx = classNames.bind(styles);
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.myRef = React.createRef();
         this.state = {
             isShowPass: false,
             isModal: false,
@@ -38,11 +38,12 @@ class Login extends Component {
         this.setState({ isShowPass: !this.state.isShowPass})
     }
 
+    // Mount
     componentDidMount = async ()=>  {
       
     }
 
-
+    // Update
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
 
@@ -71,7 +72,11 @@ class Login extends Component {
 
     // Xl ấn submit 
     handleSubmitLogin = async (e) => {
-        e.preventDefault()
+        let {isModal} = this.state
+      
+
+   
+      
         let {account,password} = this.state.form
         if(account.trim() !== "" && password.trim() !== "" ) {
             let data = this.state.form
@@ -83,6 +88,7 @@ class Login extends Component {
             let res = await this.props.loginSystem(data)
             if(res && res.data.errCode !== 0){
                 this.setState({isModal:false})
+                
                 for(let key in errMessageCoppy){
                     if(res.data.data[key]){
                         errMessageCoppy[key] = res.data.data[key]
@@ -98,22 +104,16 @@ class Login extends Component {
         }
     }
 
-  
 
-
-      
     render() {
 
     let {language,dataUser} = this.props
     let {isShowPass,isModal,errMessage} = this.state
     let {account,password} = this.state.form
 
-
-
     return (
     <>
-
-    <Modal isShow={isModal}/> 
+    <span><LoadScroll data={dataUser.isLogin} isShow={isModal}/></span>
 
     {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.ADMIN,dataUser.permission) && <Navigate to={path.MANAGE_USER}/>}
     {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
@@ -161,13 +161,11 @@ class Login extends Component {
                     </Link>
                 </span>
 
-                <p onClick={(e) => this.handleSubmitLogin(e)}>
+                <p onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
                     <Button type={account.trim() !== "" && password.trim() !== "" ? 'btn-submit' : "btn-ban"}
                         content={<SwitchLanguage id='manageAdmin.form.heading'/>}
                     />
                 </p>
-
-
             </div>
 
 

@@ -9,7 +9,6 @@ export const path = {
     
     // ADMIN
     MANAGE_USER: '/system/management',
-
     NOTFOUND: '/*',
 };  
 
@@ -42,6 +41,6 @@ export const DISCOUNTTEXT = {
 
 export const SEARCH = {
     DELAY: 600,
-    TYPESEARCH: 'idItems',
-    TABELSEARCH: 'Items'
+    TYPE_SEARCH: 'idItems',
+    TABEL_SEARCH: 'Items'
 }

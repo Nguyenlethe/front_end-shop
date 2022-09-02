@@ -3,35 +3,187 @@
     .input_search{
         position: relative;
         
-        .input{
-            width: calc(100% - var(--width-eye));
-            border-radius:6px;
+        .input.search{
+            width: 100%;
+            border-radius:6px 0px 0 6px;
             float: left;
             overflow: hidden;
             outline: none;
             border: 1px solid #ccc;
-            width: 100%;
-            height: var(--height-input);
+            border-right: 1px solid transparent;
+            width: calc(100% - var(--svg-search) - 2px);
+            height: calc( var(--height-input) - 2px);
             padding-left: var(--padding-left);
             font-size: 1.6rem;
             cursor: pointer;
             position: relative;
             z-index: 999;
             background-color:transparent;
-            padding-right: 64px;
+            padding-right: 12px;
+            font-family: var(--font-family-primary);
         }
-        svg{
+
+        .icon_load_re-set{
             position: absolute;
-            right: 2px;
-            top: 2px;
-            padding: calc( calc(var(--height-input) - 22px) / 2) 0;
-            width: 60px;
-            height: 18px;
+            right: 63px;
+            top: 28px;
+            font-size: 16px;
+            display: flex;
+            color: rgb(192, 191, 191);
+            z-index: 1000;
+
+            &:hover{
+                color: rgb(58, 57, 57);
+            }
+
+            svg{
+                padding: 7px;
+            }
+
+            .rotate{
+                font-size: 14px !important;
+                animation: rotation .8s infinite linear;
+                transition: transform linear .4s;
+            }
+
+            @keyframes rotation {
+                from {
+                    transform: rotate(0deg) scale(1.5);
+                }
+                to {
+                    transform: rotate(359deg) scale(1.5);
+                }
+            }
+        }
+
+        .input.select{
+            border-radius:6px;
+            float: left;
+            overflow: hidden;
+            outline: none;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: calc( var(--height-input) - 2px);
+            padding-left: var(--padding-left);
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 999;
+            background-color:transparent;
+            padding-right: 12px;
+            font-family: var(--font-family-primary);
+            overflow: hidden;
+            display: block;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+
+        .icon-search{
+            position: absolute;
+            right: 0px;
+            top: 24px;
+            padding: calc( calc(var(--height-input) - 24px) / 2) 0;
+            width: var(--svg-search);
+            height: 22px;
             color: rgb(224, 220, 220);
             background-color: var(--BGR-btn-submit-hover-LG);
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px;
             opacity: .6;
         }
+
+        .options_items{
+            position: absolute;
+            left: 0;
+            top: 73px;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            z-index: 2;
+            border-radius: 6px;
+            box-shadow: 1px 1px 10px #ccc;
+            overflow: auto;
+            max-height: 350px;
+
+            .no-options{
+
+                text-align: center;
+                height: 70px;
+                line-height: 70px;
+                text-transform: uppercase;
+                color: darkgrey;
+            }
+
+            .item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+                
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgb(243, 243, 243);
+                }
+
+
+                .wraper-img{
+                    width: 60px;
+                    height: 60px;
+                    overflow: hidden;
+
+                    img{
+                        height: 100%;
+                    }
+                }
+                .detail{
+                    flex: 1;
+                    margin: 6px;
+
+                    .name-items{
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        color: var(--color-text);
+                        margin: 0 0 6px 0;
+                        line-height: 1.6rem;
+                        height: 1.6rem;
+                        overflow: hidden;
+                        display: block;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                    }
+
+                    .list-price{
+
+                        .price{
+                            font-size: 1.5rem;
+                            color: var(--primary);
+                            line-height: 1.5rem;
+                            height: 1.5rem;
+
+                            .sub-price{
+                                color: var(--color-text);
+                                margin-right: 5px;
+                            }
+                            .type_price{
+                                margin-left: 6px;
+                            }
+                        }
+                        .code-items{
+                            font-size: 1.5rem;
+                            line-height: 1.5rem;
+                            height: 1.5rem;
+                            margin: 3px 0;
+                            
+                            span{
+                                margin-left: 5px;
+                                color: var(--iconSVG-active);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+
 }

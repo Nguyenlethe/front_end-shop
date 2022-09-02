@@ -6,10 +6,9 @@ import {faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../../components/Button/Button';
 import {path, languages} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import Modal from '../../../components/Modal/Modal'
+import Modal from '../../../components/LoadData/Modal'
 import SwitchLanguage from '../../../SwitchLanguage'
 import _ from 'lodash'
-
 
 import classNames from 'classnames/bind';
 import styles from './ForgotPassword.module.scss';
@@ -35,15 +34,7 @@ class ForgotPassword extends Component {
         }
     }
 
-    componentDidMount = async ()=>  {
-      
-    }
-
-    componentDidUpdate= async(prevProps, prevState)=> {
-        if(prevProps.language !== this.props.language){
-
-        }
-    }
+  
 
     // Khi onchange
     handleChangeInputAccount = (value, name) => {
@@ -61,14 +52,11 @@ class ForgotPassword extends Component {
         this.setState({form : {...stateCoppy}})
     }
 
-
     // Khi submit
     handleSubmitForgotPassword = async(e,type) => {
         e.preventDefault()
         let {newPassword,retypePassword} = this.state.form
         this.setState({isModal: true})
-
-        console.log(type)
 
         if(type === true){
             if(newPassword === retypePassword){
@@ -92,12 +80,9 @@ class ForgotPassword extends Component {
                 })
             }
         }
+
         if(type === false){
-
-            
             let { language} = this.props
-
-
             let res = await this.props.retrievalPassword({...this.state.form,valueLanguage:language})
 
             console.log(res)
@@ -106,7 +91,6 @@ class ForgotPassword extends Component {
                     isModal: false
                 })
             }
-
 
             if(res && res.data && res.data.errCode === 0){
                 this.setState({
@@ -131,8 +115,6 @@ class ForgotPassword extends Component {
                     isModal: false
                 })
             }
-
-          
         }
     }
 
@@ -144,9 +126,6 @@ class ForgotPassword extends Component {
     return (
         <>
             <Modal isShow={isModal}/> 
-
-            
-
 
             {!isSuccess ? <form className={cx('forgotpassword')}>
                 <span className={cx('heading')}><SwitchLanguage id='app.editPass.heading'/></span>

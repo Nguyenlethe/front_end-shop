@@ -246,17 +246,17 @@ export const getAllCodeInToItemsStart = (inputType) => {
         try{
 
             let res = await adminService.getAllCode(inputType)
-            // console.log(res)
-            
             
             // Thoi trang nam
             if(inputType === 'FSB'){
                 if(res && res.data.errCode === 0 ){
+                    
                     let FSBData = res.data.data.inputType
-
+                    
                     // console.log(FSBData)
-
+                    
                     dispatch(getAllCodeInToItemsFSBDataSuscess(FSBData))
+                    return FSBData
                 }else{
                     dispatch(getAllCodeInToItemsFSBDataSuscess([]))
                 }
@@ -265,10 +265,12 @@ export const getAllCodeInToItemsStart = (inputType) => {
             // Phu Kien Thhoi trang nam
             if(inputType === 'FSAM'){
                 if(res && res.data.errCode === 0 ){
+                    
                     let FSAMData = res.data.data.inputType
                     // console.log(FSAMData)
-
+                    
                     dispatch(getAllCodeInToItemsFSAMDataSuscess(FSAMData))
+                    return FSAMData
                 }else{
                     dispatch(getAllCodeInToItemsFSAMDataSuscess([]))
                 }
@@ -277,11 +279,12 @@ export const getAllCodeInToItemsStart = (inputType) => {
             // Thoi trang nu
             if(inputType === 'FSM'){
                 if(res && res.data.errCode === 0 ){
+                    
                     let  FSMData = res.data.data.inputType
-
                     // console.log(FSMData)
                     
                     dispatch(getAllCodeInToItemsFSMDataSuscess(FSMData))
+                    return FSMData
                 }else{
                     dispatch(getAllCodeInToItemsFSMDataSuscess([]))
                 }
@@ -290,10 +293,12 @@ export const getAllCodeInToItemsStart = (inputType) => {
             // Phu Kien Thhoi trang nu
             if(inputType === 'FSAW'){
                 if(res && res.data.errCode === 0 ){
+                    
                     let FSAWData = res.data.data.inputType
                     // console.log(FSAWData)
-                
+                    
                     dispatch(getAllCodeInToItemsFSAWDataSuscess(FSAWData))
+                    return FSAWData
                 }else{
                     dispatch(getAllCodeInToItemsFSAWDataSuscess([]))
                 }
@@ -302,9 +307,11 @@ export const getAllCodeInToItemsStart = (inputType) => {
             // All
             if(inputType === 'All'){
                 if(res && res.data.errCode === 0 ){
+                    
                     let AllData = res.data.data.inputType
                     // console.log(AllData)
                     dispatch(getAllCodeInToItemsAllDataSuscess(AllData))
+                    return AllData
                 }else{
                     dispatch(getAllCodeInToItemsAllDataSuscess([]))
                 }
@@ -480,4 +487,22 @@ export const getDataItemsStart = (inputType) => {
 export const getDataItemsSuscess = (data) => ({
     type: actionTypes.GET_DATA_ITEMS_SUCCESS,
     dataAllItems: data
+})
+
+
+// SET_VALUE_EMPTY
+export const setValueInputEmpty = () => {
+    return async (dispatch, getState) => {
+        try{
+            const ranDomNumber = Math.floor(1000 + Math.random() * 9000)
+            dispatch(setValueInputEmptySuscess(ranDomNumber))
+        }
+        catch(err){
+        }
+    }
+}
+
+export const setValueInputEmptySuscess = (ranDomNumber) => ({
+    type: actionTypes.SET_VALUE_EMPTY,
+    valueInput: ranDomNumber
 })

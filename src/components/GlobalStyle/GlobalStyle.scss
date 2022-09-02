@@ -85,8 +85,9 @@
     --color-text-forgot: rgb(100, 100, 100);
     --height-input-form-login: 4rem;      // height input + btn submit
 
-
-
+    // items
+    --color-sub-price: rgb(124, 123, 123);
+    --svg-search: 60px;
 }
 
 *{
@@ -141,4 +142,8 @@ html *::-webkit-scrollbar-track {
 
 a{
     text-decoration: none;
+}
+
+.css-2613qy-menu{
+    color: red !important;
 }

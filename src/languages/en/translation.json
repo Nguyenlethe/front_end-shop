@@ -134,25 +134,14 @@
             "nameItemsListItems":"Name items",
             "codeItems":"Code items",
             "craeteDiscount":"Create voucher discount",
+            "hide": "Hide Form",
+            "addDiscount": "Create New",
             "deleteAllListInput":"Delete All "
 
 
 
 
 
-
-          
-
-
-      
- 
-
-
-
-        
-
-
-           
         },
         "toast": {
             "success":"Add user successfully !!!",
@@ -162,10 +151,17 @@
             "successEditItems":"Thay đổi thành công !!!",
             "deleteSuccessItems":"Xóa thành công !"
 
+        },
+        "items": {
+            "discount":"Create voucher discount",
+            "noOptions":"No options ",
+            "priceUS": "Price (USD)",
+            "search-code-items":"Search items (Code)",
+            "select-items":"Select items",
 
-  
+
+            "planceholder_priceUS":"Enter price (USD)"
         }
-
     },
     "app": {
 

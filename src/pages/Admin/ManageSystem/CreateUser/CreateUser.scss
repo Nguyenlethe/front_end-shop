@@ -3,7 +3,7 @@
 .sub-heading{
     font-size: 1.6rem;
     text-transform: uppercase;
-    padding: 8px 20px;
+    padding: 5px 20px;
     background-color: var(--BGR-color-btn-manageuser);
     color: white;
     font-weight: 500;
@@ -38,9 +38,9 @@
     
 
         .form-input{
-            margin: 0 0 5px 0;
+            margin: 0 0 -17px 0;
             position: relative;
-            height: 106px;
+            height: 105px;
             
             
             .input-label{
@@ -61,7 +61,7 @@
                 font-size: 1.6rem;
                 cursor: pointer;
                 position: relative;
-                z-index: 9;
+                z-index: 1;
                 background-color:transparent;
             }
             .input[type='file']{

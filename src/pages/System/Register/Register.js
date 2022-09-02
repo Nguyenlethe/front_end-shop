@@ -7,7 +7,7 @@ import {faUser,faLock,faEyeSlash,faEye,faUnlock,faCircleExclamation} from '@fort
 import Button from '../../../components/Button/Button';
 import {path, languages} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import Modal from '../../../components/Modal/Modal'
+import Modal from '../../../components/LoadData/Modal'
 import SwitchLanguage from '../../../SwitchLanguage'
 
 import classNames from 'classnames/bind';
@@ -35,17 +35,18 @@ class Register extends Component {
         }
     }
 
+
     // Ẩn hiện password
     handleShowHinePassword = () => {
         this.setState({ isShowPass: !this.state.isShowPass})
     }
 
-
+    // CPN Did mount
     componentDidMount = async ()=>  {
       
     }
 
-
+    // CPN Đid update
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
 
@@ -58,16 +59,21 @@ class Register extends Component {
         let stateCopy = this.state.form
         let errMessageCoppy = this.state.errMessage
 
+        // Change xoa error
         for(let key in errMessageCoppy){
             if(name === key){
                 errMessageCoppy[key] = ''
             }
         }
+
+        // Set gtri
         for(let key in stateCopy){
             if(key === name){
                 stateCopy[key] = value
             }
         }
+
+        // Set state
         this.setState({
             isEmail: false,
             isFormat: false,
@@ -137,9 +143,7 @@ class Register extends Component {
     <>
 
     <Modal isShow={isModal}/> 
-
     {isRegister === true  && <Navigate to={path.HOMEPAGE}/>}
-
         <form className={cx('form-login')}>
             <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.SingUp'/></p>
             <div className={cx('form-input')}>
@@ -153,13 +157,13 @@ class Register extends Component {
                         onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
                     />
                 </div>
+
                 <span className={cx('error-input-login')}>
                     {isEmail ? <FontAwesomeIcon  icon={faCircleExclamation} /> : ''}
                     {isEmail ? language === languages.EN ? <SwitchLanguage id='manageAdmin.form.errAccount'/> : <SwitchLanguage id='manageAdmin.form.errAccount'/> : ''}
                     {errMessage.account !== '' ? <FontAwesomeIcon  icon={faCircleExclamation} /> : ''}
                     {errMessage.account !== '' ? language === languages.EN ? errMessage.account.valueEn : errMessage.account.valueVi : ''}
                 </span>
-
 
 
                 <label>{<SwitchLanguage id='manageAdmin.form.password'/>}</label>
@@ -171,14 +175,13 @@ class Register extends Component {
                         onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
                     />
                 </div>
+
                 <span className={cx('error-input-login')}>
                     {isFormat ? <FontAwesomeIcon icon={faCircleExclamation} /> : ''}
                     {isFormat ? language === languages.VI ? 'Mật khẩu sai định dạng !' : 'Incorrect password format' : ''}
                 </span>
               
 
-
-                
                 <label>{<SwitchLanguage id='app.editPass.labelRetype'/>}</label>
                 <div className={cx('wrap-input')}>
                     <FontAwesomeIcon className={cx('icon-input')} icon={isShowPass === false ? faLock : faUnlock}/> 
@@ -189,24 +192,22 @@ class Register extends Component {
                     />
                     <FontAwesomeIcon className={cx('icon-input')} onClick={() => this.handleShowHinePassword()} icon={isShowPass === false ? faEyeSlash : faEye}/> 
                 </div>
+
                 <span className={cx('error-input-login')}>
                     {isErrForm ? <FontAwesomeIcon icon={faCircleExclamation} /> : ''}
                     {isErrForm ? language === languages.VI ? 'Mật khẩu nhập lại không đúng !' : 'Re-entered password is incorrect' : ''}
                 </span>
 
 
-
-                <p onClick={(e) => this.handleSubmitRegister(e)}>
-                    <Button type={account.trim() !== "" && password.trim() !== "" && retypePassword.trim() !== "" ? 'btn-submit' : "btn-ban"}
+                <p onClick={(e) => account.trim() !== "" && password.trim() !== "" && retypePassword.trim() !== "" && this.handleSubmitRegister(e)}>
+                    <Button 
+                        type={account.trim() !== "" && password.trim() !== "" && 
+                        retypePassword.trim() !== "" ? 'btn-submit' : "btn-ban"}
                         content={<SwitchLanguage id='manageAdmin.form.SingUp'/>}
                     />
                 </p>
-
-
             </div>
 
-
-                    
 
             <div className={cx('login-society')}>
                 <span className={cx('login-society-sub')}><SwitchLanguage id='manageAdmin.form.OrsingUp'/></span>

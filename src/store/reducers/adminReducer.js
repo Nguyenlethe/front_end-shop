@@ -33,6 +33,9 @@ const initialState = {
     },
     items: {
         itemsAll: [],
+    },
+    search: {
+        valueInputSearchCode: null
     }
 }
 
@@ -293,7 +296,13 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
         
-        
+        // SET_VALUE_EMPTY
+        case actionTypes.SET_VALUE_EMPTY:  
+            state.search.valueInputSearchCode = action.valueInput
+            
+            return {
+                ...state
+            }
 
 
 

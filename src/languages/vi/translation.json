@@ -70,10 +70,6 @@
             "planceholder_ifDiscount":"Chọn điều kiện giảm",
 
             
-
-
-       
-
             "btn":"Thêm Mới",
             "btn_edit":"Lưu Thay Đổi",
             "heading":"Đăng Nhập",
@@ -134,18 +130,11 @@
 
             "nameItemsListItems":"Tên Sản Phẩm ",
             "codeItems":"Mã Sản Phẩm",
-          
+            "hide": "Ẩn Form",
             "craeteDiscount":"Tạo voucher giảm giá ",
+            "addDiscount": "Thêm Mới",
             "deleteAllListInput":"Xóa tất cả"
-
-
-
             
- 
-
-
-           
-
 
         
         },
@@ -161,6 +150,16 @@
         "found": {
             "back":"Trở Lại Trang Home",
             "wanr":"Có lỗi sảy ra !!!"
+        },
+        "items": {
+            "discount":"Tạo voucher giảm giá",
+            "noOptions":"Không tìm thấy ",
+            "priceUS": "Gía (USD)",
+            "search-code-items":"Tìm kiếm sản phẩm (Mã)",
+            "select-items":"Chọn sản phẩm",
+
+
+            "planceholder_priceUS":"Nhập giá (USD)"
         }
     },
     "app": {

@@ -10,12 +10,12 @@ import { toast } from 'react-toastify';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite'; 
 import MdEditor2 from 'react-markdown-editor-lite'; 
-import  handleResetState from '../../../../utils/comparativeHandling'
 import 'react-markdown-editor-lite/lib/index.css';
 import Button from '../../../../components/Button/Button';
 import Select from 'react-select';
 import _ from 'lodash'
 import bcrypt from 'bcryptjs'
+import generalHandling from '../../../../utils/generalHandling';
 
 import './Items.scss'
 import ListItems from './ListItems/ListItems';
@@ -25,6 +25,7 @@ class Items extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             listAllShops: [],
             listAllUser: [],
             listAllCategory: [],
@@ -68,7 +69,9 @@ class Items extends Component {
                 name: '',
                 nameEn: '',
                 price: '',
+                priceUS: '',
                 newPrice: '',
+                newPriceUS: '',
             },
             itemsInfo: {
                 itemsId: '',
@@ -128,6 +131,8 @@ class Items extends Component {
                 name: {},
                 nameEn: {},
                 price: {},
+                
+                priceUS:{},
                 sentFrom: {},
                 trademark: {},
                 type: {},
@@ -143,10 +148,7 @@ class Items extends Component {
     componentDidMount = async ()=>  {
         await this.props.getCategoryAllCode()
         await this.props.getAllShop()
-        await this.props.getAllCodeInToItems('DCC')
-        await this.props.getAllCodeInToItems('BNPRD')
-        await this.props.getAllCodeInToItems('TYPESIZE')
-        await this.props.getAllCodeInToItems('COLOR')
+        this.heandleDataForm()
 
         let {allUserEdit} = this.props
         this.setState({
@@ -154,7 +156,6 @@ class Items extends Component {
         })
     }
     
-
     // Change Mô tả Sản phẩm Vi
     handleEditorChangeVi = ({ html, text }) => {
         let {listErrorForm} = this.state
@@ -172,7 +173,6 @@ class Items extends Component {
         })
     }
 
-    
     // Change Mô tả Sản phẩm En
     handleEditorChangeEn = ({ html, text }) => {
         let {listErrorForm} = this.state
@@ -189,59 +189,48 @@ class Items extends Component {
         })
     }
 
+    // XL Gán Gtri 
+    heandleDataForm = (action)  => {
+        let {allShops ,allcategory,DCCData,BNPRDData,TYPESIZEData,COLORData}= this.props
+
+        let newListShop = generalHandling.handlConvertObject(allShops, 'LIST_SHOP',this.props.langauge)
+        let newListCategory = generalHandling.handlConvertObject(allcategory, 'LIST_CATEGORY',this.props.language)
+        let newDCCData = generalHandling.handlConvertObject(DCCData, 'LIST_CATEGORY',this.props.language)
+        let newBNPRDData = generalHandling.handlConvertObject(BNPRDData, 'LIST_CATEGORY',this.props.language)
+        let newTYPESIZEData = generalHandling.handlConvertObject(TYPESIZEData, 'LIST_CATEGORY',this.props.language)
+        let newCOLORData = generalHandling.handlConvertObject(COLORData, 'LIST_CATEGORY',this.props.language)
+
+        this.setState({
+            listAllShops: newListShop || [],
+            listAllCategory: newListCategory || [],
+            listSale: newDCCData || [],
+            listTrademark: newBNPRDData || [],
+            listItemsSizeAmount: newTYPESIZEData || [],
+            listColor: newCOLORData || [],
+        })
+    }
 
     // DidUpdate
     componentDidUpdate= async(prevProps, prevState)=> {
-        let {
-            allShops ,handlConvertObject,allcategory ,FSBData,FSAMData,
-            FSMData,FSAWData,AllData,DCCData,BNPRDData,TYPESIZEData, 
-            SIZEData,SZNBData,COLORData
-        }= this.props
-     
+        let {FSBData,FSAMData,FSMData,FSAWData,AllData, SIZEData,SZNBData}= this.props
+
         // Khi thay dổi ngôn ngữ
         if(prevProps.language !== this.props.language){
-            let allTypeCategory = []
-            let {optionsCategory, optionsSelectUser, optionsCategoryType,optionsItemsSizeAmount,dataEdit,listImg} = this.state
+
+            let {optionsCategory, optionsSelectUser, optionsCategoryType,optionsItemsSizeAmount,dataEdit,listImg,listAllCategoryType} = this.state
             let {allUserEdit,allcategory,TYPESIZEData,COLORData} = this.props
-
+            
             if(optionsCategory){
-                if(FSBData && FSBData.length > 0 ){
-                    if(optionsCategory.value === FSBData[0].type){
-                        allTypeCategory = FSBData
-                    }
-                }
-
-                if(FSAMData && FSAMData.length > 0 ){
-                    if(optionsCategory.value === FSAMData[0].type){
-                        allTypeCategory = FSAMData
-                    }
-                }
-
-                if(FSMData && FSMData.length > 0 ){
-                    if(optionsCategory.value === FSMData[0].type){
-                        allTypeCategory = FSMData
-                    }
-                }
-
-                if(FSAWData && FSAWData.length > 0 ){
-                    if(optionsCategory.value === FSAWData[0].type){
-                        allTypeCategory = FSAWData
-                    }
-                }
-
-                if(AllData && AllData.length > 0 ){
-                    if(optionsCategory.value === 'All'){
-                        allTypeCategory = AllData
-                    }
-                }
+                await this.props.getAllCodeInToItems(optionsCategory.value)
+                var allTypeCategory = [...listAllCategoryType]
+                var newListAllCategoryType = generalHandling.handlConvertObject(allTypeCategory, 'LIST_CATEGORY',this.props.language);
             }
 
-            this.handleEditItems(dataEdit)
-            let newListColor = handlConvertObject(COLORData, 'LIST_CATEGORY');
-            let newListCategory = handlConvertObject(allcategory, 'LIST_CATEGORY');
-            let newListAllCategoryType = handlConvertObject(allTypeCategory, 'LIST_CATEGORY');
-            let newlistItemsSizeAmount = handlConvertObject(TYPESIZEData, 'LIST_CATEGORY');
 
+            this.handleEditItems(dataEdit)
+            let newListColor = generalHandling.handlConvertObject(COLORData, 'LIST_CATEGORY',this.props.language);
+            let newListCategory = generalHandling.handlConvertObject(allcategory, 'LIST_CATEGORY',this.props.language);
+            let newlistItemsSizeAmount = generalHandling.handlConvertObject(TYPESIZEData, 'LIST_CATEGORY',this.props.language);
 
             // Thay đổi  ngôn ngữ sửa option
             let dataImgColorChangeLanguage = []
@@ -254,7 +243,6 @@ class Items extends Component {
                     }
                 })
             })
-
 
             // Lặp set lại value tên loại hàng khi thay đổi ngôn ngữ 
             let categoryName = optionsCategory
@@ -274,7 +262,7 @@ class Items extends Component {
                 userName = userName[0]
             }
 
-             // Lặp set lại value tên kiểu hàng khi thay đổi ngôn ngữ 
+            // Lặp set lại value tên kiểu hàng khi thay đổi ngôn ngữ 
             let newCategoryType = optionsCategoryType
             if(optionsCategoryType){
                 newCategoryType =  newListAllCategoryType.filter(item => {
@@ -292,144 +280,110 @@ class Items extends Component {
                 setItemsSizeAmount = setItemsSizeAmount[0]
             }
 
-
-            
+            // Set state
             this.setState({
-                isShowListsInput: false,
+                // isShowListsInput: false,
                 optionsItemsSizeAmount: setItemsSizeAmount,
                 optionsCategoryType: newCategoryType,
                 optionsCategory: categoryName,
                 optionsSelectUser: userName,
                 listItemsSizeAmount: newlistItemsSizeAmount,
-                listAllCategoryType: newListAllCategoryType,
+                // listAllCategoryType: newListAllCategoryType,
                 listAllCategory: newListCategory,
-                // optionsColor: mewOptionsColor,
                 listImg: dataImgColorChangeLanguage,
                 listColor: newListColor,
             })
         }
 
-        if(prevProps.allShops !== this.props.allShops){
-            let newListShop = handlConvertObject(allShops, 'LIST_SHOP')
-            this.setState({
-                listAllShops: newListShop
-            })
-        }
-
-        if(prevProps.allcategory !== this.props.allcategory){
-
-            let newListCategory = handlConvertObject(allcategory, 'LIST_CATEGORY')
-
-            this.setState({
-                listAllCategory: newListCategory
-            })
-        }
-
-        // ................................................
+        // Type loại hàng
         if(prevProps.FSBData !== this.props.FSBData){
-            let allFSBData = handlConvertObject(FSBData, 'LIST_CATEGORY')
+            let allFSBData = generalHandling.handlConvertObject(FSBData, 'LIST_CATEGORY',this.props.language)
             this.setState({
                listAllCategoryType: allFSBData
            })
         }
 
+        // Type loại hàng
         if(prevProps.FSAMData !== this.props.FSAMData){
-            let allFSAMData = handlConvertObject(FSAMData, 'LIST_CATEGORY')
+            let allFSAMData = generalHandling.handlConvertObject(FSAMData, 'LIST_CATEGORY',this.props.language)
             this.setState({
                listAllCategoryType: allFSAMData
            })
         }
-        
+
+        // Type loại hàng
         if(prevProps.FSMData !== this.props.FSMData){
-            let allFSMData = handlConvertObject(FSMData, 'LIST_CATEGORY')
+            let allFSMData = generalHandling.handlConvertObject(FSMData, 'LIST_CATEGORY',this.props.language)
             this.setState({
                listAllCategoryType: allFSMData
-            })
+           })
         }
 
+        // Type loại hàng
         if(prevProps.FSAWData !== this.props.FSAWData){
-            let allFSAWData = handlConvertObject(FSAWData, 'LIST_CATEGORY')
-             this.setState({
-                listAllCategoryType: allFSAWData
-            })
+            let allFSAWData = generalHandling.handlConvertObject(FSAWData, 'LIST_CATEGORY',this.props.language)
+            this.setState({
+               listAllCategoryType: allFSAWData
+           })
         }
 
+        // Type loại hàng
         if(prevProps.AllData !== this.props.AllData){
-            let newAllData = handlConvertObject(AllData, 'LIST_CATEGORY')
-             this.setState({
-                listAllCategoryType: newAllData
-            })
-        }
-
-        if(prevProps.DCCData !== this.props.DCCData){
-            let newDCCData = handlConvertObject(DCCData, 'LIST_CATEGORY')
-
+            let allAllData = generalHandling.handlConvertObject(AllData, 'LIST_CATEGORY',this.props.language)
             this.setState({
-                listSale: newDCCData
-            })
+               listAllCategoryType: allAllData
+           })
         }
-
-        if(prevProps.BNPRDData !== this.props.BNPRDData){
-            let newBNPRDData = handlConvertObject(BNPRDData, 'LIST_CATEGORY')
-            this.setState({
-                listTrademark: newBNPRDData
-            })
-        }
-
-        // ..............
-        if(prevProps.TYPESIZEData !== this.props.TYPESIZEData){
-            let newTYPESIZEData = handlConvertObject(TYPESIZEData, 'LIST_CATEGORY')
-            this.setState({
-                listItemsSizeAmount: newTYPESIZEData
-            })
-        }
-
+        
+        // Set size 
         if(prevProps.SIZEData !== this.props.SIZEData){
-
-    
             this.setState({
                 listSIZEData: SIZEData
             })
         }
 
+        // Set size 
         if(prevProps.SZNBData !== this.props.SZNBData){
-                 
             this.setState({
                 listSIZEData: SZNBData
             })
         }
 
-        if(prevProps.COLORData !== this.props.COLORData){
-            let newCOLORData = handlConvertObject(COLORData, 'LIST_CATEGORY')
-            this.setState({
-                listColor: newCOLORData
-            })
-        }
     }
-
 
     // On Change
     heandleChangeInput = async(value, name,e) => {
+
         let stateCopy = this.state.items
         let stateItemsInfoCopy = this.state.itemsInfo
         let {listImg,listErrorForm,editItems} = this.state
 
-
+        console.log(name)
 
         //  onchange input của items
-        if(name === 'name' || name === 'price'  || name === 'newPrice' || name === 'idItems' || name === 'nameEn'){
+        if(name === 'name' || name === 'price'  || name === 'newPrice' || name === 'idItems' || name === 'nameEn' || name === 'priceUS'){
+            
             let valueIdItems = ''
             for(let key in stateCopy){
+
                 if(key === 'idItems'){
                     valueIdItems = value
                 }
-                if(editItems){
+
+                if(editItems && name === 'price'){
                     stateCopy['newPrice'] = value
                 }
+
+                if(editItems && name === 'priceUS'){
+                    stateCopy['newPriceUS'] = value
+                }
+
                 if(key === name){
                     stateCopy[name] = value
                 }
             }
+
+            
 
             // Name
             if(name === 'name'){
@@ -454,6 +408,14 @@ class Items extends Component {
                     listErrorForm: {...listErrorForm,price: {}},
                 })
             }
+
+            // priceUs
+            if(name === 'priceUS'){
+                this.setState({
+                    items: {...stateCopy},
+                    listErrorForm: {...listErrorForm,price: {}},
+                })
+            }
     
             // idItems
             if(name === 'idItems'){
@@ -463,7 +425,6 @@ class Items extends Component {
                 })
             }
         }
-
 
         // Change input của itemsInfo
         if(name === 'sentFrom' || name === 'production'  || name === 'texture' ) {
@@ -490,7 +451,6 @@ class Items extends Component {
             })
         }
 
-
         // Khi onchange  file
         if(name === 'file'){
             let files = [...e.target.files]
@@ -500,7 +460,6 @@ class Items extends Component {
                 file.id = bcrypt.hashSync(file.name, salt);
                 file.option =''
             })
-         
 
             // Set pewview img
             let listImgPewViews = []
@@ -509,10 +468,6 @@ class Items extends Component {
                 listImgPewViews.push({src,file})
             })
 
-
-          
-
-            
             // Khi onChange file
             if(listImgPewViews.length !== 0){
                 let pushNewImg = [...listImg,...listImgPewViews]
@@ -549,11 +504,8 @@ class Items extends Component {
                     })
                 }
             }
-
-
         }
     }
-
 
     // Xl lấy user tương ứng khi chọn shop
     handleGetOneUser =  async(id) => {
@@ -568,21 +520,22 @@ class Items extends Component {
         return data
     }
 
-
     // Xl change input select
     handlChangeSlelect = async (valueOptions, name) => {
         let {items,itemsInfo,listImg,listErrorForm,listImgFormData,editItems} = this.state
         let {allShops} = this.props
         let {idItems} = this.state.items
         
+        // Add shop
         if(name.name === 'idShop') {   
-
             let res = await this.handleGetOneUser(valueOptions.value)
 
+            // Change add shop
             let addressShop = allShops.filter(item => {
                 if(item.id === valueOptions.value){return item}
             })
 
+            // Set State
             this.setState({
                 optionsSelect: valueOptions,
                 optionsSelectUser: res,
@@ -603,6 +556,7 @@ class Items extends Component {
             })
         }
    
+        // Add danh mục
         if(name.name === 'category' || name === 'category') {
             await this.props.getAllCodeInToItems(valueOptions.value)
 
@@ -619,7 +573,9 @@ class Items extends Component {
             })
         }
 
+        // Set type 
         if(name.name === 'type') {
+
             this.setState({
                 optionsCategoryType: valueOptions,
                 items: {
@@ -633,6 +589,7 @@ class Items extends Component {
             })
         }
 
+        // Add sale
         if(name.name === 'sale') {
             this.setState({
                 optionsSele: valueOptions,
@@ -643,6 +600,7 @@ class Items extends Component {
             })
         }
 
+        // Set Thương hiệu
         if(name.name === 'trademark') {
             this.setState({
                 optionsTrademark: valueOptions,
@@ -657,6 +615,7 @@ class Items extends Component {
             })
         }
         
+        // Set size
         if(name.name === 'itemsSizeAmount') {
             await this.props.getAllCodeInToItems(valueOptions.value)
 
@@ -669,6 +628,7 @@ class Items extends Component {
             })
         }
 
+        // Ngoài các trường hợp trên
         if(name.name !== 'itemsSizeAmount' &&  name.name !== 'trademark' && name.name !== 'sale' && name.name !== 'type' &&name.name !== 'category' && name.name !== 'idShop'){
             let stateCoppyitemsColorImgages = []
     
@@ -722,7 +682,6 @@ class Items extends Component {
         }
     }
 
-
     // changeInput size
     heandleChangeInputSize = (value,item) => {
         let {SIZE,SZNB,notSize,itemsSizeAmount,listErrorForm,listSIZEData} = this.state
@@ -736,7 +695,6 @@ class Items extends Component {
             
             // Set kieu size
             if(item.sizeId === 'SIZE'){
-
                 for(let key in stateSIZECoppy){
                     if(key === item.code){
                         stateSIZECoppy[key] = {itemsId: idItems, typeSize: item.sizeId,size: item.code,  amount: value,}
@@ -748,7 +706,7 @@ class Items extends Component {
                 })
             }
 
-
+            // Kiểu cỡ
             if(item.sizeId === 'SZNB'){
                 for(let key in stateSZNBCoppy){
                     if(key === item.code){
@@ -761,7 +719,7 @@ class Items extends Component {
                 })
             }
 
-
+            // free size
             if(item === 'FRSZ'){
                 for(let key in statenotSizeCoppy){
                     statenotSizeCoppy[key] = {itemsId:idItems, typeSize: 'FRSZ',size: 'FRSZ', amount: value,}
@@ -791,7 +749,7 @@ class Items extends Component {
             })
         }
         
-
+        // Set true nếu trống size
         let isEmptykeyObjectSizeItems = false
         for(let key in itemsSizeAmount){
 
@@ -800,19 +758,15 @@ class Items extends Component {
             }
         }
   
+        // Sét state
         this.setState({
             isEmptykeyObjectSizeItems: isEmptykeyObjectSizeItems
         })
     }
 
-
     // Delete img pewview 
     deleteImgPewView = (img) => {
         let {listImg} = this.state
-
-        console.log(listImg)
-        console.log(img)
-
 
         let newListImg = listImg.filter(item => {
             if(item !== img){
@@ -820,19 +774,15 @@ class Items extends Component {
             }
         })
 
-        console.log(newListImg)
-
         let listImgFile =  newListImg.map(item => {
             return item.file
         })
-
 
         this.setState({
             listImg: newListImg,
             listImgFormData: [...listImgFile]
         })
     }
-
 
     // Submit 
     handleOnSubmit = async(e) => {
@@ -841,8 +791,6 @@ class Items extends Component {
         let listErrorFromCoppy = listErrorForm
         
         let res = ''
-       
-
         // Loại bỏ PT rỗng size cỡ
         for(let key in itemsSizeAmount){
             if(itemsSizeAmount[key] === ''){
@@ -853,7 +801,6 @@ class Items extends Component {
 
         // Edit true
         if(editItems){
-
             let data = new FormData()
             let emptyData = JSON.stringify({data: 'EMPTY'})
 
@@ -889,28 +836,27 @@ class Items extends Component {
                 data.append("dataItemsSizeAmount", emptyData)
             }
 
-
+            // Chuyển về string
             let dataItems = JSON.stringify(items)
             let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
 
             // Gửi data form bảng dataItems && dataItemsInfo
             data.append("dataItems", dataItems)
             data.append("dataItemsInfo", dataItemsInfo)
-
             res = await adminService.editDataItems(data)
-
-
         }
         
-
         // Create items
         if(!editItems){
+
+            console.log(items)
+
+
             // Chuyển data về string
             let dataItems = JSON.stringify(items)
             let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
             let datItemsSizeAmount = JSON.stringify(itemsSizeAmount)
 
-    
             // Lặp gán lại tên file và tên file trong {} itemsColorImgages
             let listImgFormDataArray = listImgFormData
             let data = new FormData()
@@ -922,7 +868,6 @@ class Items extends Component {
                 }
             }
     
-    
             // Append form data
             let dataItemsColorImgages = JSON.stringify(itemsColorImgages)
             data.append("dataItemsColorImgages", dataItemsColorImgages)
@@ -930,18 +875,15 @@ class Items extends Component {
             data.append("dataItemsInfo", dataItemsInfo)
             data.append("datItemsSizeAmount", datItemsSizeAmount) 
     
-    
             // Truyền data xuống backend
             res = await adminService.addNewItems(data)
-
         }
-
 
         // Nếu thành công
         if(res && res.data.errCode === 0) {
-            let newDataItems = handleResetState.resetDefaultState(items)
-            let newDataItemsInfo = handleResetState.resetDefaultState(itemsInfo)
-            let newDataErr = handleResetState.resetDefaultState(listErrorForm)
+            let newDataItems = generalHandling.resetDefaultState(items)
+            let newDataItemsInfo = generalHandling.resetDefaultState(itemsInfo)
+            let newDataErr = generalHandling.resetDefaultState(listErrorForm)
 
             this.setState({
                 isShowListsInput: false,
@@ -995,14 +937,13 @@ class Items extends Component {
         }
     }
 
-
     // Xl ẩn hiện form
     handleShowHideInputsUser = () => {
 
         let {items,itemsInfo,listErrorForm} = this.state
-        let newDataItems = handleResetState.resetDefaultState(items)
-        let newDataItemsInfo = handleResetState.resetDefaultState(itemsInfo)
-        let newDataErr = handleResetState.resetDefaultState(listErrorForm)
+        let newDataItems =  generalHandling.resetDefaultState(items)
+        let newDataItemsInfo =  generalHandling.resetDefaultState(itemsInfo)
+        let newDataErr =  generalHandling.resetDefaultState(listErrorForm)
 
         this.setState({       
             editItems: false,
@@ -1038,36 +979,46 @@ class Items extends Component {
         let {language} = this.props
 
         if(editItems) {
-    
-            // 
+
+            console.log(dataItems)
+
             let res = await this.handleGetOneUser(dataItems.idShop)
+
+
+
             let nameShop = {value: dataItems.idShop, label: dataItems.storeData && dataItems.storeData.nameShop}
             let sentFromEdit = dataItems.infoItemsData && dataItems.infoItemsData.sentFrom
             let idItemsEdit = dataItems.idItems
     
             let optionsCategoryEdit = {value: dataItems.categoryData && dataItems.categoryData.code,
                 label: dataItems.categoryData && language === languages.EN ? dataItems.categoryData.valueEn : dataItems.categoryData.valueVi}
-    
                 
             let optionsCategoryTypeEdit = {value: dataItems.typeData && dataItems.typeData.code,
                 label: dataItems.typeData && language === languages.EN ? dataItems.typeData.valueEn : dataItems.typeData.valueVi}
+                
             let optionsSeleEdit = {value: dataItems.discountData && dataItems.discountData.code,
                 label: dataItems.discountData && language === languages.EN ? dataItems.discountData.valueEn : dataItems.discountData.valueVi}
+
             let nameEdit = dataItems.name
             let nameEnEdit = dataItems.nameEn
+
             let optionsTrademarkEdit = {value: dataItems.infoItemsData && dataItems.infoItemsData.trademarkData && dataItems.infoItemsData.trademarkData.code,
                 label: dataItems.infoItemsData.trademarkData && language === languages.EN ? dataItems.infoItemsData.trademarkData.valueEn : dataItems.infoItemsData.trademarkData.valueVi}
+            
             let productionEdit =  dataItems.infoItemsData && dataItems.infoItemsData.production
             let textureEdit =  dataItems.infoItemsData && dataItems.infoItemsData.texture
     
-            // 
             let optionsItemsSizeAmountEdit = {
                 value: dataItems.dataSizeAmount && dataItems.dataSizeAmount[0].typeSizeData && dataItems.dataSizeAmount[0].typeSizeData.code,
                 label: dataItems.dataSizeAmount[0].typeSizeData && language === languages.EN ? dataItems.dataSizeAmount[0].typeSizeData.valueEn : dataItems.dataSizeAmount[0].typeSizeData.valueVi}
+            
             await this.props.getAllCodeInToItems(optionsItemsSizeAmountEdit.value)
     
             let priceEdit = dataItems.price
+            let priceEditUS = dataItems.priceUS
             let newPrice = dataItems.newPrice
+            let newPriceUS = dataItems.newPriceUS
+
             let dataSizeAmount = dataItems.dataSizeAmount
     
             // 
@@ -1078,6 +1029,7 @@ class Items extends Component {
                     newData.push(result)
                 }
             })
+
             this.heandleChangeInputSize(newData)
     
             //
@@ -1088,7 +1040,6 @@ class Items extends Component {
     
             // List img
             let listImgColor = []
-    
             dataItems.dataColorImg.map(item => {
                 listImgColor.push({
                     src: `${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${item.image}`, 
@@ -1099,7 +1050,7 @@ class Items extends Component {
                 )
             })
     
-    
+            // set state
             this.setState({
                 isImgColor: true,
                 isEmptykeyObjectSizeItems: true,
@@ -1126,6 +1077,7 @@ class Items extends Component {
                     name: nameEdit,
                     nameEn: nameEnEdit,
                     price: newPrice ? newPrice : priceEdit,
+                    priceUS: newPriceUS ? newPriceUS : priceEditUS,
                     category: optionsCategoryEdit.value,
                     type: optionsCategoryTypeEdit.value,
                     manageId: res.value
@@ -1148,16 +1100,19 @@ class Items extends Component {
         })
     }
 
-
-
+    // SustomStyle select react
+    customStyles = {
+        menu: (provided, state) => ({
+            ...provided,
+            zIndex: 99999,
+        })
+    }
 
     render() {
+
     let {language} = this.props
-    let {name,price,idItems,nameEn} = this.state.items
-    let {sentFrom,production,texture} = this.state.itemsInfo
-
-
-  
+    let {name,price,idItems,nameEn,priceUS} = this.state.items
+    let {sentFrom,production,texture} = this.state.itemsInfo  
 
     let {
         listAllShops,
@@ -1182,17 +1137,13 @@ class Items extends Component {
         isEmptykeyObjectSizeItems,
         listErrorForm,
         isShowListsInput,
-        editItems,
-
+        editItems
     } = this.state
 
-
-    
 
     const mdParser = new MarkdownIt();
     return (
         <>
-        
         {/* Thêm mới items */}
         <div className='col l-3'>
             <span className='sub-heading' onClick={() => this.handleShowHideInputsUser()}>
@@ -1208,7 +1159,7 @@ class Items extends Component {
        
         {/* Bảng thêm items */}
         { isShowListsInput && 
-            <div style={{height:'auto'}} className='all-input items l-12'>
+            <div style={{height:'auto', marginTop: '30px'}} className='all-input items l-12'>
                 <div className='list-input'>
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameShop'/></label>
@@ -1269,7 +1220,6 @@ class Items extends Component {
                             {!_.isEmpty(listErrorForm.category) ? language === languages.VI ? listErrorForm.category.valueVi : listErrorForm.category.valueEn : ''}
                         </span>
                     </div>
-
                 </div>
 
                 
@@ -1289,6 +1239,8 @@ class Items extends Component {
                             {!_.isEmpty(listErrorForm.type) ? language === languages.VI ? listErrorForm.type.valueVi : listErrorForm.type.valueEn : ''}
                         </span>
                     </div>
+
+
 
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.sale'/></label>
@@ -1317,6 +1269,7 @@ class Items extends Component {
                         </span>
                     </div>
 
+
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameItemsEn'/></label>
                         <input  type='text' className='input' name='nameEn' value={nameEn} onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
@@ -1329,7 +1282,7 @@ class Items extends Component {
                     </div>
                 </div>
 
-                {/*  */}
+
                 <div className='list-input'>
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.trademark'/></label>
@@ -1346,6 +1299,7 @@ class Items extends Component {
                         </span>
                     </div>
 
+
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.production'/></label>
                         <input  type='text' className='input' name='production'  value={production} onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)} 
@@ -1355,6 +1309,7 @@ class Items extends Component {
                         <span className='err'></span>
                     </div>
                 </div>
+
 
                 <div className='list-input'>
                     <div className='form-input col l-6'>
@@ -1380,7 +1335,33 @@ class Items extends Component {
                     </div>
                 </div>
 
-                {/* Select size */}
+                
+                <div className='list-input'>
+                    <div className='form-input col l-6'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.price'/></label>
+                        <input  type='text' className='input' name='price'  value={price}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
+                            style={price !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                        />
+                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_price' /></span>
+                        <span className='err'> {!_.isEmpty(listErrorForm.price) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                            {!_.isEmpty(listErrorForm.price) ? language === languages.VI ? listErrorForm.price.valueVi : listErrorForm.price.valueEn : ''}
+                        </span>
+                    </div>
+
+
+                    <div className='form-input col l-6'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.items.priceUS'/></label>
+                        <input  type='text' className='input' name='priceUS'  value={priceUS}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
+                            style={priceUS !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                        />
+                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.items.planceholder_priceUS' /></span>
+                        <span className='err'> {!_.isEmpty(listErrorForm.priceUS) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
+                            {!_.isEmpty(listErrorForm.priceUS) ? language === languages.VI ? listErrorForm.priceUS.valueVi : listErrorForm.priceUS.valueEn : ''}
+                        </span>
+                    </div>
+                </div>
+
+
                 <div className='list-input'>
                     <div className='form-input col l-6'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.itemsSizeAmount'/></label>
@@ -1395,23 +1376,10 @@ class Items extends Component {
                         />
                         <span className='err'></span>
                     </div>
-
-                    <div className='form-input col l-6'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.price'/></label>
-                        <input  type='text' className='input' name='price'  value={price}  onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
-                            style={price !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                        />
-                        <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_price' /></span>
-                        <span className='err'> {!_.isEmpty(listErrorForm.price) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
-                            {!_.isEmpty(listErrorForm.price) ? language === languages.VI ? listErrorForm.price.valueVi : listErrorForm.price.valueEn : ''}
-                        </span>
-                    </div>
-
                 </div>
 
 
                 <div className='list-input'>
-
                     {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value === 'FRSZ' &&
                         <div className='form-input col l-6'>
                                 <>
@@ -1422,6 +1390,7 @@ class Items extends Component {
                                 </>
                         </div>
                     }
+
 
                     {/* List size */}
                     {optionsItemsSizeAmount &&  optionsItemsSizeAmount.value !== 'FRSZ' &&
@@ -1521,6 +1490,7 @@ class Items extends Component {
 
                 </div>
                 }   
+
                 <span className='err'> {!_.isEmpty(listErrorForm.file) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
                     {!_.isEmpty(listErrorForm.file) ? language === languages.VI ? listErrorForm.file.valueVi : listErrorForm.file.valueEn : ''}
                 </span>
@@ -1533,13 +1503,13 @@ class Items extends Component {
                         this.state.itemsInfo.describeTextVi && 
                             this.state.itemsInfo.describeTextEn &&
                             listImg.length > 0 && isImgColor && 
-                            isEmptykeyObjectSizeItems && name && nameEn && price &&
+                            isEmptykeyObjectSizeItems && name && nameEn && price && priceUS &&
                             this.handleOnSubmit(e)}
                         >
                             <Button 
                                 type={
-                                    this.state.itemsInfo.describeTextVi && this.state.itemsInfo.describeTextEn &&
-                                    listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems && name && nameEn && price
+                                    this.state.itemsInfo.describeTextVi && this.state.itemsInfo.describeTextEn && priceUS &&
+                                    listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems && name && nameEn && price 
                                     ? editItems ? 'edit-form-data' : 'submit-form-data' : 'ban-form-data' 
                                 }
                                 content={ !editItems ? <SwitchLanguage id='manageAdmin.form.addItems'/> : <SwitchLanguage id='manageAdmin.form.btn_edit'/>} 
@@ -1547,7 +1517,6 @@ class Items extends Component {
                         </span>
                     </div>
                 </div>
-
             </div>
         }
        
@@ -1556,51 +1525,18 @@ class Items extends Component {
             <ListItems  handleEditItems={this.handleEditItems} setStateItems={this.setEditItems}/>
         }
 
-        <Discounts listSale={listSale} listAllShops={listAllShops} listAllCategory={listAllCategory} listAllCategoryType={listAllCategoryType} handlChangeSlelect={this.handlChangeSlelect}/>
-        
-
-        
+        {listSale.length > 0 && listAllShops.length > 0 && listAllCategory.length > 0 &&
+            <Discounts 
+                listSale={listSale} 
+                listAllShops={listAllShops} 
+                listAllCategory={listAllCategory} 
+                listAllCategoryType={listAllCategoryType} 
+                handlChangeSlelect={this.handlChangeSlelect}
+            />
+        }
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <p>
-        {/* <div class="col l-2-4 m-4 c-6">
-            <a href="#/" class="ct__product">
-                <span class="ct__product-label-love">Yêu Thích</span>
-                <div class="ct__product-label-sale ">
-                    <span class="ct__label-sale">Giảm</span>
-                    <span class="ct__label-sale-percent">5%</span>
-                </div>
-                <div class="ct__product-show style=" style="background-image: url(./filecss/imagecontac/sp3.jpg);"></div>
-                <div class="ct__product-information">
-                    <span class="ct__product-introduce">Kính râm thiết kế mắt mèo kiểu Hàn Quốc cho nam lẫn nữ 6035</span>
-                    <div class="ct__produc-list-price">
-                    <span class="ct__product-sale">Giảm giá 7k</span>
-                    <span class="ct__product-tag">#shopxuhuong</span>
-                    </div>
-
-                    <div class="ct__produc-list-price">
-                        <span class="ct__produc-price">225.000 đ</span>
-                        <i class="ct__produc-icon-ship fas fa-shipping-fast"></i>
-                    </div>
-
-                    <div class="ct__produc-list-price">
-                        <div class="ct__list-star">
-                            <i class="ct__list-star-icon fix-color-icon fas fa-star"></i>
-                            <i class="ct__list-star-icon fix-color-icon fas fa-star"></i>
-                            <i class="ct__list-star-icon fix-color-icon fas fa-star"></i>
-                            <i class="ct__list-star-icon fix-color-icon fas fa-star"></i>
-                            <i class="ct__list-star-icon fas fa-star"></i>
-                        </div>                             
-                        <span class=" ct__produc-price-show">Đã Bán 103</span>
-                    </div>
-
-                    <h1 class="ct__product-form">Hải Phòng</h1>
-                </div>
-            </a>
-        </div> */} 
-    </p>
-   
- 
+    
     </>       
 )}}
 

@@ -21,10 +21,11 @@ const resetDefaultState = (objectData) => {
 }
 
 
+
 // Convent về options của input select
-const handlConvertObject = (listObject,actions) => {
-    let {language} = this.props
+const handlConvertObject = (listObject,actions,language) => {
     let newObject = []
+
 
     if(actions === 'LIST_SHOP'){
         listObject.map(item => {
@@ -35,19 +36,26 @@ const handlConvertObject = (listObject,actions) => {
     }
 
     if(actions === 'LIST_CATEGORY'){
-
         listObject.map(item => {
             newObject.value = item.code
             newObject.label = language === languages.EN ?  item.valueEn : item.valueVi
             newObject.push({value: newObject.value ,label: newObject.label})
         })
-       
+    }
+
+
+    if(actions === 'DATA_FORM'){
+        listObject.map(item => {
+            newObject.value = item.keyMap
+            newObject.label = language === languages.EN ?  item.valueEn : item.valueVi
+            newObject.push({value: newObject.value ,label: newObject.label})
+        })
     }
     
-    if(actions === undefined){
+    if(actions !== 'LIST_SHOP' && actions !== 'LIST_CATEGORY' && actions !== 'DATA_FORM'){
         listObject.map(item => {
             newObject.value = item.id
-            newObject.label = language === languages.EN ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`
+            newObject.label = actions === languages.EN ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`
             newObject.push({value:newObject.value ,label: newObject.label})
         })
     }

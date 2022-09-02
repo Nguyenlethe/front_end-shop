@@ -10,7 +10,9 @@ import Tippy from '../../../components/Tippy/Tippy';
 import SwitchLanguage from '../../../SwitchLanguage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
-import comparativeHandling from '../../../utils/comparativeHandling'
+import generalHandling from '../../../utils/generalHandling'
+import * as actions from '../../../store/action';
+
 
 import './ManageSystem.scss';
 class ManageSystem extends Component {
@@ -18,8 +20,22 @@ class ManageSystem extends Component {
         super(props);
         this.state = {
            showManageShop: false,
-           showManageUser: true
+           showManageUser: true,
+           loadDataAllCode: false
         }
+    }
+
+    // State + props thay đổi mới re-reder
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+            this.props.dataUser !== nextProps.dataUser ||             
+            this.state.showManageShop !== nextState.showManageShop ||
+            this.state.showManageUser !== nextState.showManageUser  || 
+            this.state.loadDataAllCode !== nextState.loadDataAllCode  
+        ){
+          return true;
+        }
+        return false;
     }
 
     // Ẩn hiện trang thêm user
@@ -33,20 +49,30 @@ class ManageSystem extends Component {
             }
         }
         this.setState({
-            ...stateCopy
+            ...stateCopy,
+            loadDataAllCode: true
         })
     }
 
+    // Did mount
     componentDidMount = async ()=>  {
-        
+        await this.props.fetchAllDataAllCode()
+        await this.props.getAllCodeInToItems('DCC')
+        await this.props.getAllCodeInToItems('BNPRD')
+        await this.props.getAllCodeInToItems('TYPESIZE')
+        await this.props.getAllCodeInToItems('COLOR')
+
+        this.setState({
+            loadDataAllCode: true
+        })
     }
 
+    // WillUmount
     componentWillUnmount = async ()=> {
         let {islogin, isError, permission} = this.props.dataUser
-
-        console.log(islogin, isError, permission)
     }
 
+    // Update
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
 
@@ -55,13 +81,13 @@ class ManageSystem extends Component {
 
       
 render() {
-    let {showManageShop,showManageUser} = this.state
-    let {islogin, permission} = this.props.dataUser
 
+    let {showManageShop,showManageUser,loadDataAllCode} = this.state
+    let {islogin, permission} = this.props.dataUser
     
     return (
     <>
-    {islogin && comparativeHandling.handleCheckPermission(PERMISSIONS.ADMIN, permission) ? 
+    {islogin && generalHandling.handleCheckPermission(PERMISSIONS.ADMIN, permission) ? 
     <>
         <div className='header grid'>
             <div className='grid wide'>
@@ -108,8 +134,8 @@ render() {
         <div className='grid'>
             <div className='grid wide'>
                 <div className='l-12'>
-                    {showManageShop && <ManageShop/>}
-                    {showManageUser && <ManageUser/>} 
+                    {showManageShop && loadDataAllCode && <ManageShop/>}
+                    {showManageUser && loadDataAllCode && <ManageUser/>} 
                 </div>
             </div>
         </div>
@@ -121,14 +147,16 @@ render() {
 
 const mapStateToProps = state => {
     return {
-        dataUser: state.app.loginUser
-        
+        dataUser: state.app.loginUser,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        fetchAllDataAllCode: () => dispatch(actions.fetchAllDataAllCodeStart()),
+        getAllUser: () => dispatch(actions.getAllUserStart()),
+        getAllShop: () => dispatch(actions.getAllShopStart()),
+        getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
     }
 }
 

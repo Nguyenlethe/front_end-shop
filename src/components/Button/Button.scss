@@ -11,7 +11,7 @@
     .btn-primary-link{
         display: block;
         font-weight: var(--font-weight);
-        padding: 8px 20px;
+        padding: 7px 20px;
         font-size: var(--font-size-btn);
         text-decoration: none;
         min-width: 120px;
@@ -25,7 +25,7 @@
 
         &:hover{
             background-color: var(--BGR-frimary-btn-hover-LG);
-        transition: all .25s ease;
+            transition: all .25s ease;
 
         }
     }
@@ -46,7 +46,7 @@
     .btn-close-link{
         display: block;
         font-weight: var(--font-weight);
-        padding: 8px 20px;
+        padding: 5px 20px;
         font-size: var(--font-size-btn);
         text-decoration: none;
         min-width: 120px;
@@ -82,7 +82,7 @@
     .btn-close-transparent-link{
         display: block;
         font-weight: var(--font-weight);
-        padding: 8px 20px;
+        padding: 7px 20px;
         font-size: var(--font-size-btn);
         text-decoration: none;
         min-width: 120px;
@@ -121,7 +121,7 @@
     .btn-submit-link{
         display: block;
         font-weight: var(--font-weight);
-        padding: 8px 20px;
+        padding: 6px 20px;
         font-size: var(--font-size-btn-submit);
         text-decoration: none;
         width: 100%;
@@ -159,7 +159,7 @@
         cursor: no-drop;
         display: block;
         font-weight: var(--font-weight);
-        padding: 8px 20px;
+        padding: 6px 20px;
         font-size: var(--font-size-btn-submit);
         font-family: var(--font-family-primary);
         text-transform: uppercase;
@@ -188,7 +188,7 @@
     min-width: 120px;
 
     .content-btn-form-input{
-        font-size: 1.4rem;
+        font-size: var(--font-size-btn);
         text-transform: uppercase;
         background-color: var(--BGR-color-btn-manageuser);
         color: white;
@@ -240,12 +240,12 @@
     min-width: 120px;
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
+    font-size: var(--font-size-btn);
     color: var(--default-color-iconSVG);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
     .content-btn-form-input.create{
-        padding: 10px 10px 10px 20px;
+        padding: 8px 10px 8px 20px;
         text-transform: uppercase;
     }
     svg{

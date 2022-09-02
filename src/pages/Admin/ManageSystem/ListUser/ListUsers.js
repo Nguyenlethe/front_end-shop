@@ -6,7 +6,7 @@ import {faUserPen,faTrashCan} from '@fortawesome/free-solid-svg-icons';
 import {languages } from '../../../../utils/constant'
 import { Link } from 'react-router-dom';
 import adminService from '../../../../services/adminService'
-import Modal from '../../../../components/Modal/Modal'
+import Modal from '../../../../components/LoadData/Modal'
 import * as actions from '../../../../store/action';
 
 

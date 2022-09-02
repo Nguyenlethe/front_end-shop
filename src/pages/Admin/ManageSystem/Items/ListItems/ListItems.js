@@ -39,6 +39,18 @@ class ListItems extends Component {
     }
 
    
+    // State + props thay đổi mới re-reder
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+            this.props.itemsAll !== nextProps.itemsAll ||
+            this.state.listAllItems !== nextState.listAllItems
+            
+        ){
+          return true;
+        }
+        return false;
+    }
+
 
     // Xóa items
     handleDelete = async(item) => {
@@ -58,13 +70,14 @@ class ListItems extends Component {
     handleEditUser = async (items) => {
         await this.props.setStateItems()
         this.props.handleEditItems(items)
-
     }
 
 
     render() {
         let {listAllItems} = this.state
         let {language} = this.props
+
+        // console.log('List Items Re-render')
 
 
     return (
@@ -88,7 +101,7 @@ class ListItems extends Component {
                                     return (
                                         <tr key={item.idItems}>
                                             <td>STT</td>
-                                            <td className={cx('wraper-name')}> <span className={cx('name')}>{item.name}</span></td>
+                                            <td className={cx('wraper-name')}> <span className={cx('name')}>{language === languages.EN ? item.nameEn : item.name}</span></td>
                                             <td className={cx('idItems')}>{item.idItems}</td>  
                                             <td>{item.categoryData && item.categoryData && languages.EN === language ? item.categoryData.valueEn : item.categoryData.valueVi}</td>
                                             <td>{item.typeData && item.typeData && languages.EN === language ? item.typeData.valueEn : item.typeData.valueVi}</td>

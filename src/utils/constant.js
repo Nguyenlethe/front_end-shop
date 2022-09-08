@@ -36,7 +36,9 @@ export const DISCOUNTTEXT = {
     VN_DISCOUNT: 'Đơn trên',
     VN_DISCOUNT_SUB: 'VNĐ',
     EN_DISCOUNT: 'Price above',
-    EN_DISCOUNT_SUB: 'USD'
+    EN_DISCOUNT_SUB: 'USD',
+    REDUCE_EN: 'Reduce',
+    REDUCE_VI: 'Giảm',
 }
 
 export const SEARCH = {

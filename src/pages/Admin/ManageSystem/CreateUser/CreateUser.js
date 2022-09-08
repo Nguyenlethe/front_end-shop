@@ -238,9 +238,15 @@ class CreateUser extends Component {
                 users: {...stateCopy},
                 imgPreview: '',
                 dataError: {...stateErrorCopy},
+                isShowListsInput: false,
             })
         }else{
-            this.setState({       
+            this.setState({   
+                optionsGender: null,
+                optionsPermission: null,
+                optionsProvince: null,
+                optionsDistrict: null,
+                optionsDataWards: null,    
                 isShowListsInput: !this.state.isShowListsInput
             })
         }

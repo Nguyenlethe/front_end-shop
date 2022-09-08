@@ -145,11 +145,12 @@
         },
         "toast": {
             "success":"Add user successfully !!!",
-            "warn":"An error occurred",
-            "success_change":"Change successfully",
+            "successVoucher":"Add voucher successfully !!!",
+            "warn":"An error occurred !!!",
+            "success_change":"Change successfully !!!",
             "successItems":"Create items successfully !!!",
             "successEditItems":"Thay đổi thành công !!!",
-            "deleteSuccessItems":"Xóa thành công !"
+            "deleteSuccessItems":"Xóa thành công !!!"
 
         },
         "items": {
@@ -158,9 +159,41 @@
             "priceUS": "Price (USD)",
             "search-code-items":"Search items (Code)",
             "select-items":"Select items",
+            "addDiscountSub":"Category, category type  : ",
+            "planceholder_priceUS":"Enter price (USD)",
+            "listVoucher": "List all discount",
+            "sort":"Sort",
+            "listSort":"List all voucher",
+            "allItems":"Get all ioucher items",
+            "itemsDiscount":"Apply to product",
+            "typeDiscount":"Apply to product type",
+            "discountVocher":"Apply to category",
 
 
-            "planceholder_priceUS":"Enter price (USD)"
+            "price":"Price : ",
+            "code":"Code items : ",
+            "to":"Arrive",
+            "from":"Effective from :",
+            "submitVoucher":"Apply",
+            "detail_voucher":"Detail",
+            "category":"Category : ",
+            "type":"Category type : "
+
+
+
+
+        },
+        "modal":{
+            "error":"The product has been placed with a discount code ",
+            "errorType":"The items type has been placed with a discount code",
+            "errorCategory":"The catalog has been set with a discount code ",
+            "warn":"An error occurred"
+
+        },
+        "button":{
+            "Continue":"Override",
+            "editNow":"Continue editing",
+            "close":"Exit"
         }
     },
     "app": {

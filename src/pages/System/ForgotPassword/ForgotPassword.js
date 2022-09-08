@@ -6,7 +6,7 @@ import {faCircleExclamation} from '@fortawesome/free-solid-svg-icons';
 import Button from '../../../components/Button/Button';
 import {path, languages} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import Modal from '../../../components/LoadData/Modal'
+import Modal from '../../../components/Modal/ModalLoad'
 import SwitchLanguage from '../../../SwitchLanguage'
 import _ from 'lodash'
 

@@ -61,6 +61,9 @@ const actionTypes = Object.freeze({
 
     SET_VALUE_EMPTY: 'SET_VALUE_EMPTY',
 
+    CHANGE_ITEMS_VOUCHER_SUCCESS: 'CHANGE_ITEMS_VOUCHER_SUCCESS',
+
+
 
 
 

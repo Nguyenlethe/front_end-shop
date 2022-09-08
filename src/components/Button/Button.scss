@@ -257,3 +257,42 @@
         background: var(--BGR-color-btn-manageuser);
     }
 }
+
+.submit_voucher{
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    text-align: center;
+    overflow: hidden;
+    text-transform: uppercase;
+    background: var(--BGR-voucher);
+    transition: all 0.2s ease;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    margin-left: auto;
+    margin-right: 12px;
+    margin-top: 29%;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    
+    .voucher_items{
+        font-size: var(--font-size-btn);
+        padding: 7px 0;
+    }
+}
+
+
+.href-link{
+    text-decoration: none;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 4px;
+    color: var(--iconSVG-hover);
+    
+
+    span{
+        padding: 2px 12px;
+    }
+}

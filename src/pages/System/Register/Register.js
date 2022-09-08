@@ -7,7 +7,7 @@ import {faUser,faLock,faEyeSlash,faEye,faUnlock,faCircleExclamation} from '@fort
 import Button from '../../../components/Button/Button';
 import {path, languages} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import Modal from '../../../components/LoadData/Modal'
+import Modal from '../../../components/Modal/ModalLoad'
 import SwitchLanguage from '../../../SwitchLanguage'
 
 import classNames from 'classnames/bind';

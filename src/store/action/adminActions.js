@@ -464,13 +464,12 @@ export const getDataItemsStart = (inputType) => {
         try{
 
             let res = await adminService.getDataItems(inputType)
-            // console.log(res)
 
 
             if(inputType === 'All'){
                 if(res && res.data.errCode === 0 ){
+                    // console.log(res.data)
                     let dataAllItems = res.data.data.inputType
-                    // console.log(dataAllItems)
                     dispatch(getDataItemsSuscess(dataAllItems))
                 }else{
                     dispatch(getDataItemsSuscess([]))
@@ -505,4 +504,23 @@ export const setValueInputEmpty = () => {
 export const setValueInputEmptySuscess = (ranDomNumber) => ({
     type: actionTypes.SET_VALUE_EMPTY,
     valueInput: ranDomNumber
+})
+
+
+
+// CHANGE_ITEMS_VOUCHER_SUCCESS: 'CHANGE_ITEMS_VOUCHER_SUCCESS',
+export const changeVoucherItems = (voucher) => {
+    return async (dispatch, getState) => {
+        try{
+            let actions = false
+            dispatch(changeVoucherItemsSuscess({voucher,actions: !actions }))
+        }
+        catch(err){
+        }
+    }
+}
+
+export const changeVoucherItemsSuscess = (data) => ({
+    type: actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS,
+    voucherItems: data
 })

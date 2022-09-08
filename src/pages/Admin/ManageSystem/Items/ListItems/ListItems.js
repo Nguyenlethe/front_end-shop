@@ -32,6 +32,8 @@ class ListItems extends Component {
         let {itemsAll} = this.props
 
         if(prevProps.itemsAll !== this.props.itemsAll){
+
+            
             this.setState({
                 listAllItems: itemsAll
             })
@@ -43,7 +45,9 @@ class ListItems extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (
             this.props.itemsAll !== nextProps.itemsAll ||
-            this.state.listAllItems !== nextState.listAllItems
+            this.state.listAllItems !== nextState.listAllItems ||
+            this.props.language !== nextProps.language
+
             
         ){
           return true;
@@ -86,6 +90,7 @@ class ListItems extends Component {
                 <div className={cx('tabel')}>
                     <table id={cx('customers')}>
                         <tbody>
+                            
                             <tr>
                                 <th>STT</th>
                                 <th><SwitchLanguage id='manageAdmin.form.nameItemsListItems' /></th>
@@ -124,8 +129,10 @@ class ListItems extends Component {
 } 
 
 
+
+
+
 const mapStateToProps = state => {
-    
     return {
         itemsAll: state.admin.items.itemsAll,
         language: state.app.language,

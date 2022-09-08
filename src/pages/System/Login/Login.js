@@ -7,7 +7,7 @@ import {faUser,faLock,faEyeSlash,faEye,faUnlock,faCircleExclamation} from '@fort
 import Button from '../../../components/Button/Button';
 import {path, languages,PERMISSIONS} from '../../../utils/constant'
 import * as actions from '../../../store/action';
-import LoadScroll from '../../../components/LoadData/LoadScroll'
+import LoadScroll from '../../../components/Modal/LoadScroll'
 import handleCheckPermission from '../../../utils/generalHandling'
 import SwitchLanguage from '../../../SwitchLanguage'
 

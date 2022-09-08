@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SwitchLanguage from '../../../../../SwitchLanguage';
 import * as actions from '../../../../../store/action';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUserPen,faTrashCan,faXmark} from '@fortawesome/free-solid-svg-icons';
+
 import {languages } from '../../../../../utils/constant'
 import adminService from '../../../../../services/adminService';
 import { toast } from 'react-toastify';
@@ -12,12 +11,16 @@ import Button from '../../../../../components/Button/Button';
 import Select from 'react-select';
 import {DISCOUNTTEXT, SEARCH} from '../../../../../utils/constant'
 import DatePicker from "react-datepicker";
+import _ from 'lodash'
 import "react-datepicker/dist/react-datepicker.css";
 import'./Discounts.scss';
 import SearchInput from '../../../../../components/SearchInput';
 import generalHandling from '../../../../../utils/generalHandling';
 import '../../../../../components/SearchInput/SearchInput.scss'
+import imgError from '../../../../../assets/image/NoImg.jpg'
 import InputSearch from '../../../../../components/SearchInput/InputSearch';
+import NumberFormat from 'react-number-format';
+import ModalErrorItems from '../../../../../components/Modal/ModalErrorItems';
 import TimePicker from 'react-time-picker';
 
 class Discount extends Component {
@@ -31,6 +34,10 @@ class Discount extends Component {
             isShowListInput: false,
             valueSetInputSearch: '',
             valueSetInputSelect: '',
+            dataErrorModal: [],
+            isShowModalError: false,
+            isHideModalError: false,
+
             dataOptions: {
                 optionsIdShop: null,
                 optionsSele: null,
@@ -41,6 +48,7 @@ class Discount extends Component {
                 optionsItems: null,
                 optionsDiscount: null,
             },
+
 
             listDataOptions: {
                 listAllShops: [],
@@ -71,7 +79,10 @@ class Discount extends Component {
 
     // Mount
     componentDidMount = async() => {
+        let {voucher} = this.props
+
         await this.handleSetDataDiscount()
+        
     }
 
     // State + props thay đổi mới re-reder
@@ -86,7 +97,9 @@ class Discount extends Component {
             
             this.props.DCCData !== nextProps.DCCData ||             
             this.props.allShops !== nextProps.allShops ||   
-            this.props.allcategory !== nextProps.allcategory ||   
+            this.props.allcategory !== nextProps.allcategory || 
+            this.props.voucher !== nextProps.voucher || 
+
 
             this.state.dataOptions !== nextState.dataOptions ||
             this.state.isShowButtonAddDisscount !== nextState.isShowButtonAddDisscount ||
@@ -96,6 +109,8 @@ class Discount extends Component {
             this.state.dataDiscount !== nextState.dataDiscount || 
             this.state.listDiscount !== nextState.listDiscount ||
             this.state.countInput !== nextState.countInput || 
+            this.state.dataErrorModal !== nextState.dataErrorModal || 
+            this.state.isShowModalError !== nextState.isShowModalError || 
             this.state.listDataOptions !== nextState.listDataOptions  
         ){
           return true;
@@ -226,10 +241,20 @@ class Discount extends Component {
 
     // Did update
     componentDidUpdate = async(prevProps, prevState) => {
+        let {voucher} = this.props
 
         // Thay đổi ngôn ngữ
         if(prevProps.language !== this.props.language){
             await this.handleSetDataDiscount()
+        }
+
+        // Thay đổi ngôn ngữ
+        if(prevProps.voucher !== this.props.voucher){
+            this.setState({
+                isShowButtonAddDisscount: true,
+            })
+            console.log(voucher)
+            
         }
     }
 
@@ -316,7 +341,9 @@ class Discount extends Component {
                 },
                 dataTabelItemsDiscount: {
                     ...stateItemsDiscount,
-                    forItemCategory: valueOptions.value
+                    forItemCategory: valueOptions.value,
+                    forItemType: '',
+                    itemsId:''
                 }
             })
         }
@@ -334,7 +361,8 @@ class Discount extends Component {
                 },
                 dataTabelItemsDiscount: {
                     ...stateItemsDiscount,
-                    forItemType: valueOptions.value
+                    forItemType: valueOptions.value,
+                    itemsId:''
                 }
             })
         }
@@ -380,18 +408,14 @@ class Discount extends Component {
     handleChangeSelectDate = (date,name) => {
         let stateItemsDiscount = this.state.dataTabelItemsDiscount
         let dataOptionsCoppy = this.state.dataOptions
-
         const dateSet = new Date(date).toString()
 
-        console.log('Năm :',new Date(dateSet).getFullYear())
-        console.log('Tháng :',new Date(dateSet).getMonth() + 1 )
-        console.log('Ngày :',new Date(dateSet).getDate())
-        console.log('Giờ :',new Date(dateSet).getHours())
-        console.log('Phút :',new Date(dateSet).getMinutes())
+        // console.log('Năm :',new Date(dateSet).getFullYear())
+        // console.log('Tháng :',new Date(dateSet).getMonth() + 1 )
+        // console.log('Ngày :',new Date(dateSet).getDate())
+        // console.log('Giờ :',new Date(dateSet).getHours())
+        // console.log('Phút :',new Date(dateSet).getMinutes())
        
-
-
-
 
         // Select start day
         if(name === 'startDay'){
@@ -424,21 +448,41 @@ class Discount extends Component {
 
     // Handle change input add + delete 
     handlecreateListinput = async(type) => {
+        let {dataOptions,dataTabelItemsDiscount} = this.state
+        let res = {}
 
         // Add new discount
         if(type === 'CREATE'){
+            let newDataOptions =  generalHandling.resetDefaultState(dataOptions)
+            let newdataTabelItemsDiscount =  generalHandling.resetDefaultState(dataTabelItemsDiscount)
+
             this.setState({
                 isShowButtonAddDisscount: !this.state.isShowButtonAddDisscount,
+                dataOptions: {
+                    ...newDataOptions
+                },
+                dataTabelItemsDiscount: {
+                    ...newdataTabelItemsDiscount
+                }
             })
         }
 
         // Add new discount
         if(type === 'ADD'){
             let {dataTabelItemsDiscount} = this.state
-            
 
-            
+            // Create Discount Items
+            res = await adminService.addNewDisCounts(dataTabelItemsDiscount)
+
+            // Nếu có lỗi tồn tại dícount
+            if(res && res.data && res.data.errCode === -1 && !_.isEmpty(res.data.data) ){
+                this.setState({
+                    dataErrorModal: res.data.data,
+                    isShowModalError: !this.state.isShowModalError 
+                }) 
+            }
         }
+
 
         // Hide Form Discount
         if(type === 'DELETE'){
@@ -447,6 +491,36 @@ class Discount extends Component {
             })
         }
 
+        // Update
+        if(type === 'UPDATA'){
+            let resUpdate = await adminService.addNewDisCounts({...dataTabelItemsDiscount, type: 'UPDATE'})
+            // Nếu có lỗi
+            if(resUpdate && resUpdate.data && resUpdate.data.errCode === -2){
+                toast.warn(<SwitchLanguage id='manageAdmin.toast.warn' />)
+            }
+
+            // Nếu thành công
+            if(resUpdate && resUpdate.data && resUpdate.data.errCode ===  0){
+                this.setState({
+                    isHideModalError: !this.state.isHideModalError ,
+                    isShowButtonAddDisscount: false,
+                })
+                toast.success(<SwitchLanguage id='manageAdmin.toast.successVoucher' />)
+            }
+        }
+
+        // Nếu có lỗi
+        if(res && res.data && res.data.errCode === -2){
+            toast.warn(<SwitchLanguage id='manageAdmin.toast.warn' />)
+        }
+
+        // Nếu thành công
+        if(res && res.data && res.data.errCode ===  0){
+            this.setState({
+                isShowButtonAddDisscount: false,
+            })
+            toast.success(<SwitchLanguage id='manageAdmin.toast.successVoucher' />)
+        }
     }
 
     // SustomStyle select react
@@ -525,19 +599,100 @@ class Discount extends Component {
     render() {
 
     let {language} = this.props
-    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount} = this.state
+    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,dataTabelItemsDiscount} = this.state
     let {optionsIdShop,optionsSele,optionsDayStart,optionsDayEnd,optionsCategory,optionsCategoryType,optionsDiscount} = this.state.dataOptions
     let {listSale,listAllShops,listAllCategory,listAllCategoryType,listDiscount} = this.state.listDataOptions
-
 
         
     return (
         <>
+            <ModalErrorItems isShow={isShowModalError} isHide={isHideModalError} title={'warn'}>
+                <div className='discount_modal' >
+                    {dataErrorModal && dataErrorModal.limitPrice &&
+                        <>
+                            <p className='heading'>
+                                {dataErrorModal.dataItems && dataErrorModal.dataItems !== 'TYPE' &&  dataErrorModal.dataItems !== 'CATEGORY'  && <SwitchLanguage id='manageAdmin.modal.error'/>}
+                                {dataErrorModal.dataItems && dataErrorModal.dataItems === 'TYPE' && <SwitchLanguage id='manageAdmin.modal.errorType'/>}
+                                {dataErrorModal.dataItems && dataErrorModal.dataItems === 'CATEGORY' && <SwitchLanguage id='manageAdmin.modal.errorCategory'/>}
+                            </p>
+
+                            <p className='discount'>{languages.EN === language ? 'Discount :' : 'Giảm :'} <span>{dataErrorModal.discount}</span> </p>
+
+                            <p className='voucher'>{languages.EN === language ? 'Price above :' : 'Đơn trên : '} 
+                                <span>{ languages.EN === language ? 
+                                        <NumberFormat value={dataErrorModal.limitPrice.limitUs} displayType={'text'} thousandSeparator={true}/> : 
+                                        <NumberFormat value={dataErrorModal.limitPrice.limitVn} displayType={'text'} thousandSeparator={true}/>
+                                    } 
+                                    {languages.EN === language ? ' USD' : ' VND'}
+                                </span>
+                            </p>
+                            <span className='sub_time'>{languages.EN === language ? dataErrorModal.valueEn : dataErrorModal.valueVi}</span>
+                            
+                            {dataErrorModal &&  dataErrorModal.name &&
+                                <p className='category_Or_Type'>
+                                    <SwitchLanguage id='manageAdmin.items.addDiscountSub'/>
+                                    <span>{languages.EN === language ? dataErrorModal.name.valueEn : dataErrorModal.name.valueVi}</span> 
+                                </p>
+                            } 
+                            
+                            {dataErrorModal.dataItems && dataErrorModal.dataItems.dataImgItems  &&
+                                <div className='item'>
+                                    <div className='wraper-img'>
+                                        <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${dataErrorModal.dataItems.dataImgItems.image}`} alt={imgError} className='img' />
+                                    </div>
+
+                                    <div className='detail'>
+                                        <p className='name-items'>{languages.EN === language ? dataErrorModal.dataItems.nameEn.slice(0, 30)+'...' : dataErrorModal.dataItems.name.slice(0, 30)+'...'}</p>
+                                        <div className='list-price'>
+                                            <p className='price'> 
+                                                <span className='sub-price'>Giá : {''}
+                                                { dataErrorModal && dataErrorModal.dataItems && dataErrorModal.dataItems.newPrice > 0 &&
+                                                        <span> 
+                                                            {languages.EN === language ? 
+                                                                <NumberFormat value={dataErrorModal.dataItems.newPriceUS} displayType={'text'} thousandSeparator={true}/>  : 
+                                                                <NumberFormat value={dataErrorModal.dataItems.newPrice} displayType={'text'} thousandSeparator={true}/>
+                                                            } 
+                                                        </span>
+                                                } 
+                                                { dataErrorModal && dataErrorModal.dataItems &&  dataErrorModal.dataItems.newPrice === 0 &&
+                                                        <span> 
+                                                            {languages.EN === language ? 
+                                                                <NumberFormat value={dataErrorModal.dataItems.priceUS} displayType={'text'} thousandSeparator={true}/>  : 
+                                                                <NumberFormat value={dataErrorModal.dataItems.price} displayType={'text'} thousandSeparator={true}/>
+                                                            } 
+                                                        </span>
+                                                    }
+                                                    {languages.EN === language ? ' USD' : ' VND'}
+                                                </span>
+                                            </p>
+                                            <p className='code-items'>Mã : <span>{dataErrorModal.dataItems.idItems}</span> </p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            }
+
+                            <div className='list-button'>
+                                <span onClick={() => this.handlecreateListinput('UPDATA')}>
+                                    <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Continue'/>}/>
+                                </span>
+
+                                <span>
+                                    <Button type='close-form-data' content={<SwitchLanguage id='manageAdmin.button.close'/>}/>
+                                </span>
+                            </div>
+
+                        </>
+                    }
+                </div>
+            </ModalErrorItems>
+
+
             <div className='l-12'>
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.discount' /></p> 
             </div> 
 
-            { isShowButtonAddDisscount &&
+
+            {isShowButtonAddDisscount &&
                 <div className='list_all_discount' >
                     {/* Select Shop */}
                     {listAllShops && listAllShops.length > 0 && 
@@ -653,7 +808,7 @@ class Discount extends Component {
                             placeholderText={languages.EN === language ? 'Select day start' : 'Chọn ngày bắt đầu áp dụng'}
                             showTimeSelect
                             autoComplete='off'
-                            timeFormat="p"
+                            timeFormat="HH:mm"
                             timeIntervals={30}
                             dateFormat="Pp"
                         />
@@ -671,7 +826,7 @@ class Discount extends Component {
                             placeholderText={languages.EN === language ? 'Select end start' : 'Chọn ngày kết thúc áp dụng'}
                             showTimeSelect
                             autoComplete='off'
-                            timeFormat="p"
+                            timeFormat="HH:mm"
                             timeIntervals={30}
                             dateFormat="Pp"
                         />
@@ -679,38 +834,39 @@ class Discount extends Component {
 
                 </div>
             }
-                
-                <div className='col l-12'> 
-                    {!isShowButtonAddDisscount && 
-                        <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('CREATE')}>
-                            <Button type={'create'} 
-                                content={ <SwitchLanguage id='manageAdmin.form.craeteDiscount' /> }
+
+           
+            <div className='col l-12'> 
+                {!isShowButtonAddDisscount && 
+                    <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('CREATE')}>
+                        <Button type={'create'} 
+                            content={<SwitchLanguage id='manageAdmin.form.craeteDiscount'/>}
+                        />
+                    </span>
+                } 
+
+                {isShowButtonAddDisscount && 
+                    <div className='list_input '>
+                        <span style={{display: 'inline-block'}} 
+                            onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && 
+                            this.handlecreateListinput('ADD')}>
+
+                            <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
+                                'submit-form-data' : 'ban-form-data'} 
+                                content={<SwitchLanguage id='manageAdmin.form.addDiscount' />}
                             />
                         </span>
-                    } 
 
-                    {isShowButtonAddDisscount && 
-                        <div className='list_input '>
-                            <span style={{display: 'inline-block'}} 
-                                onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && 
-                                this.handlecreateListinput('ADD')}>
+                        <span className='margin_between'></span>
 
-                                <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
-                                    'submit-form-data' : 'ban-form-data'} 
-                                    content={<SwitchLanguage id='manageAdmin.form.addDiscount' />}
-                                />
-                            </span>
-
-                            <span className='margin_between'></span>
-
-                            <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('DELETE')}>
-                                <Button type={'submit-form-data'} 
-                                    content={<SwitchLanguage id='manageAdmin.form.hide' />}
-                                />
-                            </span>
-                        </div>
-                    } 
-                </div>
+                        <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('DELETE')}>
+                            <Button type={'submit-form-data'} 
+                                content={<SwitchLanguage id='manageAdmin.form.hide' />}
+                            />
+                        </span>
+                    </div>
+                } 
+            </div>
 
         </>
     )}
@@ -726,6 +882,9 @@ const mapStateToProps = state => {
         DCCData: state.admin.listAllCodeItems.DCCData,
         allShops: state.admin.listShops.allShops,
         allcategory: state.admin.dataForm.category,
+
+        voucher: state.admin.voucher,
+
 
     }
 }

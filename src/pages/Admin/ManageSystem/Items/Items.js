@@ -20,6 +20,7 @@ import generalHandling from '../../../../utils/generalHandling';
 import './Items.scss'
 import ListItems from './ListItems/ListItems';
 import Discounts from './Discounts/Discounts';
+import ListVoucher from './ListVoucher/ListVoucher';
 const salt = bcrypt.genSaltSync(8) 
 class Items extends Component {
     constructor(props) {
@@ -992,6 +993,9 @@ class Items extends Component {
     
             let optionsCategoryEdit = {value: dataItems.categoryData && dataItems.categoryData.code,
                 label: dataItems.categoryData && language === languages.EN ? dataItems.categoryData.valueEn : dataItems.categoryData.valueVi}
+
+            await this.props.getAllCodeInToItems(optionsCategoryEdit.value)
+
                 
             let optionsCategoryTypeEdit = {value: dataItems.typeData && dataItems.typeData.code,
                 label: dataItems.typeData && language === languages.EN ? dataItems.typeData.valueEn : dataItems.typeData.valueVi}
@@ -1012,13 +1016,14 @@ class Items extends Component {
                 value: dataItems.dataSizeAmount && dataItems.dataSizeAmount[0].typeSizeData && dataItems.dataSizeAmount[0].typeSizeData.code,
                 label: dataItems.dataSizeAmount[0].typeSizeData && language === languages.EN ? dataItems.dataSizeAmount[0].typeSizeData.valueEn : dataItems.dataSizeAmount[0].typeSizeData.valueVi}
             
+
+                
             await this.props.getAllCodeInToItems(optionsItemsSizeAmountEdit.value)
     
             let priceEdit = dataItems.price
             let priceEditUS = dataItems.priceUS
             let newPrice = dataItems.newPrice
             let newPriceUS = dataItems.newPriceUS
-
             let dataSizeAmount = dataItems.dataSizeAmount
     
             // 
@@ -1534,6 +1539,8 @@ class Items extends Component {
                 handlChangeSlelect={this.handlChangeSlelect}
             />
         }
+
+        <ListVoucher/>
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     

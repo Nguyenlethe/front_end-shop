@@ -234,6 +234,11 @@ class ManageShop extends Component {
         // Set state
         this.setState({    
             isEdit: false,
+            optionsPermission: null,
+            optionsProvince: null,
+            optionsPay: null,
+            imgPreview: '',
+            selectedOption: null,
             dataError: stateCopyErr,
             dataShop: stateCopy,
             isShowListsInput: !this.state.isShowListsInput
@@ -283,6 +288,7 @@ class ManageShop extends Component {
             imgPreview: '',
             dataShop: {...stateCopy},
             isShowListsInput: false,
+            
         })
         toast.success(<SwitchLanguage id='manageAdmin.toast.success_change'/>)
     }

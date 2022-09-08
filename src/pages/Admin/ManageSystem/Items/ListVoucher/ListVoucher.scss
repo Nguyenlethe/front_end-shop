@@ -1,0 +1,29 @@
+.list_voucher{
+    
+    .list_select{
+        display: flex;
+        
+        .sort{
+            font-size: 1.6rem;
+            text-transform: uppercase;
+        }
+
+        .input-label{
+            height: 24px !important;
+            display: block;
+        }
+        .button_show-items-discount{
+            width: 100%;
+            text-align: center;
+            padding: 0 12px;
+            height: 38px;
+            border: 1px solid #ccc0;
+            background: #ee4d2d;
+            color: #fff;
+            border-radius: 35px;
+            font-size: 1.5rem;
+
+        }
+
+    }
+}

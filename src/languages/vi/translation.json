@@ -139,13 +139,13 @@
         
         },
         "toast": {
-            "success":"Thêm người dùng thành công",
+            "success":"Thêm người dùng thành công !!!",
+            "successVoucher":"Thêm voucher thành công !!!",
             "warn":"Có lỗi sảy ra !!!",
             "success_change":"Thay đổi thành công !!!",
             "successItems":"Thêm sản phẩm thành công !",
             "successEditItems":"Thay đổi thành công !!!",
-            "deleteSuccessItems":"Xóa thành công !"
-
+            "deleteSuccessItems":"Xóa thành công !!!"
         },
         "found": {
             "back":"Trở Lại Trang Home",
@@ -157,9 +157,41 @@
             "priceUS": "Gía (USD)",
             "search-code-items":"Tìm kiếm sản phẩm (Mã)",
             "select-items":"Chọn sản phẩm",
+            "planceholder_priceUS":"Nhập giá (USD)",
+            "addDiscountSub":"Danh mục, loại hàng áp dụng : ",
+            "listVoucher": "Danh sách các voucher",
+            "sort":"Xắp sếp",
+            "listSort":"Danh sách voucher",
+            "allItems":"Tất cả sản phẩm có voucher",
+            "itemsDiscount":"Áp dụng cho sản phẩm",
+            "typeDiscount":"Áp dụng cho loại hàng",
+            "discountVocher":"Áp dụng cho danh mục",
 
 
-            "planceholder_priceUS":"Nhập giá (USD)"
+            "price":"Gía : ",
+            "code":"Mã sản phẩm : ",
+            "to":"Đến",
+            "from":"Có hiệu lực từ :",
+            "submitVoucher":"Sử Dụng",
+            "detail_voucher":"Chi Tiết",
+            "category":"Danh mục : ",
+            "type":"Loại hàng : "
+
+
+
+
+        },
+        "modal":{
+            "error":"Sản phẩm đã được đặt mã giảm giá ",
+            "errorType":"Loại sản phẩm đã được đặt mã giảm giá ",
+            "errorCategory":"Danh mục phẩm đã được đặt mã giảm giá ",
+            "warn":"Có lỗi sảy ra"
+
+        },
+        "button":{
+            "Continue":"GHi Đè",
+            "editNow":"Chỉnh sửa",
+            "close":"Thoát"
         }
     },
     "app": {

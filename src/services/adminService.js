@@ -112,13 +112,20 @@ function searchData (data) {
 
 // Search items
 function addNewDisCounts (data) {
-    return axios.post(`/admin/create-new-discount`);
+    return axios.post(`/admin/create-new-discount`,data);
+}
+
+//
+function getVoucher (data) {
+    return axios.get(`/admin/get-voucher?idshop=${data.idShop}&category=${data.category}&type=${data.type}&actions=${data.actions}`,);
 }
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    getVoucher,
+    addNewDisCounts,
     searchData,
     getAllDiscountItems,
     getItemsWhere,

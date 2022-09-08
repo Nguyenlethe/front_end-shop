@@ -5,6 +5,7 @@ import SwitchLanguage from '../../SwitchLanguage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass,faSpinner,faCircleXmark} from '@fortawesome/free-solid-svg-icons';
 import {languages,SEARCH,DISCOUNTTEXT} from '../../utils/constant'
+
 import * as actions from '../../store/action';
 import adminService from '../../services/adminService';
 
@@ -79,11 +80,8 @@ class InputSearch extends Component {
 
         // Khi Array data items select thay đổi
         if(prevProps.dataArrayItemsSelect !== this.props.dataArrayItemsSelect){
-            console.log('Data :',dataArrayItemsSelect)
-
-
+            
             if(dataArrayItemsSelect[0].actions !== 'NOT_SET_VALUE'){
-                let nameItemsAdd = languages.EN === language ? dataArrayItemsSelect[0].nameEn : dataArrayItemsSelect[0].name
                 this.setState({
                     dataSelectItemsName: {
                         ...dataSelectItemsName,
@@ -167,7 +165,6 @@ class InputSearch extends Component {
         }
     }
   
-
     // Search code items
     handleGetDataItems = async (value, type) => {
         let {dataSearchItemsCode} = this.state
@@ -247,11 +244,12 @@ class InputSearch extends Component {
             let {language} = this.props
 
             let nameItemsAdd = languages.EN === language ? items.nameEn : items.name
-
+            
             if(actions === 'SEARCH_CODE_ITEM' || actions === 'SELECT_ITEMS_ARRAY' ){
                 await this.props.handleGetDataComponentSearch(items,actions)
                 
                 if(actions === 'SEARCH_CODE_ITEM'){
+                    nameItemsAdd = nameItemsAdd.slice(0, 58)+ '...'
 
                     // Set state
                     this.setState({
@@ -264,8 +262,10 @@ class InputSearch extends Component {
                     }) 
                 }
 
+
                 if(actions === 'SELECT_ITEMS_ARRAY'){
                     this.props.setValueInputEmpty()
+                    nameItemsAdd = nameItemsAdd.slice(0, 30)+ '...'
 
                     // Set state
                     this.setState({
@@ -313,8 +313,7 @@ class InputSearch extends Component {
     // handle Reset Value Input Search Code Items 
     handleResetValueInputSearchCodeItems = () => {
         let {dataSearchItemsCode} = this.state
-        const node = this.inputSearchCode.current
-        node.focus()
+      
 
         this.setState({
             dataSearchItemsCode: {
@@ -331,6 +330,9 @@ class InputSearch extends Component {
     let {valueInputSearchCodeItems,isShowDataSearchCodeItems,listDataSearchCodeItems} = this.state.dataSearchItemsCode
     let { isShowListItemsSelect,listDataItemsSelect,resultDataSearchName,valueInputSelectArray} = this.state.dataSelectItemsName
     let {TYPE_INPUT,classWraper,idSwitchLanguage,language} = this.props
+
+
+    console.log(listDataItemsSelect)
 
     return (
         <>
@@ -382,7 +384,7 @@ class InputSearch extends Component {
                                                     {language === languages.EN ? item.newPriceUS ? item.newPriceUS : item.priceUS : item.newPrice ? item.newPrice : item.price}
                                                     <span className='type_price'>{languages.EN === language ? DISCOUNTTEXT.EN_DISCOUNT_SUB : DISCOUNTTEXT.VN_DISCOUNT_SUB }</span> 
                                                 </p>
-                                                <p className='code-items'>Mã :<span>{item.idItems}</span> </p>
+                                                <p className='code-items'><SwitchLanguage id='manageAdmin.items.code' /> <span>{item.idItems}</span> </p>
                                             </div>
                                         </div>
                                     </div> 
@@ -422,7 +424,7 @@ class InputSearch extends Component {
                                                     {language === languages.EN ? item.newPriceUS ? item.newPriceUS : item.priceUS : item.newPrice ? item.newPrice : item.price}
                                                     <span className='type_price'>{languages.EN === language ? DISCOUNTTEXT.EN_DISCOUNT_SUB : DISCOUNTTEXT.VN_DISCOUNT_SUB }</span> 
                                                 </p>
-                                                <p className='code-items'>Mã :<span>{item.idItems}</span> </p>
+                                                <p className='code-items'><SwitchLanguage id='manageAdmin.items.code' /> <span>{item.idItems}</span> </p>
                                             </div>
                                         </div>
                                     </div> 
@@ -445,7 +447,7 @@ class InputSearch extends Component {
                                                     {language === languages.EN ? item.newPriceUS ? item.newPriceUS : item.priceUS : item.newPrice ? item.newPrice : item.price}
                                                     <span className='type_price'>{languages.EN === language ? DISCOUNTTEXT.EN_DISCOUNT_SUB : DISCOUNTTEXT.VN_DISCOUNT_SUB }</span> 
                                                 </p>
-                                                <p className='code-items'>Mã :<span>{item.idItems}</span> </p>
+                                                <p className='code-items'><SwitchLanguage id='manageAdmin.items.code' /> <span>{item.idItems}</span> </p>
                                             </div>
                                         </div>
 

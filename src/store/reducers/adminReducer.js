@@ -1,9 +1,9 @@
+
 import actionTypes from '../action/actionTypes';
-
-
 const initialState = {
     dataDistrict: [],
     dataWards: [],
+    voucher: [],
     dataForm: {
         listGender: [],
         listProvince: [],
@@ -43,7 +43,6 @@ const initialState = {
 
 
 const adminReducer = (state = initialState, action) => {
-
     switch (action.type) {
 
         // Reduce Lưu trữ AllCode (Gender, Province, Permission)
@@ -67,8 +66,7 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state
             }
-
-        
+             
         
         // Reduce Lưu trữ Huyện
         case actionTypes.GET_DATA_PROVINCE_SUCCESS:  
@@ -299,6 +297,14 @@ const adminReducer = (state = initialState, action) => {
         // SET_VALUE_EMPTY
         case actionTypes.SET_VALUE_EMPTY:  
             state.search.valueInputSearchCode = action.valueInput
+            
+            return {
+                ...state
+            }
+
+        // CHANGE_ITEMS_VOUCHER_SUCCESS
+        case actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS:  
+            state.voucher = action.voucherItems
             
             return {
                 ...state

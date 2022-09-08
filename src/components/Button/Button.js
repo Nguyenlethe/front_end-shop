@@ -41,7 +41,12 @@ type === 'close-form-data' ? <button className='btn-form-input'> <span className
 type === 'ban-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input ban'>{content}</span> </button>
     : 
 type === 'create' ? <button className='craete-input'> <span className='content-btn-form-input create'>{content}</span> <FontAwesomeIcon icon={faPlus}/></button>
+    : 
+type === 'submit_voucher' ? <button className='submit_voucher'> <span className='content-btn-form-input voucher_items'>{content}</span> </button>
+    : 
+type === 'href' ? <Link className='href-link' to={to}><span>{content}</span></Link> 
     : ''
+
 
                 }
             </>

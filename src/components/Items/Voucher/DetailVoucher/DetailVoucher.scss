@@ -1,0 +1,184 @@
+
+.detail-voucher{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 0vh;
+    width: 100%;
+    opacity: 0;
+    background-color: rgba(82, 82, 82, 0.334);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s linear;
+    margin: auto;
+    overflow: hidden;
+    z-index: 9999999999;
+
+    >.voucher{
+        width: 400px;
+        background-color: #fff;
+        overflow: hidden;
+        border-radius: 4px;
+        position: relative;
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+    
+    
+        .list_icon{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 60px;
+            cursor: pointer;
+    
+            .icon_close{
+                padding: 4px;
+                font-size: 2rem;
+                color: var(--BGR-voucher);
+                opacity: .5;
+            }
+            .icon_close.one{
+                opacity: .5;
+    
+                &:hover{
+                    opacity: 1;
+                }
+            }
+            .icon_close.tow{
+                opacity: .5;
+    
+                &:hover{
+                    opacity: 1;
+                    
+                }
+            }
+        }
+    
+   
+        .voucher_wraper{
+            width: 98%;
+            margin: 5px;
+            padding: 12px 0;
+            background:  var(--BGR-btn-submit-LG);
+    
+            .info_shop{
+                min-width: 116px;
+    
+                .border_img{
+                    width: 70px;
+                    height: 70px;
+                    overflow: hidden;
+                    margin: auto;
+                    border-radius: 68px;
+                    box-shadow: 0px 0px 3px #787878;
+                }
+                .avata_shop{
+                    width: 100%;
+                }
+                .name_shop{
+                    margin: 12px 12px 0px 12px;
+                    color: #fff;
+                    display: block;
+                    font-size: 1.4rem;
+                    text-align: center;
+                }
+            }
+    
+        }
+    
+    
+        .sub_voucher{
+            width: 100%;
+            margin-bottom: 20px;
+    
+            .discount_percent{
+                text-align: center;
+                display: block;
+                font-weight: 600;
+                font-size: 4rem;
+                color: #840000;
+            }
+    
+            .limit {
+                text-align: center;
+                color: rgb(57 55 55);
+                font-size: 1.4rem;
+            }
+    
+            .show_items{
+                text-align: center;
+    
+                .img_items{
+                    width: 185px;
+                    height: 185px;
+                    box-shadow: -13px 13px 5px #a1a1a1a6;
+                    margin: auto;
+                    border-radius: 4px;
+                    margin-top: 20px;
+                    overflow: hidden;
+    
+    
+                    .img{
+                        width: 100%;
+                    }
+                }
+            }
+    
+            .detail_items{
+                margin-left: 6px;
+                margin-bottom: 6px;
+    
+               
+    
+                .price{
+                    color: var(--color-text);
+    
+                    .price_number{
+                        color: var(--BGR-frimary-btn-LG);
+                        font-weight: 600;
+                    }
+                }
+    
+                .code{
+    
+                    .items_code{
+                        color: var(--iconSVG-hover);
+                    }
+                }
+            }
+        }
+        
+        .list_button{
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .name_items{
+            margin: 20px 0 12px 0;
+            font-weight: 600;
+            font-size: 2rem;
+            color: rgb(155 15 43);
+
+        }
+        
+        .times{
+            text-align: center;
+        }
+    }
+
+    .detail_voucher-not-items{
+        text-align: center;
+        margin: 30px 12px;
+       
+    }
+}

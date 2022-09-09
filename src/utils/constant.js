@@ -5,7 +5,11 @@ export const path = {
     NEWSPAGE: '/news',
     LOGINPAGE: '/login',
     REGISTERPAGE: '/register',
+    
     FORGOTPASS: '/forgot/password',
+
+    // idShop forItemCategory forItemType itemsId   
+
     
     // ADMIN
     MANAGE_USER: '/system/management',

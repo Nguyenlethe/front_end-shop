@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import SwitchLanguage from '../../SwitchLanguage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass,faSpinner,faCircleXmark} from '@fortawesome/free-solid-svg-icons';
-import {languages,SEARCH,DISCOUNTTEXT} from '../../utils/constant'
+import {languages,DISCOUNTTEXT} from '../../utils/constant'
 
 import * as actions from '../../store/action';
 import adminService from '../../services/adminService';
@@ -16,6 +16,7 @@ class InputSearch extends Component {
         this.inputSearchCode = React.createRef();
         this.state = {
             itemStorage: [],
+            newValueInputSelectArray:'',
             isLoadSearchItemsCode: false,
             value: '',
             dataSearchItemsCode: {
@@ -42,9 +43,15 @@ class InputSearch extends Component {
 
     // Component DidMount 
     componentDidMount = async() => {
-        let {dataArrayItemsSelect} = this.props
+        let {dataArrayItemsSelect,valueName,language} = this.props
         let {dataSelectItemsName,dataSearchItemsCode} = this.state
 
+        if(valueName && valueName.name){
+            let value = languages.EN === language ? valueName.nameEn.slice(0, 30)+ '...'  : valueName.name.slice(0, 30)+ '...'
+            this.setState({
+                newValueInputSelectArray: value
+            })
+        }
 
         // Check DK set State
         if(dataArrayItemsSelect && dataArrayItemsSelect.length > 0){
@@ -55,16 +62,20 @@ class InputSearch extends Component {
                 }
             })
         }
-        
     }
 
     // Component Update
     componentDidUpdate = async(prevProps, prevState) => {
         let {itemStorage,dataSearchItemsCode,dataSelectItemsName} = this.state
-        let {valueInputSearchCode,dataArrayItemsSelect,language} = this.props
+        let {valueInputSearchCode,dataArrayItemsSelect,language,valueName} = this.props
 
         // Khi language thay đổi
         if(prevProps.language !== this.props.language){
+            let value = languages.EN === language ? valueName && valueName.nameEn && valueName.nameEn.slice(0, 36)+'...'  : valueName && valueName.name && valueName.name.slice(0, 36)+'...'
+            
+            this.setState({
+                newValueInputSelectArray: value || ''
+            })
             this.handleAddItems(itemStorage,'CHANGE_LANGUAGE')
         }
 
@@ -91,8 +102,45 @@ class InputSearch extends Component {
                 })
             }
         }
+
+        // Khi props value change
+        if(prevProps.valueName !== this.props.valueName){
+            let value = languages.EN === language ? valueName.nameEn && valueName.nameEn.slice(0,30)+'...'  : valueName.name && valueName.name.slice(0,30)+'...'
+            this.setState({
+                newValueInputSelectArray: value || ''
+            })
+        }
     }
 
+    // State + props thay đổi mới re-reder
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+
+
+            this.props.TYPE_INPUT !== nextProps.TYPE_INPUT ||   
+            this.props.classWraper !== nextProps.classWraper ||             
+            this.props.idSwitchLanguage !== nextProps.idSwitchLanguage ||             
+            this.props.valueName !== nextProps.valueName ||             
+            this.props.valueInputSearchCode !== nextProps.valueInputSearchCode ||   
+            this.props.language !== nextProps.language ||   
+            
+            this.props.dataArrayItemsSelect !== nextProps.dataArrayItemsSelect ||             
+            this.props.TABEL !== nextProps.TABEL ||   
+            this.props.TYPE !== nextProps.TYPE || 
+            this.props.IDSHOP !== nextProps.IDSHOP || 
+
+
+            this.state.dataSearchItemsCode !== nextState.dataSearchItemsCode ||
+            this.state.dataSelectItemsName !== nextState.dataSelectItemsName ||
+            this.state.itemStorage !== nextState.itemStorage ||
+            this.state.newValueInputSelectArray !== nextState.newValueInputSelectArray ||
+            this.state.isLoadSearchItemsCode !== nextState.isLoadSearchItemsCode || 
+            this.state.value !== nextState.value 
+        ){
+          return true;
+        }
+        return false;
+    }
  
     // changeInput
     handleChangeInputSearch = (value, type) => {
@@ -269,6 +317,7 @@ class InputSearch extends Component {
 
                     // Set state
                     this.setState({
+                        newValueInputSelectArray:'',
                         itemStorage: items,
                         dataSelectItemsName: {
                             ...this.state.dataSelectItemsName,
@@ -326,13 +375,11 @@ class InputSearch extends Component {
   
     render() {
 
-    let {isLoadSearchItemsCode} = this.state
+    let {isLoadSearchItemsCode,newValueInputSelectArray} = this.state
     let {valueInputSearchCodeItems,isShowDataSearchCodeItems,listDataSearchCodeItems} = this.state.dataSearchItemsCode
     let { isShowListItemsSelect,listDataItemsSelect,resultDataSearchName,valueInputSelectArray} = this.state.dataSelectItemsName
     let {TYPE_INPUT,classWraper,idSwitchLanguage,language} = this.props
 
-
-    console.log(listDataItemsSelect)
 
     return (
         <>
@@ -401,7 +448,7 @@ class InputSearch extends Component {
                     <SwitchLanguage id={idSwitchLanguage}/>
                     <input className='input select' name='search' type='text' placeholder={languages.EN === language ? 'Select items' : 'Chọn sản phẩm'}
                         onFocus={() => this.handleFocusInput(TYPE_INPUT)} onBlur={() => this.handleBlurInput(TYPE_INPUT)} autoComplete="off"
-                        onChange={(e) => this.handleChangeInputSearch(e.target.value, TYPE_INPUT)} value={valueInputSelectArray}
+                        onChange={(e) => this.handleChangeInputSearch(e.target.value, TYPE_INPUT)} value={newValueInputSelectArray !== '' ? newValueInputSelectArray : valueInputSelectArray}
                     />
 
                     {isShowListItemsSelect && <div className='options_items'> 

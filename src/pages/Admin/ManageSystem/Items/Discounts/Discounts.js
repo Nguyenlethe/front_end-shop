@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SwitchLanguage from '../../../../../SwitchLanguage';
 import * as actions from '../../../../../store/action';
-
 import {languages } from '../../../../../utils/constant'
 import adminService from '../../../../../services/adminService';
 import { toast } from 'react-toastify';
@@ -26,15 +25,17 @@ import TimePicker from 'react-time-picker';
 class Discount extends Component {
     constructor(props){
         super(props);
-
         this.discount = React.createRef();
+        this.elmDiscount = React.createRef();
+
 
         this.state = {
+            nameItems: '',
+            isEdit:false,
             isShowButtonAddDisscount: false,
-            isShowListInput: false,
             valueSetInputSearch: '',
             valueSetInputSelect: '',
-            dataErrorModal: [],
+            isShowListInput: false,
             isShowModalError: false,
             isHideModalError: false,
 
@@ -49,7 +50,6 @@ class Discount extends Component {
                 optionsDiscount: null,
             },
 
-
             listDataOptions: {
                 listAllShops: [],
                 listSale:[],
@@ -62,6 +62,7 @@ class Discount extends Component {
             },
 
             countInput: [],
+            dataErrorModal: [],
             listDataResItems: [],
          
             dataTabelItemsDiscount: {
@@ -79,10 +80,10 @@ class Discount extends Component {
 
     // Mount
     componentDidMount = async() => {
-        let {voucher} = this.props
-
         await this.handleSetDataDiscount()
-        
+        const node = this.elmDiscount
+
+        localStorage.setItem('topDiscount', node.current.offsetTop - 100)
     }
 
     // State + props thay đổi mới re-reder
@@ -134,7 +135,6 @@ class Discount extends Component {
             typeCategory = generalHandling.handlConvertObject(listDataOptions.listAllCategoryTypeNotConvert, 'LIST_CATEGORY',this.props.language)
         }
 
-       
         // Lấy data giảm giá
         let dataAllDiscountItems = await adminService.getAllDiscountItems('All')
         let arrayData = dataAllDiscountItems.data.data
@@ -159,6 +159,7 @@ class Discount extends Component {
                 dataNameItems = dataNameItemsLanguage || []
             }
         }
+
         
         // Khi thay đổi ngôn ngữ + thay đổi options
         if( dataTabelItemsDiscount.forItemCategory !== '' || 
@@ -176,12 +177,16 @@ class Discount extends Component {
                     listAllCategory.map(item => {if(item.value === dataTabelItemsDiscount.forItemCategory)  optionsDataCategory.push(item)})
                 } 
                                 
-                console.log(listAllCategoryType)
                 // Options value categoryType
                 if(dataTabelItemsDiscount.forItemType !== '' && listAllCategoryType && listAllCategoryType.length > 0){
                     let newListAllCategoryType = generalHandling.handlConvertObject(listDataOptions.listAllCategoryTypeNotConvert, 'LIST_CATEGORY',language)
+                  
 
-                    newListAllCategoryType.map(item => {if(item.value === dataTabelItemsDiscount.forItemType)optionsDataCategoryType.push(item)})
+                    newListAllCategoryType.map(item => {if(item.value === dataTabelItemsDiscount.forItemType) {
+                        optionsDataCategoryType.push(item) 
+                    }
+                        
+                    })
                 } 
                 
                 
@@ -241,20 +246,87 @@ class Discount extends Component {
 
     // Did update
     componentDidUpdate = async(prevProps, prevState) => {
-        let {voucher} = this.props
+        let {voucher, language} = this.props
 
         // Thay đổi ngôn ngữ
         if(prevProps.language !== this.props.language){
             await this.handleSetDataDiscount()
         }
 
-        // Thay đổi ngôn ngữ
+        // Khi voucher change được thay đổi 
         if(prevProps.voucher !== this.props.voucher){
+
+
+            let {dataTabelItemsDiscount,dataOptions,listDataOptions} = this.state
+            let dataVoucher = voucher.voucher
+
+            let idShop = {value: dataVoucher.idShop, label: dataVoucher.Store && dataVoucher.Store.nameShop}
+            let reduce = {value: dataVoucher.codeReduce, label: dataVoucher.Discount && dataVoucher.Discount.valueEn}
+            let limitPrice = {value: dataVoucher.unitPrice, 
+                label: dataVoucher.Voucher && languages.VI === language ? 
+                `${DISCOUNTTEXT.VN_DISCOUNT}${' '}${dataVoucher.Voucher.limitVn}${' '}${DISCOUNTTEXT.VN_DISCOUNT_SUB}`
+                    : 
+                `${DISCOUNTTEXT.EN_DISCOUNT}${' '}${dataVoucher.Voucher.limitUs}${' '}${DISCOUNTTEXT.EN_DISCOUNT_SUB}`
+            }
+
+            let forItemCategory = {value: dataVoucher.forItemCategory, label: dataVoucher.Category && 
+                languages.EN === language ? dataVoucher.Category.valueEn : dataVoucher.Category.valueVi
+            }
+
+            let listAllCategoryType = await this.props.getAllCodeInToItems(forItemCategory.value)
+            let newListAllCategoryType = generalHandling.handlConvertObject(listAllCategoryType, 'LIST_CATEGORY',this.props.language)
+
+
+            let forItemType = null
+            let dataResultSearchItem = []
+            if(dataVoucher.forItemType !== 'EMPTY'){
+                forItemType = {value: dataVoucher.forItemType, label: dataVoucher.Type && 
+                    languages.EN === language ? dataVoucher.Type.valueEn : dataVoucher.Type.valueVi
+                }
+                dataResultSearchItem =  await this.handleGetDataNameItems(idShop.value, forItemCategory.value, forItemType.value)
+            }else{
+                
+            }
+
+            if(dataVoucher.itemsId === 'EMPTY') dataVoucher.itemsId = ''
+            if(dataVoucher.forItemType === 'EMPTY')  dataVoucher.forItemType = ''
+
+        
+
             this.setState({
+                isEdit: true,
+                listDataResItems: dataResultSearchItem,
                 isShowButtonAddDisscount: true,
+                nameItems: dataVoucher.Item,
+                listDataOptions:{
+                    ...listDataOptions,
+                    listAllCategoryType: newListAllCategoryType,
+                    listAllCategoryTypeNotConvert: listAllCategoryType
+                },
+                dataTabelItemsDiscount: {
+                    ...dataTabelItemsDiscount,
+                    idShop: idShop.value,
+                    codeReduce: reduce.value,
+                    unitPrice: limitPrice.value,
+                    startDay: dataVoucher.dayStart,
+                    startEnd: dataVoucher.dayEnd,
+                    forItemCategory: forItemCategory.value,
+                    forItemType: dataVoucher.forItemType,
+                    itemsId: dataVoucher.itemsId,
+                },
+                dataOptions: {
+                    ...dataOptions,
+                    optionsIdShop: idShop,
+                    optionsSele: reduce,
+                    optionsDayStart: new Date(dataVoucher.dayStart),
+                    optionsDayEnd: new Date(dataVoucher.dayEnd),
+                    optionsCategory: forItemCategory,
+                    optionsCategoryType: forItemType,
+                    optionsDiscount: limitPrice,
+                }
             })
-            console.log(voucher)
-            
+
+
         }
     }
 
@@ -350,6 +422,7 @@ class Discount extends Component {
 
         // Change select categoryType
         if(name.name === 'forItemCategoryType' ) {
+
             let dataResultSearchItem =  await this.handleGetDataNameItems(dataOptionsCoppy.optionsIdShop.value, forItemCategory, valueOptions.value)
             
             // Set state
@@ -457,6 +530,7 @@ class Discount extends Component {
             let newdataTabelItemsDiscount =  generalHandling.resetDefaultState(dataTabelItemsDiscount)
 
             this.setState({
+                nameItems:'',
                 isShowButtonAddDisscount: !this.state.isShowButtonAddDisscount,
                 dataOptions: {
                     ...newDataOptions
@@ -470,9 +544,15 @@ class Discount extends Component {
         // Add new discount
         if(type === 'ADD'){
             let {dataTabelItemsDiscount} = this.state
-
-            // Create Discount Items
+          
             res = await adminService.addNewDisCounts(dataTabelItemsDiscount)
+
+        
+            
+            // Create Discount Items
+            await this.props.getNewDataVoucher(dataTabelItemsDiscount.idShop)
+
+
 
             // Nếu có lỗi tồn tại dícount
             if(res && res.data && res.data.errCode === -1 && !_.isEmpty(res.data.data) ){
@@ -481,8 +561,8 @@ class Discount extends Component {
                     isShowModalError: !this.state.isShowModalError 
                 }) 
             }
-        }
 
+        }
 
         // Hide Form Discount
         if(type === 'DELETE'){
@@ -493,7 +573,10 @@ class Discount extends Component {
 
         // Update
         if(type === 'UPDATA'){
+
             let resUpdate = await adminService.addNewDisCounts({...dataTabelItemsDiscount, type: 'UPDATE'})
+            this.props.getNewDataVoucher(dataTabelItemsDiscount.idShop)
+
             // Nếu có lỗi
             if(resUpdate && resUpdate.data && resUpdate.data.errCode === -2){
                 toast.warn(<SwitchLanguage id='manageAdmin.toast.warn' />)
@@ -502,7 +585,7 @@ class Discount extends Component {
             // Nếu thành công
             if(resUpdate && resUpdate.data && resUpdate.data.errCode ===  0){
                 this.setState({
-                    isHideModalError: !this.state.isHideModalError ,
+                    isHideModalError: !this.state.isHideModalError,
                     isShowButtonAddDisscount: false,
                 })
                 toast.success(<SwitchLanguage id='manageAdmin.toast.successVoucher' />)
@@ -599,10 +682,9 @@ class Discount extends Component {
     render() {
 
     let {language} = this.props
-    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,dataTabelItemsDiscount} = this.state
+    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,dataTabelItemsDiscount,nameItems,isEdit} = this.state
     let {optionsIdShop,optionsSele,optionsDayStart,optionsDayEnd,optionsCategory,optionsCategoryType,optionsDiscount} = this.state.dataOptions
     let {listSale,listAllShops,listAllCategory,listAllCategoryType,listDiscount} = this.state.listDataOptions
-
         
     return (
         <>
@@ -616,7 +698,7 @@ class Discount extends Component {
                                 {dataErrorModal.dataItems && dataErrorModal.dataItems === 'CATEGORY' && <SwitchLanguage id='manageAdmin.modal.errorCategory'/>}
                             </p>
 
-                            <p className='discount'>{languages.EN === language ? 'Discount :' : 'Giảm :'} <span>{dataErrorModal.discount}</span> </p>
+                            <p className='discount'>{languages.EN === language ? 'Discount :' : 'Giảm :'} <span>{dataErrorModal.discount}</span></p>
 
                             <p className='voucher'>{languages.EN === language ? 'Price above :' : 'Đơn trên : '} 
                                 <span>{ languages.EN === language ? 
@@ -626,6 +708,7 @@ class Discount extends Component {
                                     {languages.EN === language ? ' USD' : ' VND'}
                                 </span>
                             </p>
+
                             <span className='sub_time'>{languages.EN === language ? dataErrorModal.valueEn : dataErrorModal.valueVi}</span>
                             
                             {dataErrorModal &&  dataErrorModal.name &&
@@ -642,7 +725,7 @@ class Discount extends Component {
                                     </div>
 
                                     <div className='detail'>
-                                        <p className='name-items'>{languages.EN === language ? dataErrorModal.dataItems.nameEn.slice(0, 30)+'...' : dataErrorModal.dataItems.name.slice(0, 30)+'...'}</p>
+                                        <p className='name-items'>{languages.EN === language ? dataErrorModal.dataItems.nameEn.slice(0,30)+'...' : dataErrorModal.dataItems.name.slice(0,30)+'...'}</p>
                                         <div className='list-price'>
                                             <p className='price'> 
                                                 <span className='sub-price'>Giá : {''}
@@ -673,27 +756,26 @@ class Discount extends Component {
 
                             <div className='list-button'>
                                 <span onClick={() => this.handlecreateListinput('UPDATA')}>
-                                    <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Continue'/>}/>
+                                    <Button type={'submit-form-data'} content={<SwitchLanguage id='manageAdmin.button.Continue'/>}/>
                                 </span>
 
-                                <span>
+                                <span >
                                     <Button type='close-form-data' content={<SwitchLanguage id='manageAdmin.button.close'/>}/>
                                 </span>
                             </div>
-
                         </>
                     }
                 </div>
             </ModalErrorItems>
 
 
-            <div className='l-12'>
+            <div className='l-12' ref={this.elmDiscount}>
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.discount' /></p> 
             </div> 
 
 
             {isShowButtonAddDisscount &&
-                <div className='list_all_discount' >
+                <div className='list_all_discount'>
                     {/* Select Shop */}
                     {listAllShops && listAllShops.length > 0 && 
                         <div className='form-input col l-3'>
@@ -709,19 +791,18 @@ class Discount extends Component {
                         </div>
                     }
 
-
                     {optionsIdShop !== null &&
-                            <InputSearch
-                                classWraper='form-input col l-6'
-                                idSwitchLanguage='manageAdmin.items.search-code-items'
-                                TYPE_INPUT='SEARCH_CODE_ITEM'
-                                TABEL={SEARCH.TABEL_SEARCH} 
-                                TYPE={SEARCH.TYPE_SEARCH} 
-                                IDSHOP={optionsIdShop.value} 
-                                handleGetDataComponentSearch={this.handleGetDataComponentSearch}
-                                setValueSearchCode={valueSetInputSearch}
-                            />
-                        } 
+                        <InputSearch
+                            classWraper='form-input col l-6'
+                            idSwitchLanguage='manageAdmin.items.search-code-items'
+                            TYPE_INPUT='SEARCH_CODE_ITEM'
+                            TABEL={SEARCH.TABEL_SEARCH} 
+                            TYPE={SEARCH.TYPE_SEARCH} 
+                            IDSHOP={optionsIdShop.value} 
+                            handleGetDataComponentSearch={this.handleGetDataComponentSearch}
+                            setValueSearchCode={valueSetInputSearch}
+                        />
+                    } 
             
                     {/* Select mã giảm */}
                     {listSale && listSale.length > 0 && 
@@ -781,11 +862,11 @@ class Discount extends Component {
                         />
                     </div>
 
-
                     {/* items */}
                     {listDataResItems && listDataResItems.length > 0 &&  
                         <>
                             <InputSearch
+                                valueName={nameItems}
                                 classWraper='form-input col l-3'
                                 idSwitchLanguage='manageAdmin.items.select-items'
                                 TYPE_INPUT='SELECT_ITEMS_ARRAY'
@@ -794,7 +875,6 @@ class Discount extends Component {
                             />
                         </>
                     }
-
 
                     {/* Select start Date */}
                     <div className='form-input col l-3'>
@@ -834,7 +914,6 @@ class Discount extends Component {
 
                 </div>
             }
-
            
             <div className='col l-12'> 
                 {!isShowButtonAddDisscount && 
@@ -852,8 +931,8 @@ class Discount extends Component {
                             this.handlecreateListinput('ADD')}>
 
                             <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
-                                'submit-form-data' : 'ban-form-data'} 
-                                content={<SwitchLanguage id='manageAdmin.form.addDiscount' />}
+                                isEdit ? 'edit-form-data' :  'submit-form-data' : 'ban-form-data'} 
+                                content={<SwitchLanguage id={isEdit ? 'manageAdmin.button.editNow' : 'manageAdmin.form.addDiscount'} />}
                             />
                         </span>
 
@@ -882,9 +961,7 @@ const mapStateToProps = state => {
         DCCData: state.admin.listAllCodeItems.DCCData,
         allShops: state.admin.listShops.allShops,
         allcategory: state.admin.dataForm.category,
-
         voucher: state.admin.voucher,
-
 
     }
 }
@@ -893,7 +970,9 @@ const mapDispatchToProps = dispatch => {
     return {
         getDataItems: (type) => dispatch(actions.getDataItemsStart(type)),
         getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
+        getNewDataVoucher: (id) => dispatch(actions.getNewDataVoucher(id))
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Discount);
+

@@ -4,6 +4,8 @@ const initialState = {
     dataDistrict: [],
     dataWards: [],
     voucher: [],
+    newVoucher: [],
+    typeActions: '',
     dataForm: {
         listGender: [],
         listProvince: [],
@@ -281,11 +283,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
         
-
-            
         // GET_DATA_ITEMS_SUCCESS: 'GET_DATA_ITEMS_SUCCESS',
-        // GET_DATA_ITEMS_FAILED: 'GET_DATA_ITEMS_FAILED',
-
         case actionTypes.GET_DATA_ITEMS_SUCCESS:  
             state.items.itemsAll = action.dataAllItems
             //console.log('Data TYPESIZEData',state.listAllCodeItems.SZNBData)
@@ -305,11 +303,20 @@ const adminReducer = (state = initialState, action) => {
         // CHANGE_ITEMS_VOUCHER_SUCCESS
         case actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS:  
             state.voucher = action.voucherItems
+            console.log( action.voucherItems)
             
             return {
                 ...state
             }
 
+
+        // GET_NEW_DATA_VOUCHER: 'GET_NEW_DATA_VOUCHER',
+        case actionTypes.GET_NEW_DATA_VOUCHER:  
+            state.newVoucher = action.newVoucherItems
+        
+        return {
+            ...state
+        }
 
 
         default:

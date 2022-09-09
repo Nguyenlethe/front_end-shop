@@ -259,6 +259,7 @@
 }
 
 .submit_voucher{
+    cursor: pointer;
     border: none;
     outline: none;
     border-radius: 4px;
@@ -280,11 +281,14 @@
     .voucher_items{
         font-size: var(--font-size-btn);
         padding: 7px 0;
+        display: block;
+        width: 100%;
     }
 }
 
 
 .href-link{
+    cursor: pointer;
     text-decoration: none;
     margin-left: auto;
     margin-top: auto;

@@ -177,7 +177,10 @@
             "submitVoucher":"Apply",
             "detail_voucher":"Detail",
             "category":"Category : ",
-            "type":"Category type : "
+            "type":"Category type : ",
+            "day":" day ",
+            "YES":"Agree"
+
 
 
 

@@ -175,7 +175,10 @@
             "submitVoucher":"Sử Dụng",
             "detail_voucher":"Chi Tiết",
             "category":"Danh mục : ",
-            "type":"Loại hàng : "
+            "type":"Loại hàng : ",
+            "day":" ngày ",
+            "YES":"Đồng ý"
+
 
 
 

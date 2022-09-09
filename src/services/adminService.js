@@ -115,15 +115,23 @@ function addNewDisCounts (data) {
     return axios.post(`/admin/create-new-discount`,data);
 }
 
-//
+// Get voucher 
 function getVoucher (data) {
     return axios.get(`/admin/get-voucher?idshop=${data.idShop}&category=${data.category}&type=${data.type}&actions=${data.actions}`,);
 }
+
+// Delete voucher
+function deleteVoucher (data) {
+    return axios.post(`/admin/delete-voucher`,data);
+}
+
+
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    deleteVoucher,
     getVoucher,
     addNewDisCounts,
     searchData,

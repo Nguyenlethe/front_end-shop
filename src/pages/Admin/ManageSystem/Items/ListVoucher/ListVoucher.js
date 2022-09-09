@@ -5,11 +5,13 @@ import generalHandling from '../../../../../utils/generalHandling';
 import Select from 'react-select';
 import Button from '../../../../../components/Button/Button';
 import InputSearch from '../../../../../components/SearchInput/InputSearch';
-import {languages,DISCOUNTTEXT} from '../../../../../utils/constant'
+import {languages,DISCOUNTTEXT,PERMISSIONS} from '../../../../../utils/constant'
 import NumberFormat from 'react-number-format';
 import adminService from '../../../../../services/adminService'
 import * as actions from '../../../../../store/action';
 import Voucher from '../../../../../components/Items/Voucher/Voucher';
+import { toast } from 'react-toastify';
+
 
 import './ListVoucher.scss';
 class ListVoucher extends Component {
@@ -19,7 +21,7 @@ class ListVoucher extends Component {
             optionsIdShop: null,
             optionsCategory: null,
             optionsCategoryType: null,
-
+            isNotUser: false,
             listAllShops: [],
             listAllCategory: [],
             listAllCategoryType: [],
@@ -29,26 +31,29 @@ class ListVoucher extends Component {
         }
     }
 
-   
+    // 
     componentDidMount = async () => { 
-        let {allShops,allcategory} = this.props
+        let {allShops,allcategory,dataUser} = this.props
 
         let listAllShops = generalHandling.handlConvertObject(allShops, 'LIST_SHOP',this.props.language)
         let listAllCategory = generalHandling.handlConvertObject(allcategory, 'LIST_CATEGORY',this.props.language)
 
+        let isNotUSerLogin = false
+        if(!generalHandling.handleCheckPermission(PERMISSIONS.PATIENT,dataUser.permission)){
+            isNotUSerLogin = true
+        }
 
-         // Set state
-         this.setState({
+        // Set state
+        this.setState({
+            isNotUser: isNotUSerLogin,
             listAllShops: listAllShops,
             listAllCategory: listAllCategory
         })
-        console.log(allShops,allcategory)
     }
     
-    
+    // 
     componentDidUpdate= async (prevProps, prevState) => {
-
-        // Thay đổi ngôn ngữ
+        // Thay đổi allShops
         if(prevProps.allShops !== this.props.allShops){
             let {allShops} = this.props
         
@@ -61,7 +66,7 @@ class ListVoucher extends Component {
             })
         }
 
-        // Thay đổi ngôn ngữ
+        // Thay đổi allcategory
         if(prevProps.allcategory !== this.props.allcategory){
             let {allcategory} = this.props
             
@@ -73,12 +78,56 @@ class ListVoucher extends Component {
                 listAllCategory: listAllCategory
             })
         }
+
+
+        // Thay đổi newVoucherItems
+        if(prevProps.newVoucherItems !== this.props.newVoucherItems){ 
+            let {newVoucherItems} = this.props
+            
+
+            if(newVoucherItems.length < prevProps.newVoucherItems.length){
+                toast.success(<SwitchLanguage id='manageAdmin.toast.deleteSuccessItems' />)
+            }
+          
+            // Set state
+            this.setState({
+                resultItemsDiscount: newVoucherItems,
+            })
+        }
     }
 
+    // State + props thay đổi mới re-reder
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+            this.props.language !== nextProps.language ||   
+            this.props.itemsAll !== nextProps.itemsAll ||             
+            this.props.allShops !== nextProps.allShops ||             
+            this.props.allcategory !== nextProps.allcategory ||             
+            this.props.allDataVouCher !== nextProps.allDataVouCher ||   
+            this.props.newVoucherItems !== nextProps.newVoucherItems ||   
+            
+            this.props.typeActions !== nextProps.typeActions ||             
+            this.props.dataUser !== nextProps.dataUser ||
+
+            this.state.optionsIdShop !== nextState.optionsIdShop ||
+            this.state.optionsCategory !== nextState.optionsCategory ||
+            this.state.optionsCategoryType !== nextState.optionsCategoryType ||
+            this.state.isNotUser !== nextState.isNotUser ||
+            this.state.listAllShops !== nextState.listAllShops || 
+            this.state.listAllCategory !== nextState.listAllCategory || 
+            this.state.listAllCategoryType !== nextState.listAllCategoryType ||
+            this.state.listAllCategoryTypeNotConvert !== nextState.listAllCategoryTypeNotConvert || 
+            this.state.resultItemsDiscount !== nextState.resultItemsDiscount || 
+            this.state.dataVoucherAll !== nextState.dataVoucherAll 
+        ){
+          return true;
+        }
+        return false;
+    }
 
     // Xl change input select
     handlChangeSlelect = async (valueOptions, name) => {
-        let {listAllCategoryTypeNotConvert,optionsIdShop, optionsCategory, optionsCategoryType} = this.state
+        let {listAllCategoryTypeNotConvert, optionsCategory, optionsCategoryType} = this.state
 
         // Change select category
         if(name.name === 'idShop') {
@@ -94,7 +143,6 @@ class ListVoucher extends Component {
             })
         }
 
-        
         // Change select category
         if(name.name === 'forItemCategory') {
             let {dataVoucherAll} = this.state
@@ -108,7 +156,6 @@ class ListVoucher extends Component {
                 if(voucher.forItemCategory === valueOptions.value && voucher.itemsId === 'EMPTY' && voucher.forItemType === 'EMPTY' ) return voucher
             })
 
-            
             // Set state
             this.setState({
                 optionsCategory: valueOptions,
@@ -118,8 +165,6 @@ class ListVoucher extends Component {
                 listAllCategoryTypeNotConvert: listAllCategoryType
             })
         }
-
-
 
         // Change select categoryType
         if(name.name === 'forItemCategoryType' ) {
@@ -133,11 +178,8 @@ class ListVoucher extends Component {
             this.setState({
                 optionsCategoryType: valueOptions,
                 resultItemsDiscount: dataVoucherNew,
-
             })
         }
-
-
 
         // Get all voucher items
         if(name.name === 'ALL_VORCHER_ITEMS' ) {
@@ -167,7 +209,6 @@ class ListVoucher extends Component {
             this.setState({
                 resultItemsDiscount: dataVoucherNew,
             })
-           
         }
     }
 
@@ -187,20 +228,12 @@ class ListVoucher extends Component {
         })
     }
 
-
-    handleChangeVoucher = (data) => {
-        console.log(data)
-    }
-
-
     render() { 
-    let {optionsIdShop,listAllShops,listAllCategory,optionsCategory,listAllCategoryType,optionsCategoryType,resultItemsDiscount} = this.state
-    let {language} = this.props
-
-    console.log( resultItemsDiscount)
+    let {optionsIdShop,listAllShops,listAllCategory,optionsCategory,listAllCategoryType,optionsCategoryType,resultItemsDiscount,isNotUser} = this.state
 
     return (
         <>
+
             <div className='l-12'>
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.listSort' /></p> 
             </div> 
@@ -220,7 +253,6 @@ class ListVoucher extends Component {
                         />
                     </div>
 
-
                     <div className='form-input col l-3'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.category'/></label>
                         <Select
@@ -233,7 +265,6 @@ class ListVoucher extends Component {
                             name="forItemCategory"
                         />
                     </div>
-
 
                     <div className='form-input col l-3'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.type'/></label>
@@ -248,7 +279,6 @@ class ListVoucher extends Component {
                         />
                     </div>
 
-
                     <div className='form-input col l-3'>
                         <label className='input-label'></label>
                         <button className='button_show-items-discount' style={{opacity: optionsIdShop !== null ? '1' : '.5' }}
@@ -260,7 +290,7 @@ class ListVoucher extends Component {
                 </div>
             </div> 
         
-            <Voucher changeVoucher={this.handleChangeVoucher}  dataVoucher={resultItemsDiscount} />
+            <Voucher isNotUser={isNotUser} dataVoucher={resultItemsDiscount} />
         
         </>
     )}}
@@ -273,13 +303,16 @@ const mapStateToProps = state => {
 
         allShops: state.admin.listShops.allShops,
         allcategory: state.admin.dataForm.category,
+        allDataVouCher: state.admin.dataForm.category,
+        newVoucherItems: state.admin.newVoucher,
+        typeActions: state.admin.typeActions,
+        dataUser: state.app.loginUser,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
-
     }
 }
 

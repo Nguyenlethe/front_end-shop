@@ -509,11 +509,24 @@ export const setValueInputEmptySuscess = (ranDomNumber) => ({
 
 
 // CHANGE_ITEMS_VOUCHER_SUCCESS: 'CHANGE_ITEMS_VOUCHER_SUCCESS',
-export const changeVoucherItems = (voucher) => {
+export const changeVoucherItems = (voucher, type) => {
     return async (dispatch, getState) => {
         try{
-            let actions = false
-            dispatch(changeVoucherItemsSuscess({voucher,actions: !actions }))
+
+            if(type === 'CHANGE'){
+                let actions = false
+                dispatch(changeVoucherItemsSuscess({voucher: voucher, actions: !actions }))
+            }
+
+            if(type === 'DELETE'){     
+
+                let res = await adminService.deleteVoucher({idShop: voucher.idShop, category: voucher.forItemCategory, type: voucher.forItemType, idItems: voucher.itemsId })
+
+                if(res && res.data && res.data.errCode === 0){
+                    let dataResultSearchItem = await adminService.getVoucher({idShop: voucher.idShop, category: 'EMPTY', type: 'EMPTY'})
+                    dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data))
+                }
+            }
         }
         catch(err){
         }
@@ -523,4 +536,25 @@ export const changeVoucherItems = (voucher) => {
 export const changeVoucherItemsSuscess = (data) => ({
     type: actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS,
     voucherItems: data
+})
+
+
+
+
+// GET_NEW_DATA_VOUCHER: 'GET_NEW_DATA_VOUCHER',
+export const getNewDataVoucher = (id) => {
+    return async (dispatch, getState) => {
+        try{
+            let dataResultSearchItem = await adminService.getVoucher({idShop: id, category: 'EMPTY', type: 'EMPTY'})
+            dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data))
+        }
+        catch(err){
+            
+        }
+    }
+}
+
+export const getNewDataVoucherSuscess = (data,type) => ({
+    type: actionTypes.GET_NEW_DATA_VOUCHER,
+    newVoucherItems: data,
 })

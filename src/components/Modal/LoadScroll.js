@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 import './Modal.scss';
-class LoadScrollTop extends Component {
+class LoadScroll extends Component {
 
     constructor(props) {
         super(props);
@@ -28,4 +28,4 @@ class LoadScrollTop extends Component {
 
 
 
-export default LoadScrollTop;
+export default LoadScroll;

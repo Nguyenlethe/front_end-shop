@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SwitchLanguage from '../../../SwitchLanguage';
 import Button from '../../Button';
-import {languages,DISCOUNTTEXT} from '../../../utils/constant'
+import {languages,DISCOUNTTEXT,path} from '../../../utils/constant'
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleXmark,faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import * as actions from '../../../store/action';
-
+import { Navigate } from 'react-router-dom';
 
 import './Voucher.scss';
+import ModalErrorItems from '../../Modal/ModalErrorItems';
+import DetailVoucher from './DetailVoucher/DetailVoucher';
 class ListVoucher extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-           listDataVoucher: []
+           listDataVoucher: [],
+           dataDetailVoucher: null
         }
     }
 
@@ -36,44 +38,98 @@ class ListVoucher extends Component {
     }
 
 
+    // State + props thay đổi mới re-reder
+    shouldComponentUpdate(nextProps, nextState) {
+        if (
+            this.props.language !== nextProps.language ||   
+            this.props.isNotUser !== nextProps.isNotUser ||             
+            this.props.dataVoucher !== nextProps.dataVoucher ||      
 
-    handleChangeVoucher = (actions, data) => {
-        let {changeVoucher,changeVoucherItems} = this.props
+            this.state.listDataVoucher !== nextState.listDataVoucher ||
+            this.state.dataDetailVoucher !== nextState.dataDetailVoucher 
+
+        ){
+          return true;
+        }
+        return false;
+    }
+
+
+    // Change icon
+    handleChangeVoucher = async(actions, data, index) => {
+        let {changeVoucherItems} = this.props
+        let {listDataVoucher} = this.state
+
         if(actions === 'CHANGE'){
-            changeVoucherItems(data)
+            changeVoucherItems(listDataVoucher[index], actions)
+
+            setTimeout(() => {
+                document.documentElement.scrollTop = (localStorage.getItem('topDiscount'))
+            },200) 
+        }
+
+        if(actions === 'DELETE'){
+            changeVoucherItems(listDataVoucher[index],actions)
         }
     }
 
 
+    // 
+    handleClickBTNVoucher = (className,data) => {
+        if(className !== 'list_button') {
+            if(className === 'content-btn-form-input voucher_items'){
+
+            }else{
+
+                this.setState({
+                    dataDetailVoucher: data,
+                })
+
+            }
+        }
+    }
+
+    // 
+    handleHideDetailVocher = (hide) => {
+        this.setState({
+            dataDetailVoucher: null
+        })
+    }
+
 
     render() { 
-    let {language} = this.props
-    let {listDataVoucher} = this.state
+    let {language,isNotUser} = this.props
+    let {listDataVoucher,dataDetailVoucher} = this.state
 
+ 
  
     return (
         <>
-        <div className='allVoucher'>
 
+        {dataDetailVoucher !== null &&
+            <DetailVoucher handleHide={this.handleHideDetailVocher} dataVoucher={dataDetailVoucher}/> 
+        }  
+
+        <div className='allVoucher'>
             {listDataVoucher && listDataVoucher.length > 0 &&
-                listDataVoucher.map(resultItemsDiscount => {
+                listDataVoucher.map((resultItemsDiscount,index) => {
                     return (
                     <div className='col l-6' key={resultItemsDiscount.id}>
                         
                         <div className='voucher'>
-
+                        {isNotUser &&
                             <span className='list_icon'>
 
-                                <span onClick={() => this.handleChangeVoucher('CHANGE',resultItemsDiscount)}>
+                                <span onClick={() => this.handleChangeVoucher('CHANGE',resultItemsDiscount, index)}>
                                     <FontAwesomeIcon className='icon_close one' icon={faPenToSquare} />
                                 </span>
 
-                                <span onClick={() => this.handleChangeVoucher('DELETE')}>
+                                <span onClick={() => this.handleChangeVoucher('DELETE',resultItemsDiscount, index)}>
                                     <FontAwesomeIcon className='icon_close tow' icon={faCircleXmark} />
                                 </span>
 
                             </span>
-
+                        }
 
                             <div className='voucher_wraper'>
                                 <div className='info_shop'>
@@ -86,7 +142,6 @@ class ListVoucher extends Component {
                             </div>
 
                             <div className='sub_voucher'>
-
                                 <p className='discount_percent'>
                                     {`${languages.EN === language ? DISCOUNTTEXT.REDUCE_EN : DISCOUNTTEXT.REDUCE_VI} ${resultItemsDiscount.Discount.valueEn}`}
                                 </p>
@@ -105,7 +160,6 @@ class ListVoucher extends Component {
                                     {resultItemsDiscount.itemsId === 'EMPTY' &&  resultItemsDiscount.Category !== 'EMPTY' && resultItemsDiscount.Type.valueEn !==  null && <SwitchLanguage id='manageAdmin.items.typeDiscount'/> }
                                     {resultItemsDiscount.itemsId === 'EMPTY' &&  resultItemsDiscount.Category !== 'EMPTY' &&  
                                     resultItemsDiscount.Type.valueEn ===  null  && <SwitchLanguage id='manageAdmin.items.discountVocher'/> }
-
                                 </p>
 
                                 {resultItemsDiscount.itemsId !== 'EMPTY' &&  resultItemsDiscount.Item && resultItemsDiscount.Item.name &&
@@ -167,13 +221,13 @@ class ListVoucher extends Component {
                                     </div>
                                 }
                             </div>
+                            
 
-                            <div className='list_button'>
-                                <Button  type='submit_voucher' content={<SwitchLanguage id='manageAdmin.items.submitVoucher' />}/>
-
-                                <Button  type='href' to='system/management' content={<SwitchLanguage id='manageAdmin.items.detail_voucher' />}/>
+                            <div className='list_button' onClick={(e) => this.handleClickBTNVoucher(e.target.className,resultItemsDiscount)}>
+                                <Button type='submit_voucher' content={<SwitchLanguage id='manageAdmin.items.submitVoucher' />}/>
+                                <Button type='text' content={<SwitchLanguage id='manageAdmin.items.detail_voucher'/>} />
                             </div>
-
+                    
                         </div>
                     </div>
 
@@ -181,8 +235,6 @@ class ListVoucher extends Component {
                 })
             }
         </div>
-           
-        
         </>
     )}}
 
@@ -190,12 +242,13 @@ class ListVoucher extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeVoucherItems: (voucher) => dispatch(actions.changeVoucherItems(voucher)),
+        changeVoucherItems: (voucher,type) => dispatch(actions.changeVoucherItems(voucher,type)),
     }
 }
 

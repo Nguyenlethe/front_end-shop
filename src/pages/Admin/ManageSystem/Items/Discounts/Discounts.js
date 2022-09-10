@@ -38,6 +38,7 @@ class Discount extends Component {
             isShowListInput: false,
             isShowModalError: false,
             isHideModalError: false,
+            isShow: false,
 
             dataOptions: {
                 optionsIdShop: null,
@@ -558,7 +559,7 @@ class Discount extends Component {
             if(res && res.data && res.data.errCode === -1 && !_.isEmpty(res.data.data) ){
                 this.setState({
                     dataErrorModal: res.data.data,
-                    isShowModalError: !this.state.isShowModalError 
+                    isShowModalError: !this.state.isShowModalError ,
                 }) 
             }
 
@@ -685,88 +686,98 @@ class Discount extends Component {
     let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,dataTabelItemsDiscount,nameItems,isEdit} = this.state
     let {optionsIdShop,optionsSele,optionsDayStart,optionsDayEnd,optionsCategory,optionsCategoryType,optionsDiscount} = this.state.dataOptions
     let {listSale,listAllShops,listAllCategory,listAllCategoryType,listDiscount} = this.state.listDataOptions
+
+    console.log(isShowModalError, isHideModalError,dataErrorModal)
         
     return (
         <>
-            <ModalErrorItems isShow={isShowModalError} isHide={isHideModalError} title={'warn'}>
-                <div className='discount_modal' >
-                    {dataErrorModal && dataErrorModal.limitPrice &&
-                        <>
-                            <p className='heading'>
-                                {dataErrorModal.dataItems && dataErrorModal.dataItems !== 'TYPE' &&  dataErrorModal.dataItems !== 'CATEGORY'  && <SwitchLanguage id='manageAdmin.modal.error'/>}
-                                {dataErrorModal.dataItems && dataErrorModal.dataItems === 'TYPE' && <SwitchLanguage id='manageAdmin.modal.errorType'/>}
-                                {dataErrorModal.dataItems && dataErrorModal.dataItems === 'CATEGORY' && <SwitchLanguage id='manageAdmin.modal.errorCategory'/>}
-                            </p>
+            
+            {dataErrorModal && dataErrorModal.limitPrice && <span>OK</span>}
+                <ModalErrorItems isShow={isShowModalError} isHide={isHideModalError} title={'warn'}>
 
-                            <p className='discount'>{languages.EN === language ? 'Discount :' : 'Giảm :'} <span>{dataErrorModal.discount}</span></p>
 
-                            <p className='voucher'>{languages.EN === language ? 'Price above :' : 'Đơn trên : '} 
-                                <span>{ languages.EN === language ? 
-                                        <NumberFormat value={dataErrorModal.limitPrice.limitUs} displayType={'text'} thousandSeparator={true}/> : 
-                                        <NumberFormat value={dataErrorModal.limitPrice.limitVn} displayType={'text'} thousandSeparator={true}/>
-                                    } 
-                                    {languages.EN === language ? ' USD' : ' VND'}
-                                </span>
-                            </p>
-
-                            <span className='sub_time'>{languages.EN === language ? dataErrorModal.valueEn : dataErrorModal.valueVi}</span>
-                            
-                            {dataErrorModal &&  dataErrorModal.name &&
-                                <p className='category_Or_Type'>
-                                    <SwitchLanguage id='manageAdmin.items.addDiscountSub'/>
-                                    <span>{languages.EN === language ? dataErrorModal.name.valueEn : dataErrorModal.name.valueVi}</span> 
+                    <div className='discount_modal' >
+                        {dataErrorModal && dataErrorModal.limitPrice &&
+                            <>
+                                <p className='heading'>
+                                    {dataErrorModal.dataItems && dataErrorModal.dataItems !== 'TYPE' &&  dataErrorModal.dataItems !== 'CATEGORY'  && <SwitchLanguage id='manageAdmin.modal.error'/>}
+                                    {dataErrorModal.dataItems && dataErrorModal.dataItems === 'TYPE' && <SwitchLanguage id='manageAdmin.modal.errorType'/>}
+                                    {dataErrorModal.dataItems && dataErrorModal.dataItems === 'CATEGORY' && <SwitchLanguage id='manageAdmin.modal.errorCategory'/>}
                                 </p>
-                            } 
-                            
-                            {dataErrorModal.dataItems && dataErrorModal.dataItems.dataImgItems  &&
-                                <div className='item'>
-                                    <div className='wraper-img'>
-                                        <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${dataErrorModal.dataItems.dataImgItems.image}`} alt={imgError} className='img' />
-                                    </div>
 
-                                    <div className='detail'>
-                                        <p className='name-items'>{languages.EN === language ? dataErrorModal.dataItems.nameEn.slice(0,30)+'...' : dataErrorModal.dataItems.name.slice(0,30)+'...'}</p>
-                                        <div className='list-price'>
-                                            <p className='price'> 
-                                                <span className='sub-price'>Giá : {''}
-                                                { dataErrorModal && dataErrorModal.dataItems && dataErrorModal.dataItems.newPrice > 0 &&
-                                                        <span> 
-                                                            {languages.EN === language ? 
-                                                                <NumberFormat value={dataErrorModal.dataItems.newPriceUS} displayType={'text'} thousandSeparator={true}/>  : 
-                                                                <NumberFormat value={dataErrorModal.dataItems.newPrice} displayType={'text'} thousandSeparator={true}/>
-                                                            } 
-                                                        </span>
-                                                } 
-                                                { dataErrorModal && dataErrorModal.dataItems &&  dataErrorModal.dataItems.newPrice === 0 &&
-                                                        <span> 
-                                                            {languages.EN === language ? 
-                                                                <NumberFormat value={dataErrorModal.dataItems.priceUS} displayType={'text'} thousandSeparator={true}/>  : 
-                                                                <NumberFormat value={dataErrorModal.dataItems.price} displayType={'text'} thousandSeparator={true}/>
-                                                            } 
-                                                        </span>
-                                                    }
-                                                    {languages.EN === language ? ' USD' : ' VND'}
-                                                </span>
-                                            </p>
-                                            <p className='code-items'>Mã : <span>{dataErrorModal.dataItems.idItems}</span> </p>
+                                <p className='discount'>{languages.EN === language ? 'Discount :' : 'Giảm :'} <span>{dataErrorModal.discount}</span></p>
+
+                                <p className='voucher'>{languages.EN === language ? 'Price above :' : 'Đơn trên : '} 
+                                    <span>{ languages.EN === language ? 
+                                            <NumberFormat value={dataErrorModal.limitPrice.limitUs} displayType={'text'} thousandSeparator={true}/> : 
+                                            <NumberFormat value={dataErrorModal.limitPrice.limitVn} displayType={'text'} thousandSeparator={true}/>
+                                        } 
+                                        {languages.EN === language ? ' USD' : ' VND'}
+                                    </span>
+                                </p>
+
+                                <span className='sub_time'>{languages.EN === language ? dataErrorModal.valueEn : dataErrorModal.valueVi}</span>
+                                
+                                {dataErrorModal &&  dataErrorModal.name &&
+                                    <p className='category_Or_Type'>
+                                        <SwitchLanguage id='manageAdmin.items.addDiscountSub'/>
+                                        <span>{languages.EN === language ? dataErrorModal.name.valueEn : dataErrorModal.name.valueVi}</span> 
+                                    </p>
+                                } 
+                                
+                                {dataErrorModal.dataItems && dataErrorModal.dataItems.dataImgItems  &&
+                                    <div className='item'>
+                                        <div className='wraper-img'>
+                                            <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${dataErrorModal.dataItems.dataImgItems.image}`} alt={imgError} className='img' />
                                         </div>
-                                    </div>
-                                </div> 
-                            }
 
-                            <div className='list-button'>
-                                <span onClick={() => this.handlecreateListinput('UPDATA')}>
-                                    <Button type={'submit-form-data'} content={<SwitchLanguage id='manageAdmin.button.Continue'/>}/>
-                                </span>
+                                        <div className='detail'>
+                                            <p className='name-items'>{languages.EN === language ? dataErrorModal.dataItems.nameEn.slice(0,30)+'...' : dataErrorModal.dataItems.name.slice(0,30)+'...'}</p>
+                                            <div className='list-price'>
+                                                <p className='price'> 
+                                                    <span className='sub-price'>Giá : {''}
+                                                    { dataErrorModal && dataErrorModal.dataItems && dataErrorModal.dataItems.newPrice > 0 &&
+                                                            <span> 
+                                                                {languages.EN === language ? 
+                                                                    <NumberFormat value={dataErrorModal.dataItems.newPriceUS} displayType={'text'} thousandSeparator={true}/>  : 
+                                                                    <NumberFormat value={dataErrorModal.dataItems.newPrice} displayType={'text'} thousandSeparator={true}/>
+                                                                } 
+                                                            </span>
+                                                    } 
+                                                    { dataErrorModal && dataErrorModal.dataItems &&  dataErrorModal.dataItems.newPrice === 0 &&
+                                                            <span> 
+                                                                {languages.EN === language ? 
+                                                                    <NumberFormat value={dataErrorModal.dataItems.priceUS} displayType={'text'} thousandSeparator={true}/>  : 
+                                                                    <NumberFormat value={dataErrorModal.dataItems.price} displayType={'text'} thousandSeparator={true}/>
+                                                                } 
+                                                            </span>
+                                                        }
+                                                        {languages.EN === language ? ' USD' : ' VND'}
+                                                    </span>
+                                                </p>
+                                                <p className='code-items'>Mã : <span>{dataErrorModal.dataItems.idItems}</span> </p>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                }
 
-                                <span >
-                                    <Button type='close-form-data' content={<SwitchLanguage id='manageAdmin.button.close'/>}/>
-                                </span>
-                            </div>
-                        </>
-                    }
-                </div>
-            </ModalErrorItems>
+                                <div className='list-button'>
+                                    <span onClick={() => this.handlecreateListinput('UPDATA')}>
+                                        <Button type={'submit-form-data'} content={<SwitchLanguage id='manageAdmin.button.Continue'/>}/>
+                                    </span>
+
+                                    <span >
+                                        <Button type='close-form-data' content={<SwitchLanguage id='manageAdmin.button.close'/>}/>
+                                    </span>
+                                </div>
+                            </>
+                        }
+                    </div>
+
+                    
+                </ModalErrorItems>
+            
+            
 
 
             <div className='l-12' ref={this.elmDiscount}>

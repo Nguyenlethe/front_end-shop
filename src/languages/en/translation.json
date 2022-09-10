@@ -168,6 +168,7 @@
             "itemsDiscount":"Apply to product",
             "typeDiscount":"Apply to product type",
             "discountVocher":"Apply to category",
+            "ship_price":"Create price ship",
 
 
             "price":"Price : ",

@@ -21,6 +21,7 @@ import './Items.scss'
 import ListItems from './ListItems/ListItems';
 import Discounts from './Discounts/Discounts';
 import ListVoucher from './ListVoucher/ListVoucher';
+import PriceShip from './CreateShip/PriceShip';
 const salt = bcrypt.genSaltSync(8) 
 class Items extends Component {
     constructor(props) {
@@ -980,12 +981,7 @@ class Items extends Component {
         let {language} = this.props
 
         if(editItems) {
-
-            console.log(dataItems)
-
             let res = await this.handleGetOneUser(dataItems.idShop)
-
-
 
             let nameShop = {value: dataItems.idShop, label: dataItems.storeData && dataItems.storeData.nameShop}
             let sentFromEdit = dataItems.infoItemsData && dataItems.infoItemsData.sentFrom
@@ -996,7 +992,6 @@ class Items extends Component {
 
             await this.props.getAllCodeInToItems(optionsCategoryEdit.value)
 
-                
             let optionsCategoryTypeEdit = {value: dataItems.typeData && dataItems.typeData.code,
                 label: dataItems.typeData && language === languages.EN ? dataItems.typeData.valueEn : dataItems.typeData.valueVi}
                 
@@ -1144,7 +1139,6 @@ class Items extends Component {
         isShowListsInput,
         editItems
     } = this.state
-
 
     const mdParser = new MarkdownIt();
     return (
@@ -1541,6 +1535,8 @@ class Items extends Component {
         }
 
         <ListVoucher/>
+
+        <PriceShip />
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     

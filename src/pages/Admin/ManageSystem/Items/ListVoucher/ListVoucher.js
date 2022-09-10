@@ -234,7 +234,7 @@ class ListVoucher extends Component {
     return (
         <>
 
-            <div className='l-12'>
+            <div className='l-12' >
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.listSort' /></p> 
             </div> 
 

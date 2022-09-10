@@ -166,6 +166,7 @@
             "itemsDiscount":"Áp dụng cho sản phẩm",
             "typeDiscount":"Áp dụng cho loại hàng",
             "discountVocher":"Áp dụng cho danh mục",
+            "ship_price":"Tạo giá ship",
 
 
             "price":"Gía : ",

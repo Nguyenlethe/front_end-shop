@@ -82,7 +82,6 @@ class DetailVoucher extends Component {
 
     let {dataVoucher, isShow} = this.state
     let {language} = this.props
-    console.log(dataVoucher)
  
     return (
         <>

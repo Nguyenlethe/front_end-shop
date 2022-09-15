@@ -81,7 +81,7 @@
                 &::before {
                     content: 'Select some files';
                     display: inline-block;
-                    background: var(--BGR-color-btn-manageuser);
+                    background: var(var(--color-BTN-manage));
                     width: 25%;
                     border-right: 1px solid rgb(153, 153, 153);
                     border-radius: 3px;

@@ -68,6 +68,7 @@
             "planceholder_color":"Chọn Màu...",
             "planceholder_startDay":"Chọn ngày bắt đầu áp dụng ",
             "planceholder_ifDiscount":"Chọn điều kiện giảm",
+            "planceholder_price_ship":"Nhập giá ship...",
 
             
             "btn":"Thêm Mới",
@@ -140,6 +141,7 @@
         },
         "toast": {
             "success":"Thêm người dùng thành công !!!",
+            "successPriceShip":"Thêm thành công !!!",
             "successVoucher":"Thêm voucher thành công !!!",
             "warn":"Có lỗi sảy ra !!!",
             "success_change":"Thay đổi thành công !!!",
@@ -156,6 +158,7 @@
             "noOptions":"Không tìm thấy ",
             "priceUS": "Gía (USD)",
             "search-code-items":"Tìm kiếm sản phẩm (Mã)",
+            "search-code-items-add":"Dành cho sản phẩm",
             "select-items":"Chọn sản phẩm",
             "planceholder_priceUS":"Nhập giá (USD)",
             "addDiscountSub":"Danh mục, loại hàng áp dụng : ",
@@ -167,9 +170,11 @@
             "typeDiscount":"Áp dụng cho loại hàng",
             "discountVocher":"Áp dụng cho danh mục",
             "ship_price":"Tạo giá ship",
+            "price_ship":"Giá ship",
+            "attention":"CHÚ Ý : Những tỉnh không đặt giá vận chuyển, sẽ được áp dụng phí vận chuyển mặc định là 30.000 VNĐ. Tạo giá vận chuyển thành công là khi đã chọn sản phẩm và nhập đủ cả 2 loại giá (VNĐ & USD)",
 
 
-            "price":"Gía : ",
+            "price":"Giá : ",
             "code":"Mã sản phẩm : ",
             "to":"Đến",
             "from":"Có hiệu lực từ :",
@@ -178,7 +183,15 @@
             "category":"Danh mục : ",
             "type":"Loại hàng : ",
             "day":" ngày ",
-            "YES":"Đồng ý"
+            "YES":"Đồng ý",
+            "province_add":"Tỉnh áp dụng",
+            "price_shipVn": "Giá ship (VNĐ)",
+            "price_shipUs": "Giá ship (USD)",
+            "notSelect": "Vui lòng chọn danh mục/loại hàng hoặc tìm kiếm sản phẩm !!!",
+            "notAddPriceShip": "Vui lòng nhập giá gửi hàng !!!",
+            "ship_price-list":"Danh sách giá vận chuyển",
+            "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : "
+
 
 
 
@@ -189,13 +202,19 @@
             "error":"Sản phẩm đã được đặt mã giảm giá ",
             "errorType":"Loại sản phẩm đã được đặt mã giảm giá ",
             "errorCategory":"Danh mục phẩm đã được đặt mã giảm giá ",
-            "warn":"Có lỗi sảy ra"
+            "warn":"Có lỗi sảy ra",
+            "exist":"GIÁ VẬN CHUYỂN ĐÃ TỒN TẠI "
 
         },
         "button":{
             "Continue":"GHi Đè",
             "editNow":"Chỉnh sửa",
-            "close":"Thoát"
+            "close":"Thoát",
+            "submit":"Thêm mới",
+            "hide":"Ẩn Form",
+            "delete":"Xoá",
+            "update": "Cập nhật"
+
         }
     },
     "app": {

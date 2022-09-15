@@ -22,7 +22,9 @@ import ListItems from './ListItems/ListItems';
 import Discounts from './Discounts/Discounts';
 import ListVoucher from './ListVoucher/ListVoucher';
 import PriceShip from './CreateShip/PriceShip';
-const salt = bcrypt.genSaltSync(8) 
+import ListPrice from './CreateShip/ListPriceShip/ListPrice';
+const salt = bcrypt.genSaltSync(8)   
+
 class Items extends Component {
     constructor(props) {
         super(props);
@@ -92,7 +94,7 @@ class Items extends Component {
                 size: '',
                 amount: '',
             },
-            SIZE:{
+            SIZE: {
                 SZ01:'',
                 SZ02:'',
                 SZ03:'',
@@ -101,7 +103,7 @@ class Items extends Component {
                 SZ06:'',
                 SZ07:'',
             },
-            SZNB:{
+            SZNB: {
                 SZNB01:'',
                 SZNB02:'',
                 SZNB03:'',
@@ -157,6 +159,7 @@ class Items extends Component {
             listAllUser: allUserEdit
         })
     }
+   
     
     // Change Mô tả Sản phẩm Vi
     handleEditorChangeVi = ({ html, text }) => {
@@ -1140,15 +1143,23 @@ class Items extends Component {
         editItems
     } = this.state
 
+
     const mdParser = new MarkdownIt();
     return (
         <>
         {/* Thêm mới items */}
-        <div className='col l-3'>
-            <span className='sub-heading' onClick={() => this.handleShowHideInputsUser()}>
-                <SwitchLanguage id='manageAdmin.createItems'/>
-                <FontAwesomeIcon className='icon-user' icon={faStore} />
-            </span>
+        <div className='col l-3' onClick={() => this.handleShowHideInputsUser()}>
+            {!isShowListsInput && 
+                <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.createItems'/>}  icon={<FontAwesomeIcon className='icon-user' icon={faStore} />}
+                    color='var(--color-BTN-manage)' width='86%'  border='6px'
+                />
+            }
+
+            {isShowListsInput && 
+                <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.form.hide'/>}  icon={<FontAwesomeIcon className='icon-user' icon={faStore} />}
+                    color='var(--color-BTN-manage)' width='60%'  border='6px'
+                />
+            }
         </div>
 
         {/* Title */}
@@ -1418,24 +1429,33 @@ class Items extends Component {
                     <div className='col l-12'>
                         <label className='input-label'><SwitchLanguage id='manageAdmin.form.description'/></label>
 
-                        <div className='list-btn'>
-                            <span  onClick={() => this.setState({isBTNVi: !isBTNVi})} >
-                                <Button type={isBTNVi === true ? 'submit-form-data' : 'close-form-data'} content={<SwitchLanguage id='manageAdmin.form.descriptionVi'/>} />
-                            </span>
-                            <span  onClick={() => this.setState({isBTNVi: !isBTNVi})} >
-                                <Button type={isBTNVi === true ? 'close-form-data' : 'submit-form-data'} content={<SwitchLanguage id='manageAdmin.form.descriptionEn'/>}/>
-                            </span>
+                        <div className='list-btn' style={{marginLeft: '-12px'}}>
+                            <div className='col l-2' onClick={() => this.setState({isBTNVi: !isBTNVi})}>
+                                <Button type={isBTNVi === true ? 'submit-form-data' : 'close-form-data'} content={<SwitchLanguage id='manageAdmin.form.descriptionVi'/>}
+                                    color={isBTNVi && '#ce163b'} width='100%' border='4px'
+                                /> 
+                            </div>
+
+                            <div className='col l-2' onClick={() => this.setState({isBTNVi: !isBTNVi})}>
+                                <Button type={isBTNVi === true ? 'close-form-data' : 'submit-form-data'} content={<SwitchLanguage id='manageAdmin.form.descriptionEn'/>}
+                                    color={!isBTNVi && '#ce163b'} width='100%' border='4px'
+                                /> 
+                            </div>
                         </div>
+
+
                     
                         <MdEditor
-                            style={isBTNVi && isBTNVi ? { height: '70vh' } : {height: '0px', overflow: 'hidden'}} 
+                            // style={isBTNVi && isBTNVi ? { height: '70vh' } : {height: '0px', overflow: 'hidden'}} 
+                            style={{display: isBTNVi && isBTNVi ? 'block' : 'none', height: '70vh', overflow: 'hidden'}} 
                             renderHTML={text => mdParser.render(text)} 
                             onChange={this.handleEditorChangeVi} 
                             value={this.state.itemsInfo.describeTextVi || ''}
                         />
                 
                         <MdEditor2
-                            style={!isBTNVi && !isBTNVi ? { height: '70vh ' } : {height: '0px', overflow: 'hidden'}}
+                            // style={!isBTNVi && !isBTNVi ? { height: '70vh ' } : {height: '0px', overflow: 'hidden'}}
+                            style={{display: !isBTNVi && !isBTNVi ? 'block' : 'none', height: '70vh', overflow: 'hidden'}} 
                             renderHTML={text => mdParser.render(text)} 
                             onChange={this.handleEditorChangeEn} 
                             value={this.state.itemsInfo.describeTextEn || ''}
@@ -1511,6 +1531,12 @@ class Items extends Component {
                                     listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems && name && nameEn && price 
                                     ? editItems ? 'edit-form-data' : 'submit-form-data' : 'ban-form-data' 
                                 }
+                                color={ 
+                                    this.state.itemsInfo.describeTextVi && this.state.itemsInfo.describeTextEn && priceUS &&
+                                    listImg.length > 0 && isImgColor && isEmptykeyObjectSizeItems && name && nameEn && price 
+                                    ? editItems ? '' : 'var(--color-BTN-manage)'  : '#fb9e9e' 
+                                }
+                                border='6px'
                                 content={ !editItems ? <SwitchLanguage id='manageAdmin.form.addItems'/> : <SwitchLanguage id='manageAdmin.form.btn_edit'/>} 
                             />
                         </span>
@@ -1537,6 +1563,7 @@ class Items extends Component {
         <ListVoucher/>
 
         <PriceShip />
+
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     

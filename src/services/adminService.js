@@ -125,12 +125,29 @@ function deleteVoucher (data) {
     return axios.post(`/admin/delete-voucher`,data);
 }
 
+// Add price ship
+function addPriceShip (data) {
+    return axios.post(`/admin/add-price-ship`,data);
+}
+
+// Add price ship
+function getPriceShip (data) {
+    return axios.get(`/admin/get-price-ship?idShop=${data.idShop}&itemsId=${data.itemsId}&category=${data.category}&categoryType=${data.categoryType}&actions=${data.actions}`);
+}
+
+// Update price ship
+function updatePriceShip (data) {
+    return axios.post(`/admin/update-price-ship`,data);
+}
 
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    updatePriceShip,
+    getPriceShip,
+    addPriceShip,
     deleteVoucher,
     getVoucher,
     addNewDisCounts,

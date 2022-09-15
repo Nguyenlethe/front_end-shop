@@ -12,12 +12,16 @@
     cursor: pointer;
     border: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 20px 0;
+    margin: 40px 0 20px 0;
     display: block;
     text-align: center;
     .icon-user{
         margin-left:14px;
     }
+}
+
+.btn-craete-user{
+    margin: 30px 0;
 }
 
 .sub-heading.edit{
@@ -75,7 +79,7 @@
                 &::before {
                     content: 'Select some files';
                     display: inline-block;
-                    background: var(--BGR-color-btn-manageuser);
+                    background: var(--color-BTN-manage);
                     width: 25%;
                     border-right: 1px solid rgb(153, 153, 153);
                     border-radius: 3px;

@@ -71,6 +71,8 @@
             "planceholder_color":"Select Color...",
             "planceholder_startDay":"Select day start",
             "planceholder_ifDiscount":"Select condition discount",
+            "planceholder_price_ship":"Enter shipping price...",
+
 
 
 
@@ -146,6 +148,7 @@
         "toast": {
             "success":"Add user successfully !!!",
             "successVoucher":"Add voucher successfully !!!",
+            "successPriceShip":"Thêm gía thành công !!!",
             "warn":"An error occurred !!!",
             "success_change":"Change successfully !!!",
             "successItems":"Create items successfully !!!",
@@ -158,6 +161,7 @@
             "noOptions":"No options ",
             "priceUS": "Price (USD)",
             "search-code-items":"Search items (Code)",
+            "search-code-items-add":"For product",
             "select-items":"Select items",
             "addDiscountSub":"Category, category type  : ",
             "planceholder_priceUS":"Enter price (USD)",
@@ -169,7 +173,8 @@
             "typeDiscount":"Apply to product type",
             "discountVocher":"Apply to category",
             "ship_price":"Create price ship",
-
+            "price_ship":"Price ship",
+            "attention":"NOTE: Provinces that do not set a shipping price, will apply a default shipping fee of 2 USD. Creating a successful shipping price is when you have selected the product and entered both prices (VND & USD).",
 
             "price":"Price : ",
             "code":"Code items : ",
@@ -180,9 +185,14 @@
             "category":"Category : ",
             "type":"Category type : ",
             "day":" day ",
-            "YES":"Agree"
-
-
+            "YES":"Agree",
+            "province_add":"Applicable province",
+            "price_shipVn": "Shipping cost (VNĐ)",
+            "price_shipUs": "Shipping cost (USD)",
+            "notSelect": "Please select 1 of the above fields to create a shipping price !!!",
+            "notAddPriceShip": "Please enter shipping price !!!",
+            "ship_price-list":"Shipping price list",
+            "count-add-price":"Province created the shipping price : " 
 
 
 
@@ -191,13 +201,19 @@
             "error":"The product has been placed with a discount code ",
             "errorType":"The items type has been placed with a discount code",
             "errorCategory":"The catalog has been set with a discount code ",
-            "warn":"An error occurred"
+            "warn":"An error occurred",
+            "exist":"Shipping rates already exist"
+
 
         },
         "button":{
             "Continue":"Override",
-            "editNow":"Continue editing",
-            "close":"Exit"
+            "editNow":"Editing",
+            "close":"Exit",
+            "submit":"Add new",
+            "delete":"Delete",
+            "update": "Cập nhật"
+
         }
     },
     "app": {

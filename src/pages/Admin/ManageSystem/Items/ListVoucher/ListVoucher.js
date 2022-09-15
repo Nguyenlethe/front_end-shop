@@ -233,10 +233,10 @@ class ListVoucher extends Component {
 
     return (
         <>
-
             <div className='l-12' >
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.listSort' /></p> 
             </div> 
+            
 
             <div className='list_voucher'>
                 <div className='list_select'>
@@ -281,17 +281,18 @@ class ListVoucher extends Component {
 
                     <div className='form-input col l-3'>
                         <label className='input-label'></label>
-                        <button className='button_show-items-discount' style={{opacity: optionsIdShop !== null ? '1' : '.5' }}
-                            onClick={() => {optionsIdShop !== null && this.handlChangeSlelect('EMPTY', {name: 'ALL_VORCHER_ITEMS'})}}>
-                            <SwitchLanguage id='manageAdmin.items.allItems'/>
-                        </button>
-                    </div>
 
+                        <span className='' onClick={() => {optionsIdShop !== null && this.handlChangeSlelect('EMPTY', {name: 'ALL_VORCHER_ITEMS'})}} >
+                            <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.items.allItems'/>} 
+                                color='#ce163b' width='100%' margin='4px' border='4px' opacity={optionsIdShop !== null ? '1' : '.5'}
+                            /> 
+                        </span>
+
+                    </div>
                 </div>
             </div> 
         
             <Voucher isNotUser={isNotUser} dataVoucher={resultItemsDiscount} />
-        
         </>
     )}}
 

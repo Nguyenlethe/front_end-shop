@@ -254,8 +254,6 @@ const adminReducer = (state = initialState, action) => {
             }
 
         // GET_DATA_ALLCODE_SIZE_SUCCESS:'GET_DATA_ALLCODE_SIZE_SUCCESS',
-        // GET_DATA_ALLCODE_SZNB_SUCCESS:'GET_DATA_ALLCODE_SZNB_SUCCESS'
-
         case actionTypes.GET_DATA_ALLCODE_SIZE_SUCCESS:  
             state.listAllCodeItems.SIZEData = action.SIZEData
             //console.log('Data DCCData',state.listAllCodeItems.SIZEData)
@@ -303,7 +301,7 @@ const adminReducer = (state = initialState, action) => {
         // CHANGE_ITEMS_VOUCHER_SUCCESS
         case actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS:  
             state.voucher = action.voucherItems
-            console.log( action.voucherItems)
+            // console.log( action.voucherItems)
             
             return {
                 ...state

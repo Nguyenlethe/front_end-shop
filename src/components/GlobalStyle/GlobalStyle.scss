@@ -65,6 +65,7 @@
     --color-btn-ban-hover-LG: #fff ;
 
 
+
     // Form system
     --width-form-system: 450px;
     --font-size-heading: 2.9rem;
@@ -88,6 +89,8 @@
     // items
     --color-sub-price: rgb(124, 123, 123);
     --svg-search: 60px;
+    --items_active: rgb(122, 217, 255);
+    --color-BTN-manage: #d04262;
 
     // voucher
     --BGR-voucher: #ee4d2d;
@@ -135,6 +138,8 @@ html *::-webkit-scrollbar-track {
     font-size: var(--size-heading-manage);
     text-transform: uppercase;
     cursor: pointer;
+    font-weight: 500;
+    color: #1b74e4;
 }
 
 .list-input{
@@ -150,5 +155,26 @@ a{
 }
 
 .css-2613qy-menu{
-    color: red !important;
+    color: red !important ;
+}
+.note{
+    color: red;
+}
+
+
+.rc-md-editor .editor-container {
+    flex: 1 1;
+    display: flex;
+    width: 100%;
+    height: 100% !important;
+    min-height: 0;
+    position: relative;
+}
+
+.list-btn-price{
+    display: flex;
+    justify-content: space-around;
+
+
+
 }

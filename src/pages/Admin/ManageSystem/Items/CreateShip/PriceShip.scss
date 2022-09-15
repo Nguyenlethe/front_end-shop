@@ -1,0 +1,91 @@
+
+.list-input {
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+
+    .form-input{
+        margin: 0 0 5px 0;
+        position: relative;
+        
+        .list_btn{
+            display: flex;
+        }
+
+        .form-data{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 0 5px 0;
+            position: relative;
+        }
+        
+        .input-label{
+            font-size: var(--font-size-label);
+            height: var(--height-label);
+            margin-bottom: 3px;
+         
+        }
+        .input-label-province{
+            font-size: var(--font-size-label);
+            height: var(--height-label);
+            margin-bottom: 3px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+
+            span{
+                font-weight: 600;
+                color: #000000;
+            }
+        }
+        
+        .input{
+            font-family: var(--font-family-primary);
+            width: calc(100% - var(--width-eye));
+            float: left;
+            border-radius:6px;
+            outline: none;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: var(--height-input);
+            padding-left: var(--padding-left);
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            background-color:transparent;
+    
+        }
+    
+        .planceholder_input{
+            position: absolute;
+            top: calc(50% );
+            transform: translateY(-50%);
+            width: calc(100% - var(--width-eye) );
+            left: calc(var(--padding-left) * 2);
+            font-size: var(--font-size-label);
+            color:rgb(159, 157, 157);
+        }
+
+
+        .province{
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 8px;
+
+            .list_province{
+                display: flex;
+                align-items: center;
+    
+                .input_check{
+                    margin-right: 12px;
+                }
+                
+                .label_check{
+                    color:#999;
+                }
+            }
+        }
+       
+    }
+}

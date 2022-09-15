@@ -81,7 +81,6 @@ return (
             <div className={cx('tabel')}>
                 <table id={cx('customers')}>
                     <tbody>
-
                         <tr>
 
                             <th>STT</th>

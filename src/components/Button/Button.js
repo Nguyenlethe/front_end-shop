@@ -19,7 +19,7 @@ class Button extends Component {
       
     render() {
 
-        let {to,type,content, name,color,width,border,margin} = this.props
+        let {to,type,content, name,color,width,border,margin, opacity,icon, height} = this.props
         return (
             <>
                 {type === 'primary' ? <button className='btn-primary'><Link className='btn-primary-link' to={to}><span>{content}</span></Link> </button>
@@ -32,13 +32,13 @@ class Button extends Component {
                     :
                 type === 'btn-ban' ? <button className='btn-ban'> <Link className='btn-ban-link' to={to ? to : ''}><span>{content}</span></Link> </button>
                     :
-                type === 'submit-form-data' ? <button className='btn-form-input' style={{width: width,borderRadius: border, margin: margin}}> <span style={{backgroundColor: color, borderRadius: border}} className='content-btn-form-input'>{content}</span> </button>
+                type === 'submit-form-data' ? <button className='btn-form-input' style={{opacity: opacity,width: width,borderRadius: border, margin: margin}}> <span style={{backgroundColor: color, borderRadius: border, height: height}} className='content-btn-form-input'>{content}{icon }</span> </button>
                     : 
-                type === 'edit-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input edit'>{content}</span> </button>
+                type === 'edit-form-data' ? <button className='btn-form-input'  style={{opacity: opacity,width: width,borderRadius: border, margin: margin}}> <span style={{backgroundColor: color, borderRadius: border, height: height}} className='content-btn-form-input edit'>{content}{icon}</span> </button>
                     : 
-                type === 'close-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input close'>{content}</span> </button>
+                type === 'close-form-data' ? <button className='btn-form-input' style={{opacity: opacity,width: width,borderRadius: border, margin: margin}}> <span style={{backgroundColor: color, borderRadius: border, height: height}} className='content-btn-form-input close'>{content}</span> </button>
                     : 
-                type === 'ban-form-data' ? <button className='btn-form-input'> <span className='content-btn-form-input ban'>{content}</span> </button>
+                type === 'ban-form-data' ? <button className='btn-form-input' style={{opacity: opacity,width: width,borderRadius: border, margin: margin}}> <span style={{backgroundColor: color, borderRadius: border, height: height}} className='content-btn-form-input ban'>{content}</span> </button>
                     : 
                 type === 'create' ? <button className='craete-input'> <span className='content-btn-form-input create'>{content}</span> <FontAwesomeIcon icon={faPlus}/></button>
                     : 

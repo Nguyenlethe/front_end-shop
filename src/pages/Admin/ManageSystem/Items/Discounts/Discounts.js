@@ -38,7 +38,7 @@ class Discount extends Component {
             isShowListInput: false,
             isShowModalError: false,
             isHideModalError: false,
-            isShow: false,
+            isHideSlow: true,
 
             dataOptions: {
                 optionsIdShop: null,
@@ -112,7 +112,8 @@ class Discount extends Component {
             this.state.listDiscount !== nextState.listDiscount ||
             this.state.countInput !== nextState.countInput || 
             this.state.dataErrorModal !== nextState.dataErrorModal || 
-            this.state.isShowModalError !== nextState.isShowModalError || 
+            this.state.isShowModalError !== nextState.isShowModalError ||
+            this.state.isHideSlow !== nextState.isHideSlow || 
             this.state.listDataOptions !== nextState.listDataOptions  
         ){
           return true;
@@ -559,7 +560,7 @@ class Discount extends Component {
             if(res && res.data && res.data.errCode === -1 && !_.isEmpty(res.data.data) ){
                 this.setState({
                     dataErrorModal: res.data.data,
-                    isShowModalError: !this.state.isShowModalError ,
+                    isShowModalError: true ,
                 }) 
             }
 
@@ -586,7 +587,7 @@ class Discount extends Component {
             // Nếu thành công
             if(resUpdate && resUpdate.data && resUpdate.data.errCode ===  0){
                 this.setState({
-                    isHideModalError: !this.state.isHideModalError,
+                    isHideSlow: false,
                     isShowButtonAddDisscount: false,
                 })
                 toast.success(<SwitchLanguage id='manageAdmin.toast.successVoucher' />)
@@ -617,84 +618,110 @@ class Discount extends Component {
 
     // Get data items from search
     handleGetDataComponentSearch = async(items,typeAction) => {
-        
-        let valueSetInputSearch = ''
-        let valueSetInputSelect = ''
-        
-        
-        let {dataTabelItemsDiscount,listDataOptions,dataOptions} = this.state
-        let {language} = this.props
-        let id = items.idItems || ''
-        
-        let nameItemsAdd = languages.EN === language ? items.nameEn : items.name
 
-        // Loop get options category
-        let newOptionsCategory = listDataOptions.listAllCategory.filter(item => {
-            if(item.value === items.category) return item
-        })
+        if(items !== '',typeAction !== 'DELETE_VALUE'){
+            
+            let valueSetInputSearch = ''
+            let valueSetInputSelect = ''
+            
+            
+            let {dataTabelItemsDiscount,listDataOptions,dataOptions} = this.state
+            let {language} = this.props
+            let id = items.idItems || ''
+            
 
-        // Get data categoryType + convert Object select
-        let listAllCategoryType = await this.props.getAllCodeInToItems(newOptionsCategory[0].value)
+            // Loop get options category
+            let newOptionsCategory = listDataOptions.listAllCategory.filter(item => {
+                if(item.value === items.category) return item
+            })
+
+            // Get data categoryType + convert Object select
+            let listAllCategoryType = await this.props.getAllCodeInToItems(newOptionsCategory[0].value)
 
 
-        let newListAllCategoryTypeConvertObject = generalHandling.handlConvertObject(listAllCategoryType, 'LIST_CATEGORY',language)
+            let newListAllCategoryTypeConvertObject = generalHandling.handlConvertObject(listAllCategoryType, 'LIST_CATEGORY',language)
 
-        // Loop get options categoryType
-        let newOptionsCategoryType = newListAllCategoryTypeConvertObject.filter(item => {
-            if(item.value === items.type) return item
-        })
+            // Loop get options categoryType
+            let newOptionsCategoryType = newListAllCategoryTypeConvertObject.filter(item => {
+                if(item.value === items.type) return item
+            })
 
-        // Add action reset value
-        let dataResultSearchItem =  await this.handleGetDataNameItems(items.idShop, items.category, items.type)
-        
-        if(typeAction === 'SELECT_ITEMS_ARRAY'){
-            dataResultSearchItem.map(item => item.actions = 'NOT_SET_VALUE')
+            // Add action reset value
+            let dataResultSearchItem =  await this.handleGetDataNameItems(items.idShop, items.category, items.type)
+            
+            if(typeAction === 'SELECT_ITEMS_ARRAY'){
+                dataResultSearchItem.map(item => item.actions = 'NOT_SET_VALUE')
+            }
+            if(typeAction === 'SEARCH_CODE_ITEM'){
+                dataResultSearchItem.map(item => item.actions = '')
+            }
+
+            // Set state
+            this.setState({
+                valueSetInputSearch: valueSetInputSearch,
+                valueSetInputSelect: valueSetInputSelect,
+                listDataResItems: dataResultSearchItem,
+                listDataOptions: {
+                    ...listDataOptions,
+                    listAllCategoryType: newListAllCategoryTypeConvertObject,
+                    listAllCategoryTypeNotConvert: listAllCategoryType
+                },
+                dataOptions: {
+                    ...dataOptions,
+                    optionsCategory: newOptionsCategory[0],
+                    optionsCategoryType: newOptionsCategoryType[0]
+                },
+                dataTabelItemsDiscount: {
+                    ...dataTabelItemsDiscount,
+                    itemsId: id,
+                    forItemType: newOptionsCategoryType[0].value,
+                    forItemCategory: newOptionsCategory[0].value
+                },
+            })
+
+            return dataResultSearchItem
         }
-        if(typeAction === 'SEARCH_CODE_ITEM'){
-            dataResultSearchItem.map(item => item.actions = '')
-        }
+    }
 
-        // Set state
+    // Hide Modal
+    handleShowHide = (resBoll) => {
         this.setState({
-            valueSetInputSearch: valueSetInputSearch,
-            valueSetInputSelect: valueSetInputSelect,
-            listDataResItems: dataResultSearchItem,
-            listDataOptions: {
-                ...listDataOptions,
-                listAllCategoryType: newListAllCategoryTypeConvertObject,
-                listAllCategoryTypeNotConvert: listAllCategoryType
+            isShowModalError: resBoll,
+            isHideSlow: true
+        }) 
+    }
+
+    // Delete value input 
+    handleResetValueInput = () => {
+        let {dataTabelItemsDiscount,dataOptions} = this.state
+
+        let newDataTabelItemsDiscount  = generalHandling.resetDefaultState(dataTabelItemsDiscount)
+        let newDataOptions  = generalHandling.resetDefaultState(dataOptions)
+
+        this.setState({
+            dataTabelItemsDiscount: {
+                ...newDataTabelItemsDiscount
             },
             dataOptions: {
-                ...dataOptions,
-                optionsCategory: newOptionsCategory[0],
-                optionsCategoryType: newOptionsCategoryType[0]
-            },
-            dataTabelItemsDiscount: {
-                ...dataTabelItemsDiscount,
-                itemsId: id,
-                forItemType: newOptionsCategoryType[0].value,
-                forItemCategory: newOptionsCategory[0].value
-            },
+                ...newDataOptions
+            }
         })
 
-        return dataResultSearchItem
     }
 
     render() {
 
     let {language} = this.props
-    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,dataTabelItemsDiscount,nameItems,isEdit} = this.state
+    let {listDataResItems,valueSetInputSearch,isShowButtonAddDisscount,dataErrorModal,isShowModalError,isHideModalError,isHideSlow,nameItems,isEdit} = this.state
     let {optionsIdShop,optionsSele,optionsDayStart,optionsDayEnd,optionsCategory,optionsCategoryType,optionsDiscount} = this.state.dataOptions
     let {listSale,listAllShops,listAllCategory,listAllCategoryType,listDiscount} = this.state.listDataOptions
 
-    console.log(isShowModalError, isHideModalError,dataErrorModal)
         
     return (
         <>
             
-            {dataErrorModal && dataErrorModal.limitPrice && <span>OK</span>}
-                <ModalErrorItems isShow={isShowModalError} isHide={isHideModalError} title={'warn'}>
-
+            {isShowModalError && 
+                <ModalErrorItems isShow={isShowModalError} isHideSlow={isHideSlow} handleShowHide={this.handleShowHide} title={'warn'}>
 
                     <div className='discount_modal' >
                         {dataErrorModal && dataErrorModal.limitPrice &&
@@ -773,189 +800,178 @@ class Discount extends Component {
                             </>
                         }
                     </div>
-
                     
                 </ModalErrorItems>
-            
-            
-
+            }
 
             <div className='l-12' ref={this.elmDiscount}>
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.discount' /></p> 
             </div> 
 
+            <div className='list_all_discount'>
+                {/* Select Shop */}
+                {listAllShops && listAllShops.length > 0 && 
+                    <div className='form-input col l-3'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameShop'/></label>
+                        <Select
+                            value={optionsIdShop}
+                            onChange={this.handlChangeSlelect}
+                            options={listAllShops}
+                            styles={this.customStyles}
+                            name='idShop'
+                            placeholder={<SwitchLanguage id='manageAdmin.form.nameShop'/>}
+                        />
+                    </div>
+                }
 
-            {isShowButtonAddDisscount &&
-                <div className='list_all_discount'>
-                    {/* Select Shop */}
-                    {listAllShops && listAllShops.length > 0 && 
-                        <div className='form-input col l-3'>
-                            <label className='input-label'><SwitchLanguage id='manageAdmin.form.nameShop'/></label>
-                            <Select
-                                value={optionsIdShop}
-                                onChange={this.handlChangeSlelect}
-                                options={listAllShops}
-                                styles={this.customStyles}
-                                name='idShop'
-                                placeholder={<SwitchLanguage id='manageAdmin.form.nameShop'/>}
-                            />
-                        </div>
-                    }
+                {optionsIdShop !== null &&
+                    <InputSearch
+                        classWraper='form-input col l-6'
+                        idSwitchLanguage='manageAdmin.items.search-code-items'
+                        TYPE_INPUT='SEARCH_CODE_ITEM'
+                        TABEL={SEARCH.TABEL_SEARCH} 
+                        TYPE={SEARCH.TYPE_SEARCH} 
+                        IDSHOP={optionsIdShop.value} 
+                        handleGetDataComponentSearch={this.handleGetDataComponentSearch}
+                        setValueSearchCode={valueSetInputSearch}
+                    />
+                } 
+        
+                {/* Select mã giảm */}
+                {listSale && listSale.length > 0 && 
+                    <div className='form-input col l-3'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.sale'/></label>
+                        <Select
+                            value={optionsSele}
+                            onChange={this.handlChangeSlelect}
+                            options={listSale}
+                            styles={this.customStyles}
+                            name='discount'
+                            isDisabled={optionsIdShop ? false : true}
+                            placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_sale'/>}
+                        />
+                    </div>
+                }
 
-                    {optionsIdShop !== null &&
+                {/* Select mã giảm */}
+                {listSale && listSale.length > 0 && 
+                    <div className='form-input col l-3'>
+                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.ifDiscount'/></label>
+                        <Select
+                            value={optionsDiscount}
+                            onChange={this.handlChangeSlelect}
+                            options={listDiscount}
+                            styles={this.customStyles}
+                            name='voucher'
+                            placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_ifDiscount'/>}
+                        />
+                    </div>
+                }
+
+                {/* Category */}
+                <div className='form-input col l-3'>
+                    <label className='input-label'><SwitchLanguage id='manageAdmin.form.category'/></label>
+                    <Select
+                        value={optionsCategory}
+                        onChange={this.handlChangeSlelect}
+                        options={listAllCategory}
+                        styles={this.customStyles}
+                        placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_category'/>}
+                        name="forItemCategory"
+                    />
+                </div>
+
+                {/* Type */}
+                <div className='form-input col l-3'>
+                    <label className='input-label'><SwitchLanguage id='manageAdmin.form.type'/></label>
+                    <Select
+                        isDisabled={optionsCategory !== null ? false : true}
+                        value={optionsCategoryType}
+                        onChange={this.handlChangeSlelect}
+                        options={listAllCategoryType}
+                        styles={this.customStyles}
+                        placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_type'/>}
+                        name="forItemCategoryType"
+                    />
+                </div>
+
+                {/* items */}
+                {listDataResItems && listDataResItems.length > 0 &&  
+                    <>
                         <InputSearch
-                            classWraper='form-input col l-6'
-                            idSwitchLanguage='manageAdmin.items.search-code-items'
-                            TYPE_INPUT='SEARCH_CODE_ITEM'
-                            TABEL={SEARCH.TABEL_SEARCH} 
-                            TYPE={SEARCH.TYPE_SEARCH} 
-                            IDSHOP={optionsIdShop.value} 
+                            valueName={nameItems}
+                            classWraper='form-input col l-3'
+                            idSwitchLanguage='manageAdmin.items.select-items'
+                            TYPE_INPUT='SELECT_ITEMS_ARRAY'
                             handleGetDataComponentSearch={this.handleGetDataComponentSearch}
-                            setValueSearchCode={valueSetInputSearch}
+                            dataArrayItemsSelect={listDataResItems} 
                         />
-                    } 
+                    </>
+                }
+
+                {/* Select start Date */}
+                <div className='form-input col l-3'>
+                    <label className='input-label'><SwitchLanguage id='manageAdmin.form.startDay'/></label>
+                    <DatePicker 
+                        selected={optionsDayStart} 
+                        minDate={new Date()}
+                        onChange={(date) =>  this.handleChangeSelectDate(date,'startDay')} 
+                        className='fixCss'
+                        name='startDay'
+                        placeholderText={languages.EN === language ? 'Select day start' : 'Chọn ngày bắt đầu áp dụng'}
+                        showTimeSelect
+                        autoComplete='off'
+                        timeFormat="HH:mm"
+                        timeIntervals={30}
+                        dateFormat="Pp"
+                    />
+                </div>
+
+                {/* Select start Date */}
+                <div className='form-input col l-3'>
+                    <label className='input-label'><SwitchLanguage id='manageAdmin.form.endDay'/></label>
+                    <DatePicker 
+                        disabled={optionsDayStart ? false : true}
+                        selected={optionsDayEnd} 
+                        minDate={optionsDayStart}
+                        onChange={(date) =>  this.handleChangeSelectDate(date,'endDay')} 
+                        className='fixCss'
+                        placeholderText={languages.EN === language ? 'Select end start' : 'Chọn ngày kết thúc áp dụng'}
+                        showTimeSelect
+                        autoComplete='off'
+                        timeFormat="HH:mm"
+                        timeIntervals={30}
+                        dateFormat="Pp"
+                    />
+                </div>
+
+            </div>
             
-                    {/* Select mã giảm */}
-                    {listSale && listSale.length > 0 && 
-                        <div className='form-input col l-3'>
-                            <label className='input-label'><SwitchLanguage id='manageAdmin.form.sale'/></label>
-                            <Select
-                                value={optionsSele}
-                                onChange={this.handlChangeSlelect}
-                                options={listSale}
-                                styles={this.customStyles}
-                                name='discount'
-                                isDisabled={optionsIdShop ? false : true}
-                                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_sale'/>}
-                            />
-                        </div>
-                    }
+            <div className='col l-12'> 
+                <div className='list_input ' style={{alignItems: 'center'}}>
 
-                    {/* Select mã giảm */}
-                    {listSale && listSale.length > 0 && 
-                        <div className='form-input col l-3'>
-                            <label className='input-label'><SwitchLanguage id='manageAdmin.form.ifDiscount'/></label>
-                            <Select
-                                value={optionsDiscount}
-                                onChange={this.handlChangeSlelect}
-                                options={listDiscount}
-                                styles={this.customStyles}
-                                name='voucher'
-                                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_ifDiscount'/>}
-                            />
-                        </div>
-                    }
+                    <span style={{display: 'inline-block'}} 
+                        onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && 
+                        this.handlecreateListinput('ADD')}>
 
-                    {/* Category */}
-                    <div className='form-input col l-3'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.category'/></label>
-                        <Select
-                            value={optionsCategory}
-                            onChange={this.handlChangeSlelect}
-                            options={listAllCategory}
-                            styles={this.customStyles}
-                            placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_category'/>}
-                            name="forItemCategory"
+                        <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
+                            isEdit ? 'edit-form-data' :  'submit-form-data' : 'ban-form-data'} 
+                            color={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
+                                isEdit ?'' : 'var(--color-BTN-manage)' : '#fb9e9e'}
+                            content={<SwitchLanguage id={isEdit ? 'manageAdmin.button.editNow' : 'manageAdmin.form.addDiscount'} />}
                         />
+
+                    </span>
+
+                    <div className='col l-2' onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && this.handleResetValueInput()}>
+                        <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.delete'/>} 
+                            color={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? '#ce163b' : '#fb9e9e'} width='70%' margin='4px 0 0 0' border='50px'
+                        /> 
                     </div>
 
-                    {/* Type */}
-                    <div className='form-input col l-3'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.type'/></label>
-                        <Select
-                            isDisabled={optionsCategory !== null ? false : true}
-                            value={optionsCategoryType}
-                            onChange={this.handlChangeSlelect}
-                            options={listAllCategoryType}
-                            styles={this.customStyles}
-                            placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_type'/>}
-                            name="forItemCategoryType"
-                        />
-                    </div>
 
-                    {/* items */}
-                    {listDataResItems && listDataResItems.length > 0 &&  
-                        <>
-                            <InputSearch
-                                valueName={nameItems}
-                                classWraper='form-input col l-3'
-                                idSwitchLanguage='manageAdmin.items.select-items'
-                                TYPE_INPUT='SELECT_ITEMS_ARRAY'
-                                handleGetDataComponentSearch={this.handleGetDataComponentSearch}
-                                dataArrayItemsSelect={listDataResItems} 
-                            />
-                        </>
-                    }
-
-                    {/* Select start Date */}
-                    <div className='form-input col l-3'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.startDay'/></label>
-                        <DatePicker 
-                            selected={optionsDayStart} 
-                            minDate={new Date()}
-                            onChange={(date) =>  this.handleChangeSelectDate(date,'startDay')} 
-                            className='fixCss'
-                            name='startDay'
-                            placeholderText={languages.EN === language ? 'Select day start' : 'Chọn ngày bắt đầu áp dụng'}
-                            showTimeSelect
-                            autoComplete='off'
-                            timeFormat="HH:mm"
-                            timeIntervals={30}
-                            dateFormat="Pp"
-                        />
-                    </div>
-
-                    {/* Select start Date */}
-                    <div className='form-input col l-3'>
-                        <label className='input-label'><SwitchLanguage id='manageAdmin.form.endDay'/></label>
-                        <DatePicker 
-                            disabled={optionsDayStart ? false : true}
-                            selected={optionsDayEnd} 
-                            minDate={optionsDayStart}
-                            onChange={(date) =>  this.handleChangeSelectDate(date,'endDay')} 
-                            className='fixCss'
-                            placeholderText={languages.EN === language ? 'Select end start' : 'Chọn ngày kết thúc áp dụng'}
-                            showTimeSelect
-                            autoComplete='off'
-                            timeFormat="HH:mm"
-                            timeIntervals={30}
-                            dateFormat="Pp"
-                        />
-                    </div>
 
                 </div>
-            }
-           
-            <div className='col l-12'> 
-                {!isShowButtonAddDisscount && 
-                    <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('CREATE')}>
-                        <Button type={'create'} 
-                            content={<SwitchLanguage id='manageAdmin.form.craeteDiscount'/>}
-                        />
-                    </span>
-                } 
-
-                {isShowButtonAddDisscount && 
-                    <div className='list_input '>
-                        <span style={{display: 'inline-block'}} 
-                            onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && 
-                            this.handlecreateListinput('ADD')}>
-
-                            <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
-                                isEdit ? 'edit-form-data' :  'submit-form-data' : 'ban-form-data'} 
-                                content={<SwitchLanguage id={isEdit ? 'manageAdmin.button.editNow' : 'manageAdmin.form.addDiscount'} />}
-                            />
-                        </span>
-
-                        <span className='margin_between'></span>
-
-                        <span style={{display: 'inline-block'}} onClick={() => this.handlecreateListinput('DELETE')}>
-                            <Button type={'submit-form-data'} 
-                                content={<SwitchLanguage id='manageAdmin.form.hide' />}
-                            />
-                        </span>
-                    </div>
-                } 
             </div>
 
         </>

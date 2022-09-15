@@ -202,6 +202,9 @@
         text-align: center;
         padding: 8px 20px;
         opacity: .8;
+        justify-content: center;
+        display: flex;
+        align-items: center;
 
         .icon-user{
             margin-left:14px;
@@ -277,6 +280,7 @@
     margin-right: 12px;
     margin-top: 29%;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    
     
     .voucher_items{
         font-size: var(--font-size-btn);

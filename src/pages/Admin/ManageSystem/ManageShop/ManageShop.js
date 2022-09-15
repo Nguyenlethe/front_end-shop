@@ -474,11 +474,17 @@ class ManageShop extends Component {
             <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.manageShop' /></p> 
         </div> 
 
-        <div className='col l-3' onClick={() => this.handleShowHideInputsUser()}>
-            <span className='sub-heading' >
-                <SwitchLanguage id='manageAdmin.createShop'/>
-                <FontAwesomeIcon className='icon-user' icon={faStore} />
-            </span>
+        <div className='col l-3 btn-craete-user'  onClick={() => this.handleShowHideInputsUser()}>
+            {!isShowListsInput &&
+                <Button type='submit-form-data' content={  <SwitchLanguage id='manageAdmin.createShop'/>}  icon={<FontAwesomeIcon className='icon-user' icon={faStore} />}
+                    color='var(--color-BTN-manage)' width='77%' margin='4px' border='6px'
+                />
+            }
+            {isShowListsInput &&
+                <Button type='submit-form-data' content={<SwitchLanguage id='manageAdmin.form.hide'/> }  icon={<FontAwesomeIcon className='icon-user' icon={faStore} />}
+                    color='var(--color-BTN-manage)' width='60%' margin='4px' border='6px'
+                /> 
+            } 
         </div>
 
         <div style={{height: isShowListsInput ? '866'+'px' : '0'+'px'}}  className='all-input l-12'>  
@@ -607,17 +613,17 @@ class ManageShop extends Component {
             </div>
     
             {isEdit ? 
-                <div className='col' onClick={(e) => this.handleSubmitFormData(e)}>
-                    <Button type='edit-form-data'
-                        content={language === languages.EN ? 'Save Change':'Lưu Thay Đổi'}>
-                    </Button>
-                </div>      
+                <div className='col l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                    <Button type='edit-form-data' content={language === languages.EN ? 'Save Change':'Lưu Thay Đổi'}
+                        width='86%' margin='4px' border='6px'
+                    /> 
+                </div>
                 :
-                <div className='col' onClick={(e) => this.handleSubmitFormData(e)}>
-                    <Button type='submit-form-data'
-                        content={<SwitchLanguage  id={'manageAdmin.form.btn'}/>}>
-                    </Button>
-                </div>    
+                <div className='col l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                    <Button type='submit-form-data' content={<SwitchLanguage  id={'manageAdmin.form.btn'}/>}
+                        color='var(--color-BTN-manage)' width='86%' margin='4px' border='6px'
+                    /> 
+                </div>
             }
         </div>
 

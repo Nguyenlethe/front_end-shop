@@ -483,13 +483,21 @@ return (
         <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.manageUsers'/></p>
     </div>     
 
-    <div className='col l-3'>
-        <span className='sub-heading' onClick={() => this.handleShowHideInputsUser()}>
-            <SwitchLanguage id='manageAdmin.createUser'/>
-            <FontAwesomeIcon className='icon-user' icon={faUserPlus} />
-        </span>
+
+    <div className='col l-3 btn-craete-user' onClick={() => this.handleShowHideInputsUser()}>
+        {isShowListsInput &&
+            <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.form.hide'}/>}
+                color='var(--color-BTN-manage)' width='50%' margin='4px' border='6px'
+            /> 
+        }
+        {!isShowListsInput &&
+            <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.createUser'}/>}  icon={<FontAwesomeIcon className='icon-user' icon={faUserPlus} />}
+                color='var(--color-BTN-manage)' width='80%' margin='4px' border='6px'
+            /> 
+        }
+
     </div>
-                    
+
     <div style={{height: isShowListsInput ? '1058'+'px' : '0'+'px'}} className='all-input l-12'>
 
     <div className='list-input'>
@@ -688,15 +696,19 @@ return (
 
     <div className='col l-12'>
         {!isEditUser &&
-            <span onClick={(e) => this.handleSubmitFormData(e)}>
-                <Button type='submit-form-data' content={<SwitchLanguage  id={'manageAdmin.form.btn'}/>}/>
-            </span>
+            <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                <Button type='submit-form-data' content={<SwitchLanguage  id={'manageAdmin.form.btn'}/> } 
+                    color='var(--color-BTN-manage)' width='80%' margin='4px' border='6px'
+                /> 
+            </div>
         }
 
         {isEditUser && 
-            <span onClick={(e) => this.handleSubmitFormData(e)}>
-                <Button type='edit-form-data' content={<SwitchLanguage id='manageAdmin.form.btn_edit'/>}/>
-            </span>
+            <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                <Button type='edit-form-data' content={<SwitchLanguage id='manageAdmin.form.btn_edit'/> } 
+                     width='80%' margin='4px' border='6px'
+                /> 
+            </div>
         }
     </div>
 

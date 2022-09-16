@@ -187,6 +187,8 @@ class PriceShip extends Component {
 
             // Set State
             this.setState({
+                dataProvinceVN: [],
+                dataProvinceUS: [],
                 dataErrorFrom:{
                     ...dataErrorFrom,
                     notSelect: '',
@@ -216,6 +218,8 @@ class PriceShip extends Component {
 
             // Set State
             this.setState({
+                dataProvinceVN: [],
+                dataProvinceUS: [],
                 dataErrorFrom:{
                     ...dataErrorFrom,
                     notSelect: '',
@@ -258,7 +262,6 @@ class PriceShip extends Component {
                 }
             })
         }
-        
     }
 
 
@@ -307,7 +310,7 @@ class PriceShip extends Component {
                 isErrSelectPriceShip = 'manageAdmin.items.notAddPriceShip'
             }
 
-
+         
             // Neu co loi
             if(isErrSelect !== '' || isErrSelectPriceShip  !== '' ){
 
@@ -405,69 +408,116 @@ class PriceShip extends Component {
             }
         }
 
+        const reg = new RegExp('^[0-9]+$');
         // Change
         if(name === 'PRICE_VI'){
-            if(dataProvinceVN.length === 0){ 
-                this.setState({
-                    dataProvinceVN: [{priceShipVN: price, province: province}],
-                    dataErrorFrom:{
-                        ...dataErrorFrom,
-                        notAddPriceShip: '',
-                    },
-                })
+
+
+            if(reg.test(price)){
+
+                if(dataProvinceVN.length === 0){ 
+                    this.setState({
+                        dataProvinceVN: [{priceShipVN: price, province: province}],
+                        dataErrorFrom:{
+                            ...dataErrorFrom,
+                            notAddPriceShip: '',
+                        },
+                    })
+                }
+    
+                if(dataProvinceVN.length > 0){
+                    dataProvinceVN.map((item, index) => {
+                        if(item.province === province) {
+                            dataProvinceVN[index].priceShipVN = price
+    
+                            this.setState({
+                                dataProvinceVN: dataProvinceVN,
+                                dataErrorFrom:{
+                                    ...dataErrorFrom,
+                                    notAddPriceShip: '',
+                                },
+                            })
+                        }else{
+                            let data = [...dataProvinceVN, {priceShipVN: price, province: province}]
+    
+                            this.setState({
+                                dataProvinceVN: data,
+                                dataErrorFrom:{
+                                    ...dataErrorFrom,
+                                    notAddPriceShip: '',
+                                },
+                            })
+                        }
+                    })
+                }
+            }else{
+                if(price.length > 0){
+                    this.setState({
+                        dataErrorFrom:{
+                            ...dataErrorFrom,
+                            notAddPriceShip: 'manageAdmin.items.errPriceShip'
+                        },
+                    })
+                }
             }
 
-            if(dataProvinceVN.length > 0){
-                dataProvinceVN.map((item, index) => {
-                    if(item.province === province) {
-                        dataProvinceVN[index].priceShipVN = price
 
-                        this.setState({
-                            dataProvinceVN: dataProvinceVN,
-                        })
-                    }else{
-                        let data = [...dataProvinceVN, {priceShipVN: price, province: province}]
 
-                        this.setState({
-                            dataProvinceVN: data,
-                        })
-                    }
-                })
-            }
         }
 
         // Change
         if(name === 'PRICE_US'){
 
-            if(dataProvinceUS.length === 0){ 
-                this.setState({
-                    dataProvinceUS: [{priceShipUS: price, province: province}],
-                    dataErrorFrom:{
-                        ...dataErrorFrom,
-                        notAddPriceShip: '',
-                    },
-                })
+            if(reg.test(price)){
+
+                if(dataProvinceUS.length === 0){ 
+                    this.setState({
+                        dataProvinceUS: [{priceShipUS: price, province: province}],
+                        dataErrorFrom:{
+                            ...dataErrorFrom,
+                            notAddPriceShip: '',
+                        },
+                    })
+                }
+
+                if(dataProvinceUS.length > 0){
+                    dataProvinceUS.map((item, index) => {
+                        if(item.province === province) {
+                            dataProvinceUS[index].priceShipUS = price
+
+                            this.setState({
+                                dataProvinceUS: dataProvinceUS,
+                                dataErrorFrom:{
+                                    ...dataErrorFrom,
+                                    notAddPriceShip: '',
+                                },
+                            })
+                        
+                        }else{
+
+                            let data = [...dataProvinceUS, {priceShipUS: price, province: province}]
+                            this.setState({
+                                dataProvinceUS: data,
+                                dataErrorFrom:{
+                                    ...dataErrorFrom,
+                                    notAddPriceShip: '',
+                                },
+                            })
+
+                        }
+                    })
+                }
+            }else{
+                if(price.length > 0){
+                    this.setState({
+                        dataErrorFrom:{
+                            ...dataErrorFrom,
+                            notAddPriceShip: 'manageAdmin.items.errPriceShip'
+                        },
+                    })
+                }
             }
 
-            if(dataProvinceUS.length > 0){
-                dataProvinceUS.map((item, index) => {
-                    if(item.province === province) {
-                        dataProvinceUS[index].priceShipUS = price
-
-                        this.setState({
-                            dataProvinceUS: dataProvinceUS,
-                        })
-                      
-                    }else{
-
-                        let data = [...dataProvinceUS, {priceShipUS: price, province: province}]
-                        this.setState({
-                            dataProvinceUS: data,
-                        })
-
-                    }
-                })
-            }
         }
 
         // Change
@@ -493,6 +543,8 @@ class PriceShip extends Component {
         
         // Set state
         this.setState({
+            dataProvinceVN: [],
+            dataProvinceUS: [],
             dataTabelShip: {
                 ...dataTabelShip,
                 itemsId: items.idItems,
@@ -798,7 +850,7 @@ class PriceShip extends Component {
                                             <span>{languages.VI === language ? province.valueVi : province.valueEn}</span>
                                         </div>
 
-                                        <input type='number' className='input' title='VI' name={province.keyMap} ref={(ref) => this.allInputData(ref,index)}
+                                        <input  className='input' title='VI' name={province.keyMap} ref={(ref) => this.allInputData(ref,index)}
                                             onChange={(e) => this.handleChangeInput(e.target.value,'PRICE_VI',province.keyMap, index)}
                                             placeholder={languages.EN === language ? 'Enter shipping price...' : 'Nhập giá ship...'}
                                         />
@@ -819,7 +871,7 @@ class PriceShip extends Component {
                                             <span>{languages.VI === language ? province.valueVi : province.valueEn}</span>
                                         </div>
 
-                                        <input  type='number' className='input' title='US' name={province.keyMap} ref={(ref) => this.allInputData(ref,index + listProvince.length)}
+                                        <input  className='input' title='US' name={province.keyMap} ref={(ref) => this.allInputData(ref,index + listProvince.length)}
                                             onChange={(e) => this.handleChangeInput(e.target.value,'PRICE_US',province.keyMap, index)}
                                             placeholder={languages.EN === language ? 'Enter shipping price...' : 'Nhập giá ship...'}
                                         />
@@ -866,11 +918,8 @@ class PriceShip extends Component {
                 </div>
             </div>
             
-
             <ListPrice getValueChangePriceShip={this.getValueChangePriceShip} />
-
             
-          
         </>
     )}}
 

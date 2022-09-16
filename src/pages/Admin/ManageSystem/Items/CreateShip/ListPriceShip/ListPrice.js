@@ -69,10 +69,7 @@ class ListPrice extends Component {
                     resListDataPriceShip: dataModal
                 })
             }
-
-
         }
-
     }
 
     // handle set list data
@@ -183,10 +180,16 @@ class ListPrice extends Component {
 
     // DELETE price ship
     changePriceShip = async(dataPrice, actions) => {
-        let {optionsCategory,optionsCategoryType} = this.state
+        let {optionsCategory,optionsCategoryType,dataPriceShip} = this.state
+        let {isYesModal} = this.props
         
         if(actions === 'EDIT'){
-            this.props.getValueChangePriceShip(dataPrice)
+            await this.props.getValueChangePriceShip(dataPrice)
+
+            // Set state
+            this.setState({
+                resListDataPriceShip: dataPrice,
+            })
             
             setTimeout(() => {
                 document.documentElement.scrollTop = (localStorage.getItem('topPriceShip'))
@@ -195,7 +198,11 @@ class ListPrice extends Component {
         
         // Delete
         if(actions === 'DELETE'){
-            this.props.handleShowHide(false)
+
+            if(isYesModal){
+                this.props.handleShowHide(false)
+            }
+
             let resData = await adminService.getPriceShip({idShop: dataPrice.idShop , itemsId: dataPrice.itemsId, category: dataPrice.category, categoryType: dataPrice.categoryType, actions: 'DELETE'})
             if(resData && resData.data && resData.data.errCode === 0){
     

@@ -144,6 +144,7 @@
 
 
 
+
         },
         "toast": {
             "success":"Add user successfully !!!",
@@ -192,7 +193,8 @@
             "notSelect": "Please select 1 of the above fields to create a shipping price !!!",
             "notAddPriceShip": "Please enter shipping price !!!",
             "ship_price-list":"Shipping price list",
-            "count-add-price":"Province created the shipping price : " 
+            "count-add-price":"Province created the shipping price : " ,
+            "errPriceShip":"Can't enter text !!!"
 
 
 

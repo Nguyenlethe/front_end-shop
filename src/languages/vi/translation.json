@@ -190,7 +190,8 @@
             "notSelect": "Vui lòng chọn danh mục/loại hàng hoặc tìm kiếm sản phẩm !!!",
             "notAddPriceShip": "Vui lòng nhập giá gửi hàng !!!",
             "ship_price-list":"Danh sách giá vận chuyển",
-            "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : "
+            "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : ",
+            "errPriceShip":"Không được nhập chữ !!!"
 
 
 

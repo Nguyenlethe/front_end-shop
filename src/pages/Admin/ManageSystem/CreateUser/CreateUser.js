@@ -396,9 +396,11 @@ class CreateUser extends Component {
             this.setState({
 
                 optionsProvince: valueOptions,
+                optionsDistrict: null,
                 users: {
                     ...users,
                     province: valueOptions.value,
+                    district: '',
                 },
                 dataError: {
                     ...dataError,
@@ -413,9 +415,11 @@ class CreateUser extends Component {
             this.setState({
 
                 optionsDistrict: valueOptions,
+                optionsDataWards: null,
                 users: {
                     ...users,
                     district: valueOptions.value,
+                    wards:'',
                 },
                 dataError: {
                     ...dataError,

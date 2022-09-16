@@ -14,6 +14,8 @@
         "createShop":"Create New Shop",
         "createItems":"Create New Items",
         "listItem":"List All Items",
+        "other": "Other",
+        "otherDataSystem":"Add other data for system",
 
         "form":{
             "idUser":"ID User",
@@ -214,7 +216,8 @@
             "close":"Exit",
             "submit":"Add new",
             "delete":"Delete",
-            "update": "Cập nhật"
+            "update": "Cập nhật",
+            "addColor": "I. Add color"
 
         }
     },

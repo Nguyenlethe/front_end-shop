@@ -763,7 +763,7 @@ class PriceShip extends Component {
                 <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.items.ship_price' /></p> 
             </div> 
 
-            <div className='list-input' >
+            <div id='list-input' >
                 <div className='l-3'></div >
 
                 <InputSearch 

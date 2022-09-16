@@ -14,6 +14,8 @@
         "createShop":"Tạo Mới Shop",
         "createItems":"Tạo mới sản phẩm",
         "listItem":"Danh Sách sản phẩm",
+        "other": "Khác",
+        "otherDataSystem":"Thêm dữ liệu khác cho hệ thống",
 
 
         "form":{
@@ -136,8 +138,6 @@
             "addDiscount": "Thêm Mới",
             "deleteAllListInput":"Xóa tất cả"
             
-
-        
         },
         "toast": {
             "success":"Thêm người dùng thành công !!!",
@@ -194,10 +194,6 @@
             "errPriceShip":"Không được nhập chữ !!!"
 
 
-
-
-
-
         },
         "modal":{
             "error":"Sản phẩm đã được đặt mã giảm giá ",
@@ -214,7 +210,8 @@
             "submit":"Thêm mới",
             "hide":"Ẩn Form",
             "delete":"Xoá",
-            "update": "Cập nhật"
+            "update": "Cập nhật",
+            "addColor":"I. Thêm màu"
 
         }
     },

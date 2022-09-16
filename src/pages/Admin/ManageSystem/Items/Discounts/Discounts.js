@@ -114,7 +114,9 @@ class Discount extends Component {
             this.state.dataErrorModal !== nextState.dataErrorModal || 
             this.state.isShowModalError !== nextState.isShowModalError ||
             this.state.isHideSlow !== nextState.isHideSlow || 
-            this.state.listDataOptions !== nextState.listDataOptions  
+            this.state.listDataOptions !== nextState.listDataOptions  ||
+            this.state.isEdit !== nextState.isEdit  
+
         ){
           return true;
         }
@@ -699,6 +701,7 @@ class Discount extends Component {
         let newDataOptions  = generalHandling.resetDefaultState(dataOptions)
 
         this.setState({
+            isEdit: false,
             dataTabelItemsDiscount: {
                 ...newDataTabelItemsDiscount
             },
@@ -951,15 +954,22 @@ class Discount extends Component {
                 <div className='list_input ' style={{alignItems: 'center'}}>
 
                     <span style={{display: 'inline-block'}} 
-                        onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && 
-                        this.handlecreateListinput('ADD')}>
+                        onClick={() => optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && this.handlecreateListinput('ADD')}>
 
-                        <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
-                            isEdit ? 'edit-form-data' :  'submit-form-data' : 'ban-form-data'} 
-                            color={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 
-                                isEdit ?'' : 'var(--color-BTN-manage)' : '#fb9e9e'}
-                            content={<SwitchLanguage id={isEdit ? 'manageAdmin.button.editNow' : 'manageAdmin.form.addDiscount'} />}
+                        {isEdit &&
+                            <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount && isEdit && 'edit-form-data'} 
+                            content={<SwitchLanguage id='manageAdmin.button.editNow' />}
                         />
+
+                        }
+
+                        {!isEdit &&
+                            <Button type={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 'submit-form-data' : 'ban-form-data'} 
+                                color={optionsIdShop && optionsSele && optionsDayStart && optionsDayEnd && optionsCategory && optionsDiscount ? 'var(--color-BTN-manage)' : '#fb9e9e'}
+                                content={<SwitchLanguage id='manageAdmin.form.addDiscount' />}
+                            />
+                        }
+                       
 
                     </span>
 

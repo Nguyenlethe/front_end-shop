@@ -478,250 +478,246 @@ render() {
     let {email,password,firstName,lastName, phoneNumber, avata,avataLink,wards,addressDetails} = this.state.users
 
 return (
-
-<div className='grid'>
-<div className='grid wide'>
-<div className='row'>
-
-    <div className='col l-12'>
-        <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.manageUsers'/></p>
-    </div>     
+    <>
+        <div className='col l-12'>
+            <p className='heading-manage-user'><SwitchLanguage id='manageAdmin.manageUsers'/></p>
+        </div>     
 
 
-    <div className='col l-3 btn-craete-user' onClick={() => this.handleShowHideInputsUser()}>
-        {isShowListsInput &&
-            <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.form.hide'}/>}
-                color='var(--color-BTN-manage)' width='50%' margin='4px' border='6px'
-            /> 
-        }
-        {!isShowListsInput &&
-            <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.createUser'}/>}  icon={<FontAwesomeIcon className='icon-user' icon={faUserPlus} />}
-                color='var(--color-BTN-manage)' width='80%' margin='4px' border='6px'
-            /> 
-        }
-
-    </div>
-
-    <div style={{height: isShowListsInput ? '1058'+'px' : '0'+'px'}} className='all-input l-12'>
-
-    <div className='list-input'>
-        <div className='form-input col l-6' style={{ display:  isEditUser ? 'none' : 'block'}}>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.email'/></label>
-            <input  type='text' className='input' name='email'
-                style={{backgroundColor: email !== '' ? 'white' : 'transparent'}} 
-                value={email}  disabled={isEditUser ? true : false }
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                          
-            />
-            <span name='email'  className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_email' /></span>
-            <span className='err'>{!_.isEmpty(dataError.email) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.email) ? language === languages.VI ? dataError.email.valueVi : dataError.email.valueEn : ''}</span>
-        </div>
-
-        
-
-        <div className='form-input password col l-6 ' style={{ display: isEditUser ? 'none' : 'block'}}>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.password'/></label>
-            <input type={isShowPass ? 'password' : 'text'} className='input' name='password'
-                style={{backgroundColor: password !== '' ? 'white' : 'transparent' }}
-                value={password} disabled={isEditUser ? true : false }
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}         
-            />
-            <p className='eye-password' onClick={() => this.setState({isShowPass: !this.state.isShowPass})}>
-                {isShowPass === false ? <FontAwesomeIcon  icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-            </p>
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_password' /></span>
-            <span className='err'>{!_.isEmpty(dataError.password) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.password) ? language === languages.VI ? dataError.password.valueVi : dataError.password.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.firstName'/></label>
-            <input type='text' className='input' name='firstName'
-                style={firstName !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={firstName}
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                                                                
-            />
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_firstName' /></span>
-            <span className='err'>{!_.isEmpty(dataError.firstName) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.firstName) ? language === languages.VI ? dataError.firstName.valueVi : dataError.firstName.valueEn : ''}</span>
-        </div>
-
-
-
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.lastName'/></label>
-            <input type='text' className='input' name='lastName'
-                style={lastName !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={lastName}
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                         
-            />
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_lastName' /></span>
-            <span className='err'>{!_.isEmpty(dataError.lastName) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.lastName) ? language === languages.VI ? dataError.lastName.valueVi : dataError.lastName.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.gender'/></label>
-            <Select
-                value={optionsGender}
-                onChange={this.handlChangeSlelect}
-                options={listGender}
-                name='gender'
-                styles={this.customStyles}
-                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_gender' />}
-            />
-            <span className='err'>{!_.isEmpty(dataError.gender) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.gender) ? language === languages.VI ? dataError.gender.valueVi : dataError.gender.valueEn : ''}</span>
-        </div>
-
-
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.permission'/></label>
-            <Select
-                value={optionsPermission}
-                onChange={this.handlChangeSlelect}
-                options={listPermission}
-                name='permission'
-                styles={this.customStyles}
-                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_permission' />}
-            />
-            <span className='err'>{!_.isEmpty(dataError.permission) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.permission) ? language === languages.VI ? dataError.permission.valueVi : dataError.permission.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.avataLink'/></label>
-            <input type='text' className='input' name='avataLink'
-                style={avataLink !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={avataLink}
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                         
-            />
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_avataLink' /></span>
-            <span className='err'>{!_.isEmpty(dataError.avataLink) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.avataLink) ? language === languages.VI ? dataError.avataLink.valueVi : dataError.avataLink.valueEn : ''}</span>
-        </div>
-
-
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.Province'/></label>
-            <Select
-                value={optionsProvince}
-                onChange={this.handlChangeSlelect}
-                options={listProvince}
-                name='province'
-                styles={this.customStyles}
-                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_Province' />}
-            />
-            <span className='err'>{!_.isEmpty(dataError.province) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.province) ? language === languages.VI ? dataError.province.valueVi : dataError.province.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.district'/></label>
-            <Select
-                value={optionsDistrict}
-                onChange={this.handlChangeSlelect}
-                options={listDistrict}
-                name='district'
-                styles={this.customStyles}
-                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_district' />}
-            />
-            <span className='err'>{!_.isEmpty(dataError.district) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.district) ? language === languages.VI ? dataError.district.valueVi : dataError.district.valueEn : ''}</span>
-        </div>
-
-
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.wards'/></label>
-            {listDataWards && listDataWards.length > 0 ?
-            <Select
-                value={optionsDataWards}
-                onChange={this.handlChangeSlelect}
-                options={listDataWards}
-                name='wards'
-                styles={this.customStyles}
-                placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_wards' />}
-            />
-            :
-            <>
-                <input type="text" className='input' name='wards' 
-                    style={wards !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                    value={wards}
-                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
-                />
-                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_wards' /></span>
-            </>
-            } 
-            <span className='err'>{!_.isEmpty(dataError.wards) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.wards) ? language === languages.VI ? dataError.wards.valueVi : dataError.wards.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-12'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.AddressDetails'/></label>
-            <input type='text' className='input' name='addressDetails'
-                style={addressDetails !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={addressDetails}
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                          
-            />
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_AddressDetails' /></span>
-            <span className='err'>{!_.isEmpty(dataError.addressDetails) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.addressDetails) ? language === languages.VI ? dataError.addressDetails.valueVi : dataError.addressDetails.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='list-input'>
-        <div className='form-input col l-6'>
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.phone'/></label>
-            <input type='text' className='input' name='phoneNumber'
-                style={phoneNumber !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={phoneNumber} 
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                              
-            />
-            <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_phone' /></span>
-            <span className='err'>{!_.isEmpty(dataError.phoneNumber) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.phoneNumber) ? language === languages.VI ? dataError.phoneNumber.valueVi : dataError.phoneNumber.valueEn : ''}</span>
-        </div>
-
-
-        <div className='form-input col l-6' >
-            <label className='input-label'><SwitchLanguage id='manageAdmin.form.avata'/></label>
-            <input type='file' className='input' name='avata'
-                style={avata !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
-                value={avata} disabled={isEditUser ? true : false }
-                onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name,e)}                                                                                                                         
-            />
-            <span className='err'>{!_.isEmpty(dataError.avata) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.avata) ? language === languages.VI ? dataError.avata.valueVi : dataError.avata.valueEn : ''}</span>
-        </div>
-    </div>
-
-    <div className='pewview-img l-3'>
-        <div className='pewview-border-img' >
-            <img className='avata-img' src={imgPreview} alt='' />
-        </div>
-    </div>
-
-    <div className='col l-12'>
-        {!isEditUser &&
-            <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
-                <Button type='submit-form-data' content={<SwitchLanguage  id={'manageAdmin.form.btn'}/> } 
+        <div className='col l-3 btn-craete-user' onClick={() => this.handleShowHideInputsUser()}>
+            {isShowListsInput &&
+                <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.form.hide'}/>}
+                    color='var(--color-BTN-manage)' width='50%' margin='4px' border='6px'
+                /> 
+            }
+            {!isShowListsInput &&
+                <Button type='submit-form-data' content={<SwitchLanguage id= {'manageAdmin.createUser'}/>}  icon={<FontAwesomeIcon className='icon-user' icon={faUserPlus} />}
                     color='var(--color-BTN-manage)' width='80%' margin='4px' border='6px'
                 /> 
-            </div>
-        }
+            }
+        </div>
 
-        {isEditUser && 
-            <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
-                <Button type='edit-form-data' content={<SwitchLanguage id='manageAdmin.form.btn_edit'/> } 
-                     width='80%' margin='4px' border='6px'
-                /> 
+        <div style={{height: isShowListsInput ? '1058'+'px' : '0'+'px'}} className='all-input l-12'>
+ 
+        <div className='list-input'>
+            <div className='form-input col l-6' style={{ display:  isEditUser ? 'none' : 'block'}}>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.email'/></label>
+                <input  type='text' className='input' name='email'
+                    style={{backgroundColor: email !== '' ? 'white' : 'transparent'}} 
+                    value={email}  disabled={isEditUser ? true : false }
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                          
+                />
+                <span name='email'  className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_email' /></span>
+                <span className='err'>{!_.isEmpty(dataError.email) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.email) ? language === languages.VI ? dataError.email.valueVi : dataError.email.valueEn : ''}</span>
             </div>
-        }
-    </div>
 
-    </div>
-        <ListUser handleSetValueForm={this.handleSetValueForm} heandleChangeInput={this.heandleChangeInput}/>
-    </div>
-    
-</div>
-</div>  
+            
+
+            <div className='form-input password col l-6 ' style={{ display: isEditUser ? 'none' : 'block'}}>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.password'/></label>
+                <input type={isShowPass ? 'password' : 'text'} className='input' name='password'
+                    style={{backgroundColor: password !== '' ? 'white' : 'transparent' }}
+                    value={password} disabled={isEditUser ? true : false }
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}         
+                />
+                <p className='eye-password' onClick={() => this.setState({isShowPass: !this.state.isShowPass})}>
+                    {isShowPass === false ? <FontAwesomeIcon  icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                </p>
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_password' /></span>
+                <span className='err'>{!_.isEmpty(dataError.password) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.password) ? language === languages.VI ? dataError.password.valueVi : dataError.password.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.firstName'/></label>
+                <input type='text' className='input' name='firstName'
+                    style={firstName !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={firstName}
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                                                                
+                />
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_firstName' /></span>
+                <span className='err'>{!_.isEmpty(dataError.firstName) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.firstName) ? language === languages.VI ? dataError.firstName.valueVi : dataError.firstName.valueEn : ''}</span>
+            </div>
+
+
+
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.lastName'/></label>
+                <input type='text' className='input' name='lastName'
+                    style={lastName !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={lastName}
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                         
+                />
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_lastName' /></span>
+                <span className='err'>{!_.isEmpty(dataError.lastName) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.lastName) ? language === languages.VI ? dataError.lastName.valueVi : dataError.lastName.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.gender'/></label>
+                <Select
+                    value={optionsGender}
+                    onChange={this.handlChangeSlelect}
+                    options={listGender}
+                    name='gender'
+                    styles={this.customStyles}
+                    placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_gender' />}
+                />
+                <span className='err'>{!_.isEmpty(dataError.gender) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.gender) ? language === languages.VI ? dataError.gender.valueVi : dataError.gender.valueEn : ''}</span>
+            </div>
+
+
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.permission'/></label>
+                <Select
+                    value={optionsPermission}
+                    onChange={this.handlChangeSlelect}
+                    options={listPermission}
+                    name='permission'
+                    styles={this.customStyles}
+                    placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_permission' />}
+                />
+                <span className='err'>{!_.isEmpty(dataError.permission) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.permission) ? language === languages.VI ? dataError.permission.valueVi : dataError.permission.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.avataLink'/></label>
+                <input type='text' className='input' name='avataLink'
+                    style={avataLink !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={avataLink}
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                         
+                />
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_avataLink' /></span>
+                <span className='err'>{!_.isEmpty(dataError.avataLink) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.avataLink) ? language === languages.VI ? dataError.avataLink.valueVi : dataError.avataLink.valueEn : ''}</span>
+            </div>
+
+
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.Province'/></label>
+                <Select
+                    value={optionsProvince}
+                    onChange={this.handlChangeSlelect}
+                    options={listProvince}
+                    name='province'
+                    styles={this.customStyles}
+                    placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_Province' />}
+                />
+                <span className='err'>{!_.isEmpty(dataError.province) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.province) ? language === languages.VI ? dataError.province.valueVi : dataError.province.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.district'/></label>
+                <Select
+                    value={optionsDistrict}
+                    onChange={this.handlChangeSlelect}
+                    options={listDistrict}
+                    name='district'
+                    styles={this.customStyles}
+                    placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_district' />}
+                />
+                <span className='err'>{!_.isEmpty(dataError.district) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.district) ? language === languages.VI ? dataError.district.valueVi : dataError.district.valueEn : ''}</span>
+            </div>
+
+
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.wards'/></label>
+                {listDataWards && listDataWards.length > 0 ?
+                <Select
+                    value={optionsDataWards}
+                    onChange={this.handlChangeSlelect}
+                    options={listDataWards}
+                    name='wards'
+                    styles={this.customStyles}
+                    placeholder={<SwitchLanguage id='manageAdmin.form.planceholder_wards' />}
+                />
+                :
+                <>
+                    <input type="text" className='input' name='wards' 
+                        style={wards !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                        value={wards}
+                        onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}   
+                    />
+                    <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_wards' /></span>
+                </>
+                } 
+                <span className='err'>{!_.isEmpty(dataError.wards) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.wards) ? language === languages.VI ? dataError.wards.valueVi : dataError.wards.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-12'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.AddressDetails'/></label>
+                <input type='text' className='input' name='addressDetails'
+                    style={addressDetails !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={addressDetails}
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                          
+                />
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_AddressDetails' /></span>
+                <span className='err'>{!_.isEmpty(dataError.addressDetails) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.addressDetails) ? language === languages.VI ? dataError.addressDetails.valueVi : dataError.addressDetails.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='list-input'>
+            <div className='form-input col l-6'>
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.phone'/></label>
+                <input type='text' className='input' name='phoneNumber'
+                    style={phoneNumber !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={phoneNumber} 
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name)}                                              
+                />
+                <span className='planceholder_input'><SwitchLanguage id='manageAdmin.form.planceholder_phone' /></span>
+                <span className='err'>{!_.isEmpty(dataError.phoneNumber) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.phoneNumber) ? language === languages.VI ? dataError.phoneNumber.valueVi : dataError.phoneNumber.valueEn : ''}</span>
+            </div>
+
+
+            <div className='form-input col l-6' >
+                <label className='input-label'><SwitchLanguage id='manageAdmin.form.avata'/></label>
+                <input type='file' className='input' name='avata'
+                    style={avata !== '' ? {backgroundColor: 'white'}: {backgroundColor: 'transparent'}}
+                    value={avata} disabled={isEditUser ? true : false }
+                    onChange={(e) => this.heandleChangeInput(e.target.value,e.target.name,e)}                                                                                                                         
+                />
+                <span className='err'>{!_.isEmpty(dataError.avata) && <FontAwesomeIcon  icon={faCircleExclamation} />} {!_.isEmpty(dataError.avata) ? language === languages.VI ? dataError.avata.valueVi : dataError.avata.valueEn : ''}</span>
+            </div>
+        </div>
+
+        <div className='pewview-img l-3'>
+            <div className='pewview-border-img' >
+                <img className='avata-img' src={imgPreview} alt='' />
+            </div>
+        </div>
+
+        <div className='col l-12'>
+            {!isEditUser &&
+                <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                    <Button type='submit-form-data' content={<SwitchLanguage  id={'manageAdmin.form.btn'}/> } 
+                        color='var(--color-BTN-manage)' width='80%' margin='4px' border='6px'
+                    /> 
+                </div>
+            }
+
+            {isEditUser && 
+                <div className='l-2'  onClick={(e) => this.handleSubmitFormData(e)}>
+                    <Button type='edit-form-data' content={<SwitchLanguage id='manageAdmin.form.btn_edit'/> } 
+                        width='80%' margin='4px' border='6px'
+                    /> 
+                </div>
+            }
+        </div>
+
+        </div>
+
+        <div>
+            <ListUser handleSetValueForm={this.handleSetValueForm} heandleChangeInput={this.heandleChangeInput}/>
+        </div>
+    </>
+
 )}}
 
 

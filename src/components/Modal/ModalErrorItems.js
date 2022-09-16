@@ -92,7 +92,7 @@ class ModalErrorItems extends Component {
                         {children}
                     </div>
                 }
-                {children}
+                {title !== 'warn' && {children}}
             </div>
         </>
     )}

@@ -6,13 +6,14 @@ import {path, PERMISSIONS} from '../../../utils/constant'
 import {HomeIcons, ShopIcons,ListUserIcons,ShopIconsActive,ListUserIconsActive} from '../../../components/Icons'
 import ManageShop from './ManageShop'
 import ManageUser from './CreateUser';
+import OtherSystemData from './OtherSystemData';
 import Tippy from '../../../components/Tippy/Tippy';
 import SwitchLanguage from '../../../SwitchLanguage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {faRightFromBracket,faPlus} from '@fortawesome/free-solid-svg-icons';
 import generalHandling from '../../../utils/generalHandling'
 import * as actions from '../../../store/action';
-
+import InputStyle from '../../../components/InputStyle';
 
 import './ManageSystem.scss';
 class ManageSystem extends Component {
@@ -20,8 +21,10 @@ class ManageSystem extends Component {
         super(props);
         this.state = {
            showManageShop: false,
-           showManageUser: true,
-           loadDataAllCode: false
+           showManageUser: false,
+           loadDataAllCode: false,
+           islogOut: false,
+           showOtherSystemData: true,
         }
     }
 
@@ -31,7 +34,11 @@ class ManageSystem extends Component {
             this.props.dataUser !== nextProps.dataUser ||             
             this.state.showManageShop !== nextState.showManageShop ||
             this.state.showManageUser !== nextState.showManageUser  || 
-            this.state.loadDataAllCode !== nextState.loadDataAllCode  
+            this.state.loadDataAllCode !== nextState.loadDataAllCode || 
+            this.state.islogOut !== nextState.islogOut || 
+            this.state.showOtherSystemData !== nextState.showOtherSystemData
+
+
         ){
           return true;
         }
@@ -79,10 +86,16 @@ class ManageSystem extends Component {
         }
     }
 
+    // Handle log out
+    handleLogOut = async () => {
+        this.setState({islogOut: true})
+        localStorage.clear()
+    }
+
       
 render() {
 
-    let {showManageShop,showManageUser,loadDataAllCode} = this.state
+    let {showManageShop,showManageUser,loadDataAllCode,islogOut,showOtherSystemData} = this.state
     let {islogin, permission} = this.props.dataUser
     
     return (
@@ -95,37 +108,55 @@ render() {
         
                     <div className='nav-header'>
                         <div className='list-icon-controll'>
-                            <Tippy content={<SwitchLanguage id='manageAdmin.home'/>} height='70'>
+                            <Tippy content={<SwitchLanguage id='manageAdmin.home'/>} height='var(--height-tippy-nav'>
                                 <span className='icon-system '>
                                     <Link className='nav-icon-home' to={path.HOMEPAGE}> <HomeIcons/></Link>
                                 </span>
                             </Tippy>
     
-                            <Tippy content={<SwitchLanguage id='manageAdmin.manageShop'/>} height='70'>
+                            <Tippy content={<SwitchLanguage id='manageAdmin.manageShop'/>} height='var(--height-tippy-nav'>
                                 <span className={ showManageShop ?  'icon-system active': 'icon-system'} onClick={() => this.handleShowPage('showManageShop')}>
                                     {showManageShop ? <ShopIconsActive/> : <ShopIcons/>}
                                 </span>
                             </Tippy>
     
-                            <Tippy content={<SwitchLanguage id='manageAdmin.manageUsers'/>} height='70'>
+                            <Tippy content={<SwitchLanguage id='manageAdmin.manageUsers'/>} height='var(--height-tippy-nav'>
                                 <span className={ showManageUser ? 'icon-system active' : 'icon-system'} onClick={() => this.handleShowPage('showManageUser')}>
                                     {showManageUser ? <ListUserIconsActive/> : <ListUserIcons/>}
                                 </span>
                             </Tippy>
+
+
+                            <Tippy content={<SwitchLanguage id='manageAdmin.other'/>} height='var(--height-tippy-nav'>
+                                <span className={showOtherSystemData ? 'icon-system active' : 'icon-system'} onClick={() => this.handleShowPage('showOtherSystemData')}>
+                                    <span className='border-icon-nav'><FontAwesomeIcon icon={faPlus}/></span>
+                                </span>
+                            </Tippy>
+
+
+
+
                         </div>
     
+
+
                         <div className='List-icon-right'>
+
                             <Tippy content={<SwitchLanguage id='manageAdmin.language'/>}>
                                 <div className='language'>
                                     <ListLanguage/> 
                                 </div>
                             </Tippy>
+
+
                             <Tippy content={<SwitchLanguage id='manageAdmin.logout'/>} height='20'>
-                                <span className='log-out'>
+                                <span className='log-out' onClick={() => this.handleLogOut()}>
                                     <FontAwesomeIcon className='icon-log-out' icon={faRightFromBracket}/>
                                 </span>
                             </Tippy>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -134,8 +165,12 @@ render() {
         <div className='grid'>
             <div className='grid wide'>
                 <div className='l-12'>
+                    
+                    {showOtherSystemData && loadDataAllCode && <InputStyle> <OtherSystemData/> </InputStyle>}
                     {showManageShop && loadDataAllCode && <ManageShop/>}
                     {showManageUser && loadDataAllCode && <ManageUser/>} 
+                    {islogOut && loadDataAllCode && <Navigate to={path.HOME} />}
+
                 </div>
             </div>
         </div>

@@ -48,6 +48,16 @@
                         border-radius: 6px;
                         background-color: rgba(238, 238, 238, 0.837);
                     }
+
+                    .border-icon-nav{
+                        width: 26px;
+                        height: 26px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 2px solid;
+                        border-radius: 50px;
+                    }
             
                 }
                 .icon-system.active{
@@ -57,7 +67,17 @@
                     justify-content: center;
                     width: 110px;
                     height: calc(var(--heightHeader) - 10px);
-                    
+
+
+                    .border-icon-nav{
+                        width: 26px;
+                        height: 26px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 2px solid;
+                        border-radius: 50px;
+                    }
                 }
             }
     

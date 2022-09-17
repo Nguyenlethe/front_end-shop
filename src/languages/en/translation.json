@@ -217,7 +217,9 @@
             "submit":"Add new",
             "delete":"Delete",
             "update": "Cập nhật",
-            "addColor": "I. Add color"
+            "addColor": "I. Add color",
+            "Facebook":"Continue with Facebook",
+            "Twitter":"Continue with Twitter"
 
         }
     },

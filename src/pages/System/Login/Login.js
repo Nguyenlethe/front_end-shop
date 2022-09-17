@@ -15,12 +15,16 @@ import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
 
+
 class Login extends Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
         this.state = {
             isShowPass: false,
+            isFocusAcount: false,
+            isFocusPassword: false,
+
             isModal: false,
             errMessage: {
                 account: '',
@@ -32,6 +36,8 @@ class Login extends Component {
             }
         }
     }
+
+  
 
     // Ẩn hiện password
     handleShowHinePassword = () => {
@@ -54,6 +60,7 @@ class Login extends Component {
     handleOnchangeInput = (value, name) => {
         let stateCopy = this.state.form
         let errMessageCoppy = this.state.errMessage
+
         for(let key in errMessageCoppy){
             if(name === key){
                 errMessageCoppy[key] = ''
@@ -64,19 +71,18 @@ class Login extends Component {
                 stateCopy[key] = value
             }
         }
+
         this.setState({
             errMessage: {...errMessageCoppy},
             form: {...stateCopy}
         })
+
     }
 
     // Xl ấn submit 
     handleSubmitLogin = async (e) => {
-        let {isModal} = this.state
-      
+        e.preventDefault()
 
-   
-      
         let {account,password} = this.state.form
         if(account.trim() !== "" && password.trim() !== "" ) {
             let data = this.state.form
@@ -86,6 +92,8 @@ class Login extends Component {
                 errMessage: {...errMessageCoppy}
             })
             let res = await this.props.loginSystem(data)
+
+            console.log(res)
             if(res && res.data.errCode !== 0){
                 this.setState({isModal:false})
                 
@@ -108,7 +116,7 @@ class Login extends Component {
     render() {
 
     let {language,dataUser} = this.props
-    let {isShowPass,isModal,errMessage} = this.state
+    let {isShowPass,isModal,errMessage,isFocusAcount,isFocusPassword} = this.state
     let {account,password} = this.state.form
 
     return (
@@ -120,15 +128,15 @@ class Login extends Component {
     {dataUser.islogin && handleCheckPermission.handleCheckPermission(PERMISSIONS.SELLER,dataUser.permission)  && <Navigate to={path.HOMEPAGE}/>}
 
         <form className={cx('form-login')}>
-            <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.heading'/></p>
+            {/* <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.heading'/></p> */}
             
-            <div className={cx('form-input')}>
+            <div className={cx('form-input')} >
                 <label><SwitchLanguage id='manageAdmin.form.account'/></label>
-                <div className={cx('wrap-input')}>
+                <div className={cx('wrap-input')} style={{boxShadow: isFocusAcount ? '1px 1px 10px #046ba6' : ''}}>
                     <FontAwesomeIcon className={cx('icon-input')} icon={faUser}/> 
-                    <input className={cx('input')} type="text"  name='account' value={account}
-                        placeholder={language === languages.EN ? 'Enter account' : 'Nhập tài khoản'}
-                        onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
+                    <input className={cx('input')} type="text"  name='account' value={account} autoComplete="off"
+                        placeholder={language === languages.EN ? 'Enter account' : 'Nhập tài khoản'} onFocus={() => this.setState({isFocusAcount: true})}
+                        onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)} onBlur={() => this.setState({isFocusAcount: false})}
                     />
                 </div>
                 <span className={cx('error-input-login')}>
@@ -136,14 +144,12 @@ class Login extends Component {
                     {errMessage.account !== '' ? language === languages.EN ? errMessage.account.valueEn : errMessage.account.valueVi : ''}
                 </span>
 
-
-
                 <label>{<SwitchLanguage id='manageAdmin.form.password'/>}</label>
-                <div className={cx('wrap-input')}>
+                <div className={cx('wrap-input')} style={{boxShadow: isFocusPassword ? '1px 1px 10px #046ba6' : ''}} >
                     <FontAwesomeIcon className={cx('icon-input')} icon={isShowPass === false ? faLock : faUnlock}/> 
                     <input className={cx('input')} name='password' type={isShowPass === false ? 'password' : 'text'}  
-                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'}
-                        value={password} autoComplete="on"
+                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'}  onFocus={() => this.setState({isFocusPassword: true})}  
+                        value={password} autoComplete="on"  onBlur={() => this.setState({isFocusPassword: false})}
                         onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
                     />
                     <FontAwesomeIcon className={cx('icon-input')} onClick={() => this.handleShowHinePassword()} icon={isShowPass === false ? faEyeSlash : faEye}/> 
@@ -153,39 +159,36 @@ class Login extends Component {
                     {errMessage.password !== '' ? language === languages.EN ? errMessage.password.valueEn : errMessage.password.valueVi : ''}
                 </span>
 
-
-
-                <span  className={cx('forget')}>
+                <span className={cx('forget')}>
                     <Link to={path.FORGOTPASS}>
                         <SwitchLanguage id='manageAdmin.form.ForgotPW'/> 
                     </Link>
                 </span>
+                
 
-                <p onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
-                    <Button type={account.trim() !== "" && password.trim() !== "" ? 'btn-submit' : "btn-ban"}
-                        content={<SwitchLanguage id='manageAdmin.form.heading'/>}
+                <p className='l-4 MG_between' style={{marginTop: '70px'}} onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
+                    <Button textType='capitalize' width='100%' border='4px' size='1.8rem' height='35px' color='var(--BGR-color-btn-manageuser)' 
+                        type={account.trim() !== "" && password.trim() !== "" ? 'submit-form-data' : 'btn-ban'}
+                        content={<SwitchLanguage id='manageAdmin.form.heading'/>} margin='12px 0'
                     />
                 </p>
+
             </div>
 
-
-                    
+            <div className={cx('compartment')}><span >OR</span></div>
 
             <div className={cx('login-society')}>
-                <span className={cx('login-society-sub')}><SwitchLanguage id='manageAdmin.form.Orsing'/></span>
                 <div className={cx('list-icon-society')}>
-                    <a className={cx('img-logo')} href='/#'>
-                        <img src='https://nguyenlethe.github.io/shop-image/image/Fb.png' alt="" />
-                    </a>
-                    <a className={cx('img-logo')} href='/#'>
-                        <img src='https://nguyenlethe.github.io/shop-image/image/GG.png' alt="" />
-                    </a>
+                    <span className='l-12'>
+                        <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-FB-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Facebook'/>} />
+                    </span>
+                    
+                    <span className='l-12'>
+                        <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-TW-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Twitter'/>} />
+                    </span>
                 </div>
             </div>
-            <div className={cx('text-footer-form')}>
-                <p><SwitchLanguage id='manageAdmin.form.CRaccount'/></p>
-                <p><Link to={path.REGISTERPAGE}><SwitchLanguage id='manageAdmin.form.SingUp'/></Link></p>
-            </div>
+
         </form>
         </>
     

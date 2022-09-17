@@ -85,7 +85,7 @@
             "OrsingUp":"Đăng kí bằng cách sử dụng",
             "CRaccount":"Đăng nhập bằng cách tạo một tài khoản",
             "RGaccount":"Bạn đã có sẵn một tài khoản ?",
-            "SingUp":"ĐĂNG KÝ",
+            "SingUp":"Đăng Ký",
             "confirm":"XÁC NHẬN",
             "errAccount":"Email sai định dạng",
             "emptyData":"Người dùng chưa nhập",
@@ -211,7 +211,10 @@
             "hide":"Ẩn Form",
             "delete":"Xoá",
             "update": "Cập nhật",
-            "addColor":"I. Thêm màu"
+            "addColor":"I. Thêm màu",
+            "Facebook":"Tiếp tục với Facebook",
+            "Twitter":"Tiếp tục với Twitter"
+
 
         }
     },

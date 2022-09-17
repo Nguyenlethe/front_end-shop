@@ -1,14 +1,14 @@
 
 .form-login{
     width: var(--width-form-system);
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 6px rgb(137, 137, 137);
+    // background-color: rgb(255, 255, 255);
+    // box-shadow: 0px 0px 6px rgb(137, 137, 137);
     padding: 30px 30px;
     border-radius: 8px;
 
     .heading{
         font-size: var(--font-size-heading);
-        color: var(--color-heading);
+        color: var(--white);
         padding: 20px 0 50px 0;
         display: block;
         font-weight: 600;
@@ -18,7 +18,9 @@
     }
 
     .form-input{
+
         label{
+            color: var(--white);
             width: 100%;
             display: block;
             font-size: var(--font-size-label-form-login);
@@ -29,8 +31,9 @@
 
         .wrap-input{
             display: flex;
+            border-radius: 6px;
             align-items: center;
-            border-bottom: 1px solid #ccc;
+            border: 1px solid var(--white);
             position: relative;
 
            
@@ -45,6 +48,7 @@
             }
 
             .input{
+                color: var(--white);
                 height: var(--height-input-form-login);
                 width: calc(100% - 30px);
                 font-size:  var(--font-size-label-form-login);
@@ -53,6 +57,7 @@
                 outline: none;
                 position: relative;
                 font-family: var(--font-family-primary);
+                background: transparent;
             }
 
             .input[name='password']{
@@ -67,13 +72,13 @@
         .forget{
             display: inline-block;
             float: right;
-            margin: 12px  0;
+            margin: 0px 0 40px 0;
             cursor: pointer;
             
             a{
+                color: var(--white);
                 font-size: var(--font-size-label-form-login);
                 text-decoration: none;
-                color: var( --color-text-forgot);
                 &:hover{
                     color: var(--color-hover-link);
                 }
@@ -92,6 +97,7 @@
             display: flex;
             align-items: center;
             color: red;
+            margin-top: 4px;
             height: 2rem;
             
             svg{
@@ -113,8 +119,12 @@
         }
         
         .list-icon-society{
-            margin: 20px 0 0 0;
+            width: 100%;
+            // text-transform: capitalize;
 
+            >span{
+                margin-bottom: 10px;
+            }
             .img-logo{
                 margin: 0 8px;
             }
@@ -138,6 +148,22 @@
                     color: var(--color-hover-link);
                 }
             }
+        }
+    }
+
+    .compartment{
+        border-bottom: 1px solid #61616140;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top : 20px;
+
+        span{
+            position: absolute;
+            transform: translateY(-50%);
+            background-color: rgb(255 255 255);
+            padding: 0 6px;
+            border-radius: 50px;
         }
     }
 }

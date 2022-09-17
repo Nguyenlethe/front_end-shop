@@ -24,6 +24,9 @@ class Register extends Component {
             isFormat: false,
             isEmail: false,
             isRegister: false,
+            isAccount: false,
+            isPassword: false,
+            isRetypePassword: false,
             errMessage: {
                 account: '',
             },
@@ -135,7 +138,7 @@ class Register extends Component {
     render() {
 
     let {language} = this.props
-    let {isShowPass,isModal,errMessage,isErrForm,isFormat,isEmail,isRegister} = this.state
+    let {isShowPass,isModal,errMessage,isErrForm,isFormat,isEmail,isRegister,isAccount,isPassword,isRetypePassword} = this.state
     let {account,password,retypePassword} = this.state.form
 
        
@@ -145,17 +148,18 @@ class Register extends Component {
     <Modal isShow={isModal}/> 
     {isRegister === true  && <Navigate to={path.HOMEPAGE}/>}
         <form className={cx('form-login')}>
-            <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.SingUp'/></p>
+            {/* <p className={cx('heading')}><SwitchLanguage id='manageAdmin.form.SingUp'/></p> */}
             <div className={cx('form-input')}>
 
-
                 <label><SwitchLanguage id='manageAdmin.form.planceholder_email'/></label>
-                <div className={cx('wrap-input')}>
+                <div className={cx('wrap-input')} style={{boxShadow: isAccount ? '1px 1px 10px #046ba6' : ''}} >
                     <FontAwesomeIcon className={cx('icon-input')} icon={faUser}/> 
-                    <input className={cx('input')} type="text"  name='account' value={account}
-                        placeholder={language === languages.EN ? 'Enter account' : 'Nhập email của bạn'}
-                        onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
+
+                    <input className={cx('input')} type="text"  name='account' value={account} autoComplete="off" 
+                        placeholder={language === languages.EN ? 'Enter account' : 'Nhập email của bạn'}  onFocus={() => this.setState({isAccount: true})}
+                        onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)} onBlur={() => this.setState({isAccount: false})}
                     />
+
                 </div>
 
                 <span className={cx('error-input-login')}>
@@ -166,14 +170,16 @@ class Register extends Component {
                 </span>
 
 
-                <label>{<SwitchLanguage id='manageAdmin.form.password'/>}</label>
-                <div className={cx('wrap-input')}>
+                <label>{<SwitchLanguage id='manageAdmin.form.password'/>}</label> 
+                <div className={cx('wrap-input')} style={{boxShadow: isPassword ? '1px 1px 10px #046ba6' : ''}} >
                     <FontAwesomeIcon className={cx('icon-input')} icon={isShowPass === false ? faLock : faUnlock}/> 
-                    <input className={cx('input')} name='password' type='text'
-                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'}
-                        value={password} autoComplete="on"
+
+                    <input className={cx('input')} name='password' type='text' autoComplete="off"
+                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'} onFocus={() => this.setState({isPassword: true})}
+                        value={password} onBlur={() => this.setState({isPassword: false})}
                         onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
                     />
+
                 </div>
 
                 <span className={cx('error-input-login')}>
@@ -183,13 +189,15 @@ class Register extends Component {
               
 
                 <label>{<SwitchLanguage id='app.editPass.labelRetype'/>}</label>
-                <div className={cx('wrap-input')}>
+                <div className={cx('wrap-input')} style={{boxShadow: isRetypePassword ? '1px 1px 10px #046ba6' : ''}} >
                     <FontAwesomeIcon className={cx('icon-input')} icon={isShowPass === false ? faLock : faUnlock}/> 
+
                     <input className={cx('input')} name='retypePassword' type={isShowPass === false ? 'password' : 'text'}  
-                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'}
-                        value={retypePassword} autoComplete="on"
+                        placeholder={language === languages.EN ? 'Enter password' : 'Nhập mật khẩu'} onFocus={() => this.setState({isRetypePassword: true})}
+                        value={retypePassword} autoComplete="off" onBlur={() => this.setState({isRetypePassword: false})}
                         onChange={(e) => this.handleOnchangeInput(e.target.value, e.target.name)}
                     />
+
                     <FontAwesomeIcon className={cx('icon-input')} onClick={() => this.handleShowHinePassword()} icon={isShowPass === false ? faEyeSlash : faEye}/> 
                 </div>
 
@@ -199,32 +207,29 @@ class Register extends Component {
                 </span>
 
 
-                <p onClick={(e) => account.trim() !== "" && password.trim() !== "" && retypePassword.trim() !== "" && this.handleSubmitRegister(e)}>
-                    <Button 
+                <p className='l-4 MG_between' style={{marginTop: '40px'}} onClick={(e) => account.trim() !== "" && password.trim() !== "" && retypePassword.trim() !== "" && this.handleSubmitRegister(e)}>
+                    <Button textType='capitalize' width='100%' border='4px' size='1.8rem' height='35px'
+                        color='var(--BGR-color-btn-manageuser)' opacity={account.trim() === "" || password.trim() === "" || retypePassword.trim() === "" ? '.6' : '1' }
                         type={account.trim() !== "" && password.trim() !== "" && 
-                        retypePassword.trim() !== "" ? 'btn-submit' : "btn-ban"}
-                        content={<SwitchLanguage id='manageAdmin.form.SingUp'/>}
+                        retypePassword.trim() !== "" ? 'submit-form-data' : "btn-ban"}
+                        content={<SwitchLanguage id='manageAdmin.form.SingUp'/>} margin='12px 0'
                     />
                 </p>
+
+    
+                <div className={cx('compartment')}><span >OR</span></div>
             </div>
-
-
-            <div className={cx('login-society')}>
-                <span className={cx('login-society-sub')}><SwitchLanguage id='manageAdmin.form.OrsingUp'/></span>
-                <div className={cx('list-icon-society')}>
-                    <a className={cx('img-logo')} href='/#'>
-                        <img src='https://nguyenlethe.github.io/shop-image/image/Fb.png' alt="" />
-                    </a>
-                    <a className={cx('img-logo')} href='/#'>
-                        <img src='https://nguyenlethe.github.io/shop-image/image/GG.png' alt="" />
-                    </a>
+                <div className={cx('login-society')}>
+                    <div className={cx('list-icon-society')}>
+                        <span className='l-12'>
+                            <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-FB-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Facebook'/>} />
+                        </span>
+                        
+                        <span className='l-12'>
+                            <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-TW-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Twitter'/>} />
+                        </span>
+                    </div>
                 </div>
-            </div>
-
-            <div className={cx('text-footer-form')}>
-                <p><SwitchLanguage id='manageAdmin.form.RGaccount'/></p>
-                <p><Link to={path.LOGINPAGE}><SwitchLanguage id='manageAdmin.form.heading'/></Link></p>
-            </div>
         </form>
         </>
     

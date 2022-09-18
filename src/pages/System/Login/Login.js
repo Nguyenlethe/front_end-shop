@@ -168,7 +168,7 @@ class Login extends Component {
 
                 <p className='l-4 MG_between' style={{marginTop: '70px'}} onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
                     <Button textType='capitalize' width='100%' border='4px' size='1.8rem' height='35px' color='var(--BGR-color-btn-manageuser)' 
-                        type={account.trim() !== "" && password.trim() !== "" ? 'submit-form-data' : 'btn-ban'}
+                        type={account.trim() !== "" && password.trim() !== "" ? 'submit-form-data' : 'btn-ban'} opacity={account.trim() !== "" && password.trim() !== "" ? '1': '.6'}
                         content={<SwitchLanguage id='manageAdmin.form.heading'/>} margin='12px 0'
                     />
                 </p>

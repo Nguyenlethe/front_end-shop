@@ -160,6 +160,7 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.GET_ALL_CATEGORY_SUSCESS:  
             state.dataForm.category = action.dataAllCode.category
+
             
             return {
                 ...state

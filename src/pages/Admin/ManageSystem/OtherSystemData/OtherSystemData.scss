@@ -4,3 +4,14 @@
     color: var( --BGR-voucher);
     cursor: pointer;
 }
+
+#list-input{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .err_message{
+        color: red;
+        margin-top: -16px;
+    }
+}

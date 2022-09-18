@@ -150,7 +150,7 @@ class Items extends Component {
 
     // // DidMound
     componentDidMount = async ()=>  {
-        await this.props.getCategoryAllCode()
+        // await this.props.getCategoryAllCode()
         await this.props.getAllShop()
         this.heandleDataForm()
 
@@ -1597,7 +1597,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllShop: () => dispatch(actions.getAllShopStart()),
-        getCategoryAllCode: () => dispatch(actions.getCategoryAllCodeStart()),
+       
         getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
     }
 }

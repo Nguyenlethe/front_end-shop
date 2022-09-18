@@ -13,6 +13,7 @@
     --height-label: 1.9rem; 
     --font-size-label: 1.6rem;
     --height-input: 40px;
+    --color-plh: rgb(159, 157, 157);
     
     // Tippy
     --font-size-tippy: 1.4rem;
@@ -149,8 +150,8 @@ html *::-webkit-scrollbar-track {
 .list-input{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    justify-content:space-between;
     margin-top: 10px;
 }
 
@@ -178,7 +179,4 @@ a{
 .list-btn-price{
     display: flex;
     justify-content: space-around;
-
-
-
 }

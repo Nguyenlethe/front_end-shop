@@ -63,6 +63,7 @@ class ManageSystem extends Component {
 
     // Did mount
     componentDidMount = async ()=>  {
+        await this.props.getCategoryAllCode()
         await this.props.fetchAllDataAllCode()
         await this.props.getAllCodeInToItems('DCC')
         await this.props.getAllCodeInToItems('BNPRD')
@@ -192,6 +193,7 @@ const mapDispatchToProps = dispatch => {
         getAllUser: () => dispatch(actions.getAllUserStart()),
         getAllShop: () => dispatch(actions.getAllShopStart()),
         getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
+        getCategoryAllCode: () => dispatch(actions.getCategoryAllCodeStart()),
     }
 }
 

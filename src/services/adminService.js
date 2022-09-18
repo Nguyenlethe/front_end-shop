@@ -141,10 +141,15 @@ function updatePriceShip (data) {
 }
 
 
+// Create data other
+function createDataOther (data) {
+    return axios.post(`/admin/crate-data-other`,data);
+}
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    createDataOther,
     updatePriceShip,
     getPriceShip,
     addPriceShip,

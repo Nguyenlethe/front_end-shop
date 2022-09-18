@@ -56,7 +56,7 @@
             "planceholder_sreachCode":"Nhập mã sản phẩm để tìm kiếm",
             
 
-            "planceholder_category":"Chọn Shop",
+            "planceholder_category":"Chọn danh mục",
             "planceholder_type":"Chọn Danh Mục Sản Phẩm",
             "planceholder_sale":"Giảm Giá Sản Phẩm",
             "planceholder_price": "Nhập Giá Sản Phẩm",
@@ -191,7 +191,55 @@
             "notAddPriceShip": "Vui lòng nhập giá gửi hàng !!!",
             "ship_price-list":"Danh sách giá vận chuyển",
             "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : ",
-            "errPriceShip":"Không được nhập chữ !!!"
+            "errPriceShip":"Không được nhập chữ !!!",
+
+            "labelCodeColor":"Mã màu",
+            "pldCodeColor":"Nhập mã màu",
+
+            "pldNameColorVN":"Nhập tên màu (VN)",
+            "labelNameVNColor":"Tên màu (VN)",
+
+            "pldNameColorEN":"Nhập tên màu (EN)",
+            "labelNameENColor":"Tên màu (EN)",
+
+
+
+            "addTrademarks":"2. Thêm thương hiệu",
+
+            "labelCodeTrademarks": "Mã thương hiệu",
+            "pldCodeTrademarks": "Nhập mã thương hiệu",
+
+            "pldNameTrademarks": "Nhập tên thương hiệu",
+            "labelNameTrademarks": "Tên thương hiệu",
+
+
+
+
+            "addCategory":"3. Thêm danh mục",
+
+            "labelCodeCategory":"Mã danh mục",
+            "pldCodeCategory":"Nhập mã danh mục",
+
+            "pldNameCategoryVN":"Nhập tên danh mục (VN)",
+            "labelNameVNCategory":"Tên danh mục (VN)",
+
+            "pldNameCategoryEN":"Nhập tên danh mục (EN)",
+            "labelNameENCategory":"Tên danh mục (EN)",
+
+
+
+            "addType":"4. Thêm loại hàng",
+
+            "labelCodeType":"Mã loại hàng",
+            "pldCodeType":"Nhập mã loại hàng",
+
+            "pldNameTypeVN":"Nhập tên loại hàng (VN)",
+            "labelNameVNType":"Tên loại hàng (VN)",
+
+            "pldNameTypeEN":"Nhập tên loại hàng (EN)",
+            "labelNameENType":"Tên loại hàng (EN)"
+
+           
 
 
         },

@@ -57,7 +57,7 @@
             "planceholder_district":"Please Enter District",
             "planceholder_wards":"Please Enter Wards",
             "planceholder_AddressDetails":"Please Enter Address Detail",
-            "planceholder_category":"Click Select Shop",
+            "planceholder_category":"Click Select category",
             "planceholder_type":"Click Select Sectors",
             "planceholder_sale":"Click Select Add Discount Code",
             "planceholder_price": "Enter Price",
@@ -91,7 +91,7 @@
             "OrsingUp":"Sign up using",
             "CRaccount":"Sign in by creating an account",
             "RGaccount":"You already have an account ?",
-            "SingUp":"REGISTER",
+            "SingUp":"Register",
             "confirm":"CONFIRM",
             "errAccount":"Incorrect email format",
             "emptyData":"User not enter data ",
@@ -196,8 +196,47 @@
             "notAddPriceShip": "Please enter shipping price !!!",
             "ship_price-list":"Shipping price list",
             "count-add-price":"Province created the shipping price : " ,
-            "errPriceShip":"Can't enter text !!!"
+            "errPriceShip":"Can't enter text !!!",
 
+            "labelCodeColor":"Code Color",
+            "pldCodeColor":"Enter code color",
+
+            "pldNameColorVN":"Enter name color (VN)",
+            "labelNameVNColor":"Name color (VN)",
+
+            "pldNameColorEN":"Enter name color (EN)",
+            "labelNameENColor":"Name color (EN)",
+
+            "addTrademarks":"2. More brands",
+
+            "labelCodeTrademarks": "Code trademarks",
+            "pldCodeTrademarks": "Enter code trademarks",
+
+            "labelNameTrademarks": "Name trademarks",
+            "pldNameTrademarks": "Enter name trademarks",
+
+            "addCategory":"3. Add category",
+
+            "labelCodeCategory":"Code category",
+            "pldCodeCategory":"Enter code category",
+
+            "pldNameCategoryVN":"Enter name category (VN)",
+            "labelNameVNCategory":"Name category (VN)",
+
+            "pldNameCategoryEN":"Enter name category (EN)",
+            "labelNameENCategory":"Name category (EN)",
+
+
+            "addType":"4. Add product type",
+
+            "labelCodeType":"Code product type",
+            "pldCodeType":"Enter code product type",
+
+            "pldNameTypeVN":"Enter name product type (VN)",
+            "labelNameVNType":"Name product type (VN)",
+
+            "pldNameTypeEN":"Enter name product type (EN)",
+            "labelNameENType":"Name product type (EN)"
 
 
         },

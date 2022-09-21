@@ -197,6 +197,8 @@
             "ship_price-list":"Shipping price list",
             "count-add-price":"Province created the shipping price : " ,
             "errPriceShip":"Can't enter text !!!",
+            "history": "Result search",
+            "seeMore" :"See More",
 
             "labelCodeColor":"Code Color",
             "pldCodeColor":"Enter code color",

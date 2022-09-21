@@ -31,9 +31,15 @@ function createNewUser (data) {
 }
 
 
+// search get items 
+function searchItemsNameNav (data) {
+    return axios.get(`/admin/search-name-items?idShop=${data.idShop}&type=${data.type}&language=${data.language}&value=${data.value}&limit=${data.limit}&page=${data.page}`,);
+}
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    searchItemsNameNav,
     createNewUser,
     updatePassword,
     retrievalPassword,

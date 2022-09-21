@@ -9,8 +9,8 @@
         "manageUsers":"Quản lý người dùng",
         "logout":"Đăng xuất",
         "createUser": "Tạo Người Dùng",
-        "btnLG":"Đăng Nhập",
-        "btnRGT":"Đăng Ký",
+        "btnLG":"Đăng nhập",
+        "btnRGT":"Đăng ký",
         "createShop":"Tạo Mới Shop",
         "createItems":"Tạo mới sản phẩm",
         "listItem":"Danh Sách sản phẩm",
@@ -192,6 +192,10 @@
             "ship_price-list":"Danh sách giá vận chuyển",
             "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : ",
             "errPriceShip":"Không được nhập chữ !!!",
+            "history": "Kết quả tìm kiếm ",
+            "seeMore" :"Xem Thêm",
+
+
 
             "labelCodeColor":"Mã màu",
             "pldCodeColor":"Nhập mã màu",

@@ -97,17 +97,13 @@ class DefaultLayout extends Component {
             });
         })();
     }
- 
-  
       
     render() {
     let {children} = this.props
+
     return (
-
-
     <>
       <div className='content'><canvas className='snow' id="snow">
-
 
       </canvas>
         <div className='ground'>

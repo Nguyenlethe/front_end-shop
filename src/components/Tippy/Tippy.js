@@ -25,7 +25,7 @@ class Tippy extends Component {
         }
     }
     
-    onHover = () => {
+    onHide = () => {
         const node = this.myRef.current;
         node.classList.remove('keyfame');
         setTimeout(() =>{
@@ -37,10 +37,9 @@ class Tippy extends Component {
     render() {
 
         let {children,content,className,Location,Arrow,height} = this.props
-        let {isShowSubItem} = this.state
         return (
        
-            <div className='tippy' onMouseLeave={() => this.onHover()} onMouseOver={() => this.handleHover()}>
+            <div className='tippy' onMouseLeave={() => this.onHide()} onMouseOver={() => this.handleHover()}>
                 {children}
 
                <div style={{bottom: `calc(-${height}% )`}} ref={this.myRef} className='contents'>

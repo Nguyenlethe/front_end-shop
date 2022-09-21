@@ -560,4 +560,37 @@ export const getNewDataVoucherSuscess = (data,type) => ({
 })
 
 
+// setDataEmptyLogOutStart
+export const setDataEmptyLogOutStart = () => {
+    return async (dispatch, getState) => {
+        try{
+            dispatch(setDataEmptyLogOutSuscess(''))
+        }
+        catch(err){
+            
+        }
+    }
+}
 
+export const setDataEmptyLogOutSuscess = (data,type) => ({
+    type: actionTypes.SET_EMPTY_DATA_LOG_OUT,
+    setDataLogin: '',
+})
+
+
+// ADD_DATA_OPTIONS_SEARCH_NAV: 'ADD_DATA_OPTIONS_SEARCH_NAV',
+export const addDataOptionsSearchNav = (dataInput) => {
+    return async (dispatch, getState) => {
+        try{
+            dispatch(addDataOptionsSearchNavSuscess(dataInput))
+        }
+        catch(err){
+            
+        }
+    }
+}
+
+export const addDataOptionsSearchNavSuscess = (data,type) => ({
+    type: actionTypes.ADD_DATA_OPTIONS_SEARCH_NAV,
+    dataOptions: data,
+})

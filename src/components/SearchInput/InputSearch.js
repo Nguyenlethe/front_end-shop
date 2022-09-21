@@ -448,7 +448,7 @@ class InputSearch extends Component {
     let {isLoadSearchItemsCode,newValueInputSelectArray,isShowTextAdd} = this.state
     let {valueInputSearchCodeItems,isShowDataSearchCodeItems,listDataSearchCodeItems} = this.state.dataSearchItemsCode
     let { isShowListItemsSelect,listDataItemsSelect,resultDataSearchName,valueInputSelectArray} = this.state.dataSelectItemsName
-    let {TYPE_INPUT,classWraper,idSwitchLanguage,language,idSwitchLanguageAdd} = this.props
+    let {TYPE_INPUT,classWraper,idSwitchLanguage,language,idSwitchLanguageAdd,notLabel} = this.props
 
 
 
@@ -456,14 +456,17 @@ class InputSearch extends Component {
         <>
 
             <div className={classWraper}>
-            <div className='search' >
+            <div className='search'>
             <div className='input_search' >
-
-              
+  
             {TYPE_INPUT === 'SEARCH_CODE_ITEM' &&
                 <>
-                    {!isShowTextAdd && <SwitchLanguage id={idSwitchLanguage}/>}
-                    {isShowTextAdd && <SwitchLanguage id={idSwitchLanguageAdd}/>}
+                    {notLabel !== 'true' &&
+                        <>
+                            {!isShowTextAdd && <SwitchLanguage id={idSwitchLanguage}/>}
+                            {isShowTextAdd && <SwitchLanguage id={idSwitchLanguageAdd}/>}
+                        </>
+                    }
                     
                     <input className='input search' name='search' type='text' autoComplete="off"  ref={this.inputSearchCode} onFocus={() => isShowTextAdd && this.handleFocusInput()}
                        value={valueInputSearchCodeItems} placeholder={languages.EN === language ? 'Search items' : 'Tìm sản phẩm '}
@@ -517,6 +520,9 @@ class InputSearch extends Component {
                             })
                         }
                     </div>
+
+
+                    
                 </>
             }
 

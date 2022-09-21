@@ -28,18 +28,21 @@ class Home extends Component {
 
       
     render() {
-        return (
-            <>
-              <div className="l-5">Home</div>
-            </>
-        )
+
+
+
+    return (
+        <>
+            <div className="l-5">Home</div>
+        </>
+    )
     }
 }
 
 
 const mapStateToProps = state => {
     return {
-        
+        dataUser: state.app.loginUser,
     }
 }
 

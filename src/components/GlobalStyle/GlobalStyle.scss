@@ -5,8 +5,14 @@
     --black : #000;
     --white : #fff;
     --color-text: #333;
+    --sub-text: #ccc;
 
-   
+    // Layout default 
+    --BGR-color-nav-top: linear-gradient( #ee9ca700,#ffdde100);
+    --height-top-nav: 40px;
+    --height-nav-center: 80px;
+    --height-input-search-nav: 40px;
+
 
     //input 
     --padding-left: 12px;
@@ -38,8 +44,9 @@
     // Mắt
     --width-eye: 40px;
 
-    //Btn
-    --font-size-btn: 1.6rem;
+    // --font-size-btn: 1.6rem;
+    --font-size-btn: 1.4rem;
+
     --BGR-frimary-btn-LG: rgba(254, 44, 85, 1.0);
     --color-frimary-btn-LG: rgba(255, 255, 255, 1.0);
     --BGR-frimary-btn-hover-LG:rgb(242, 47, 86);
@@ -68,7 +75,6 @@
     --BGR-btn-ban-LG: rgba(159, 224, 255, 0.44);
     --color-btn-ban-LG: rgb(255, 255, 255);
     --color-btn-ban-hover-LG: #fff ;
-
 
 
     // Form system

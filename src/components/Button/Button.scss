@@ -12,7 +12,8 @@
         display: block;
         font-weight: var(--font-weight);
         padding: 7px 20px;
-        font-size: var(--font-size-btn);
+        // font-size: var(--font-size-btn);
+        font-size: 1.4rem;
         text-decoration: none;
         min-width: 120px;
         color: var(--color-frimary-btn-LG);
@@ -83,7 +84,8 @@
         display: block;
         font-weight: var(--font-weight);
         padding: 7px 20px;
-        font-size: var(--font-size-btn);
+         // font-size: var(--font-size-btn);
+         font-size: 1.4rem;
         text-decoration: none;
         min-width: 120px;
         color: var(--color-close-transparent-btn-LG);
@@ -293,13 +295,15 @@
 .href-link{
     cursor: pointer;
     text-decoration: none;
+    text-transform: uppercase;
     margin-left: auto;
     margin-top: auto;
-    margin-bottom: 4px;
     color: var(--iconSVG-hover);
-    
-
+        
     span{
-        padding: 2px 12px;
+        font-size: 1.35rem !important;
+        padding: 2px 12px 0px 12px;
+        display: block;
     }
+
 }

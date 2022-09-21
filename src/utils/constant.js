@@ -50,3 +50,13 @@ export const SEARCH = {
     TYPE_SEARCH: 'idItems',
     TABEL_SEARCH: 'Items'
 }
+
+export const CONTACT = {
+    PHONE: '(+84) 353233526',
+    EMAIL: 'thenguyenle1312@gmail.com'
+}
+
+export const ITEMS = {
+    LIMIT_SHOW_SEARCH: 2,
+    SEE_MORE_SHOW_ITEMS_SEARCH: 50,
+}

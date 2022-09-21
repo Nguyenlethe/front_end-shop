@@ -1,5 +1,5 @@
-import actionTypes from '../action/actionTypes';
 
+import actionTypes from '../action/actionTypes';
 
 const initState = {
     language: localStorage.getItem('language') ? localStorage.getItem('language') : 'en',
@@ -12,12 +12,9 @@ const initState = {
         fullNameVi: localStorage.getItem('fullNameVi') ? localStorage.getItem('fullNameVi') : '',
         fullNameEn: localStorage.getItem('fullNameEn') ? localStorage.getItem('fullNameEn') : '',
         province: localStorage.getItem('province') ? localStorage.getItem('province') : '',
-    }
+    },
+    dataOptions: {}
 }
-
-
-
-
 
 
 
@@ -38,7 +35,6 @@ const appReducer = (state = initState, action) => {
                 ...state
             }
 
-
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
             state.loginUser.id = action.dataLogin.id
             localStorage.setItem('islogin', true)
@@ -58,6 +54,7 @@ const appReducer = (state = initState, action) => {
             state.loginUser.province = localStorage.getItem('province')
             state.loginUser.islogin = localStorage.getItem('islogin')
             state.loginUser.isError = localStorage.getItem('isError')
+
             return {
                 ...state
             }
@@ -68,8 +65,25 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state
             }
+ 
+        case actionTypes.SET_EMPTY_DATA_LOG_OUT:
+            state.loginUser.id = action.setDataLogin
+            state.loginUser.email = action.setDataLogin
+            state.loginUser.permission = action.setDataLogin
+            state.loginUser.fullNameVi = action.setDataLogin
+            state.loginUser.fullNameEn = action.setDataLogin
+            state.loginUser.province = action.setDataLogin
+            state.loginUser.islogin = action.setDataLogin
+            state.loginUser.isError = action.setDataLogin
+            return {
+                ...state
+            }
 
-
+        case actionTypes.ADD_DATA_OPTIONS_SEARCH_NAV:
+            state.dataOptions = action.dataOptions
+            return {
+                ...state
+            }
 
 
             

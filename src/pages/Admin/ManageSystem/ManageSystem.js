@@ -89,6 +89,7 @@ class ManageSystem extends Component {
 
     // Handle log out
     handleLogOut = async () => {
+        this.props.setDataEmptyLogOut()
         this.setState({islogOut: true})
         localStorage.clear()
     }
@@ -176,7 +177,7 @@ render() {
             </div>
         </div>
     </>
-    :  <Navigate to={path.NOTFOUND} /> }
+    :  <Navigate to={path.HOME} /> }
     </>
 )}}
 
@@ -189,6 +190,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setDataEmptyLogOut: () => dispatch(actions.setDataEmptyLogOutStart()),
         fetchAllDataAllCode: () => dispatch(actions.fetchAllDataAllCodeStart()),
         getAllUser: () => dispatch(actions.getAllUserStart()),
         getAllShop: () => dispatch(actions.getAllShopStart()),

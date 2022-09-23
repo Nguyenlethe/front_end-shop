@@ -7,6 +7,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 
 
 
+
 class App extends Component {
     render() {
     return ( 
@@ -22,7 +23,7 @@ class App extends Component {
                         Layout = Fragment; 
                     }
                     return (
-                        <Route key={route.path} path={route.path} element={<Layout><Page /></Layout>}/>
+                        <Route key={route.path} path={route.path} element={<Layout><Page/></Layout>}/>
                     )
                 })}
             </Routes>

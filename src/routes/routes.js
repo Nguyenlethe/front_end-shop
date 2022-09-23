@@ -8,8 +8,8 @@ import LayoutLogin_Register from '../layouts/Login_Register'
 import NotFound404 from '../pages/NotFound404'
 import News from '../pages/News';
 import ManageUser from '../pages/Admin/ManageSystem/ManageSystem';
-import ForgotPassword from '../pages/System/ForgotPassword';
-
+import ForgotPassword from '../pages/System/ForgotPassword'; 
+import SeeMoreItemsSearch from '../pages/Items/SeeMoreItemsSearch'
 
 const routes = [
     { path: path.HOME, components: Home },
@@ -19,6 +19,8 @@ const routes = [
     { path: path.NEWSPAGE, components: News },
     { path: path.FORGOTPASS, components: ForgotPassword , layout: LayoutLogin_Register},
     { path: path.MANAGE_USER, components: ManageUser , layout: null},
+    { path: path.SEARCH_ITEMS, components: SeeMoreItemsSearch },
+
     { path: path.NOTFOUND, components: NotFound404 ,layout: null}
 ]
 

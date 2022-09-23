@@ -199,6 +199,9 @@
             "errPriceShip":"Can't enter text !!!",
             "history": "Result search",
             "seeMore" :"See More",
+            "resultShow":"Search results for : ",
+            "endPage": "Last page",
+
 
             "labelCodeColor":"Code Color",
             "pldCodeColor":"Enter code color",

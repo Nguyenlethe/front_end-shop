@@ -6,7 +6,7 @@
     border-radius: 6px;
 
 
-    > input{
+    > input[name='search']{
         border-radius: 6px 0px 0px 6px;
         height: var(--height-input-search-nav);
         padding-left: 12px;
@@ -132,19 +132,35 @@
 
     .border-icon-search {
         width: 70px;
+        height: var(--height-input-search-nav);
         display: flex;
         justify-content: center;
         margin-left: auto;
+        position: relative;
 
+        input{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: transparent;
+        }
+        
         .icon-search{
+            position: absolute;
             color: white;
             font-size: 2rem;
             background: var(--color-BTN-manage);
             width: 100%;
             padding: 8px 0;
-            margin: 0 2px 0 0;
             border-radius: 4px;
+            top: 2px;
+            right: 2px;
+
         }
+
     }
 
     .wraper-options{
@@ -157,6 +173,7 @@
         border-radius: 3px;
         padding-bottom: 20px;
         opacity: 0;
+        z-index: 99;
 
 
         &::after{

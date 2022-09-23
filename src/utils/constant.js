@@ -5,11 +5,13 @@ export const path = {
     NEWSPAGE: '/news',
     LOGINPAGE: '/login',
     REGISTERPAGE: '/register',
-    
     FORGOTPASS: '/forgot/password',
 
     // idShop forItemCategory forItemType itemsId   
 
+
+    // Items
+    SEARCH_ITEMS: '/courses',
     
     // ADMIN
     MANAGE_USER: '/system/management',
@@ -57,6 +59,7 @@ export const CONTACT = {
 }
 
 export const ITEMS = {
-    LIMIT_SHOW_SEARCH: 2,
-    SEE_MORE_SHOW_ITEMS_SEARCH: 50,
+    LIMIT_SHOW_SEARCH: 10,
+    SEE_MORE_SHOW_ITEMS_SEARCH: 30,
+    LIMIT_SHOW_SEEMORE_CLICK_END: 5,
 }

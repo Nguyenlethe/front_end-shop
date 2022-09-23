@@ -33,7 +33,7 @@ function createNewUser (data) {
 
 // search get items 
 function searchItemsNameNav (data) {
-    return axios.get(`/admin/search-name-items?idShop=${data.idShop}&type=${data.type}&language=${data.language}&value=${data.value}&limit=${data.limit}&page=${data.page}`,);
+    return axios.get(`/admin/search-name-items?idShop=${data.idShop}&category=${data.category}&type=${data.type}&language=${data.language}&value=${data.value}&limit=${data.limit}&page=${data.page}`,);
 }
 
 

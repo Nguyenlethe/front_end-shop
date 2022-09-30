@@ -86,56 +86,59 @@ class ListItemsSearch extends Component {
                     </div>
                 }
 
-                    {dataSearchInput.length === 0 &&
-                        <div className='img_not-items'>
-                            <img src={notItems} alt='Không tìm thấy...' />
-                        </div>
-                    } 
-
-
-                    <div className='options_items' style={{maxHeight: isSeeMore ? 'none' : '350px',}}>
-                        {valueInput !== '' && dataSearchInput && dataSearchInput.length > 0 && 
-                            dataSearchInput.map((item,index) => {
-                                return (
-                                    <div key={item.idItems} className='item' style={{backgroundColor: item.active ? item.active === true ? '#b1d6f5d4' : ''  : ''}}>
-                                    
-                                        <div className='wraper-img'>
-                                            <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${item.dataImgItems && item.dataImgItems.image}`} alt='' className='img' />
-                                        </div>
-                                        <div className='detail'>
-                                            <p className='name-items'>{languages.EN === language ? item.nameEn: item.name}</p>
-                                            <div className='list-price'>
-                                                <p className='price'> 
-                                                    <span className='sub-price'>Giá :</span>
-                                                    {language === languages.EN ? item.newPriceUS ? item.newPriceUS : item.priceUS : item.newPrice ? item.newPrice : item.price}
-                                                    <span className='type_price'>{languages.EN === language ? DISCOUNTTEXT.EN_DISCOUNT_SUB : DISCOUNTTEXT.VN_DISCOUNT_SUB }</span> 
-                                                </p>
-                                                <p className='code-items'><SwitchLanguage id='manageAdmin.items.code' /> <span>{item.idItems}</span> </p>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                )
-                            })
-                        }
+                {dataSearchInput.length === 0 &&
+                    <div className='img_not-items'>
+                        <img src={notItems} alt='Không tìm thấy...' />
                     </div>
+                } 
 
-                    {numberItems > limitShowItems  &&
-                        <div className='options-end' >
-                            
-                                <Link onClick={() => setTimeout(() => {this.props.handleShowHideListDataOptions()},300) }
-                                    to={{pathname: `${path.SEARCH_ITEMS}`,
-                                    search: `?idShop=${dataOptionsSearch[0].idShop}&category=${dataOptionsSearch[0].category}&type=${dataOptionsSearch[0].type}&language=${language}&value=${valueInput}&limit=${ITEMS.SEE_MORE_SHOW_ITEMS_SEARCH}&page=${1}`}} >
+
+                <div className='options_items' style={{maxHeight: isSeeMore ? 'none' : '350px',}}>
+                    {valueInput !== '' && dataSearchInput && dataSearchInput.length > 0 && 
+                        dataSearchInput.map((item,index) => {
+                            return (
+                                <Link key={item.idItems} className='item' to={{
+                                    pathname: `${path.DETAIL_ITEMS}`,
+                                    search: `?idItems=${item.idItems}`
+                                }}
+                                    style={{backgroundColor: item.active ? item.active === true ? '#b1d6f5d4' : ''  : ''}}
+                                >
                                 
-                                    <SwitchLanguage id='manageAdmin.items.seeMore'/>
-                                </Link>
-                           
-                        </div>
+                                    <div className='wraper-img'>
+                                        <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${item.dataImgItems && item.dataImgItems.image}`} alt='' className='img' />
+                                    </div>
+                                    <div className='detail'>
+                                        <p className='name-items'>{languages.EN === language ? item.nameEn: item.name}</p>
+                                        <div className='list-price'>
+                                            <p className='price'> 
+                                                <span className='sub-price'>Giá :</span>
+                                                {language === languages.EN ? item.newPriceUS ? item.newPriceUS : item.priceUS : item.newPrice ? item.newPrice : item.price}
+                                                <span className='type_price'>{languages.EN === language ? DISCOUNTTEXT.EN_DISCOUNT_SUB : DISCOUNTTEXT.VN_DISCOUNT_SUB }</span> 
+                                            </p>
+                                            <p className='code-items'><SwitchLanguage id='manageAdmin.items.code' /> <span>{item.idItems}</span> </p>
+                                        </div>
+                                    </div>
+                                </Link> 
+                            )
+                        })
                     }
+                </div>
+
+
+                {numberItems > limitShowItems  &&
+                    <div className='options-end' >
+                        <Link onClick={() => setTimeout(() => {this.props.handleShowHideListDataOptions()},300) }
+                            to={{pathname: `${path.SEARCH_ITEMS}`,
+                            search: `?idShop=${dataOptionsSearch[0].idShop}&category=${dataOptionsSearch[0].category}&type=${dataOptionsSearch[0].type}&language=${language}&value=${valueInput}&limit=${ITEMS.SEE_MORE_SHOW_ITEMS_SEARCH}&page=${1}`}} >
+                        
+                            <SwitchLanguage id='manageAdmin.items.seeMore'/>
+                        </Link>
+                    </div>
+                }
                 </div> 
             }
         </>
-    )
-    }
+    )}
 }
 
 

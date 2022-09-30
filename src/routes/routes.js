@@ -10,6 +10,7 @@ import News from '../pages/News';
 import ManageUser from '../pages/Admin/ManageSystem/ManageSystem';
 import ForgotPassword from '../pages/System/ForgotPassword'; 
 import SeeMoreItemsSearch from '../pages/Items/SeeMoreItemsSearch'
+import DetailItems from '../components/Items/DetailItems/DetailItems';
 
 const routes = [
     { path: path.HOME, components: Home },
@@ -20,6 +21,8 @@ const routes = [
     { path: path.FORGOTPASS, components: ForgotPassword , layout: LayoutLogin_Register},
     { path: path.MANAGE_USER, components: ManageUser , layout: null},
     { path: path.SEARCH_ITEMS, components: SeeMoreItemsSearch },
+    { path: path.DETAIL_ITEMS, components: DetailItems },
+
 
     { path: path.NOTFOUND, components: NotFound404 ,layout: null}
 ]

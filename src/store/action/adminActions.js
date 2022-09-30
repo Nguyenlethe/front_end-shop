@@ -459,22 +459,34 @@ export const getAllCodeInToItemsCOLORDataSuscess = (data) => ({
 // GET_DATA_ITEMS_FAILED: 'GET_DATA_ITEMS_FAILED',
 
 // Actions lấy AllCode (category)
-export const getDataItemsStart = (inputType) => {
+export const getDataItemsStart = (data) => {
     return async (dispatch, getState) => {
         try{
 
-            let res = await adminService.getDataItems(inputType)
+            let res = await adminService.getDataItems(data)
 
 
-            if(inputType === 'All'){
+            if(data.amount === 'All' && data.idItems === 'EMPTY' && data.idShop === 'EMPTY' && data.category  ===  'EMPTY' && data.type  ===  'EMPTY' ){
                 if(res && res.data.errCode === 0 ){
-                    // console.log(res.data)
                     let dataAllItems = res.data.data.inputType
                     dispatch(getDataItemsSuscess(dataAllItems))
                 }else{
                     dispatch(getDataItemsSuscess([]))
                 }
             }
+
+            if(data.amount === 'ONE' && data.idItems !== 'EMPTY' && data.idShop === 'EMPTY' && data.category  ===  'EMPTY' && data.type  ===  'EMPTY' ){
+                if(res && res.data.errCode === 0 ){
+                    let dataAllItems = res.data.data.inputType
+                    dispatch(getDataONEItemsSuscess(dataAllItems))
+                }else{
+                    dispatch(getDataONEItemsSuscess([]))
+                }
+            }
+
+            return
+            // { amount: 'All',idItems: 'EMPTY', idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY' }
+
 
         }
         catch(err){
@@ -486,6 +498,11 @@ export const getDataItemsStart = (inputType) => {
 export const getDataItemsSuscess = (data) => ({
     type: actionTypes.GET_DATA_ITEMS_SUCCESS,
     dataAllItems: data
+})
+
+export const getDataONEItemsSuscess = (data) => ({
+    type: actionTypes.GET_ONE_ITEMS_SUCCESS,
+    dataOneItems: data
 })
 
 

@@ -13,7 +13,6 @@ import './PriceShip.scss';
 import { toast } from 'react-toastify';
 import ListPrice from './ListPriceShip/ListPrice';
 import ModalErrorItems from '../../../../../components/Modal/ModalErrorItems';
-import e from 'cors';
 
 class PriceShip extends Component {
     constructor(props) {
@@ -70,7 +69,7 @@ class PriceShip extends Component {
 
     // Mount
     componentDidMount = async () => { 
-        let {listDataOptions, dataOptions} = this.state
+        let {listDataOptions} = this.state
         let {allShops,langauge,dataProvince,allcategory}= this.props
         let newListShop = generalHandling.handlConvertObject(allShops, 'LIST_SHOP',langauge)
         let listAllCategory = generalHandling.handlConvertObject(allcategory, 'LIST_CATEGORY',this.props.language)
@@ -271,6 +270,9 @@ class PriceShip extends Component {
 
         // Submit
         if(name === 'SUBMIT'){
+
+            // console.log(price, name, province)
+
             // Biến lưu trữ
             let newDataProvinceVN = []
             let newDataProvinceUS = []
@@ -347,6 +349,8 @@ class PriceShip extends Component {
     
                 // Xóa các phần tử UDF
                 const newTabelShip = tabelShip.filter(item => item !== undefined)
+
+                console.log(newTabelShip,province)
     
                 // Gửi data đi
                 let res
@@ -356,6 +360,7 @@ class PriceShip extends Component {
                 if(province === 'UPDATE'){
                     res = await adminService.updatePriceShip(newTabelShip)
                 }
+
     
     
                 // Nếu thành công
@@ -396,8 +401,10 @@ class PriceShip extends Component {
                 // Nếu tồn tại
                 if(res && res.data && res.data.errCode === 1){
                     let dataModal = res.data.data
+
     
                     this.setState({
+                        ...this.state,
                         isShow: true,
                         dataModal: dataModal
                     })
@@ -748,7 +755,6 @@ class PriceShip extends Component {
     let {isClickBTN,valueInputSearch,isEdit,isShow,isHideSlow,dataModal} = this.state
     let {language} = this.props
 
-   
 
     return (
         <>

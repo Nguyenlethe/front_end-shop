@@ -5,13 +5,13 @@
         
         .input.search{
             width: 100%;
-            border-radius:6px 0px 0 6px !important;
+            border-radius:6px 0px 0 6px ;
             float: left;
             overflow: hidden;
             outline: none;
             border: 1px solid #ccc;
-            border-right: 1px solid transparent !important;
-            width: calc(100% - var(--svg-search) - 2px) !important;
+            border-right: 1px solid transparent ;
+            width: calc(100% - var(--svg-search) - 2px) ;
             height: calc( var(--height-input) - 2px);
             padding-left: var(--padding-left);
             font-size: 1.6rem;

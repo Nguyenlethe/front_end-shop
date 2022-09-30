@@ -5,7 +5,9 @@
     right: 0;
     height: 100vh;
     width: 100%;
-    background-color: rgb(255, 217, 217);
+    // background-color: rgb(255, 217, 217);
+    background: linear-gradient(rgb(255, 177, 177), rgb(195, 243, 247));
+
     z-index: 999999;
     display: flex;
     align-items: center;
@@ -13,9 +15,11 @@
     transition: all 0.3s linear;
 
     > svg{
-        width: 35px;
-        animation: rotation .8s infinite linear;
-        transition: transform linear .4s;
+      width: 35px;
+      color: red;
+      height: 35px;
+      animation: rotation 0.8s infinite linear;
+      transition: transform linear 0.4s;
     }
 
     @keyframes rotation {

@@ -401,8 +401,6 @@ class InputSearch extends Component {
                     }) 
                 }
             }
-
-
         }
     }
 
@@ -474,7 +472,7 @@ class InputSearch extends Component {
                        style={{borderRight: isShowTextAdd ? '1px solid #ccc' : '', borderRadius: isShowTextAdd ? '4px' : '', width: isShowTextAdd ? '100%' : '' }}
                     />
 
-                    <span className='icon_load_re-set' style={{ right: isShowTextAdd ? '12px' : ''}}>
+                    <span className='icon_load_re-set' style={{right: isShowTextAdd ? '12px' : ''}}>
                         {isLoadSearchItemsCode && <FontAwesomeIcon className='rotate' icon={faSpinner}/>}
 
                         {valueInputSearchCodeItems !== '' && 
@@ -486,7 +484,7 @@ class InputSearch extends Component {
                     
                     {!isShowTextAdd &&
                         <FontAwesomeIcon className='icon-search'
-                            icon={faMagnifyingGlass} style={{opacity: valueInputSearchCodeItems !== '' ? '1' : '.7' }}
+                            icon={faMagnifyingGlass} style={{opacity: valueInputSearchCodeItems !== '' ? '1' : '.7', zIndex: '9'}}
                             onClick={() => this.handleGetDataItems(valueInputSearchCodeItems,TYPE_INPUT)}
                         />
                     }

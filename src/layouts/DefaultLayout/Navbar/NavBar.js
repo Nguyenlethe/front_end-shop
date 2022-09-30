@@ -8,7 +8,7 @@ import {path, PERMISSIONS,languages, CONTACT} from '../../../utils/constant'
 import { Link ,Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPhoneFlip,faEnvelope} from '@fortawesome/free-solid-svg-icons';
-
+import adminService from '../../../services/adminService';
 
 import './NavBar.scss';
 import Button from '../../../components/Button/Button';
@@ -24,13 +24,25 @@ class NavBar extends Component {
    
     // Mount 
     componentDidMount = async ()=>  {
-      
+       let {islogin, permission, id} = this.props.dataUser
+       this.props.getLikeOrFollowItemsShop({idUser: id, type: 'LIKE'})
     }
+
+    // Trước khi chết 
+    componentWillUnmount = () => {
+
+    }
+  
 
     // Update
     componentDidUpdate= async(prevProps, prevState)=> {
         if(prevProps.language !== this.props.language){
 
+        }
+
+        if(prevProps.oneItems !== this.props.oneItems){
+            let {islogin, permission, id} = this.props.dataUser
+            this.props.getLikeOrFollowItemsShop({idUser: id, type: 'LIKE'})
         }
     }
 
@@ -64,9 +76,9 @@ class NavBar extends Component {
                         <Button type='href' to={path.REGISTERPAGE} content={<SwitchLanguage id='manageAdmin.btnRGT'/>} />
                     </div>
                 }       
-                <Tippy content={<SwitchLanguage id='manageAdmin.language'/>}>
-                    <ListLanguage />
-                </Tippy>
+               
+                <ListLanguage colorBoxShadow='0px 0px 3px rgb(255 255 255)' />
+                
             </div>
             
         </div>
@@ -81,13 +93,14 @@ const mapStateToProps = (state) => {
     return { 
         language: state.app.language ,
         dataUser: state.app.loginUser,
+        oneItems: state.admin.items.oneItems,
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        getLikeOrFollowItemsShop: (data) => dispatch(action.getLikeOrFollowItemsShop(data))
     }
 }
 

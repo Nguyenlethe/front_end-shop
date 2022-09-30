@@ -24,7 +24,7 @@ class ListItems extends Component {
     }
 
     componentDidMount = async() => {
-        await this.props.getDataItems('All')
+        await this.props.getDataItems({amount: 'All',idItems: 'EMPTY',idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY'})
     }
 
 
@@ -61,10 +61,10 @@ class ListItems extends Component {
         let res = await adminService.deleteDataItems({id:item})
 
         if(res && res.data.errCode === 0){
-            await this.props.getDataItems('All')
+            await this.props.getDataItems({amount: 'All',idItems: 'EMPTY',idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY'})
             toast.success(<SwitchLanguage id='manageAdmin.toast.deleteSuccessItems'/>)
         }else{
-            await this.props.getDataItems('All')
+            await this.props.getDataItems({amount: 'All',idItems: 'EMPTY',idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY'})
             toast.warn(<SwitchLanguage id='manageAdmin.toast.warn'/>)
         }
     }

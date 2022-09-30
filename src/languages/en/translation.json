@@ -241,7 +241,25 @@
             "labelNameVNType":"Name product type (VN)",
 
             "pldNameTypeEN":"Enter name product type (EN)",
-            "labelNameENType":"Name product type (EN)"
+            "labelNameENType":"Name product type (EN)",
+
+            "headingSubDetailText":"Product details",
+            "describe-items":"Product Description",
+            "toShare":"To share : ",
+            "likes":"Like  ",
+            "liked":"liked ",
+            "evaluate":"Evaluate",
+            "sold":"Sold",
+            "decrease":"Decrease",
+            "subPrice":"USD",
+            "loveItems":"Favourite +",
+            "ship":"Transport",
+            "textFreeShip":"Free shipping to",
+            "nextShip":"Transfer to",
+            "textPriceShip":"Shipping cost",
+            "listColor":"Color"
+
+
 
 
         },

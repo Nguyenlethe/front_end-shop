@@ -5,7 +5,7 @@ import SwitchLanguage from '../../SwitchLanguage';
 import {languages, path,SEARCH} from '../../utils/constant'
 import ListLanguage from '../../components/ListLanguage';
 import { Link ,Navigate} from 'react-router-dom';
-import img from '../..//assets/image/LOGO.png'
+import img from '../..//assets/image/LOGOO.png'
 
 import styles from './DefaultLayout.scss';
 import NavBar from './Navbar/NavBar';
@@ -50,7 +50,7 @@ class DefaultLayout extends Component {
               <div className='list_nav-center'>
 
                 <div className='col l-2'>
-                  <Link to={path.HOME}  className=' hug-img-logo'>
+                  <Link to={path.HOME}  className='hug-img-logo'>
                     <img src={img} alt='' />
                   </Link>
                 </div>

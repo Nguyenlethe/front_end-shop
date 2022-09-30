@@ -115,7 +115,7 @@
             "nameItems":"Nhập Tên Sản Phẩm",
             "nameItemsEn":"Nhập Tên English Sản Phẩm ",
             "price":"Giá",
-            "idItems":"Mã  Định Danh",
+            "idItems":"Mã Định Danh",
 
             "trademark":"Thương Hiệu",
             "production":"Xuất Sứ",
@@ -243,9 +243,28 @@
             "labelNameVNType":"Tên loại hàng (VN)",
 
             "pldNameTypeEN":"Nhập tên loại hàng (EN)",
-            "labelNameENType":"Tên loại hàng (EN)"
+            "labelNameENType":"Tên loại hàng (EN)",
+
+            "headingSubDetailText":"Chi tiết sản phẩm ",
+            "describe-items":"Mô tả sản phẩm",
+            "toShare":"Chia sẻ : ",
+            "likes":"Thích  ",
+            "liked":"Đã thích  ",
+            "evaluate":"Đánh giá",
+            "sold":"Đã bán",
+            "decrease": "Giảm",
+            "subPrice":"VNĐ",
+            "loveItems":"Yêu thích +",
+            "ship":"Vận chuyển",
+            "textFreeShip":"Miễn phí vận chuyển tới",
+            "nextShip":"Vận chuyển tới",
+            "textPriceShip":"Giá vận chuyển ",
+            "listColor":"Màu sắc"
+
+
 
            
+
 
 
         },

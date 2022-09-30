@@ -44,10 +44,10 @@ class ListLanguage extends Component {
     render() {
 
       let {isActive} = this.state
+      let {colorBoxShadow} = this.props
 
         return (  
-            <div className={cx('flag')}>
-
+            <div className={cx('flag')} style={{boxShadow: colorBoxShadow ? colorBoxShadow : ''}}>
                 <button id='Vi' className={cx(isActive ? 'active' : 'flag-btn')} onClick={() => this.handleClick('vi')}>
                   <img className={cx('img-flag')} src={VNFlag} alt='VN'/>
                 </button>

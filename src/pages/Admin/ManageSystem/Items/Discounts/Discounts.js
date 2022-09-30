@@ -1005,7 +1005,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getDataItems: (type) => dispatch(actions.getDataItemsStart(type)),
+        // getDataItems: (type) => dispatch(actions.getDataItemsStart(type)),
         getAllCodeInToItems: (type) => dispatch(actions.getAllCodeInToItemsStart(type)),
         getNewDataVoucher: (id) => dispatch(actions.getNewDataVoucher(id))
     }

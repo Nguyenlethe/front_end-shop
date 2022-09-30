@@ -5,7 +5,7 @@ import {faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 import './Modal.scss';
 
-class Tippy extends Component {
+class ModalLoad extends Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -21,7 +21,7 @@ class Tippy extends Component {
     return (
        
         <>
-            {isShow ? <div id="Modal">
+            {isShow ? <div id="Modal" >
                 <FontAwesomeIcon icon={faSpinner} />
             </div> : ''}
         </>
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tippy);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalLoad);

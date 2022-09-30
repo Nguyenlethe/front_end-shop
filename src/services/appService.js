@@ -37,8 +37,15 @@ function searchItemsNameNav (data) {
 }
 
 
+// Get like or follow items or shop
+function getLikeOrFollowItemsShop (data) {
+    return axios.get(`/app/get-data-tabel-followLikes?&idUser=${data.idUser}&type=${data.type}&idItems=${data.idItems}&idShop=${data.idShop}`,);
+}
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    getLikeOrFollowItemsShop,
     searchItemsNameNav,
     createNewUser,
     updatePassword,

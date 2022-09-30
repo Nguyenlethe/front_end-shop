@@ -22,6 +22,9 @@ export const loginSystemStart = (dataForm) => {
     return async (dispatch, getState) => {
         try{
             let resultDataUser  = await appService.loginSystem(dataForm)
+
+            console.log(resultDataUser)
+
             if( resultDataUser && resultDataUser.data.errCode === 0){
                 dispatch(loginSystemSuscess(resultDataUser.data.data))
             }else{
@@ -101,3 +104,37 @@ export const createNewUserStart = (data) => {
     }
 }
 
+
+
+// GET_ITEMS_LIKES: 'GET_ITEMS_LIKES',
+
+// Actions đăng nhập
+export const getLikeOrFollowItemsShop = (data) => {
+    return async (dispatch, getState) => {
+        try{
+            let res  = await appService.getLikeOrFollowItemsShop(data)
+
+            // console.log(res)
+
+            if(res && res.data.errCode === 0 && data.type == 'LIKE'){
+                dispatch(getLikeItemsShopSuscess(res.data.data))
+            }
+            if(res && res.data.errCode === 0 && data.type == 'FLOW'){
+                dispatch(getFollowItemsShopSuscess(res.data.data))
+            }
+            
+        }catch(err) {
+            console.error("getLikeOrFollowItemsShop  ERROR")
+        }
+    }
+}
+
+export const getLikeItemsShopSuscess = (data) => ({
+    type: actionTypes.GET_ITEMS_LIKES,
+    dataLike: data
+})
+
+export const getFollowItemsShopSuscess = (data) => ({
+    type: actionTypes.GET_FOLLOW_LIKES,
+    dataFOLLOW: data
+})

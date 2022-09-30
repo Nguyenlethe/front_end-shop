@@ -1,9 +1,10 @@
 .border-input-search-nav{
     position: relative;
-    border: 1px solid #ccc;
     align-items: center;
     display: flex;
     border-radius: 6px;
+    background: white;
+    box-shadow: 0px 0px 1px #ff0000;
 
 
     > input[name='search']{
@@ -146,13 +147,18 @@
             border: none;
             outline: none;
             color: transparent;
+            cursor: pointer;
+        }
+
+        &:hover .icon-search{
+            background: red;
         }
         
         .icon-search{
             position: absolute;
             color: white;
             font-size: 2rem;
-            background: var(--color-BTN-manage);
+            background: var(--BGR-color-nav);
             width: 100%;
             padding: 8px 0;
             border-radius: 4px;

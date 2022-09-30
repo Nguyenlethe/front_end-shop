@@ -11,7 +11,9 @@ export const path = {
 
 
     // Items
-    SEARCH_ITEMS: '/courses',
+    SEARCH_ITEMS: '/search-items',
+    DETAIL_ITEMS: '/detail-items',
+
     
     // ADMIN
     MANAGE_USER: '/system/management',

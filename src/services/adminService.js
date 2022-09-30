@@ -81,8 +81,8 @@ function addNewItems (data) {
 }
 
 // Get items
-function getDataItems (type) {
-    return axios.get(`/admin/get-data-items?type=${type}`);
+function getDataItems (data) {
+    return axios.get(`/admin/get-data-items?amount=${data.amount}&idItems=${data.idItems}&idShop=${data.idShop}&category=${data.category}&type=${data.type}`);  
 }
 
 // Xoa items

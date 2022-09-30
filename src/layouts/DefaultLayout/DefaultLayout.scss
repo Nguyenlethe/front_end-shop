@@ -1,12 +1,17 @@
 .hug-img-logo {
     position: relative;
 
+    &:hover{
+        opacity: .8;
+    }
+
     img{
-        height: var(--height-nav-center) ;
+        width: 100%;
     }
 }
 .nav-center {
-    border-bottom: 1px solid #ccc;
+    background: var(--BGR-color-nav);
+
 
     .list_nav-center{
         display: flex;

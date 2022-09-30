@@ -44,7 +44,7 @@ class Items extends Component {
             listImg: [],
             listColor: [],
            
-
+            isEditDetailItems: false,
             coating: false,
             optionsColor: null,
             optionsSize: null,
@@ -163,11 +163,18 @@ class Items extends Component {
     
     // Change Mô tả Sản phẩm Vi
     handleEditorChangeVi = ({ html, text }) => {
-        let {listErrorForm} = this.state
+        let {listErrorForm, itemsInfo,isEditDetailItems,editItems} = this.state
+        let isEdit = isEditDetailItems
+
+        if(editItems ){
+            isEdit = true
+        }
+
 
         this.setState({ 
+            isEditDetailItems: isEdit,
             itemsInfo: {
-                ...this.state.itemsInfo,
+                ...itemsInfo,
                 describeTextVi: text || '',
                 describeHtmlVi: html || '',
             },
@@ -180,8 +187,17 @@ class Items extends Component {
 
     // Change Mô tả Sản phẩm En
     handleEditorChangeEn = ({ html, text }) => {
-        let {listErrorForm} = this.state
+        let {listErrorForm,isEditDetailItems,editItems} = this.state
+
+        let isEdit = isEditDetailItems
+
+        if(editItems ){
+            isEdit = true
+        }
+
+
         this.setState({ 
+            isEditDetailItems: isEdit,
             itemsInfo: {
                 ...this.state.itemsInfo,
                 describeTextEn: text || '',
@@ -792,7 +808,7 @@ class Items extends Component {
     // Submit 
     handleOnSubmit = async(e) => {
         e.preventDefault()
-        let {items,itemsInfo, itemsSizeAmount, itemsColorImgages,listImgFormData,listErrorForm,editItems,listImg} = this.state
+        let {items,itemsInfo, itemsSizeAmount, itemsColorImgages,listImgFormData,listErrorForm,editItems,isEditDetailItems} = this.state
         let listErrorFromCoppy = listErrorForm
         
         let res = ''
@@ -844,9 +860,11 @@ class Items extends Component {
             // Chuyển về string
             let dataItems = JSON.stringify(items)
             let dataItemsInfo = JSON.stringify({...itemsInfo,itemsId: items.idItems})
+            let editDetailItems = JSON.stringify(isEditDetailItems)
 
             // Gửi data form bảng dataItems && dataItemsInfo
             data.append("dataItems", dataItems)
+            data.append("editDetailItems", editDetailItems)
             data.append("dataItemsInfo", dataItemsInfo)
             res = await adminService.editDataItems(data)
         }
@@ -1460,6 +1478,8 @@ class Items extends Component {
                             onChange={this.handleEditorChangeEn} 
                             value={this.state.itemsInfo.describeTextEn || ''}
                         />
+
+
                         <span className='err'> {!_.isEmpty(listErrorForm.describeTextVi) && <FontAwesomeIcon  icon={faCircleExclamation} />} 
                             {!_.isEmpty(listErrorForm.describeTextVi) ? language === languages.VI ? listErrorForm.describeTextVi.valueVi : listErrorForm.describeTextVi.valueEn : ''}
                         </span><br></br>

@@ -12,8 +12,12 @@ const initState = {
         fullNameVi: localStorage.getItem('fullNameVi') ? localStorage.getItem('fullNameVi') : '',
         fullNameEn: localStorage.getItem('fullNameEn') ? localStorage.getItem('fullNameEn') : '',
         province: localStorage.getItem('province') ? localStorage.getItem('province') : '',
+        // detailAddressVI: localStorage.getItem('detailAddressVI') ? localStorage.getItem('detailAddressVI') : '',
+        // detailAddressEN: localStorage.getItem('detailAddressEN') ? localStorage.getItem('detailAddressEN') : '',
+
     },
-    dataOptions: {}
+    dataOptions: {},
+    listItemsUserLike: []
 }
 
 
@@ -36,6 +40,17 @@ const appReducer = (state = initState, action) => {
             }
 
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
+
+            // let addressDetail = action.dataLogin.addressDetails
+            // let wardsData = action.dataLogin.wardsData
+            // let districtData = action.dataLogin.districtData
+            // let provinceData = action.dataLogin.provinceData
+
+            // const detaiAddress = {
+            //     valueVi: `${addressDetail}, ${wardsData.valueVi} - ${districtData.valueVi} - ${provinceData.valueVi}`,
+            //     valueEn: `${addressDetail}, ${wardsData.valueEn} - ${districtData.valueEn} - ${provinceData.valueEn}`,
+            // }
+
             state.loginUser.id = action.dataLogin.id
             localStorage.setItem('islogin', true)
             localStorage.setItem('isError', false)
@@ -45,7 +60,11 @@ const appReducer = (state = initState, action) => {
             localStorage.setItem('fullNameVi',`${action.dataLogin.firstName} ${action.dataLogin.lastName}`)
             localStorage.setItem('fullNameEn',`${action.dataLogin.lastName} ${action.dataLogin.firstName}`)
             localStorage.setItem('province',action.dataLogin.province)
+            // localStorage.setItem('detailAddressVI',detaiAddress.valueVi)
+            // localStorage.setItem('detailAddressEN',detaiAddress.valueEn)
 
+            // state.loginUser.detailAddressVI = localStorage.getItem('detailAddressVI')
+            // state.loginUser.detailAddressEN = localStorage.getItem('detailAddressEN')
             state.loginUser.id = localStorage.getItem('id')
             state.loginUser.email = localStorage.getItem('email')
             state.loginUser.permission = localStorage.getItem('permission')
@@ -85,6 +104,12 @@ const appReducer = (state = initState, action) => {
                 ...state
             }
 
+        case actionTypes.GET_ITEMS_LIKES:
+            state.listItemsUserLike = action.dataLike
+            return {
+                ...state
+            }
+        // GET_ITEMS_LIKES
 
             
 

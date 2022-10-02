@@ -324,6 +324,10 @@
                 position: relative;
                 overflow: hidden;
                 min-width: 120px;
+
+                &:hover{
+                    border: 1px solid rgb(255, 0, 0);
+                }
             }
 
             .button_color-select-img.active{ 
@@ -349,8 +353,81 @@
                 }
             }
 
+            .list-btn-amount{
+                display: flex;
+                align-items: center;
+
+                .btn-amount-items{
+                    font-size: 1.6rem;
+                    min-width: 30px;
+                    background: transparent;
+                    border: 1px solid #ccc;
+                    padding: 5px 0;
+                }
+    
+                .btn-amount-items.content-amount{
+                    max-width: 60px;
+                    border-left: transparent;
+                    border-right: transparent;
+                    overflow: hidden;
+
+                    input{
+                        text-align: center;
+                        width: 125%;
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
+
+
         }
 
+        .list-btn-buy-now{
+            display: flex;
+            align-items: center;
+
+            .btn-buy-items{
+                background: transparent;
+                border: none;
+                outline: none;
+                overflow: hidden;
+                border-radius: 2px;
+    
+                >span{
+                    font-size: 1.6rem;
+                    text-transform: uppercase;
+                    color: var( --color-price);
+                    padding: 2px 20px;
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid var( --color-price);
+                    background: #ff000012;
+    
+                    i{
+                        font-size: 2.4rem;
+                        margin-right: 6px;
+                    }
+                }
+
+                &:hover{
+                    opacity: .8;
+                    cursor: pointer;
+                }
+            }
+    
+            .btn-buy-items.buy_now{
+    
+                >span{
+                    font-size: 1.6rem;
+                    text-transform: uppercase;
+                    color: rgb(255, 255, 255);
+                    padding: 6px 20px;
+                    border: 1px solid transparent;
+                    background: var( --color-price);
+                }
+            }
+        }
 
     }
 

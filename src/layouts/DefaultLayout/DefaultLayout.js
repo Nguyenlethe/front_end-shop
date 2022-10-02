@@ -6,23 +6,33 @@ import {languages, path,SEARCH} from '../../utils/constant'
 import ListLanguage from '../../components/ListLanguage';
 import { Link ,Navigate} from 'react-router-dom';
 import img from '../..//assets/image/LOGOO.png'
-
 import styles from './DefaultLayout.scss';
 import NavBar from './Navbar/NavBar';
 import InputSearch from '../../components/SearchInput/InputSearch';
 import InputSearchNav from '../../components/SearchInput/InputSearchNav';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
+import CartList from './Navbar/CartList/CartList';
+
 
 class DefaultLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+          avatarUser: '',
+          lenthItemsListCart: 0,
+          isShowListItemsCart: false
         }
     }
 
    
     // Mount 
     componentDidMount = async ()=>  {
+      let {dataUser} = this.props
+
+      this.setState({
+        avatarUser: dataUser.avatar
+      })
       // this.props.addDataOptionsSearchNav({
       //   value: 'All2',
       //   valueTextInputEN: 'Full floor 2',
@@ -32,14 +42,49 @@ class DefaultLayout extends Component {
 
     // Update
     componentDidUpdate= async(prevProps, prevState)=> {
+        let {dataUser} = this.props
+
         if(prevProps.language !== this.props.language){
 
         }
+
+        // if(prevProps.dataUser !== this.props.dataUser){
+
+        //   this.setState({
+        //     avatarUser: dataUser.avatar
+        //   })
+        // }
     }
+
+    handleSetLengthItemsListCart = (length) => {
+      this.setState({
+        lenthItemsListCart: length
+      })
+    }
+
+
+    handleSetShowOrHideListCart = (type) => {
+
+      if(type == 'SHOW'){
+        this.setState({
+          isShowListItemsCart: Math.random() * 10000
+        })
+      }
+
+      if(type == 'HIDE'){
+        this.setState({
+          isShowListItemsCart: false
+        })
+      }
+    }
+
 
       
     render() {
-    let {children} = this.props
+    let {children, dataUser} = this.props
+    let {avatarUser,lenthItemsListCart,isShowListItemsCart} = this. state
+
+
     return (
       <>
         <NavBar />
@@ -48,7 +93,6 @@ class DefaultLayout extends Component {
             <div className='row'>
 
               <div className='list_nav-center'>
-
                 <div className='col l-2'>
                   <Link to={path.HOME}  className='hug-img-logo'>
                     <img src={img} alt='' />
@@ -56,17 +100,28 @@ class DefaultLayout extends Component {
                 </div>
 
 
-                <div className='col l-7'>
+                <div className='col l-9'>
                   <InputSearchNav />
                 </div>
 
+                
+                <div className='col l-1'>
+                  <div className='list-icon-nav'>
 
-                <div className='col l-3'>
-                    Giỏ hàng - Tin nhắn - User + menu
-                </div>
+                    <div className='wrapper-icon-nav' onMouseLeave={() => this.handleSetShowOrHideListCart('HIDE')} >
+                      <i className="bi bi-cart2" onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')}></i>
+                      <span className='length-items-to-cart'>{lenthItemsListCart}</span>
+
+                      <div className='wrapper-list-cart'>
+                        <CartList isShowListItemsCart={isShowListItemsCart} handleSetLengthItemsListCart={this.handleSetLengthItemsListCart} />
+                      </div>
+                      
+                    </div>
+
+                  </div>
+                </div> 
 
               </div>
-
 
             </div>
           </div>
@@ -79,8 +134,8 @@ class DefaultLayout extends Component {
 
 const mapStateToProps = (state) => {
   return { 
-    language: state.app.language 
-
+    language: state.app.language ,
+    dataUser: state.app.loginUser,
   }
 }
 

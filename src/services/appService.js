@@ -42,9 +42,29 @@ function getLikeOrFollowItemsShop (data) {
     return axios.get(`/app/get-data-tabel-followLikes?&idUser=${data.idUser}&type=${data.type}&idItems=${data.idItems}&idShop=${data.idShop}`,);
 }
 
+// delete voucher Expired
+function deleteVoucherExpired() {
+    return axios.post(`/system/delete-voucher-expired`);
+}
+
+
+// add items to cart
+function addNewItemsToCart(data) {
+    return axios.post(`/system/add-items-to-cart`, data);
+}
+
+// Get list items cart
+function getListCart (id) {
+    return axios.get(`/app/get-list-items-cart?&idUser=${id}`,);
+}
+
+
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    getListCart,
+    addNewItemsToCart,
+    deleteVoucherExpired,
     getLikeOrFollowItemsShop,
     searchItemsNameNav,
     createNewUser,

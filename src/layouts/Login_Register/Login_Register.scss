@@ -1,13 +1,13 @@
 
-$col-sky-top: #3f9aed;
+$col-sky-top: #000000;
 $col-sky-bottom: #e8f2f6;
-$col-fg: #5d7399;
+$col-fg: #000000;
 $col-blood: #dd4040;
 $col-ground: #f6f9fa;
 
 
 .bgr-default-login{
-    background: linear-gradient(#48484837, #64646430), url('') top center / cover no-repeat;
+    // background: linear-gradient(#48484837, #64646430), url('') top center / cover no-repeat;
     position: fixed;
     top: 0;
     z-index: 9999;

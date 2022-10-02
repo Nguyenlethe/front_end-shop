@@ -1,6 +1,10 @@
 
+
+$col-icon: #000000;
+
 .form-login{
     width: var(--width-form-system);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     // background-color: rgb(255, 255, 255);
     // box-shadow: 0px 0px 6px rgb(137, 137, 137);
     padding: 30px 30px;
@@ -40,7 +44,7 @@
 
             .icon-input{
                 font-size: var(--font-size-label-form-login);
-                color: rgb(2, 129, 188);
+                color: $col-icon;
                 opacity: 0.5;
                 width: auto;
                 flex: 1;

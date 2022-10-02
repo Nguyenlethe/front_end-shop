@@ -140,6 +140,7 @@
             
         },
         "toast": {
+            "addItemsCart":"Thêm thành công sản phẩm !!!",
             "success":"Thêm người dùng thành công !!!",
             "successPriceShip":"Thêm thành công !!!",
             "successVoucher":"Thêm voucher thành công !!!",
@@ -259,7 +260,13 @@
             "textFreeShip":"Miễn phí vận chuyển tới",
             "nextShip":"Vận chuyển tới",
             "textPriceShip":"Giá vận chuyển ",
-            "listColor":"Màu sắc"
+            "listColor":"Màu sắc",
+            "listSize":"Size",
+            "count":"Số lượng",
+            "addnewcart":"Thêm vào giỏ hàng",
+            "buyNow":"Mua ngay",
+            "checkBuyItems": "Vui lòng điền đầy đủ thông tin, màu sắc, kích cỡ, số lượng !!!",
+            "titleCart":"Sản phẩm mới thêm"
 
 
 

@@ -5,13 +5,15 @@ import SwitchLanguage from '../../../SwitchLanguage';
 import withRouter from '../../../routes/withRouter';
 import * as actions from '../../../store/action'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAngleRight,faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import {faAngleRight,faAngleLeft, faSleigh} from '@fortawesome/free-solid-svg-icons';
 import { FaFacebook,FaFacebookMessenger,FaTwitter,FaTelegram,FaRegHeart,FaHeart} from 'react-icons/fa';
 import notItemsImg from '../../../assets/image/NoImg.jpg'
 import appService from '../../../services/appService';
 import ListStar from '../ListStar'
 import NumberFormat from 'react-number-format';
 import Ship from '../../../assets/image/iconShip.png'
+import Button from '../../../components/Button'
+
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import './DetailItems.scss';
@@ -24,7 +26,8 @@ class DetailItems extends Component {
         
 
         this.state = {
-          indexActiveColor: 0,
+          indexActiveColor: 100,
+          indexActiveSize: 100,
           newPrice: 0,
           newPriceUS: 0,
           price: 0,
@@ -45,6 +48,7 @@ class DetailItems extends Component {
 
           isLoadItems: true,
           isActive: false,
+          isEmptyColorSize: false,
 
           isLike: 0,
           evaluate: 0,
@@ -53,6 +57,12 @@ class DetailItems extends Component {
           totalStars: 0,
           indexScrollX: 0,
           totalStarsAllType: 0,
+          
+          dataTalbelOrderItems: {
+            color: '',
+            size: '',
+            itemsNumber: 1
+          }
         }
     }
 
@@ -193,7 +203,7 @@ class DetailItems extends Component {
 
       // Not Change
       if(isActive == true && isLike == 0){
-        console.log('Not Change')
+        
       }
     }
 
@@ -272,6 +282,103 @@ class DetailItems extends Component {
       })
     }
 
+    // handle click add index active
+    handleActiveClick = (index, valueTabel, type, date) => {
+      let {dataTalbelOrderItems, } = this.state
+
+      if(type == 'COLOR'){
+        this.setState({
+          indexActiveColor: index,
+          indexImg: index,
+          isEmptyColorSize: false,
+          dataTalbelOrderItems: {
+            ...dataTalbelOrderItems,
+            color: valueTabel,
+          }
+        })
+      }
+      if(type == 'SIZE'){
+        this.setState({
+          indexActiveSize: index,
+          isEmptyColorSize: false,
+          dataTalbelOrderItems: {
+            ...dataTalbelOrderItems,
+            size: valueTabel,
+          }
+        })
+      }
+
+      if(type == 'CHANGE_AMOUNT'){
+        this.setState({
+          dataTalbelOrderItems: {
+            ...dataTalbelOrderItems,
+            itemsNumber: valueTabel,
+          }
+        })
+      }
+
+      if(type == 'BLUR_INPUT'){
+        if(valueTabel == '' || valueTabel <= 0){
+
+          this.setState({
+            dataTalbelOrderItems: {
+              ...dataTalbelOrderItems,
+              itemsNumber: 1,
+            }
+          })
+        } 
+      }
+
+      if(type == 'CHANGE_DOWN_AMOUNT'){
+        let itemsNumber = dataTalbelOrderItems.itemsNumber - 1
+        if(itemsNumber >= 1){
+          this.setState({
+            dataTalbelOrderItems: {
+              ...dataTalbelOrderItems,
+              itemsNumber: itemsNumber,
+            }
+          })
+        }
+      }
+
+      if(type == 'CHANGE_UP_AMOUNT'){
+        let itemsNumber = dataTalbelOrderItems.itemsNumber + 1
+
+        this.setState({
+          dataTalbelOrderItems: {
+            ...dataTalbelOrderItems,
+            itemsNumber: itemsNumber,
+          }
+        })
+      }
+    }
+
+    // XL mua và thêm vào giỏ hàng
+    handleBuyItems = (type) => {
+      let {dataUser,navigate} = this.props
+      let {indexActiveColor,indexActiveSize, items,dataTalbelOrderItems} = this.state
+
+      if(dataUser.islogin != 'true'){
+        navigate(`${path.LOGINPAGE}`)
+      }
+
+      if(type == 'CART'){
+        if(indexActiveColor == 100 || indexActiveSize == 100) {
+          this.setState({isEmptyColorSize: true})
+        }
+
+        if(indexActiveColor != 100 || indexActiveSize != 100){
+          this.props.addNewItemsToCart({
+            itemsId: items.idItems, 
+            userGuestId: dataUser.id, 
+            idShop:items.idShop, 
+            itemsNumber: dataTalbelOrderItems.itemsNumber, 
+            timeCreate: new Date(), color: dataTalbelOrderItems.color, 
+            size: dataTalbelOrderItems.size})
+        }
+      }
+    }
+
       
     render() {
 
@@ -288,13 +395,17 @@ class DetailItems extends Component {
       priceItemsShip,
       priceShipType,
       priceShipCategory,
-      indexActiveColor
+      indexActiveColor,
+      isEmptyColorSize,
+      indexActiveSize
     } = this.state
+
+    let {itemsNumber} = this.state.dataTalbelOrderItems
 
     let {language} = this.props
     let {dataUser} = this.props
 
-    console.log(items)
+
 
     return (
     <>
@@ -375,12 +486,13 @@ class DetailItems extends Component {
 
             <div className='col l-8'>
               <div className='data-info-items'>
+
                 <span className='name-items' style={{marginLeft: '4px'}}>
                   <span className='labels-discount'><SwitchLanguage id='manageAdmin.items.loveItems'/></span> 
                   {languages.EN === language ? items.nameEn : items.name}
                 </span>
 
-                <div className='all-detail-evaluate-items l-12'>
+                <div className='all-detail-evaluate-items l-12 mgb-20'>
                     <ListStar evaluate={evaluate} />
 
                     <div className='content-countEvaluate'>
@@ -465,13 +577,12 @@ class DetailItems extends Component {
                 }
               </div>
 
-              <div className='detail-price-ship grt-20'> 
-                <div className='l-2'>
+              <div className='detail-price-ship grt-20 '> 
+                <div className='l-2  grt-20'>
                   <span className='title-truck'><SwitchLanguage id='manageAdmin.items.ship'/></span>
                 </div>
 
-                <div className='l-10 detail-price-ship'>
-
+                <div className='l-10 detail-price-ship  grt-20'>
                   <div className='wrapper_icon-ship'>
                     <img src={Ship} alt='' />
                   </div>
@@ -525,7 +636,7 @@ class DetailItems extends Component {
                 <div className='l-10'>
                   {items.dataColorImg && items.dataColorImg[0].colorData && items.dataColorImg.map((color, index) => {
                       return (
-                        <button key={color.image} onClick={() => this.setState({indexActiveColor: index, indexImg: index})}
+                        <button key={color.image} onClick={() => this.handleActiveClick(index, color.colorData.code,'COLOR')} 
                           style={{borderColor: index == indexActiveColor ? 'red' : ''}}
                           className={`button_color-select-img mgr-12  grt-12 ${index == indexActiveColor ? 'active' : ''}`}>{languages.EN == language ? color.colorData.valueEn : color.colorData.valueVi}
                           {index == indexActiveColor && <i className="bi bi-check icon-check"></i>} 
@@ -533,6 +644,64 @@ class DetailItems extends Component {
                       )
                   })}
                 </div>
+              </div>
+
+
+              <div className='detail-price-ship grt-20'> 
+                <div className='l-2  grt-12'>
+                  <span className='title-truck '><SwitchLanguage id='manageAdmin.items.listSize'/></span>
+                </div>
+
+                <div className='l-10'>
+                  {items.dataSizeAmount && items.dataSizeAmount[0] && items.dataSizeAmount.map((size, index) => {
+                      return (
+                        <button key={`${size.sizeData.valueEn}${index}`} onClick={() => size.amount >= 1 && this.handleActiveClick(index, size.sizeData.valueEn, 'SIZE')} 
+                          style={{borderColor: index == indexActiveSize && size.amount >= 1 ? 'red' : '', opacity: size.amount <= 0 && '.6' }} 
+                          className={`button_color-select-img mgr-12  grt-12 ${index == indexActiveSize && size.amount >= 1 ? 'active' : ''}`}>
+                          {index == indexActiveSize && size.amount >= 1 && <i className="bi bi-check icon-check"></i>} 
+                          {`${size.sizeData.valueEn} (${size.amount})`}
+                        </button>
+                      )
+                  })}
+                </div>
+              </div>
+
+
+              <div className='detail-price-ship grt-20'> 
+                <div className='l-2 grt-12'>
+                  <span className='title-truck '><SwitchLanguage id='manageAdmin.items.count'/></span>
+                </div>
+
+                <div className='l-10'>
+
+                  <div className='grt-12 list-btn-amount'>
+                    <button className='btn-amount-items' onClick={() => this.handleActiveClick('','','CHANGE_DOWN_AMOUNT')}>-</button>
+                    <button className='btn-amount-items content-amount'> 
+                      <input type='number' 
+                        onChange={(e) => this.handleActiveClick('',e.target.value,'CHANGE_AMOUNT')} 
+                        onBlur={(e) => this.handleActiveClick('',e.target.value,'BLUR_INPUT')} value={itemsNumber}/>
+                    </button>
+                    <button className='btn-amount-items'  onClick={() => this.handleActiveClick('','','CHANGE_UP_AMOUNT')}>+</button>
+                  </div>
+
+                </div>
+              </div>
+
+              {isEmptyColorSize && 
+                <span className='err grt-20' style={{display: 'block'}}><SwitchLanguage  id='manageAdmin.items.checkBuyItems'/></span>
+              }
+
+                
+              <div className='l-12 grt-20 list-btn-buy-now'>
+
+                <button className='btn-buy-items mgr-12 grt-20'>
+                   <span onClick={() => this.handleBuyItems('CART')}><i className="bi bi-cart-plus"></i> <SwitchLanguage  id='manageAdmin.items.addnewcart'/></span>
+                </button>
+
+                <button className='btn-buy-items buy_now grt-20'>
+                  <span><SwitchLanguage  id='manageAdmin.items.buyNow'/></span>
+                </button>
+
               </div>
 
             </div>
@@ -592,8 +761,6 @@ class DetailItems extends Component {
 
     </>
     }
-            
-       
     </div>
     </div>
     </div>
@@ -613,7 +780,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getDataItems: (data) => dispatch(actions.getDataItemsStart(data)),
+      getDataItems: (data) => dispatch(actions.getDataItemsStart(data)),
+      addNewItemsToCart: (data) => dispatch(actions.addNewItemsToCart(data)),
     }
 }
 

@@ -138,3 +138,48 @@ export const getFollowItemsShopSuscess = (data) => ({
     type: actionTypes.GET_FOLLOW_LIKES,
     dataFOLLOW: data
 })
+
+
+
+// ADD_ITEMS_TO_CART: 'ADD_ITEMS_TO_CART',
+// add items to cart
+export const addNewItemsToCart = (data) => {
+    return async (dispatch, getState) => {
+        try{
+            await appService.addNewItemsToCart(data)
+            let res = await appService.getListCart(data.userGuestId)
+
+
+            if(res && res.data.errCode === 0){
+                let data = res.data.data
+                dispatch(getListCartSuscess(data))
+            }
+    
+        }catch(err) {
+            console.error("addNewItemsToCart  ERROR")
+        }
+    }
+}
+
+// GET_ITEMS_CART: 'GET_ITEMS_CART'dataCart
+// get items cart
+export const getListCart = (idUser) => {
+    return async (dispatch, getState) => {
+        try{
+            let res = await appService.getListCart(idUser)
+
+            if(res && res.data.errCode === 0){
+                let data = res.data.data
+                dispatch(getListCartSuscess(data))
+            }
+    
+        }catch(err) {
+            console.error("addNewItemsToCart  ERROR")
+        }
+    }
+}
+
+export const getListCartSuscess = (data) => ({
+    type: actionTypes.GET_ITEMS_CART,
+    dataCart: data
+})

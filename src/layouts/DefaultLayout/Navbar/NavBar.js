@@ -7,8 +7,10 @@ import Tippy from '../../../components/Tippy/Tippy'
 import {path, PERMISSIONS,languages, CONTACT} from '../../../utils/constant'
 import { Link ,Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPhoneFlip,faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {faPhoneFlip,faEnvelope,faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import adminService from '../../../services/adminService';
+
+
 
 import './NavBar.scss';
 import Button from '../../../components/Button/Button';
@@ -49,7 +51,7 @@ class NavBar extends Component {
       
     render() {
 
-    let {islogin, permission} = this.props.dataUser
+    let {islogin, permission, avatar} = this.props.dataUser
     
     return (
         <div className='grid'>
@@ -70,15 +72,31 @@ class NavBar extends Component {
             
 
             <div className='nav-top-right'>
-                {!islogin && 
+                {!islogin ?
                     <div className='not-login'>
                         <Button type='href' to={path.LOGINPAGE} content={<SwitchLanguage id='manageAdmin.btnLG'/>} /> <span style={{color: 'var(--sub-text)'}}>{'|'}</span>
                         <Button type='href' to={path.REGISTERPAGE} content={<SwitchLanguage id='manageAdmin.btnRGT'/>} />
                     </div>
+
+                    :
+                    
+                    <div className='list-icon-nav'>
+                        <div className='wrapper-icon-nav'>
+                        <i className="bi bi-chat-dots"></i>
+                        </div>
+
+                        {islogin == 'true' ?
+                        <div className='wrapper_avatar mgl-12'>
+                            <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
+                        </div>
+                        : 
+                        <FontAwesomeIcon className='mgl-12' icon={faCircleUser} />
+                        }
+                    </div>
                 }       
-               
-                <ListLanguage colorBoxShadow='0px 0px 3px rgb(255 255 255)' />
                 
+                <ListLanguage colorBoxShadow='0px 0px 3px rgb(255 255 255)' />
+               
             </div>
             
         </div>

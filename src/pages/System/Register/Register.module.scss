@@ -1,4 +1,7 @@
 
+
+$col-icon: #000000;
+
 .form-login{
     width: var(--width-form-system);
     background-color: transparent;
@@ -38,7 +41,7 @@
 
             .icon-input{
                 font-size: var(--font-size-label-form-login);
-                color: rgb(2, 129, 188);
+                color: $col-icon;
                 opacity: 0.5;
                 width: auto;
                 flex: 1;

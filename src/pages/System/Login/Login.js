@@ -166,7 +166,7 @@ class Login extends Component {
                 </span>
                 
 
-                <p className='l-4 MG_between' style={{marginTop: '70px'}} onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
+                <p className='l-12 MG_between' style={{marginTop: '70px'}} onClick={(e) => account.trim() !== "" && password.trim() !== "" && this.handleSubmitLogin(e)}>
                     <Button textType='capitalize' width='100%' border='4px' size='1.8rem' height='35px' color='var(--BGR-color-btn-manageuser)' 
                         type={account.trim() !== "" && password.trim() !== "" ? 'submit-form-data' : 'btn-ban'} opacity={account.trim() !== "" && password.trim() !== "" ? '1': '.6'}
                         content={<SwitchLanguage id='manageAdmin.form.heading'/>} margin='12px 0'
@@ -175,9 +175,9 @@ class Login extends Component {
 
             </div>
 
-            <div className={cx('compartment')}><span >OR</span></div>
+            {/* <div className={cx('compartment')}><span >OR</span></div> */}
 
-            <div className={cx('login-society')}>
+            {/* <div className={cx('login-society')}>
                 <div className={cx('list-icon-society')}>
                     <span className='l-12'>
                         <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-FB-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Facebook'/>} />
@@ -187,7 +187,7 @@ class Login extends Component {
                         <Button border='4px' size='1.7rem' width='100%'  textType='inherit' color='var(--BGR-color-TW-login)' type='submit-form-data' content={<SwitchLanguage id='manageAdmin.button.Twitter'/>} />
                     </span>
                 </div>
-            </div>
+            </div> */}
 
         </form>
         </>

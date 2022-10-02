@@ -106,8 +106,9 @@
     --color-BTN-manage: #d04262;
     --height-img-child-detail-items: 62.39px;
     --font-size-name-detail-items: 2rem;
-    --color-price: rgba(255, 15, 15, 0.89);
+    --color-price: rgb(233, 66, 37);
     --bgr-color-detail-items: rgb(240, 237, 237);
+    --btn-add-new-cart: #ffeee8;
 
 
     // number page
@@ -290,4 +291,10 @@ button{
 }
 .mgr-12{
     margin-right: 12px;
+}
+.mgl-20{
+    margin-left: 20px;
+}
+.mgb-20{
+    margin-bottom: 20px;
 }

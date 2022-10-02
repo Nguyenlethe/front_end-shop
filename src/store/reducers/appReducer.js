@@ -12,12 +12,14 @@ const initState = {
         fullNameVi: localStorage.getItem('fullNameVi') ? localStorage.getItem('fullNameVi') : '',
         fullNameEn: localStorage.getItem('fullNameEn') ? localStorage.getItem('fullNameEn') : '',
         province: localStorage.getItem('province') ? localStorage.getItem('province') : '',
+        avatar: localStorage.getItem('avatar') ? localStorage.getItem('avatar') : '',
         // detailAddressVI: localStorage.getItem('detailAddressVI') ? localStorage.getItem('detailAddressVI') : '',
         // detailAddressEN: localStorage.getItem('detailAddressEN') ? localStorage.getItem('detailAddressEN') : '',
 
     },
     dataOptions: {},
-    listItemsUserLike: []
+    listItemsUserLike: [],
+    listItemsCart: []
 }
 
 
@@ -41,6 +43,8 @@ const appReducer = (state = initState, action) => {
 
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
 
+            console.log(action.dataLogin)
+
             // let addressDetail = action.dataLogin.addressDetails
             // let wardsData = action.dataLogin.wardsData
             // let districtData = action.dataLogin.districtData
@@ -60,6 +64,8 @@ const appReducer = (state = initState, action) => {
             localStorage.setItem('fullNameVi',`${action.dataLogin.firstName} ${action.dataLogin.lastName}`)
             localStorage.setItem('fullNameEn',`${action.dataLogin.lastName} ${action.dataLogin.firstName}`)
             localStorage.setItem('province',action.dataLogin.province)
+            localStorage.setItem('avatar',action.dataLogin.avata)
+
             // localStorage.setItem('detailAddressVI',detaiAddress.valueVi)
             // localStorage.setItem('detailAddressEN',detaiAddress.valueEn)
 
@@ -71,6 +77,7 @@ const appReducer = (state = initState, action) => {
             state.loginUser.fullNameVi = localStorage.getItem('fullNameVi')
             state.loginUser.fullNameEn = localStorage.getItem('fullNameEn')
             state.loginUser.province = localStorage.getItem('province')
+            state.loginUser.avatar = localStorage.getItem('avatar')
             state.loginUser.islogin = localStorage.getItem('islogin')
             state.loginUser.isError = localStorage.getItem('isError')
 
@@ -111,7 +118,12 @@ const appReducer = (state = initState, action) => {
             }
         // GET_ITEMS_LIKES
 
-            
+        // GET_ITEMS_CART: 'GET_ITEMS_CART'dataCart
+        case actionTypes.GET_ITEMS_CART:
+            state.listItemsCart = action.dataCart
+            return {
+                ...state
+            }
 
 
         default:

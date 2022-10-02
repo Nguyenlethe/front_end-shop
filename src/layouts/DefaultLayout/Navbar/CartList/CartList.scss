@@ -1,0 +1,105 @@
+
+.list-items-cart{
+    padding: 6px 0px 10px 10px;
+    z-index: 99;
+    display: block;
+    position: relative;
+
+    &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        top: -8.5px;
+        right: 40px;
+        border-width: 0 10px 9px;
+        border-style: solid;
+        border-color: transparent transparent #fafafa transparent;
+    }
+
+    .title-cart{
+        display: block;
+        text-transform: capitalize;
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+
+    .wrapper-cart{
+        width: 450px;
+        max-height: 450px;
+        border-radius: 2px;
+        overflow: auto;
+        padding-right: 12px;
+    
+    
+    
+        >img{
+            width: 100%;
+            padding: 30px 40px;
+        }
+    
+        .items-cart{
+            margin: 0 0 12px 0;
+            display:flex;
+    
+            .wrapper-img-items-cart{
+                width: 50px;
+                overflow: hidden;
+                height: 50px;
+        
+                img{
+                    width: 100%;
+                }
+        
+            }
+    
+            .detail-info-items{
+                width: 60%;
+                margin-left: 12px;
+    
+                .name-items-cart{
+                    font-size: 1.5rem;
+                    line-height: 1.8rem;
+                    height: 3.8rem;
+                    overflow: hidden;
+                    display: block;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                }
+            }
+    
+            .list-price-items-cart{
+                display: flex;
+                flex: 1 1;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                align-items: end;
+                width: 100%;
+                flex-direction: column;
+    
+                .price-items-cart{
+                    font-size: 1.5rem;
+                    color: red;
+                }
+            }
+        }
+    }
+
+    .btn-next-to-cart{
+        border: none;
+        outline: none;
+        background: transparent;
+        float: right;
+        margin: 10px 12px;
+
+        span{
+            display: block;
+            font-size: 1.6rem;
+            text-transform: capitalize;
+            background: var(--color-primary-items);
+            color: var(--white);
+            padding: 6px 20px;
+            border-radius: 2px;
+        }
+    }
+}

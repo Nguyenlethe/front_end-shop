@@ -5,7 +5,7 @@ import SwitchLanguage from '../../SwitchLanguage';
 import {languages, path,SEARCH} from '../../utils/constant'
 import ListLanguage from '../../components/ListLanguage';
 import { Link ,Navigate} from 'react-router-dom';
-import img from '../..//assets/image/LOGOO.png'
+import img from '../..//assets/image/ShopBag.png'
 import styles from './DefaultLayout.scss';
 import NavBar from './Navbar/NavBar';
 import InputSearch from '../../components/SearchInput/InputSearch';
@@ -81,13 +81,15 @@ class DefaultLayout extends Component {
 
       
     render() {
-    let {children, dataUser} = this.props
+    let {children, dataUser, isCartPage} = this.props
     let {avatarUser,lenthItemsListCart,isShowListItemsCart} = this. state
+
 
 
     return (
       <>
         <NavBar />
+
         <div className='grid nav-center'>
           <div className='grid wide'>
             <div className='row'>
@@ -99,33 +101,46 @@ class DefaultLayout extends Component {
                   </Link>
                 </div>
 
+                {isCartPage == true && 
+                  <>
+                    <div className='col l-2'>
+                      <span className='heading-cart'>Giỏ Hàng</span>
+                    </div>
+                    <div className='col l-2'></div>
+                  </>
+                }
 
-                <div className='col l-9'>
-                  <InputSearchNav />
+                <div className={isCartPage == true ? `col l-6` : `col l-8`}>
+                  <InputSearchNav isCartPage={isCartPage} />
                 </div>
 
-                
-                <div className='col l-1'>
-                  <div className='list-icon-nav'>
 
-                    <div className='wrapper-icon-nav' onMouseLeave={() => this.handleSetShowOrHideListCart('HIDE')} >
-                      <i className="bi bi-cart2" onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')}></i>
-                      <span className='length-items-to-cart'>{lenthItemsListCart}</span>
+                {isCartPage !== true &&
+                  <div className='col l-2'>
+                    <div className='list-icon-nav'>
 
-                      <div className='wrapper-list-cart'>
-                        <CartList isShowListItemsCart={isShowListItemsCart} handleSetLengthItemsListCart={this.handleSetLengthItemsListCart} />
+                      <div className='wrapper-icon-nav' onMouseLeave={() => this.handleSetShowOrHideListCart('HIDE')} >
+                        <i className="bi bi-cart2" onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')}></i>
+
+                        {dataUser.islogin == 'true' &&
+                          <span className='length-items-to-cart'>{lenthItemsListCart}</span>
+                        } 
+
+                        <div className='wrapper-list-cart'>
+                          <CartList isShowListItemsCart={isShowListItemsCart} handleSetLengthItemsListCart={this.handleSetLengthItemsListCart} />
+                        </div>
+                        
                       </div>
-                      
                     </div>
-
-                  </div>
-                </div> 
+                  </div> 
+                }
 
               </div>
 
             </div>
           </div>
         </div>
+        
         {children}
       </>
     )}

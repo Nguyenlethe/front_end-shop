@@ -88,13 +88,14 @@ class CartList extends Component {
 
         {showListItemsCart && 
             <div className='list-items-cart'>
-                {litsItemsCart.length > 0 && <span className='title-cart'><SwitchLanguage id='manageAdmin.items.titleCart'/></span>}
+                {litsItemsCart.length > 0 && islogin == 'true' && <span className='title-cart'><SwitchLanguage id='manageAdmin.items.titleCart'/></span>}
                 <div className='wrapper-cart'>
-                    {litsItemsCart.length > 0 ? 
+                    {litsItemsCart.length > 0 && islogin == 'true' ? 
                         <>
-                            {litsItemsCart.map(item => {
+                            {litsItemsCart.map((item, index) => {
                                 return (
-                                    <div key={item.timeCreate} className='items-cart'> 
+                                    <Link to={{
+                                        pathname: `${path.DETAIL_ITEMS}`, search: `?idItems=${item.itemsId}`}} key={item.timeCreate} className='items-cart' > 
                                         <div className='wrapper-img-items-cart'>
                                             <img src={`${process.env.REACT_APP_BACKEND_IMAGES_ITEMS}/${item.Item.dataImgItems.image}`}  alt='Anh items'/>
                                         </div>
@@ -113,7 +114,7 @@ class CartList extends Component {
                                             </p>
                                             <p className='price-items-cart'>x{item.itemsNumber}</p>
                                         </div>
-                                    </div>
+                                    </Link>
                                 )
                             })}
                         </>
@@ -124,7 +125,7 @@ class CartList extends Component {
                     }
                 </div>
 
-                {litsItemsCart.length > 0 && <button className='btn-next-to-cart'> <span>Xem Giỏ Hàng</span></button>}
+                {litsItemsCart.length > 0 && islogin == 'true' && <button className='btn-next-to-cart'> <Link to={path.DETAIL_LIST_CART}>Xem Giỏ Hàng</Link></button>}
 
             </div>
         }

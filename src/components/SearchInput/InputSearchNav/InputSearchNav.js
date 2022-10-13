@@ -206,7 +206,7 @@ class InputSearchNav extends Component {
     render() {
 
     let {dataOptionsSearch,isShowOptionsSearchNav,isLoad,valueInput,dataSearchInput,isHideFormDataOptionsSearch,numberItems,isAccept} = this.state
-    let {language} = this.props
+    let {language,isCartPage} = this.props
 
 
 
@@ -226,28 +226,34 @@ class InputSearchNav extends Component {
                 {valueInput !== '' && !isLoad &&  <FontAwesomeIcon onClick={() => this.handleChangeInputSearchNav('')} className='icon-close' icon={faCircleXmark} /> } 
             </div>
 
-            <span style={{color: 'var(--sub-text)'}}>{' | '}</span>
-            <div className='select-type-search' onMouseOver={() => this.handleHoverOptionsSearch()} onMouseLeave={() => this.handleHideOptionsSearch()}>
-                <option className='options' value={dataOptionsSearch[0].type}>{languages.EN === language ? 
-                    dataOptionsSearch[0].valueTextInputEN.length > 13 ? dataOptionsSearch[0].valueTextInputEN.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputEN  : 
-                    dataOptionsSearch[0].valueTextInputVI.length > 13 ? dataOptionsSearch[0].valueTextInputVI.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputVI }
-                </option>
-                <FontAwesomeIcon className='icon-select ' icon={faCaretDown} />  
+            {isCartPage !== true &&
+                <>
+                    <span style={{color: 'var(--sub-text)'}}>{' | '}</span>
 
-                {isShowOptionsSearchNav && dataOptionsSearch.length > 1 &&
-                    <div className='list-options keyfame' ref={this.listOptions}>
-                        {dataOptionsSearch.map(option =>{
-                            return (
-                                <option className='options' value={option.type} key={option.type} onClick={() => this.handleAddOptionsSearchNav(option)}>
-                                    {languages.EN === language ? 
-                                    option.valueTextInputEN.length > 13 ? option.valueTextInputEN.slice(0, 13) + '...' : option.valueTextInputEN  : 
-                                    option.valueTextInputVI.length > 13 ? option.valueTextInputVI.slice(0, 13) + '...' : option.valueTextInputVI }
-                                </option>
-                            )
-                        })}
+                    <div className='select-type-search' onMouseOver={() => this.handleHoverOptionsSearch()} onMouseLeave={() => this.handleHideOptionsSearch()}>
+                        <option className='options' value={dataOptionsSearch[0].type}>{languages.EN === language ? 
+                            dataOptionsSearch[0].valueTextInputEN.length > 13 ? dataOptionsSearch[0].valueTextInputEN.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputEN  : 
+                            dataOptionsSearch[0].valueTextInputVI.length > 13 ? dataOptionsSearch[0].valueTextInputVI.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputVI }
+                        </option>
+                        <FontAwesomeIcon className='icon-select ' icon={faCaretDown} />  
+
+                        {isShowOptionsSearchNav && dataOptionsSearch.length > 1 &&
+                            <div className='list-options keyfame' ref={this.listOptions}>
+                                {dataOptionsSearch.map(option =>{
+                                    return (
+                                        <option className='options' value={option.type} key={option.type} onClick={() => this.handleAddOptionsSearchNav(option)}>
+                                            {languages.EN === language ? 
+                                            option.valueTextInputEN.length > 13 ? option.valueTextInputEN.slice(0, 13) + '...' : option.valueTextInputEN  : 
+                                            option.valueTextInputVI.length > 13 ? option.valueTextInputVI.slice(0, 13) + '...' : option.valueTextInputVI }
+                                        </option>
+                                    )
+                                })}
+                            </div>
+                        }
                     </div>
-                }
-            </div>
+                </>
+            }
+
 
             <ListItemsSearch 
                 isHideFormDataOptionsSearch={isHideFormDataOptionsSearch}   

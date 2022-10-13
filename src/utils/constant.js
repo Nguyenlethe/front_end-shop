@@ -6,6 +6,7 @@ export const path = {
     LOGINPAGE: '/login',
     REGISTERPAGE: '/register',
     FORGOTPASS: '/forgot/password',
+    DETAIL_LIST_CART: '/cart',
 
     // idShop forItemCategory forItemType itemsId   
 

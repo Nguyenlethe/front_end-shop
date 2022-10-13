@@ -85,12 +85,18 @@ class NavBar extends Component {
                         <i className="bi bi-chat-dots"></i>
                         </div>
 
-                        {islogin == 'true' ?
-                        <div className='wrapper_avatar mgl-12'>
-                            <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
-                        </div>
+                        {islogin == 'true' ? 
+
+                            <div className='wrapper_avatar mgl-12'>
+                                <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
+
+                                
+                                
+                            </div>
+
+
                         : 
-                        <FontAwesomeIcon className='mgl-12' icon={faCircleUser} />
+                            <FontAwesomeIcon className='mgl-12' icon={faCircleUser} />
                         }
                     </div>
                 }       

@@ -68,13 +68,9 @@ class SeeMoreItemsSearch extends Component {
 
             let numberItems = res.data.count / ITEMS.SEE_MORE_SHOW_ITEMS_SEARCH
 
-            console.log(res.data.count, dataLength)
             numberItems = Math.round(numberItems)
 
-            
-            
             let arrayPage = []
-            
             for(let i = 1; i <= numberItems ; i++){
                 arrayPage.push(i)
             }
@@ -102,8 +98,6 @@ class SeeMoreItemsSearch extends Component {
     render() {
 
     let {listDataItemsSearch,value,dataSearchItemsParams,arrayNumberPage} = this.state
-    let {language} = this.props
-
 
     return (
         <>
@@ -126,15 +120,10 @@ class SeeMoreItemsSearch extends Component {
 
                 <NumberPage 
                     dataSearchItemsParams={dataSearchItemsParams}
-                    value={value}  limitSeeMore={ITEMS.SEE_MORE_SHOW_ITEMS_SEARCH}
+                    value={value} limitSeeMore={ITEMS.SEE_MORE_SHOW_ITEMS_SEARCH}
                     arrayNumberPage={arrayNumberPage}   
                     idShop
                 />
-
-               
-
-
-
 
             </div>
             </div>

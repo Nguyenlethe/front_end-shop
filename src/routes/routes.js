@@ -11,6 +11,7 @@ import ManageUser from '../pages/Admin/ManageSystem/ManageSystem';
 import ForgotPassword from '../pages/System/ForgotPassword'; 
 import SeeMoreItemsSearch from '../pages/Items/SeeMoreItemsSearch'
 import DetailItems from '../components/Items/DetailItems/DetailItems';
+import DetailListCart from '../pages/Items/DetailListCart';
 
 const routes = [
     { path: path.HOME, components: Home },
@@ -22,8 +23,7 @@ const routes = [
     { path: path.MANAGE_USER, components: ManageUser , layout: null},
     { path: path.SEARCH_ITEMS, components: SeeMoreItemsSearch },
     { path: path.DETAIL_ITEMS, components: DetailItems },
-
-
+    { path: path.DETAIL_LIST_CART, components: DetailListCart ,layout:null},
     { path: path.NOTFOUND, components: NotFound404 ,layout: null}
 ]
 

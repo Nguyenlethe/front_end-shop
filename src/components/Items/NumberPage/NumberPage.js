@@ -79,7 +79,7 @@ class NumberPage extends Component {
     render() {
 
     let {language, arrayNumberPage,dataSearchItemsParams, value,limitSeeMore} = this.props
-    let {numberPageActive,widthNumberPage} = this.state
+    let {numberPageActive} = this.state
 
 
     return (

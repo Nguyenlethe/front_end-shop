@@ -18,6 +18,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import './DetailItems.scss';
 import ModalLoad from '../../Modal/ModalLoad';
+import { toast } from 'react-toastify';
 class DetailItems extends Component {
     constructor(props) {
         super(props);
@@ -135,6 +136,8 @@ class DetailItems extends Component {
 
         setTimeout(() => {
           this.setState({
+            indexActiveColor: 100,
+            indexActiveSize: 100,
             allDataPriceShip: allDataPriceShip,
             provinceFreeShip: provinceFreeShip,
             provinceFreeShipCategory: provinceFreeShipCategory,
@@ -368,6 +371,7 @@ class DetailItems extends Component {
         }
 
         if(indexActiveColor != 100 || indexActiveSize != 100){
+          toast.success(<SwitchLanguage id='manageAdmin.toast.addItemsCart'/>)
           this.props.addNewItemsToCart({
             itemsId: items.idItems, 
             userGuestId: dataUser.id, 
@@ -375,6 +379,7 @@ class DetailItems extends Component {
             itemsNumber: dataTalbelOrderItems.itemsNumber, 
             timeCreate: new Date(), color: dataTalbelOrderItems.color, 
             size: dataTalbelOrderItems.size})
+
         }
       }
     }

@@ -9,6 +9,8 @@ import { Link ,Navigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPhoneFlip,faEnvelope,faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import adminService from '../../../services/adminService';
+import {routesProFie} from '../../../routes/routes'
+import RoutesMenu from './RoutesMenu'
 
 
 
@@ -19,7 +21,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+           isShowMenu: false
         }
     }
 
@@ -48,10 +50,25 @@ class NavBar extends Component {
         }
     }
 
+
+    handleSetShowOrHideListCart = (type) => {
+        if(type == 'SHOW'){
+          this.setState({
+            isShowMenu: Math.random() * 10000
+          })
+        }
+  
+        if(type == 'HIDE'){
+          this.setState({
+            isShowMenu: false
+          })
+        }
+    }
+
       
     render() {
-
     let {islogin, permission, avatar} = this.props.dataUser
+    let {isShowMenu} = this.state
     
     return (
         <div className='grid'>
@@ -86,18 +103,23 @@ class NavBar extends Component {
                         </div>
 
                         {islogin == 'true' ? 
+                            <div className='pile-profile' onMouseLeave={() => this.handleSetShowOrHideListCart('HIDE')}>
+                                <div className='wrapper_avatar mgl-12' onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')}>
+                                    <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
+                                </div>
 
-                            <div className='wrapper_avatar mgl-12'>
-                                <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
 
-                                
-                                
+                                <div className='menu-profile'>
+                                    <RoutesMenu isShowMenu={isShowMenu}/>
+                                </div>
+
                             </div>
-
 
                         : 
                             <FontAwesomeIcon className='mgl-12' icon={faCircleUser} />
                         }
+
+
                     </div>
                 }       
                 

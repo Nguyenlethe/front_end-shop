@@ -308,5 +308,11 @@
             "goLogin":"Back to login page",
             "ntfSuccess": "Change password successfully"
         }
+    },
+    "proFile":{
+        "manageOrder":"Manage order items",
+        "manageUser": "Account Management",
+        "resgisterSell":"Register to be a seller",
+        "manageShop":"Shop manager"
     }
 }

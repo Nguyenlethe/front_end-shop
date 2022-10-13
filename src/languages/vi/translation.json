@@ -294,8 +294,6 @@
             "addColor":"I. Thêm màu",
             "Facebook":"Tiếp tục với Facebook",
             "Twitter":"Tiếp tục với Twitter"
-
-
         }
     },
     "app": {
@@ -314,6 +312,12 @@
             "ntfSuccess": "Đổi mật khẩu thành công"
 
         }
+    },
+    "proFile":{
+        "manageOrder":"Quản lý đơn hàng",
+        "manageUser":"Quản lý tài khoản",
+        "resgisterSell":"Đăng ký trở thành người bán",
+        "manageShop":"Quản lý shop"
     }
 }
 

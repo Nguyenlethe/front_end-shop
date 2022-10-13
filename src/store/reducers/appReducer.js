@@ -1,5 +1,6 @@
 
 import actionTypes from '../action/actionTypes';
+import avataDefault from '../../assets/image/NoImg.jpg'
 
 const initState = {
     language: localStorage.getItem('language') ? localStorage.getItem('language') : 'en',
@@ -43,8 +44,6 @@ const appReducer = (state = initState, action) => {
 
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
 
-            console.log(action.dataLogin)
-
             // let addressDetail = action.dataLogin.addressDetails
             // let wardsData = action.dataLogin.wardsData
             // let districtData = action.dataLogin.districtData
@@ -64,7 +63,7 @@ const appReducer = (state = initState, action) => {
             localStorage.setItem('fullNameVi',`${action.dataLogin.firstName} ${action.dataLogin.lastName}`)
             localStorage.setItem('fullNameEn',`${action.dataLogin.lastName} ${action.dataLogin.firstName}`)
             localStorage.setItem('province',action.dataLogin.province)
-            localStorage.setItem('avatar',action.dataLogin.avata)
+            localStorage.setItem('avatar',action.dataLogin.avata != null ? action.dataLogin.avata : 'defaulAvata.jpg')
 
             // localStorage.setItem('detailAddressVI',detaiAddress.valueVi)
             // localStorage.setItem('detailAddressEN',detaiAddress.valueEn)

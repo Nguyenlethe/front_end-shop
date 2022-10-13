@@ -14,6 +14,15 @@ export const path = {
     // Items
     SEARCH_ITEMS: '/search-items',
     DETAIL_ITEMS: '/detail-items',
+    
+
+    // Profile
+    PRO_FILE: '/profile',
+    MANAGE_SHOP: '/manage-shop',
+    RESGISTER_SELL: '/resgister-sell',
+    DETAIL_ORDER: '/detail-order',
+
+
 
     
     // ADMIN

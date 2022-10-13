@@ -70,16 +70,32 @@
                     }
                 }
     
-                .wrapper_avatar{
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 50px;
-                    border: 2px solid #e2e2e2;
-                    overflow: hidden;
-                    cursor: pointer;
-        
-                    img{
-                        width: 100%;
+                .pile-profile {
+                    position: relative;
+
+                    .wrapper_avatar{
+                        width: 26px;
+                        height: 26px;
+                        border-radius: 50px;
+                        border: 2px solid #e2e2e2;
+                        overflow: hidden;
+                        cursor: pointer;
+            
+                        img{
+                            width: 100%;
+                        }
+                    }
+
+                    .menu-profile{
+                        position: absolute;
+                        // background: var(--white);
+                        // width: 240px;
+                        transform: translateX(-44%);
+                        display: flex;
+                        flex-wrap: wrap;
+                        z-index: 1;
+                        top: 32px;
+                        // padding: 12px 0;
                     }
                 }
     

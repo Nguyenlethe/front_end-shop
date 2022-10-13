@@ -5,7 +5,7 @@ import SwitchLanguage from '../../SwitchLanguage';
 import {languages, path,SEARCH} from '../../utils/constant'
 import ListLanguage from '../../components/ListLanguage';
 import { Link ,Navigate} from 'react-router-dom';
-import img from '../..//assets/image/ShopBag.png'
+import img from '../..//assets/image/ShopBagLogo.png'
 import styles from './DefaultLayout.scss';
 import NavBar from './Navbar/NavBar';
 import InputSearch from '../../components/SearchInput/InputSearch';

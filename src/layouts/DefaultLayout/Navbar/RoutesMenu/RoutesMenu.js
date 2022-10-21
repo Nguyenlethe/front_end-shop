@@ -22,7 +22,8 @@ class RoutesMenu extends Component {
         this.state = {
             isPATIENT: false,
             isSELLER: false,
-            isShowMenu: false
+            isShowMenu: false,
+            isADMIN: false
         }
     }
 
@@ -32,13 +33,27 @@ class RoutesMenu extends Component {
         let {islogin, permission, avatar} = this.props.dataUser
         let isPATIENT = handleCheckPermission.handleCheckPermission(PERMISSIONS.PATIENT,permission)
         let isSELLER = handleCheckPermission.handleCheckPermission(PERMISSIONS.SELLER,permission)
+        let isADMIN = handleCheckPermission.handleCheckPermission(PERMISSIONS.ADMIN,permission)
 
-        this.setState({
-            isPATIENT: isPATIENT,
-            isSELLER: isSELLER
-        })
 
-    
+        
+        if(this.props.isShowMenu != false){
+            this.setState({
+                isShowMenu: true,
+                isPATIENT: isPATIENT,
+                isSELLER: isSELLER,
+                isADMIN: isADMIN
+            })
+        }
+
+        if(this.props.isShowMenu == false){
+            this.setState({
+                isShowMenu: false,
+                isPATIENT: isPATIENT,
+                isSELLER: isSELLER,
+                isADMIN: isADMIN
+            })
+        }
     }
 
 
@@ -68,10 +83,11 @@ class RoutesMenu extends Component {
                 })
             }
 
-
         }
     }
 
+
+   
     // Handle log out
     handleLogOut = async (type) => {
         if(type == 'LOGOUT'){
@@ -84,13 +100,17 @@ class RoutesMenu extends Component {
     render() {
 
     let {islogin, permission, avatar} = this.props.dataUser
-    let {isPATIENT, isSELLER,isShowMenu} = this. state
+    let {isPATIENT, isSELLER,isShowMenu, isADMIN} = this. state
+    let {isNotMenu} = this.props
     
     
     return (
         <>
             {isShowMenu && 
-                <div className='wrapper-menu-profile'>
+                <div className={isNotMenu == true ? 'menu-profile-notAfter' : 'wrapper-menu-profile'}
+                    style={{border: isNotMenu == true ? 'none' : '', width: isNotMenu == true ? '100%' : ''}}
+                >
+
                     {routesProFie.map((routes, index) => {
                         if(isPATIENT == true && routes.role != PERMISSIONS.PATIENT){
                             return (
@@ -104,6 +124,17 @@ class RoutesMenu extends Component {
                         }
 
                         if(isSELLER == true && routes.role != PERMISSIONS.SELLER){
+                            return (
+                                <p key={routes.path}>
+                                    <Link className='element-link' onClick={() => this.handleLogOut(routes.status)} to={routes.path}>
+                                        <span className='element-link-icon'><FontAwesomeIcon icon={routes.icon} /></span>
+                                        <span className='element-link-text'><SwitchLanguage id={routes.idText}/></span>
+                                    </Link>
+                                </p>
+                            )
+                        }
+
+                        if(isADMIN == true && routes.role != PERMISSIONS.PATIENT){
                             return (
                                 <p key={routes.path}>
                                     <Link className='element-link' onClick={() => this.handleLogOut(routes.status)} to={routes.path}>

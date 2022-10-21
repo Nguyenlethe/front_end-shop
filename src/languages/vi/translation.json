@@ -36,6 +36,7 @@
             "password-edit":"Không được sửa trường này !",
             "listSeller":"Danh Sách Người Bán",
             "startDay":"Ngày bắt đầu",
+            "birthday":"Ngày sinh",
 
 
             "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
@@ -75,6 +76,7 @@
             
             "btn":"Thêm Mới",
             "btn_edit":"Lưu Thay Đổi",
+            "save":"Lưu",
             "heading":"Đăng Nhập",
             "account":"Tài Khoản",
             "passwordLogin":"Mật Khẩu",
@@ -315,6 +317,11 @@
     },
     "proFile":{
         "manageOrder":"Quản lý đơn hàng",
+        "proFileHeading":"Hồ sơ của tôi",
+        "proFileSub":"Quản lý thông tin hồ sơ để bảo mật tài khoản",
+        "surname":"Họ",
+        "name":"Tên",
+        "nameAccount":"Tên đăng nhập",
         "manageUser":"Quản lý tài khoản",
         "resgisterSell":"Đăng ký trở thành người bán",
         "manageShop":"Quản lý shop"

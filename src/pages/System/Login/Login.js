@@ -98,10 +98,12 @@ class Login extends Component {
                 this.setState({isModal:false})
                 
                 for(let key in errMessageCoppy){
+                 
                     if(res.data.data[key]){
                         errMessageCoppy[key] = res.data.data[key]
                     }
                 }
+
                 this.setState({
                     errMessage: {...errMessageCoppy}
                 })

@@ -1,4 +1,32 @@
 
+.menu-profile-notAfter{
+    width: 260px;
+    background: var(--white);
+    padding: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+    .element-link {
+        display: flex;
+        font-size: 1.6rem;
+        color: var(--black);
+        padding: 6px 12px;
+    
+        &:hover{
+            background: rgb(240, 240, 240);
+        }
+    
+        .element-link-icon{
+            margin-right: 12px;
+            color: #ed1714;
+        }
+    
+        .element-link-text{
+    
+        }
+    }
+}
+
 .wrapper-menu-profile{
     width: 260px;
     background: var(--white);
@@ -35,7 +63,7 @@
         font-size: 1.6rem;
         color: var(--black);
         padding: 6px 12px;
-
+    
         &:hover{
             background: rgb(240, 240, 240);
         }

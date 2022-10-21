@@ -29,6 +29,7 @@ class DefaultLayout extends Component {
     // Mount 
     componentDidMount = async ()=>  {
       let {dataUser} = this.props
+      this.props.fetchAllDataAllCode()
 
       this.setState({
         avatarUser: dataUser.avatar
@@ -95,9 +96,9 @@ class DefaultLayout extends Component {
             <div className='row'>
 
               <div className='list_nav-center'>
-                <div className='col l-2'>
+                <div className={isCartPage == true ? 'col l-2' : 'col l-3'}>
                   <Link to={path.HOME}  className='hug-img-logo'>
-                    <img src={img} alt='' />
+                    <img style={{width: isCartPage == true ? '92%' : ''}} src={img} alt='' />
                   </Link>
                 </div>
 
@@ -110,7 +111,7 @@ class DefaultLayout extends Component {
                   </>
                 }
 
-                <div className={isCartPage == true ? `col l-6` : `col l-8`}>
+                <div className={isCartPage == true ? `col l-6` : `col l-7`}>
                   <InputSearchNav isCartPage={isCartPage} />
                 </div>
 
@@ -157,7 +158,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addDataOptionsSearchNav: (data) => dispatch(action.addDataOptionsSearchNav(data))
+    addDataOptionsSearchNav: (data) => dispatch(action.addDataOptionsSearchNav(data)),
+    fetchAllDataAllCode: () => dispatch(action.fetchAllDataAllCodeStart()),
   }
 
 }

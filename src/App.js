@@ -11,6 +11,7 @@ import appService from './services/appService';
 class App extends Component {
 
     componentDidMount = async() => {
+        // this.props.fetchAllDataAllCode()
         setTimeout(async() => {
             await appService.deleteVoucherExpired()
         },0)
@@ -54,7 +55,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-
+        // fetchAllDataAllCode: () => dispatch(actions.fetchAllDataAllCodeStart()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

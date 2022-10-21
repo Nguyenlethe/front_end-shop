@@ -1,6 +1,4 @@
-
 import actionTypes from '../action/actionTypes';
-import avataDefault from '../../assets/image/NoImg.jpg'
 
 const initState = {
     language: localStorage.getItem('language') ? localStorage.getItem('language') : 'en',
@@ -14,8 +12,13 @@ const initState = {
         fullNameEn: localStorage.getItem('fullNameEn') ? localStorage.getItem('fullNameEn') : '',
         province: localStorage.getItem('province') ? localStorage.getItem('province') : '',
         avatar: localStorage.getItem('avatar') ? localStorage.getItem('avatar') : '',
-        // detailAddressVI: localStorage.getItem('detailAddressVI') ? localStorage.getItem('detailAddressVI') : '',
-        // detailAddressEN: localStorage.getItem('detailAddressEN') ? localStorage.getItem('detailAddressEN') : '',
+        phone: localStorage.getItem('phone') ? localStorage.getItem('phone') : '',
+        fristName: localStorage.getItem('fristName') ? localStorage.getItem('fristName') : '',
+        LastName: localStorage.getItem('LastName') ? localStorage.getItem('LastName') : '',
+        birthday: localStorage.getItem('birthday') ? localStorage.getItem('birthday') : '',
+        gender: localStorage.getItem('gender') ? localStorage.getItem('gender') : '',
+
+
 
     },
     dataOptions: {},
@@ -43,34 +46,29 @@ const appReducer = (state = initState, action) => {
             }
 
         case actionTypes.LOGIN_SYSTEM_SUSCESS:  
-
-            // let addressDetail = action.dataLogin.addressDetails
-            // let wardsData = action.dataLogin.wardsData
-            // let districtData = action.dataLogin.districtData
-            // let provinceData = action.dataLogin.provinceData
-
-            // const detaiAddress = {
-            //     valueVi: `${addressDetail}, ${wardsData.valueVi} - ${districtData.valueVi} - ${provinceData.valueVi}`,
-            //     valueEn: `${addressDetail}, ${wardsData.valueEn} - ${districtData.valueEn} - ${provinceData.valueEn}`,
-            // }
+            console.log(action.dataLogin) 
 
             state.loginUser.id = action.dataLogin.id
             localStorage.setItem('islogin', true)
+            localStorage.setItem('phone', action.dataLogin.phoneNumber)
             localStorage.setItem('isError', false)
             localStorage.setItem('id', action.dataLogin.id)
             localStorage.setItem('email',action.dataLogin.email)
+            localStorage.setItem('fristName',action.dataLogin.firstName)
+            localStorage.setItem('LastName',action.dataLogin.lastName)
             localStorage.setItem('permission',action.dataLogin.permission)
             localStorage.setItem('fullNameVi',`${action.dataLogin.firstName} ${action.dataLogin.lastName}`)
             localStorage.setItem('fullNameEn',`${action.dataLogin.lastName} ${action.dataLogin.firstName}`)
             localStorage.setItem('province',action.dataLogin.province)
+            localStorage.setItem('birthday',action.dataLogin.birthday)
+            localStorage.setItem('gender',action.dataLogin.gender)
+
             localStorage.setItem('avatar',action.dataLogin.avata != null ? action.dataLogin.avata : 'defaulAvata.jpg')
 
-            // localStorage.setItem('detailAddressVI',detaiAddress.valueVi)
-            // localStorage.setItem('detailAddressEN',detaiAddress.valueEn)
-
-            // state.loginUser.detailAddressVI = localStorage.getItem('detailAddressVI')
-            // state.loginUser.detailAddressEN = localStorage.getItem('detailAddressEN')
             state.loginUser.id = localStorage.getItem('id')
+            state.loginUser.gender = localStorage.getItem('gender')
+            state.loginUser.birthday = localStorage.getItem('birthday')
+            state.loginUser.phone = localStorage.getItem('phone')
             state.loginUser.email = localStorage.getItem('email')
             state.loginUser.permission = localStorage.getItem('permission')
             state.loginUser.fullNameVi = localStorage.getItem('fullNameVi')
@@ -79,6 +77,9 @@ const appReducer = (state = initState, action) => {
             state.loginUser.avatar = localStorage.getItem('avatar')
             state.loginUser.islogin = localStorage.getItem('islogin')
             state.loginUser.isError = localStorage.getItem('isError')
+            state.loginUser.fristName = localStorage.getItem('fristName')
+            state.loginUser.LastName = localStorage.getItem('lastName')
+
 
             return {
                 ...state

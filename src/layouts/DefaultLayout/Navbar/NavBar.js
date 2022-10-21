@@ -11,6 +11,7 @@ import {faPhoneFlip,faEnvelope,faCircleUser} from '@fortawesome/free-solid-svg-i
 import adminService from '../../../services/adminService';
 import {routesProFie} from '../../../routes/routes'
 import RoutesMenu from './RoutesMenu'
+import withRouter from '../../../routes/withRouter';
 
 
 
@@ -104,7 +105,9 @@ class NavBar extends Component {
 
                         {islogin == 'true' ? 
                             <div className='pile-profile' onMouseLeave={() => this.handleSetShowOrHideListCart('HIDE')}>
-                                <div className='wrapper_avatar mgl-12' onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')}>
+                                <div className='wrapper_avatar mgl-12' onMouseOver={() => this.handleSetShowOrHideListCart('SHOW')} 
+                                    onClick={() => this.props.navigate(path.PRO_FILE)}
+                                >
                                     <img src={`${process.env.REACT_APP_BACKEND_IMAGES_URL}/${avatar}`} alt='' />
                                 </div>
 
@@ -150,4 +153,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

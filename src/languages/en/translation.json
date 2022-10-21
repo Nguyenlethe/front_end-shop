@@ -40,6 +40,7 @@
             "Actions":"Actions",
             "AddressDetails":"Address Detail",
             "startDay":"Day start",
+            "birthday":"Birthday",
 
 
 
@@ -81,6 +82,7 @@
 
             "btn":"Create New",
             "btn_edit":"Save Change",
+            "save":"Save",
             "heading":"Login",
             "account":"Account",
             "passwordLogin":"Password",
@@ -311,6 +313,12 @@
     },
     "proFile":{
         "manageOrder":"Manage order items",
+        "proFileHeading":"My profile",
+        "proFileSub":"Manage profile information for account security",
+        "name":"Name",
+        "surname":"Surname",
+        "nameAccount":"Sign in name",
+
         "manageUser": "Account Management",
         "resgisterSell":"Register to be a seller",
         "manageShop":"Shop manager"

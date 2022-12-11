@@ -1,31 +1,24 @@
-import React, { Component }  from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSpinner} from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import './Modal.scss';
+import "./Modal.scss";
 class LoadScroll extends Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+    this.state = {};
+  }
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-
-        }
-    }
-
- 
-    render() {
-
-    let {isShow} = this.props
+  render() {
+    let { isShow } = this.props;
 
     return (
-       
-        <>
-            <div id="loadScroll" style={{width: !isShow ? '0%' : '96%'}}></div> 
-        </>
-    )}
+      <>
+        <div id="loadScroll" style={{ width: !isShow ? "0%" : "96%" }}></div>
+      </>
+    );
+  }
 }
-
-
 
 export default LoadScroll;

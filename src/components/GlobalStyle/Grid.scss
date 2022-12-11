@@ -2,13 +2,16 @@
     width: 100%;
     padding: 0;
 }
-.MG_between{
+
+.MG_between {
     margin: auto;
 }
+
 .grid.wide {
     max-width: 1200px;
     margin: 0 auto;
 }
+
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -16,37 +19,45 @@
     margin-right: -4px;
     justify-content: space-between;
 }
-.hone__list{
+
+.hone__list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 0 4px;
 }
+
 .row.no-gutters {
     margin-left: 0;
     margin-right: 0;
 }
+
 .col {
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
+
 .row.no-gutters .col {
     padding-left: 0;
     padding-right: 0;
 }
+
 .c-0 {
     display: none;
 }
+
 .c-1 {
     flex: 0 0 8.33333%;
     max-width: 8.33333%;
 }
+
 .c-2 {
     flex: 0 0 16.66667%;
     max-width: 16.66667%;
 }
+
 .c-3 {
     flex: 0 0 25%;
     max-width: 25%;
@@ -147,12 +158,14 @@
         margin-left: -8px;
         margin-right: -8px;
     }
-    .hone__list{
+
+    .hone__list {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         padding: 0 8px;
     }
+
     .col {
         padding-left: 8px;
         padding-right: 8px;
@@ -220,7 +233,7 @@
     }
 
     .m-9 {
-        flex: 0 0 75%; 
+        flex: 0 0 75%;
         max-width: 75%;
     }
 
@@ -463,7 +476,7 @@
     .wide .col {
         padding-left: 12px;
         padding-right: 12px;
-     
+
     }
 
     .wide .row.sm-gutter .col {

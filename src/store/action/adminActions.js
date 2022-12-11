@@ -1,613 +1,562 @@
-import actionTypes from './actionTypes';
-import { default as adminService} from '../../services/adminService'
-
-
+import actionTypes from "./actionTypes";
+import { default as adminService } from "../../services/adminService";
 
 // Actions lấy Xã/Phường
 export const fetchAllDataWardsStart = (inputWards) => {
-    return async (dispatch, getState) => {
-        try{
-            let resWards = await adminService.getDataWards(inputWards);
-            if( resWards && resWards.data.errCode === 0 ){
-                dispatch(fetchAllDataWardsSuscess(resWards.data.data))
-            }else{
-                dispatch(fetchAllDataWardsFailed())
-            }
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(fetchAllDataWardsFailed())
-        }
+  return async (dispatch, getState) => {
+    try {
+      let resWards = await adminService.getDataWards(inputWards);
+      if (resWards && resWards.data.errCode === 0) {
+        dispatch(fetchAllDataWardsSuscess(resWards.data.data));
+      } else {
+        dispatch(fetchAllDataWardsFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(fetchAllDataWardsFailed());
     }
-}
+  };
+};
 
 export const fetchAllDataWardsSuscess = (data) => ({
-    type: actionTypes.GET_DATA_WARDS_SUCCESS,
-    dataWards: data
-})
+  type: actionTypes.GET_DATA_WARDS_SUCCESS,
+  dataWards: data,
+});
 
 export const fetchAllDataWardsFailed = () => ({
-    type: actionTypes.GET_DATE_WARDS_FAILED,
-})
-
-
-
-
+  type: actionTypes.GET_DATE_WARDS_FAILED,
+});
 
 // Actions lấy Huyện
 export const fetchAllDataProvinceStart = (inputProvince) => {
-    return async (dispatch, getState) => {
-        try{
-            let resProvince = await adminService.getDataDistrict(inputProvince);
-            if( resProvince && resProvince.data.errCode === 0 ){
-                dispatch(fetchAllDataProvinceSuscess(resProvince.data.data))
-            }else{
-                dispatch(fetchAllDataProvinceFailed())
-            }
-
-
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(fetchAllDataProvinceFailed())
-        }
+  return async (dispatch, getState) => {
+    try {
+      let resProvince = await adminService.getDataDistrict(inputProvince);
+      if (resProvince && resProvince.data.errCode === 0) {
+        dispatch(fetchAllDataProvinceSuscess(resProvince.data.data));
+      } else {
+        dispatch(fetchAllDataProvinceFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(fetchAllDataProvinceFailed());
     }
-}
+  };
+};
 
 export const fetchAllDataProvinceSuscess = (data) => ({
-    type: actionTypes.GET_DATA_PROVINCE_SUCCESS,
-    dataDistrict: data
-})
+  type: actionTypes.GET_DATA_PROVINCE_SUCCESS,
+  dataDistrict: data,
+});
 
 export const fetchAllDataProvinceFailed = () => ({
-    type: actionTypes.GET_DATE_PROVINCE_FAILED,
-})
-
-
-
-
+  type: actionTypes.GET_DATE_PROVINCE_FAILED,
+});
 
 // Actions lấy AllCode (Gender, Province, Permission)
 export const fetchAllDataAllCodeStart = () => {
-    return async (dispatch, getState) => {
-        try{
-            
-            let resPay = await adminService.getAllCode('PAY')
-            let resGender = await adminService.getAllCode('GENDER')
-            let resPermission = await adminService.getAllCode('ROLE')
-            let resProvince = await adminService.getAllCode('TTP')
-            
+  return async (dispatch, getState) => {
+    try {
+      let resPay = await adminService.getAllCode("PAY");
+      let resGender = await adminService.getAllCode("GENDER");
+      let resPermission = await adminService.getAllCode("ROLE");
+      let resProvince = await adminService.getAllCode("TTP");
 
-            if( resGender && resGender.data.errCode === 0 &&
-                resPermission && resPermission.data.errCode === 0 &&
-                resProvince && resProvince.data.errCode === 0 &&
-                resPay && resPay.data.errCode === 0
-            ){
-                let data = {
-                    pay: resPay.data.data.inputType,
-                    gender: resGender.data.data.inputType,
-                    province: resProvince.data.data.inputType,
-                    resPermission: resPermission.data.data.inputType
-                }
-                dispatch(fetchAllDataAllCodeSuscess(data))
-            }else{
-                dispatch(fetchAllDataAllCodeFailed())
-            }
-
-
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(fetchAllDataAllCodeFailed())
-        }
+      if (
+        resGender &&
+        resGender.data.errCode === 0 &&
+        resPermission &&
+        resPermission.data.errCode === 0 &&
+        resProvince &&
+        resProvince.data.errCode === 0 &&
+        resPay &&
+        resPay.data.errCode === 0
+      ) {
+        let data = {
+          pay: resPay.data.data.inputType,
+          gender: resGender.data.data.inputType,
+          province: resProvince.data.data.inputType,
+          resPermission: resPermission.data.data.inputType,
+        };
+        dispatch(fetchAllDataAllCodeSuscess(data));
+      } else {
+        dispatch(fetchAllDataAllCodeFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(fetchAllDataAllCodeFailed());
     }
-}
+  };
+};
 
 export const fetchAllDataAllCodeSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_SUCCESS,
-    dataAllCode: data
-})
+  type: actionTypes.GET_DATA_ALLCODE_SUCCESS,
+  dataAllCode: data,
+});
 
 export const fetchAllDataAllCodeFailed = () => ({
-    type: actionTypes.GET_DATE_ALLCODE_FAILED,
-})
-
-
-
+  type: actionTypes.GET_DATE_ALLCODE_FAILED,
+});
 
 // GET_ALL_CATEGORY_SUSCESS: 'GET_ALL_CATEGORY_SUSCESS',
 // GET_ALL_CATEGORY_FAILED: 'GET_ALL_CATEGORY_FAILED',
 
 export const getCategoryAllCodeStart = () => {
-    return async (dispatch, getState) => {
-        try{
+  return async (dispatch, getState) => {
+    try {
+      let category = await adminService.getAllCode("CATEGRORY");
+      // console.log(category)
 
-            let category = await adminService.getAllCode('CATEGRORY')
-            // console.log(category)
-            
-            if(category && category.data.errCode === 0 ){
-                let data = {
-                    category: category.data.data.inputType,
-                }
-                dispatch(getCategoryAllCodeSuscess(data))
-            }else{
-                dispatch(getCategoryAllCodeFailed())
-            }
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(getCategoryAllCodeFailed())
-        }
+      if (category && category.data.errCode === 0) {
+        let data = {
+          category: category.data.data.inputType,
+        };
+        dispatch(getCategoryAllCodeSuscess(data));
+      } else {
+        dispatch(getCategoryAllCodeFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(getCategoryAllCodeFailed());
     }
-}
+  };
+};
 
 export const getCategoryAllCodeSuscess = (data) => ({
-    type: actionTypes.GET_ALL_CATEGORY_SUSCESS,
-    dataAllCode: data
-})
+  type: actionTypes.GET_ALL_CATEGORY_SUSCESS,
+  dataAllCode: data,
+});
 
 export const getCategoryAllCodeFailed = () => ({
-    type: actionTypes.GET_ALL_CATEGORY_FAILED,
-})
-
-
-
-
+  type: actionTypes.GET_ALL_CATEGORY_FAILED,
+});
 
 //  GET_ALL_USER_SUSCESS: 'GET_ALL_USER_SUSCESS',
 //  GET_ALL_USER_FAILED: 'GET_ALL_USER_FAILED',
 
-
-
 // Actions lấy user All và !R2
 export const getAllUserStart = (type) => {
-    return async (dispatch, getState) => {
-        try{
+  return async (dispatch, getState) => {
+    try {
+      let allUser = await adminService.getAllUser("ALL");
+      let allUserNotInR2 = await adminService.getAllUser("!R2");
 
-            let allUser = await adminService.getAllUser('ALL');
-            let allUserNotInR2 = await adminService.getAllUser('!R2');
-        
-        
-            if( allUser && allUser.data.errCode === 0 && 
-                allUserNotInR2 && allUserNotInR2.data.errCode === 0 
-            ){
-                let dataFull = allUser.data.data.listAllUser
-                let dataNotInR2 = allUserNotInR2.data.data.listAllUser
+      if (
+        allUser &&
+        allUser.data.errCode === 0 &&
+        allUserNotInR2 &&
+        allUserNotInR2.data.errCode === 0
+      ) {
+        let dataFull = allUser.data.data.listAllUser;
+        let dataNotInR2 = allUserNotInR2.data.data.listAllUser;
 
-                // console.log(allUserNotInR2.data.data.listAllUser, allUser.data.data.listAllUser)
+        // console.log(allUserNotInR2.data.data.listAllUser, allUser.data.data.listAllUser)
 
-                dispatch(getAllUserSuscess(dataFull))
-                dispatch(getAllUserNotSellerSuscess(dataNotInR2))
-            }else{
-                dispatch(getAllUserFailed())
-            }
-           
-
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(getAllUserFailed())
-        }
+        dispatch(getAllUserSuscess(dataFull));
+        dispatch(getAllUserNotSellerSuscess(dataNotInR2));
+      } else {
+        dispatch(getAllUserFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(getAllUserFailed());
     }
-}
+  };
+};
 
 export const getAllUserSuscess = (data) => ({
-    type: actionTypes.GET_ALL_USER_SUSCESS,
-    users: data
-})
+  type: actionTypes.GET_ALL_USER_SUSCESS,
+  users: data,
+});
 
 export const getAllUserNotSellerSuscess = (data) => ({
-    type: actionTypes.GET_ALL_USER_NOT_SELLER_SUSCESS,
-    users: data
-})
+  type: actionTypes.GET_ALL_USER_NOT_SELLER_SUSCESS,
+  users: data,
+});
 
 export const getAllUserFailed = () => ({
-    type: actionTypes.GET_ALL_USER_FAILED,
-})
-
-
+  type: actionTypes.GET_ALL_USER_FAILED,
+});
 
 // GET_ALL_SHOP_SUSCESS: 'GET_ALL_SHOP_SUSCESS',
 // GET_ALL_SHOP_FAILED: 'GET_ALL_SHOP_FAILED',
 
-
-
 // Actions lấy all Shop
 export const getAllShopStart = (type) => {
-    return async (dispatch, getState) => {
-        try{
-           
-            let allShop = await adminService.getAllShop('ALL');
-            if( allShop && allShop.data.errCode === 0){
-                let data = allShop.data.data.listAllShop
-                dispatch(getAllShopSuscess(data))
-            }else{
-                dispatch(getAllShopFailed())
-            }
-    
-        }catch(err) {
-            console.log("Error Actions :"+ err)
-            dispatch(getAllShopFailed())
-        }
+  return async (dispatch, getState) => {
+    try {
+      let allShop = await adminService.getAllShop("ALL");
+      if (allShop && allShop.data.errCode === 0) {
+        let data = allShop.data.data.listAllShop;
+        dispatch(getAllShopSuscess(data));
+      } else {
+        dispatch(getAllShopFailed());
+      }
+    } catch (err) {
+      console.log("Error Actions :" + err);
+      dispatch(getAllShopFailed());
     }
-}
+  };
+};
 
 export const getAllShopSuscess = (data) => ({
-    type: actionTypes.GET_ALL_SHOP_SUSCESS,
-    shops: data
-})
+  type: actionTypes.GET_ALL_SHOP_SUSCESS,
+  shops: data,
+});
 
 export const getAllShopFailed = () => ({
-    type: actionTypes.GET_ALL_SHOP_FAILED,
-})
-
-
-
-
+  type: actionTypes.GET_ALL_SHOP_FAILED,
+});
 
 // Actions lấy AllCode (category)
 export const getAllCodeInToItemsStart = (inputType) => {
-    return async (dispatch, getState) => {
-        try{
+  return async (dispatch, getState) => {
+    try {
+      let res = await adminService.getAllCode(inputType);
 
-            let res = await adminService.getAllCode(inputType)
-            
-            // Thoi trang nam
-            if(inputType === 'FSB'){
-                if(res && res.data.errCode === 0 ){
-                    
-                    let FSBData = res.data.data.inputType
-                    
-                    // console.log(FSBData)
-                    
-                    dispatch(getAllCodeInToItemsFSBDataSuscess(FSBData))
-                    return FSBData
-                }else{
-                    dispatch(getAllCodeInToItemsFSBDataSuscess([]))
-                }
-            }
+      // Thoi trang nam
+      if (inputType === "FSB") {
+        if (res && res.data.errCode === 0) {
+          let FSBData = res.data.data.inputType;
 
-            // Phu Kien Thhoi trang nam
-            if(inputType === 'FSAM'){
-                if(res && res.data.errCode === 0 ){
-                    
-                    let FSAMData = res.data.data.inputType
-                    // console.log(FSAMData)
-                    
-                    dispatch(getAllCodeInToItemsFSAMDataSuscess(FSAMData))
-                    return FSAMData
-                }else{
-                    dispatch(getAllCodeInToItemsFSAMDataSuscess([]))
-                }
-            }
+          // console.log(FSBData)
 
-            // Thoi trang nu
-            if(inputType === 'FSM'){
-                if(res && res.data.errCode === 0 ){
-                    
-                    let  FSMData = res.data.data.inputType
-                    // console.log(FSMData)
-                    
-                    dispatch(getAllCodeInToItemsFSMDataSuscess(FSMData))
-                    return FSMData
-                }else{
-                    dispatch(getAllCodeInToItemsFSMDataSuscess([]))
-                }
-            }
-
-            // Phu Kien Thhoi trang nu
-            if(inputType === 'FSAW'){
-                if(res && res.data.errCode === 0 ){
-                    
-                    let FSAWData = res.data.data.inputType
-                    // console.log(FSAWData)
-                    
-                    dispatch(getAllCodeInToItemsFSAWDataSuscess(FSAWData))
-                    return FSAWData
-                }else{
-                    dispatch(getAllCodeInToItemsFSAWDataSuscess([]))
-                }
-            }
-
-            // All
-            if(inputType === 'All'){
-                if(res && res.data.errCode === 0 ){
-                    
-                    let AllData = res.data.data.inputType
-                    // console.log(AllData)
-                    dispatch(getAllCodeInToItemsAllDataSuscess(AllData))
-                    return AllData
-                }else{
-                    dispatch(getAllCodeInToItemsAllDataSuscess([]))
-                }
-            }
-
-            // Giảm giá 
-            if(inputType === 'DCC'){
-                if(res && res.data.errCode === 0 ){
-                    let DCCData = res.data.data.inputType
-                    // console.log(DCCData)
-                    dispatch(getAllCodeInToItemsDCCDataSuscess(DCCData))
-                }else{
-                    dispatch(getAllCodeInToItemsDCCDataSuscess([]))
-                }
-            }
-
-            // Thương Hiệu
-            if(inputType === 'BNPRD'){
-                if(res && res.data.errCode === 0 ){
-                    let BNPRDData = res.data.data.inputType
-                    // console.log(BNPRDData)
-                    dispatch(getAllCodeInToItemsBNPRDDataSuscess(BNPRDData))
-                }else{
-                    dispatch(getAllCodeInToItemsBNPRDDataSuscess([]))
-                }
-            }
-
-            // Kiểu cỡ
-            if(inputType === 'TYPESIZE'){
-                if(res && res.data.errCode === 0 ){
-                    let TYPESIZEData = res.data.data.inputType
-                    // console.log(TYPESIZEData)
-                    dispatch(getAllCodeInToItemsTYPESIZEDataSuscess(TYPESIZEData))
-                }else{
-                    dispatch(getAllCodeInToItemsTYPESIZEDataSuscess([]))
-                }
-            }
-
-            // Kiểu cỡ chu
-            if(inputType === 'SIZE'){
-                if(res && res.data.errCode === 0 ){
-                    let SIZEData = res.data.data.inputType
-                    // console.log(SIZEData)
-                    dispatch(getAllCodeInToItemsSIZEDataSuscess(SIZEData))
-                }else{
-                    dispatch(getAllCodeInToItemsSIZEDataSuscess([]))
-                }
-            }
-
-            // Kiểu cỡ so
-            if(inputType === 'SZNB'){
-                if(res && res.data.errCode === 0 ){
-                    let SZNBData = res.data.data.inputType
-                    // console.log(SZNBData)
-                    dispatch(getAllCodeInToItemsSZNBDataSuscess(SZNBData))
-                }else{
-                    dispatch(getAllCodeInToItemsSZNBDataSuscess([]))
-                }
-            }
-
-            // Mau
-            if(inputType === 'COLOR'){
-                if(res && res.data.errCode === 0 ){
-                    let COLORData = res.data.data.inputType
-                    // console.log(SZNBData)
-                    dispatch(getAllCodeInToItemsCOLORDataSuscess(COLORData))
-                }else{
-                    dispatch(getAllCodeInToItemsCOLORDataSuscess([]))
-                }
-            }
-            
-
-        }catch(err) {
-            console.log("Error Actions getAllCodeInToItemsStart :"+ err)
+          dispatch(getAllCodeInToItemsFSBDataSuscess(FSBData));
+          return FSBData;
+        } else {
+          dispatch(getAllCodeInToItemsFSBDataSuscess([]));
         }
+      }
+
+      // Phu Kien Thhoi trang nam
+      if (inputType === "FSAM") {
+        if (res && res.data.errCode === 0) {
+          let FSAMData = res.data.data.inputType;
+          // console.log(FSAMData)
+
+          dispatch(getAllCodeInToItemsFSAMDataSuscess(FSAMData));
+          return FSAMData;
+        } else {
+          dispatch(getAllCodeInToItemsFSAMDataSuscess([]));
+        }
+      }
+
+      // Thoi trang nu
+      if (inputType === "FSM") {
+        if (res && res.data.errCode === 0) {
+          let FSMData = res.data.data.inputType;
+          // console.log(FSMData)
+
+          dispatch(getAllCodeInToItemsFSMDataSuscess(FSMData));
+          return FSMData;
+        } else {
+          dispatch(getAllCodeInToItemsFSMDataSuscess([]));
+        }
+      }
+
+      // Phu Kien Thhoi trang nu
+      if (inputType === "FSAW") {
+        if (res && res.data.errCode === 0) {
+          let FSAWData = res.data.data.inputType;
+          // console.log(FSAWData)
+
+          dispatch(getAllCodeInToItemsFSAWDataSuscess(FSAWData));
+          return FSAWData;
+        } else {
+          dispatch(getAllCodeInToItemsFSAWDataSuscess([]));
+        }
+      }
+
+      // All
+      if (inputType === "All") {
+        if (res && res.data.errCode === 0) {
+          let AllData = res.data.data.inputType;
+          // console.log(AllData)
+          dispatch(getAllCodeInToItemsAllDataSuscess(AllData));
+          return AllData;
+        } else {
+          dispatch(getAllCodeInToItemsAllDataSuscess([]));
+        }
+      }
+
+      // Giảm giá
+      if (inputType === "DCC") {
+        if (res && res.data.errCode === 0) {
+          let DCCData = res.data.data.inputType;
+          // console.log(DCCData)
+          dispatch(getAllCodeInToItemsDCCDataSuscess(DCCData));
+        } else {
+          dispatch(getAllCodeInToItemsDCCDataSuscess([]));
+        }
+      }
+
+      // Thương Hiệu
+      if (inputType === "BNPRD") {
+        if (res && res.data.errCode === 0) {
+          let BNPRDData = res.data.data.inputType;
+          // console.log(BNPRDData)
+          dispatch(getAllCodeInToItemsBNPRDDataSuscess(BNPRDData));
+        } else {
+          dispatch(getAllCodeInToItemsBNPRDDataSuscess([]));
+        }
+      }
+
+      // Kiểu cỡ
+      if (inputType === "TYPESIZE") {
+        if (res && res.data.errCode === 0) {
+          let TYPESIZEData = res.data.data.inputType;
+          // console.log(TYPESIZEData)
+          dispatch(getAllCodeInToItemsTYPESIZEDataSuscess(TYPESIZEData));
+        } else {
+          dispatch(getAllCodeInToItemsTYPESIZEDataSuscess([]));
+        }
+      }
+
+      // Kiểu cỡ chu
+      if (inputType === "SIZE") {
+        if (res && res.data.errCode === 0) {
+          let SIZEData = res.data.data.inputType;
+          // console.log(SIZEData)
+          dispatch(getAllCodeInToItemsSIZEDataSuscess(SIZEData));
+        } else {
+          dispatch(getAllCodeInToItemsSIZEDataSuscess([]));
+        }
+      }
+
+      // Kiểu cỡ so
+      if (inputType === "SZNB") {
+        if (res && res.data.errCode === 0) {
+          let SZNBData = res.data.data.inputType;
+          // console.log(SZNBData)
+          dispatch(getAllCodeInToItemsSZNBDataSuscess(SZNBData));
+        } else {
+          dispatch(getAllCodeInToItemsSZNBDataSuscess([]));
+        }
+      }
+
+      // Mau
+      if (inputType === "COLOR") {
+        if (res && res.data.errCode === 0) {
+          let COLORData = res.data.data.inputType;
+          // console.log(SZNBData)
+          dispatch(getAllCodeInToItemsCOLORDataSuscess(COLORData));
+        } else {
+          dispatch(getAllCodeInToItemsCOLORDataSuscess([]));
+        }
+      }
+    } catch (err) {
+      console.log("Error Actions getAllCodeInToItemsStart :" + err);
     }
-}
+  };
+};
 
 export const getAllCodeInToItemsFSBDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_FSB_SUCCESS,
-    FSBData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_FSB_SUCCESS,
+  FSBData: data,
+});
 
 export const getAllCodeInToItemsFSAMDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_FSAM_SUCCESS,
-    FSAMData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_FSAM_SUCCESS,
+  FSAMData: data,
+});
 
 export const getAllCodeInToItemsFSMDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_FSM_SUCCESS,
-    FSMData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_FSM_SUCCESS,
+  FSMData: data,
+});
 
 export const getAllCodeInToItemsFSAWDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_FSAW_SUCCESS,
-    FSAWData: data
-})
+  type: actionTypes.GET_DATA_ALLCODE_FSAW_SUCCESS,
+  FSAWData: data,
+});
 
 export const getAllCodeInToItemsAllDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_ALL_SUCCESS,
-    AllData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_ALL_SUCCESS,
+  AllData: data,
+});
 
 export const getAllCodeInToItemsDCCDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_DCC_SUCCESS,
-    DCCData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_DCC_SUCCESS,
+  DCCData: data,
+});
 
 export const getAllCodeInToItemsBNPRDDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_BNPRD_SUCCESS,
-    BNPRDData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_BNPRD_SUCCESS,
+  BNPRDData: data,
+});
 
 export const getAllCodeInToItemsTYPESIZEDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_TYPESIZE_SUCCESS,
-    TYPESIZEData: data
-})
+  type: actionTypes.GET_DATA_ALLCODE_TYPESIZE_SUCCESS,
+  TYPESIZEData: data,
+});
 
 export const getAllCodeInToItemsSIZEDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_SIZE_SUCCESS,
-    SIZEData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_SIZE_SUCCESS,
+  SIZEData: data,
+});
 
 export const getAllCodeInToItemsSZNBDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_SZNB_SUCCESS,
-    SZNBData: data
-})
-
+  type: actionTypes.GET_DATA_ALLCODE_SZNB_SUCCESS,
+  SZNBData: data,
+});
 
 export const getAllCodeInToItemsCOLORDataSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ALLCODE_COLOR_SUCCESS,
-    COLORData: data
-})
-
-
+  type: actionTypes.GET_DATA_ALLCODE_COLOR_SUCCESS,
+  COLORData: data,
+});
 
 // GET_DATA_ITEMS_SUCCESS: 'GET_DATA_ITEMS_SUCCESS',
 // GET_DATA_ITEMS_FAILED: 'GET_DATA_ITEMS_FAILED',
 
 // Actions lấy AllCode (category)
 export const getDataItemsStart = (data) => {
-    return async (dispatch, getState) => {
-        try{
+  return async (dispatch, getState) => {
+    try {
+      let res = await adminService.getDataItems(data);
 
-            let res = await adminService.getDataItems(data)
-
-
-            if(data.amount === 'All' && data.idItems === 'EMPTY' && data.idShop === 'EMPTY' && data.category  ===  'EMPTY' && data.type  ===  'EMPTY' ){
-                if(res && res.data.errCode === 0 ){
-                    let dataAllItems = res.data.data.inputType
-                    dispatch(getDataItemsSuscess(dataAllItems))
-                }else{
-                    dispatch(getDataItemsSuscess([]))
-                }
-            }
-
-            if(data.amount === 'ONE' && data.idItems !== 'EMPTY' && data.idShop === 'EMPTY' && data.category  ===  'EMPTY' && data.type  ===  'EMPTY' ){
-                if(res && res.data.errCode === 0 ){
-                    let dataAllItems = res.data.data.inputType
-                    dispatch(getDataONEItemsSuscess(dataAllItems))
-                }else{
-                    dispatch(getDataONEItemsSuscess([]))
-                }
-            }
-
-            return
-            // { amount: 'All',idItems: 'EMPTY', idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY' }
-
-
+      if (
+        data.amount === "All" &&
+        data.idItems === "EMPTY" &&
+        data.idShop === "EMPTY" &&
+        data.category === "EMPTY" &&
+        data.type === "EMPTY"
+      ) {
+        if (res && res.data.errCode === 0) {
+          let dataAllItems = res.data.data.inputType;
+          dispatch(getDataItemsSuscess(dataAllItems));
+        } else {
+          dispatch(getDataItemsSuscess([]));
         }
-        catch(err){
-            console.log("Error Actions getDataItemsStart :"+ err)
+      }
+
+      if (
+        data.amount === "ONE" &&
+        data.idItems !== "EMPTY" &&
+        data.idShop === "EMPTY" &&
+        data.category === "EMPTY" &&
+        data.type === "EMPTY"
+      ) {
+        if (res && res.data.errCode === 0) {
+          let dataAllItems = res.data.data.inputType;
+          dispatch(getDataONEItemsSuscess(dataAllItems));
+        } else {
+          dispatch(getDataONEItemsSuscess([]));
         }
+      }
+
+      return;
+      // { amount: 'All',idItems: 'EMPTY', idShop: 'EMPTY', category: 'EMPTY', type: 'EMPTY' }
+    } catch (err) {
+      console.log("Error Actions getDataItemsStart :" + err);
     }
-}
+  };
+};
 
 export const getDataItemsSuscess = (data) => ({
-    type: actionTypes.GET_DATA_ITEMS_SUCCESS,
-    dataAllItems: data
-})
+  type: actionTypes.GET_DATA_ITEMS_SUCCESS,
+  dataAllItems: data,
+});
 
 export const getDataONEItemsSuscess = (data) => ({
-    type: actionTypes.GET_ONE_ITEMS_SUCCESS,
-    dataOneItems: data
-})
-
+  type: actionTypes.GET_ONE_ITEMS_SUCCESS,
+  dataOneItems: data,
+});
 
 // SET_VALUE_EMPTY
 export const setValueInputEmpty = () => {
-    return async (dispatch, getState) => {
-        try{
-            const ranDomNumber = Math.floor(1000 + Math.random() * 9000)
-            dispatch(setValueInputEmptySuscess(ranDomNumber))
-        }
-        catch(err){
-        }
-    }
-}
+  return async (dispatch, getState) => {
+    try {
+      const ranDomNumber = Math.floor(1000 + Math.random() * 9000);
+      dispatch(setValueInputEmptySuscess(ranDomNumber));
+    } catch (err) {}
+  };
+};
 
 export const setValueInputEmptySuscess = (ranDomNumber) => ({
-    type: actionTypes.SET_VALUE_EMPTY,
-    valueInput: ranDomNumber
-})
-
-
+  type: actionTypes.SET_VALUE_EMPTY,
+  valueInput: ranDomNumber,
+});
 
 // CHANGE_ITEMS_VOUCHER_SUCCESS: 'CHANGE_ITEMS_VOUCHER_SUCCESS',
 export const changeVoucherItems = (voucher, type) => {
-    return async (dispatch, getState) => {
-        try{
+  return async (dispatch, getState) => {
+    try {
+      if (type === "CHANGE") {
+        let actions = false;
+        dispatch(
+          changeVoucherItemsSuscess({ voucher: voucher, actions: !actions })
+        );
+      }
 
-            if(type === 'CHANGE'){
-                let actions = false
-                dispatch(changeVoucherItemsSuscess({voucher: voucher, actions: !actions }))
-            }
+      if (type === "DELETE") {
+        let res = await adminService.deleteVoucher({
+          idShop: voucher.idShop,
+          category: voucher.forItemCategory,
+          type: voucher.forItemType,
+          idItems: voucher.itemsId,
+        });
 
-            if(type === 'DELETE'){     
-
-                let res = await adminService.deleteVoucher({idShop: voucher.idShop, category: voucher.forItemCategory, type: voucher.forItemType, idItems: voucher.itemsId })
-
-                if(res && res.data && res.data.errCode === 0){
-                    let dataResultSearchItem = await adminService.getVoucher({idShop: voucher.idShop, category: 'EMPTY', type: 'EMPTY'})
-                    dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data))
-                }
-            }
+        if (res && res.data && res.data.errCode === 0) {
+          let dataResultSearchItem = await adminService.getVoucher({
+            idShop: voucher.idShop,
+            category: "EMPTY",
+            type: "EMPTY",
+          });
+          dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data));
         }
-        catch(err){
-        }
-    }
-}
+      }
+    } catch (err) {}
+  };
+};
 
 export const changeVoucherItemsSuscess = (data) => ({
-    type: actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS,
-    voucherItems: data
-})
-
-
-
+  type: actionTypes.CHANGE_ITEMS_VOUCHER_SUCCESS,
+  voucherItems: data,
+});
 
 // GET_NEW_DATA_VOUCHER: 'GET_NEW_DATA_VOUCHER',
 export const getNewDataVoucher = (id) => {
-    return async (dispatch, getState) => {
-        try{
-            let dataResultSearchItem = await adminService.getVoucher({idShop: id, category: 'EMPTY', type: 'EMPTY'})
-            dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data))
-        }
-        catch(err){
-            
-        }
-    }
-}
+  return async (dispatch, getState) => {
+    try {
+      let dataResultSearchItem = await adminService.getVoucher({
+        idShop: id,
+        category: "EMPTY",
+        type: "EMPTY",
+      });
+      dispatch(getNewDataVoucherSuscess(dataResultSearchItem.data.data));
+    } catch (err) {}
+  };
+};
 
-export const getNewDataVoucherSuscess = (data,type) => ({
-    type: actionTypes.GET_NEW_DATA_VOUCHER,
-    newVoucherItems: data,
-})
-
+export const getNewDataVoucherSuscess = (data, type) => ({
+  type: actionTypes.GET_NEW_DATA_VOUCHER,
+  newVoucherItems: data,
+});
 
 // setDataEmptyLogOutStart
 export const setDataEmptyLogOutStart = () => {
-    return async (dispatch, getState) => {
-        try{
-            dispatch(setDataEmptyLogOutSuscess(''))
-        }
-        catch(err){
-            
-        }
-    }
-}
+  return async (dispatch, getState) => {
+    try {
+      dispatch(setDataEmptyLogOutSuscess(""));
+    } catch (err) {}
+  };
+};
 
-export const setDataEmptyLogOutSuscess = (data,type) => ({
-    type: actionTypes.SET_EMPTY_DATA_LOG_OUT,
-    setDataLogin: '',
-})
-
+export const setDataEmptyLogOutSuscess = (data, type) => ({
+  type: actionTypes.SET_EMPTY_DATA_LOG_OUT,
+  setDataLogin: "",
+});
 
 // ADD_DATA_OPTIONS_SEARCH_NAV: 'ADD_DATA_OPTIONS_SEARCH_NAV',
 export const addDataOptionsSearchNav = (dataInput) => {
-    return async (dispatch, getState) => {
-        try{
-            dispatch(addDataOptionsSearchNavSuscess(dataInput))
-        }
-        catch(err){
-            
-        }
-    }
-}
+  return async (dispatch, getState) => {
+    try {
+      dispatch(addDataOptionsSearchNavSuscess(dataInput));
+    } catch (err) {}
+  };
+};
 
-export const addDataOptionsSearchNavSuscess = (data,type) => ({
-    type: actionTypes.ADD_DATA_OPTIONS_SEARCH_NAV,
-    dataOptions: data,
-})
+export const addDataOptionsSearchNavSuscess = (data, type) => ({
+  type: actionTypes.ADD_DATA_OPTIONS_SEARCH_NAV,
+  dataOptions: data,
+});

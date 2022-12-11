@@ -1,12 +1,12 @@
-.allVoucher{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    max-height: 626px;
-    overflow: auto;
-    margin-bottom: 50px;
+.allVoucher {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-height: 626px;
+  overflow: auto;
+  margin-bottom: 50px;
 
-.voucher{
+  .voucher {
     width: 100%;
     border: 1px solid rgb(226, 226, 226);
     overflow: hidden;
@@ -16,162 +16,169 @@
     min-height: 130px;
 
 
-    .list_icon{
+    .list_icon {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 60px;
+      cursor: pointer;
+
+      .icon_close {
+        padding: 4px;
+        font-size: 2rem;
+        color: var(--BGR-voucher);
+        opacity: .5;
+      }
+
+      .icon_close.one {
+        opacity: .5;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .icon_close.tow {
+        opacity: .5;
+
+        &:hover {
+          opacity: 1;
+
+        }
+      }
+    }
+
+    &::after {
+      border-left: 14px dotted rgb(255, 255, 255);
+      content: "";
+      display: block;
+      width: 25px;
+      height: 100%;
+      margin-left: -8px;
+      position: absolute;
+      top: 0;
+    }
+
+    .voucher_wraper {
+      background-color: var(--BGR-voucher);
+      width: 110px;
+      // height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-right: 6px;
+
+      .info_shop {
+        min-width: 116px;
+
+        .border_img {
+          width: 70px;
+          height: 70px;
+          overflow: hidden;
+          margin: auto;
+          border-radius: 68px;
+          box-shadow: 0px 0px 3px #787878;
+        }
+
+        .avata_shop {
+          width: 100%;
+        }
+
+        .name_shop {
+          margin: 4px 12px 0px 12px;
+          color: #fff;
+          display: block;
+          font-size: 1.4rem;
+          text-align: center;
+        }
+      }
+
+    }
+
+
+    .sub_voucher {
+
+      .discount_percent {
+        margin-top: 3px;
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: 600;
         display: flex;
-        justify-content: space-between;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        width: 60px;
-        cursor: pointer;
+      }
 
-        .icon_close{
-            padding: 4px;
-            font-size: 2rem;
-            color: var(--BGR-voucher);
-            opacity: .5;
-        }
-        .icon_close.one{
-            opacity: .5;
+      .limit {
+        color: rgb(57 55 55);
+        font-size: 1.4rem;
+      }
 
-            &:hover{
-                opacity: 1;
-            }
-        }
-        .icon_close.tow{
-            opacity: .5;
-
-            &:hover{
-                opacity: 1;
-                
-            }
-        }
-    }
-
-    &::after{
-        border-left: 14px dotted rgb(255, 255, 255);
-        content: "";
-        display: block;
-        width: 25px;
-        height: 100%;
-        margin-left: -8px;
-        position: absolute;
-        top: 0;
-    }
-    .voucher_wraper{
-        background-color: var(--BGR-voucher);
-        width: 110px;
-        // height: 100%;
+      .show_items {
+        margin-top: 5px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-right: 6px;
 
-        .info_shop{
-            min-width: 116px;
+        .img_items {
+          width: 70px;
+          height: 70px;
+          overflow: hidden;
 
-            .border_img{
-                width: 70px;
-                height: 70px;
-                overflow: hidden;
-                margin: auto;
-                border-radius: 68px;
-                box-shadow: 0px 0px 3px #787878;
-            }
-            .avata_shop{
-                width: 100%;
-            }
-            .name_shop{
-                margin: 4px 12px 0px 12px;
-                color: #fff;
-                display: block;
-                font-size: 1.4rem;
-                text-align: center;
-            }
+
+          .img {
+            width: 100%;
+          }
         }
+      }
 
-    }
+      .detail_items {
+        margin-left: 6px;
+        margin-bottom: 6px;
 
 
-    .sub_voucher{
 
-        .discount_percent{
-            margin-top: 3px;
-            font-size: 2rem;
-            text-transform: uppercase;
+        .price {
+          color: var(--color-text);
+
+          .price_number {
+            color: var(--BGR-frimary-btn-LG);
             font-weight: 600;
-            display: flex;
+          }
         }
 
-        .limit {
-            color: rgb(57 55 55);
-            font-size: 1.4rem;
+        .code {
+
+          .items_code {
+            color: var(--iconSVG-hover);
+          }
         }
-
-        .show_items{
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-
-            .img_items{
-                width: 70px;
-                height: 70px;
-                overflow: hidden;
-
-
-                .img{
-                    width: 100%;
-                }
-            }
-        }
-
-        .detail_items{
-            margin-left: 6px;
-            margin-bottom: 6px;
-
-           
-
-            .price{
-                color: var(--color-text);
-
-                .price_number{
-                    color: var(--BGR-frimary-btn-LG);
-                    font-weight: 600;
-                }
-            }
-
-            .code{
-
-                .items_code{
-                    color: var(--iconSVG-hover);
-                }
-            }
-        }
-    }
-    
-    .list_button{
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        align-items: center;
-        justify-content: center;
+      }
     }
 
-}
-}
-.times{
-    color: rgb(57 55 55);
-
-    .content-time{
-        color: var(--iconSVG-hover);
+    .list_button {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
     }
+
+  }
 }
 
-.name_items{
-    font-weight: 600;
-    color: var(--BGR-frimary-btn-LG);
+.times {
+  color: rgb(57 55 55);
+
+  .content-time {
+    color: var(--iconSVG-hover);
+  }
 }
-.detail_voucher-not-items{
-    margin-top: 12px;
+
+.name_items {
+  font-weight: 600;
+  color: var(--BGR-frimary-btn-LG);
+}
+
+.detail_voucher-not-items {
+  margin-top: 12px;
 }

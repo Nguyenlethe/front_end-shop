@@ -1,332 +1,307 @@
 {
-    "nav": {
-        "home": "Bố cục mặc định "
+  "nav": {
+    "home": "Bố cục mặc định "
+  },
+  "manageAdmin": {
+    "language": "Ngôn ngữ",
+    "home": "Trang chủ",
+    "manageShop": "Quản lý Shop",
+    "manageUsers": "Quản lý người dùng",
+    "logout": "Đăng xuất",
+    "createUser": "Tạo Người Dùng",
+    "btnLG": "Đăng nhập",
+    "btnRGT": "Đăng ký",
+    "createShop": "Tạo Mới Shop",
+    "createItems": "Tạo mới sản phẩm",
+    "listItem": "Danh Sách sản phẩm",
+    "other": "Khác",
+    "otherDataSystem": "Thêm dữ liệu khác cho hệ thống",
+
+    "form": {
+      "idUser": "Mã Người Dùng",
+      "email": "Email",
+      "password": "Mật Khẩu",
+      "firstName": "Họ/Tên Đệm",
+      "lastName": "Tên",
+      "phone": "Số Điện Thoại",
+      "gender": "Giới Tính",
+      "avata": "Ảnh Đại Diện",
+      "avataLink": "Link Ảnh Đại Diện",
+      "permission": "Quyền",
+      "Province": "Tỉnh/Thành Phố",
+      "district": "Quận/Huyện",
+      "wards": "Xã/Phường",
+      "email-edit": "Không được sửa trường này !",
+      "password-edit": "Không được sửa trường này !",
+      "listSeller": "Danh Sách Người Bán",
+      "startDay": "Ngày bắt đầu",
+      "birthday": "Ngày sinh",
+
+      "AddressDetails": "Thông Tin Chi Tiết Địa Chỉ",
+      "planceholder_idUser": " Nhập Mã Người Dùng",
+      "planceholder_email": " Nhập Email",
+      "planceholder_password": " Nhập Mật Khẩu",
+      "planceholder_firstName": " Nhập Họ/Tên Đệm",
+      "planceholder_lastName": " Nhập Tên",
+      "planceholder_phone": " Nhập Số Điện Thoại",
+      "planceholder_gender": " Nhập Giới Tính",
+      "planceholder_avata": " Nhập Ảnh Đại Diện",
+      "planceholder_avataLink": " Nhập Link Ảnh Đại Diện",
+      "planceholder_permission": " Nhập Quyền",
+      "planceholder_Province": " Nhập Tỉnh/Thành Phố",
+      "planceholder_district": " Nhập Quận/Huyện",
+      "planceholder_wards": " Nhập Xã/Phường",
+      "planceholder_AddressDetails": " Nhập Thông Tin Chi Tiết Địa Chỉ",
+      "planceholder_sreachCode": "Nhập mã sản phẩm để tìm kiếm",
+
+      "planceholder_category": "Chọn danh mục",
+      "planceholder_type": "Chọn Danh Mục Sản Phẩm",
+      "planceholder_sale": "Giảm Giá Sản Phẩm",
+      "planceholder_price": "Nhập Giá Sản Phẩm",
+      "planceholder_idItems": "Nhập Mã Định Danh Sản Phẩm",
+
+      "planceholder_trademark": "Chọn Thương Hiệu",
+      "planceholder_production": "Xuất Sứ...",
+      "planceholder_sentFrom": "Nơi Gửi Hàng",
+      "planceholder_texture": "Chọn Chất Liệu Sản Phẩm",
+      "planceholder_itemsSizeAmount": "Chọn Kiểu Cỡ...",
+      "planceholder_color": "Chọn Màu...",
+      "planceholder_startDay": "Chọn ngày bắt đầu áp dụng ",
+      "planceholder_ifDiscount": "Chọn điều kiện giảm",
+      "planceholder_price_ship": "Nhập giá ship...",
+
+      "btn": "Thêm Mới",
+      "btn_edit": "Lưu Thay Đổi",
+      "save": "Lưu",
+      "heading": "Đăng Nhập",
+      "account": "Tài Khoản",
+      "passwordLogin": "Mật Khẩu",
+      "ETaccount": "Nhập tài khoỏa",
+      "ETpassword": "Nhập mật khẩu",
+      "ForgotPW": "Quên mật khẩu ?",
+      "Orsing": "Đăng nhập bằng cách sử dụng",
+      "OrsingUp": "Đăng kí bằng cách sử dụng",
+      "CRaccount": "Đăng nhập bằng cách tạo một tài khoản",
+      "RGaccount": "Bạn đã có sẵn một tài khoản ?",
+      "SingUp": "Đăng Ký",
+      "confirm": "XÁC NHẬN",
+      "errAccount": "Email sai định dạng",
+      "emptyData": "Người dùng chưa nhập",
+      "fullName": "Họ và tên",
+      "Address": "Địa chỉ",
+      "Permission": "Quyền",
+      "Detail": "Chi tiết",
+      "Actions": "Trạng thái",
+      "listUser": "Danh Sách Người Dùng",
+      "endDay": "Ngày kết thúc",
+      "sreachCode": "Tìm kiếm sản phẩm bằng mã",
+
+      "manageId": "Người quản lý",
+      "nameShop": "Tên Shop",
+      "addressShop": "Địa Chỉ Shop",
+      "emailShop": "Email Shop",
+      "phoneNumber": "Số Điện Thoại",
+      "pay": "Phương Thức Thanh Toán",
+      "province": "Tỉnh /Thành Phố",
+      "payType": "Phương thức thay toán",
+      "viewDetail": "Xem chi tiết",
+      "seller": "Chủ cửa hàng",
+      "manager": "Người Quản Lý",
+      "category": "Danh Mục Hàng",
+      "type": "Loại Hàng",
+      "sale": "Giảm Giá",
+      "nameItems": "Nhập Tên Sản Phẩm",
+      "nameItemsEn": "Nhập Tên English Sản Phẩm ",
+      "price": "Giá",
+      "idItems": "Mã Định Danh",
+
+      "trademark": "Thương Hiệu",
+      "production": "Xuất Sứ",
+      "sentFrom": "Nơi Gửi",
+      "texture": "Chất Liệu Sản Phẩm",
+      "itemsSizeAmount": "Kiểu Cỡ",
+      "amount": "Số Lượng",
+      "description": "Mô Tả Sản Phẩm",
+      "descriptionVi": "Mô Tả VI",
+      "descriptionEn": "Mô Tả EN",
+      "addImg": "Thêm Ảnh",
+      "addItems": "Thêm Sản Phẩm",
+      "errorEmpty": "Không được để trống trường này !!!",
+      "ifDiscount": "Điều kiện giảm",
+
+      "nameItemsListItems": "Tên Sản Phẩm ",
+      "codeItems": "Mã Sản Phẩm",
+      "hide": "Ẩn Form",
+      "craeteDiscount": "Tạo voucher giảm giá ",
+      "addDiscount": "Thêm Mới",
+      "deleteAllListInput": "Xóa tất cả"
     },
-    "manageAdmin": {
-        "language": "Ngôn ngữ",
-        "home":"Trang chủ",
-        "manageShop":"Quản lý Shop",
-        "manageUsers":"Quản lý người dùng",
-        "logout":"Đăng xuất",
-        "createUser": "Tạo Người Dùng",
-        "btnLG":"Đăng nhập",
-        "btnRGT":"Đăng ký",
-        "createShop":"Tạo Mới Shop",
-        "createItems":"Tạo mới sản phẩm",
-        "listItem":"Danh Sách sản phẩm",
-        "other": "Khác",
-        "otherDataSystem":"Thêm dữ liệu khác cho hệ thống",
-
-
-        "form":{
-            "idUser":"Mã Người Dùng",
-            "email":"Email",
-            "password":"Mật Khẩu",
-            "firstName":"Họ/Tên Đệm",
-            "lastName":"Tên",
-            "phone":"Số Điện Thoại",
-            "gender":"Giới Tính",
-            "avata":"Ảnh Đại Diện",
-            "avataLink":"Link Ảnh Đại Diện",
-            "permission":"Quyền",
-            "Province":"Tỉnh/Thành Phố",
-            "district":"Quận/Huyện",
-            "wards":"Xã/Phường",
-            "email-edit":"Không được sửa trường này !",
-            "password-edit":"Không được sửa trường này !",
-            "listSeller":"Danh Sách Người Bán",
-            "startDay":"Ngày bắt đầu",
-            "birthday":"Ngày sinh",
-
-
-            "AddressDetails":"Thông Tin Chi Tiết Địa Chỉ",
-            "planceholder_idUser":" Nhập Mã Người Dùng",
-            "planceholder_email":" Nhập Email",
-            "planceholder_password":" Nhập Mật Khẩu",
-            "planceholder_firstName":" Nhập Họ/Tên Đệm",
-            "planceholder_lastName":" Nhập Tên",
-            "planceholder_phone":" Nhập Số Điện Thoại",
-            "planceholder_gender":" Nhập Giới Tính",
-            "planceholder_avata":" Nhập Ảnh Đại Diện",
-            "planceholder_avataLink":" Nhập Link Ảnh Đại Diện",
-            "planceholder_permission":" Nhập Quyền",
-            "planceholder_Province":" Nhập Tỉnh/Thành Phố",
-            "planceholder_district":" Nhập Quận/Huyện",
-            "planceholder_wards":" Nhập Xã/Phường",
-            "planceholder_AddressDetails":" Nhập Thông Tin Chi Tiết Địa Chỉ",
-            "planceholder_sreachCode":"Nhập mã sản phẩm để tìm kiếm",
-            
-
-            "planceholder_category":"Chọn danh mục",
-            "planceholder_type":"Chọn Danh Mục Sản Phẩm",
-            "planceholder_sale":"Giảm Giá Sản Phẩm",
-            "planceholder_price": "Nhập Giá Sản Phẩm",
-            "planceholder_idItems":"Nhập Mã Định Danh Sản Phẩm",
-
-            "planceholder_trademark":"Chọn Thương Hiệu",
-            "planceholder_production":"Xuất Sứ...",
-            "planceholder_sentFrom":"Nơi Gửi Hàng",
-            "planceholder_texture":"Chọn Chất Liệu Sản Phẩm",
-            "planceholder_itemsSizeAmount":"Chọn Kiểu Cỡ...",
-            "planceholder_color":"Chọn Màu...",
-            "planceholder_startDay":"Chọn ngày bắt đầu áp dụng ",
-            "planceholder_ifDiscount":"Chọn điều kiện giảm",
-            "planceholder_price_ship":"Nhập giá ship...",
-
-            
-            "btn":"Thêm Mới",
-            "btn_edit":"Lưu Thay Đổi",
-            "save":"Lưu",
-            "heading":"Đăng Nhập",
-            "account":"Tài Khoản",
-            "passwordLogin":"Mật Khẩu",
-            "ETaccount":"Nhập tài khoỏa",
-            "ETpassword":"Nhập mật khẩu",
-            "ForgotPW":"Quên mật khẩu ?",
-            "Orsing":"Đăng nhập bằng cách sử dụng",
-            "OrsingUp":"Đăng kí bằng cách sử dụng",
-            "CRaccount":"Đăng nhập bằng cách tạo một tài khoản",
-            "RGaccount":"Bạn đã có sẵn một tài khoản ?",
-            "SingUp":"Đăng Ký",
-            "confirm":"XÁC NHẬN",
-            "errAccount":"Email sai định dạng",
-            "emptyData":"Người dùng chưa nhập",
-            "fullName":"Họ và tên",
-            "Address": "Địa chỉ",
-            "Permission":"Quyền",
-            "Detail":"Chi tiết",
-            "Actions":"Trạng thái",
-            "listUser":"Danh Sách Người Dùng",
-            "endDay":"Ngày kết thúc",
-            "sreachCode":"Tìm kiếm sản phẩm bằng mã",
-            
-            "manageId":"Người quản lý",
-            "nameShop":"Tên Shop",
-            "addressShop":"Địa Chỉ Shop",
-            "emailShop":"Email Shop",
-            "phoneNumber":"Số Điện Thoại",
-            "pay":"Phương Thức Thanh Toán",
-            "province":"Tỉnh /Thành Phố",
-            "payType":"Phương thức thay toán",
-            "viewDetail":"Xem chi tiết",
-            "seller":"Chủ cửa hàng",
-            "manager":"Người Quản Lý",
-            "category":"Danh Mục Hàng",
-            "type": "Loại Hàng",
-            "sale":"Giảm Giá",
-            "nameItems":"Nhập Tên Sản Phẩm",
-            "nameItemsEn":"Nhập Tên English Sản Phẩm ",
-            "price":"Giá",
-            "idItems":"Mã Định Danh",
-
-            "trademark":"Thương Hiệu",
-            "production":"Xuất Sứ",
-            "sentFrom":"Nơi Gửi",
-            "texture":"Chất Liệu Sản Phẩm",
-            "itemsSizeAmount":"Kiểu Cỡ",
-            "amount":"Số Lượng",
-            "description":"Mô Tả Sản Phẩm",
-            "descriptionVi":"Mô Tả VI",
-            "descriptionEn":"Mô Tả EN",
-            "addImg":"Thêm Ảnh",
-            "addItems":"Thêm Sản Phẩm",
-            "errorEmpty":"Không được để trống trường này !!!",
-            "ifDiscount":"Điều kiện giảm",
-
-            "nameItemsListItems":"Tên Sản Phẩm ",
-            "codeItems":"Mã Sản Phẩm",
-            "hide": "Ẩn Form",
-            "craeteDiscount":"Tạo voucher giảm giá ",
-            "addDiscount": "Thêm Mới",
-            "deleteAllListInput":"Xóa tất cả"
-            
-        },
-        "toast": {
-            "addItemsCart":"Thêm thành công sản phẩm !!!",
-            "success":"Thêm người dùng thành công !!!",
-            "successPriceShip":"Thêm thành công !!!",
-            "successVoucher":"Thêm voucher thành công !!!",
-            "warn":"Có lỗi sảy ra !!!",
-            "success_change":"Thay đổi thành công !!!",
-            "successItems":"Thêm sản phẩm thành công !",
-            "successEditItems":"Thay đổi thành công !!!",
-            "deleteSuccessItems":"Xóa thành công !!!"
-        },
-        "found": {
-            "back":"Trở Lại Trang Home",
-            "wanr":"Có lỗi sảy ra !!!"
-        },
-        "items": {
-            "discount":"Tạo voucher giảm giá",
-            "noOptions":"Không tìm thấy ",
-            "priceUS": "Gía (USD)",
-            "search-code-items":"Tìm kiếm sản phẩm (Mã)",
-            "search-code-items-add":"Dành cho sản phẩm",
-            "select-items":"Chọn sản phẩm",
-            "planceholder_priceUS":"Nhập giá (USD)",
-            "addDiscountSub":"Danh mục, loại hàng áp dụng : ",
-            "listVoucher": "Danh sách các voucher",
-            "sort":"Xắp sếp",
-            "listSort":"Danh sách voucher",
-            "allItems":"Tất cả sản phẩm có voucher",
-            "itemsDiscount":"Áp dụng cho sản phẩm",
-            "typeDiscount":"Áp dụng cho loại hàng",
-            "discountVocher":"Áp dụng cho danh mục",
-            "ship_price":"Tạo giá ship",
-            "price_ship":"Giá ship",
-            "attention":"CHÚ Ý : Những tỉnh không đặt giá vận chuyển, sẽ được áp dụng phí vận chuyển mặc định là 30.000 VNĐ. Tạo giá vận chuyển thành công là khi đã chọn sản phẩm và nhập đủ cả 2 loại giá (VNĐ & USD)",
-
-
-            "price":"Giá : ",
-            "code":"Mã sản phẩm : ",
-            "to":"Đến",
-            "from":"Có hiệu lực từ :",
-            "submitVoucher":"Sử Dụng",
-            "detail_voucher":"Chi Tiết",
-            "category":"Danh mục : ",
-            "type":"Loại hàng : ",
-            "day":" ngày ",
-            "YES":"Đồng ý",
-            "province_add":"Tỉnh áp dụng",
-            "price_shipVn": "Giá ship (VNĐ)",
-            "price_shipUs": "Giá ship (USD)",
-            "notSelect": "Vui lòng chọn danh mục/loại hàng hoặc tìm kiếm sản phẩm !!!",
-            "notAddPriceShip": "Vui lòng nhập giá gửi hàng !!!",
-            "ship_price-list":"Danh sách giá vận chuyển",
-            "count-add-price":"Số lưọng tỉnh đã tạo giá vận chuyển : ",
-            "errPriceShip":"Không được nhập chữ !!!",
-            "history": "Kết quả tìm kiếm ",
-            "seeMore" :"Xem Thêm",
-            "resultShow":"Các kết quả tìm kiếm cho : ",
-            "endPage": "Trang cuối",
-
-
-
-            "labelCodeColor":"Mã màu",
-            "pldCodeColor":"Nhập mã màu",
-
-            "pldNameColorVN":"Nhập tên màu (VN)",
-            "labelNameVNColor":"Tên màu (VN)",
-
-            "pldNameColorEN":"Nhập tên màu (EN)",
-            "labelNameENColor":"Tên màu (EN)",
-
-
-
-            "addTrademarks":"2. Thêm thương hiệu",
-
-            "labelCodeTrademarks": "Mã thương hiệu",
-            "pldCodeTrademarks": "Nhập mã thương hiệu",
-
-            "pldNameTrademarks": "Nhập tên thương hiệu",
-            "labelNameTrademarks": "Tên thương hiệu",
-
-
-
-
-            "addCategory":"3. Thêm danh mục",
-
-            "labelCodeCategory":"Mã danh mục",
-            "pldCodeCategory":"Nhập mã danh mục",
-
-            "pldNameCategoryVN":"Nhập tên danh mục (VN)",
-            "labelNameVNCategory":"Tên danh mục (VN)",
-
-            "pldNameCategoryEN":"Nhập tên danh mục (EN)",
-            "labelNameENCategory":"Tên danh mục (EN)",
-
-
-
-            "addType":"4. Thêm loại hàng",
-
-            "labelCodeType":"Mã loại hàng",
-            "pldCodeType":"Nhập mã loại hàng",
-
-            "pldNameTypeVN":"Nhập tên loại hàng (VN)",
-            "labelNameVNType":"Tên loại hàng (VN)",
-
-            "pldNameTypeEN":"Nhập tên loại hàng (EN)",
-            "labelNameENType":"Tên loại hàng (EN)",
-
-            "headingSubDetailText":"Chi tiết sản phẩm ",
-            "describe-items":"Mô tả sản phẩm",
-            "toShare":"Chia sẻ : ",
-            "likes":"Thích  ",
-            "liked":"Đã thích  ",
-            "evaluate":"Đánh giá",
-            "sold":"Đã bán",
-            "decrease": "Giảm",
-            "subPrice":"VNĐ",
-            "loveItems":"Yêu thích +",
-            "ship":"Vận chuyển",
-            "textFreeShip":"Miễn phí vận chuyển tới",
-            "nextShip":"Vận chuyển tới",
-            "textPriceShip":"Giá vận chuyển ",
-            "listColor":"Màu sắc",
-            "listSize":"Size",
-            "count":"Số lượng",
-            "addnewcart":"Thêm vào giỏ hàng",
-            "buyNow":"Mua ngay",
-            "checkBuyItems": "Vui lòng điền đầy đủ thông tin, màu sắc, kích cỡ, số lượng !!!",
-            "titleCart":"Sản phẩm mới thêm"
-
-
-
-           
-
-
-
-        },
-        "modal":{
-            "error":"Sản phẩm đã được đặt mã giảm giá ",
-            "errorType":"Loại sản phẩm đã được đặt mã giảm giá ",
-            "errorCategory":"Danh mục phẩm đã được đặt mã giảm giá ",
-            "warn":"Có lỗi sảy ra",
-            "exist":"GIÁ VẬN CHUYỂN ĐÃ TỒN TẠI "
-
-        },
-        "button":{
-            "Continue":"GHi Đè",
-            "editNow":"Chỉnh sửa",
-            "close":"Thoát",
-            "submit":"Thêm mới",
-            "hide":"Ẩn Form",
-            "delete":"Xoá",
-            "update": "Cập nhật",
-            "addColor":"I. Thêm màu",
-            "Facebook":"Tiếp tục với Facebook",
-            "Twitter":"Tiếp tục với Twitter"
-        }
+    "toast": {
+      "addItemsCart": "Thêm thành công sản phẩm !!!",
+      "success": "Thêm người dùng thành công !!!",
+      "successPriceShip": "Thêm thành công !!!",
+      "successVoucher": "Thêm voucher thành công !!!",
+      "warn": "Có lỗi sảy ra !!!",
+      "success_change": "Thay đổi thành công !!!",
+      "successItems": "Thêm sản phẩm thành công !",
+      "successEditItems": "Thay đổi thành công !!!",
+      "deleteSuccessItems": "Xóa thành công !!!"
     },
-    "app": {
-        "found": {
-            "back":"Trở Lại Trang Home",
-            "heading":"404 Trang không tồn tại",
-            "sub":"Có vẻ như bạn đang truy cập vào địa chỉ không tồn tại "
-        },
-        "editPass":{
-            "heading":"Quên Mật Khẩu",
-            "labelEmail":"Nhập tài khoản/Email của bạn",
-            "labelNewPass":"Nhập mật khẩu mới",
-            "labelRetype":"Nhập lại mật khẩu",
-            "labelCode":"Nhập mã xác minh của bạn",
-            "goLogin":"Về Trang Login",
-            "ntfSuccess": "Đổi mật khẩu thành công"
-
-        }
+    "found": {
+      "back": "Trở Lại Trang Home",
+      "wanr": "Có lỗi sảy ra !!!"
     },
-    "proFile":{
-        "manageOrder":"Quản lý đơn hàng",
-        "proFileHeading":"Hồ sơ của tôi",
-        "proFileSub":"Quản lý thông tin hồ sơ để bảo mật tài khoản",
-        "surname":"Họ",
-        "name":"Tên",
-        "nameAccount":"Tên đăng nhập",
-        "manageUser":"Quản lý tài khoản",
-        "resgisterSell":"Đăng ký trở thành người bán",
-        "manageShop":"Quản lý shop"
+    "items": {
+      "discount": "Tạo voucher giảm giá",
+      "noOptions": "Không tìm thấy ",
+      "priceUS": "Gía (USD)",
+      "search-code-items": "Tìm kiếm sản phẩm (Mã)",
+      "search-code-items-add": "Dành cho sản phẩm",
+      "select-items": "Chọn sản phẩm",
+      "planceholder_priceUS": "Nhập giá (USD)",
+      "addDiscountSub": "Danh mục, loại hàng áp dụng : ",
+      "listVoucher": "Danh sách các voucher",
+      "sort": "Xắp sếp",
+      "listSort": "Danh sách voucher",
+      "allItems": "Tất cả sản phẩm có voucher",
+      "itemsDiscount": "Áp dụng cho sản phẩm",
+      "typeDiscount": "Áp dụng cho loại hàng",
+      "discountVocher": "Áp dụng cho danh mục",
+      "ship_price": "Tạo giá ship",
+      "price_ship": "Giá ship",
+      "attention": "CHÚ Ý : Những tỉnh không đặt giá vận chuyển, sẽ được áp dụng phí vận chuyển mặc định là 30.000 VNĐ. Tạo giá vận chuyển thành công là khi đã chọn sản phẩm và nhập đủ cả 2 loại giá (VNĐ & USD)",
+
+      "price": "Giá : ",
+      "code": "Mã sản phẩm : ",
+      "to": "Đến",
+      "from": "Có hiệu lực từ :",
+      "submitVoucher": "Sử Dụng",
+      "detail_voucher": "Chi Tiết",
+      "category": "Danh mục : ",
+      "type": "Loại hàng : ",
+      "day": " ngày ",
+      "YES": "Đồng ý",
+      "province_add": "Tỉnh áp dụng",
+      "price_shipVn": "Giá ship (VNĐ)",
+      "price_shipUs": "Giá ship (USD)",
+      "notSelect": "Vui lòng chọn danh mục/loại hàng hoặc tìm kiếm sản phẩm !!!",
+      "notAddPriceShip": "Vui lòng nhập giá gửi hàng !!!",
+      "ship_price-list": "Danh sách giá vận chuyển",
+      "count-add-price": "Số lưọng tỉnh đã tạo giá vận chuyển : ",
+      "errPriceShip": "Không được nhập chữ !!!",
+      "history": "Kết quả tìm kiếm ",
+      "seeMore": "Xem Thêm",
+      "resultShow": "Các kết quả tìm kiếm cho : ",
+      "endPage": "Trang cuối",
+
+      "labelCodeColor": "Mã màu",
+      "pldCodeColor": "Nhập mã màu",
+
+      "pldNameColorVN": "Nhập tên màu (VN)",
+      "labelNameVNColor": "Tên màu (VN)",
+
+      "pldNameColorEN": "Nhập tên màu (EN)",
+      "labelNameENColor": "Tên màu (EN)",
+
+      "addTrademarks": "2. Thêm thương hiệu",
+
+      "labelCodeTrademarks": "Mã thương hiệu",
+      "pldCodeTrademarks": "Nhập mã thương hiệu",
+
+      "pldNameTrademarks": "Nhập tên thương hiệu",
+      "labelNameTrademarks": "Tên thương hiệu",
+
+      "addCategory": "3. Thêm danh mục",
+
+      "labelCodeCategory": "Mã danh mục",
+      "pldCodeCategory": "Nhập mã danh mục",
+
+      "pldNameCategoryVN": "Nhập tên danh mục (VN)",
+      "labelNameVNCategory": "Tên danh mục (VN)",
+
+      "pldNameCategoryEN": "Nhập tên danh mục (EN)",
+      "labelNameENCategory": "Tên danh mục (EN)",
+
+      "addType": "4. Thêm loại hàng",
+
+      "labelCodeType": "Mã loại hàng",
+      "pldCodeType": "Nhập mã loại hàng",
+
+      "pldNameTypeVN": "Nhập tên loại hàng (VN)",
+      "labelNameVNType": "Tên loại hàng (VN)",
+
+      "pldNameTypeEN": "Nhập tên loại hàng (EN)",
+      "labelNameENType": "Tên loại hàng (EN)",
+
+      "headingSubDetailText": "Chi tiết sản phẩm ",
+      "describe-items": "Mô tả sản phẩm",
+      "toShare": "Chia sẻ : ",
+      "likes": "Thích  ",
+      "liked": "Đã thích  ",
+      "evaluate": "Đánh giá",
+      "sold": "Đã bán",
+      "decrease": "Giảm",
+      "subPrice": "VNĐ",
+      "loveItems": "Yêu thích +",
+      "ship": "Vận chuyển",
+      "textFreeShip": "Miễn phí vận chuyển tới",
+      "nextShip": "Vận chuyển tới",
+      "textPriceShip": "Giá vận chuyển ",
+      "listColor": "Màu sắc",
+      "listSize": "Size",
+      "count": "Số lượng",
+      "addnewcart": "Thêm vào giỏ hàng",
+      "buyNow": "Mua ngay",
+      "checkBuyItems": "Vui lòng điền đầy đủ thông tin, màu sắc, kích cỡ, số lượng !!!",
+      "titleCart": "Sản phẩm mới thêm"
+    },
+    "modal": {
+      "error": "Sản phẩm đã được đặt mã giảm giá ",
+      "errorType": "Loại sản phẩm đã được đặt mã giảm giá ",
+      "errorCategory": "Danh mục phẩm đã được đặt mã giảm giá ",
+      "warn": "Có lỗi sảy ra",
+      "exist": "GIÁ VẬN CHUYỂN ĐÃ TỒN TẠI "
+    },
+    "button": {
+      "Continue": "GHi Đè",
+      "editNow": "Chỉnh sửa",
+      "close": "Thoát",
+      "submit": "Thêm mới",
+      "hide": "Ẩn Form",
+      "delete": "Xoá",
+      "update": "Cập nhật",
+      "addColor": "I. Thêm màu",
+      "Facebook": "Tiếp tục với Facebook",
+      "Twitter": "Tiếp tục với Twitter"
     }
+  },
+  "app": {
+    "found": {
+      "back": "Trở Lại Trang Home",
+      "heading": "404 Trang không tồn tại",
+      "sub": "Có vẻ như bạn đang truy cập vào địa chỉ không tồn tại "
+    },
+    "editPass": {
+      "heading": "Quên Mật Khẩu",
+      "labelEmail": "Nhập tài khoản/Email của bạn",
+      "labelNewPass": "Nhập mật khẩu mới",
+      "labelRetype": "Nhập lại mật khẩu",
+      "labelCode": "Nhập mã xác minh của bạn",
+      "goLogin": "Về Trang Login",
+      "ntfSuccess": "Đổi mật khẩu thành công"
+    }
+  },
+  "proFile": {
+    "manageOrder": "Quản lý đơn hàng",
+    "proFileHeading": "Hồ sơ của tôi",
+    "proFileSub": "Quản lý thông tin hồ sơ để bảo mật tài khoản",
+    "surname": "Họ",
+    "name": "Tên",
+    "nameAccount": "Tên đăng nhập",
+    "manageUser": "Quản lý tài khoản",
+    "resgisterSell": "Đăng ký trở thành người bán",
+    "manageShop": "Quản lý shop",
+    "errSubmit": "Vui lòng điền đầy đủ thông tin !!!",
+    "errType": "Email hoặc Số điện thọai sai định dạng !!! "
+  }
 }
-
- 
-

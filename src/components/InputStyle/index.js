@@ -1,8 +1,7 @@
+import "./InputStyle.scss";
 
-import './InputStyle.scss'
-
-function InputStyle({children}) {
-    return children;
+function InputStyle({ children }) {
+  return children;
 }
 
 export default InputStyle;

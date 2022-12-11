@@ -1,0 +1,13 @@
+{
+  "editor.minimap.scale": 2,
+  "scssFormatter.trailingComma": "all",
+  "workbench.sash.size": 2,
+  "editor.tabSize": 2,
+  "prettier.bracketSpacing": true,
+  "prettier.tabWidth": 2,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "markdown.preview.fontSize": 14,
+  "editor.suggestFontSize": 14
+}

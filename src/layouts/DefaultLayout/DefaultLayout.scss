@@ -1,101 +1,102 @@
 .hug-img-logo {
-    position: relative;
+  position: relative;
 
-    &:hover{
-        opacity: .8;
-    }
+  &:hover {
+    opacity: .8;
+  }
 
-    img{
-        width: 66%;
-    }
+  img {
+    width: 66%;
+  }
 }
+
 .nav-center {
-    background: var(--BGR-color-nav);
+  background: var(--BGR-color-nav);
 
-    .list_nav-center{
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: var(--height-nav-center);
-        justify-content: space-between;
+  .list_nav-center {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--height-nav-center);
+    justify-content: space-between;
 
-        .heading-cart{
-            font-size: 2.5rem;
-            color: white;
-            position: relative;
-            display: block;
-            padding-left: 36px;
-            cursor: pointer;
+    .heading-cart {
+      font-size: 2.5rem;
+      color: white;
+      position: relative;
+      display: block;
+      padding-left: 36px;
+      cursor: pointer;
 
-            &::after{
-                display: block;
-                content: "";
-                position: absolute;
-                width: 1px;
-                background: var(--white);
-                height: 70%;
-                top: 7px;
-                left: 0;
-            }
-        }
-
-        .list-icon-nav{
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-
-
-            .wrapper-icon-nav{
-                position: relative;
-                position: relative;
-                margin: auto;
-
-                i{
-                    font-size: 3rem;
-                    color: white;
-                    padding: 0 12px;
-                }
-
-
-                .wrapper-list-cart{
-                    position: absolute;
-                    right: -25px;
-                    top: 44px;
-                    z-index: 99;
-                    box-shadow: 0px 0px 3px #acacac;
-                    background: var(--white);
-                    border-radius: 2px;
-                }
-
-                .length-items-to-cart{
-                    position: absolute;
-                    top: 0;
-                    right: 3px;
-                    background: white;
-                    display: block;
-                    padding: 0px 6px;
-                    text-align: center;
-                    color: red;
-                    line-height: 2rem;
-                    border-radius: 50px;
-                }
-            }
-
-            .wrapper_avatar{
-                width: 34px;
-                height: 34px;
-                border-radius: 50px;
-                border: 2px solid #e2e2e2;
-                overflow: hidden;
-    
-                img{
-                    width: 100%;
-                }
-            }
-
-        }
-
-     
-        
+      &::after {
+        display: block;
+        content: "";
+        position: absolute;
+        width: 1px;
+        background: var(--white);
+        height: 70%;
+        top: 7px;
+        left: 0;
+      }
     }
+
+    .list-icon-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+
+      .wrapper-icon-nav {
+        position: relative;
+        position: relative;
+        margin: auto;
+
+        i {
+          font-size: 3rem;
+          color: white;
+          padding: 0 12px;
+        }
+
+
+        .wrapper-list-cart {
+          position: absolute;
+          right: -25px;
+          top: 44px;
+          z-index: 99;
+          box-shadow: 0px 0px 3px #acacac;
+          background: var(--white);
+          border-radius: 2px;
+        }
+
+        .length-items-to-cart {
+          position: absolute;
+          top: 0;
+          right: 3px;
+          background: white;
+          display: block;
+          padding: 0px 6px;
+          text-align: center;
+          color: red;
+          line-height: 2rem;
+          border-radius: 50px;
+        }
+      }
+
+      .wrapper_avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50px;
+        border: 2px solid #e2e2e2;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+
+    }
+
+
+
+  }
 }

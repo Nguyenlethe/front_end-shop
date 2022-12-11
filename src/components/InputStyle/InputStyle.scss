@@ -1,230 +1,230 @@
+.sub-heading {
+ font-size: 1.6rem;
+ text-transform: uppercase;
+ padding: 5px 20px;
+ background-color: var(--BGR-color-btn-manageuser);
+ color: white;
+ font-weight: 500;
+ border-radius: 50px;
+ box-shadow: 1px 1px 10px rgb(173, 172, 172);
+ cursor: pointer;
+ border: none;
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ margin: 20px 0;
+ display: block;
+ text-align: center;
+ width: 78%;
 
-
-.sub-heading{
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    padding: 5px 20px;
-    background-color: var(--BGR-color-btn-manageuser);
-    color: white;
-    font-weight: 500;
-    border-radius: 50px;
-    box-shadow: 1px 1px 10px rgb(173, 172, 172);
-    cursor: pointer;
-    border: none;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 20px 0;
-    display: block;
-    text-align: center;
-    width: 78%;
-    .icon-user{
-        margin-left:14px;
-    }
+ .icon-user {
+  margin-left: 14px;
+ }
 }
 
-.sub-heading.edit{
-    background-color: var(--BGR-color-btn-manageuser-edit);
+.sub-heading.edit {
+ background-color: var(--BGR-color-btn-manageuser-edit);
 }
 
-.all-input{
-    height: 0px;
-    overflow: hidden;
-    transition: height .5s linear;
-    -webkit-transition: height .5s linear;
+.all-input {
+ height: 0px;
+ overflow: hidden;
+ transition: height .5s linear;
+ -webkit-transition: height .5s linear;
 
-    .list-input{
-        display: flex;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-        margin-top: -15px;
-        flex-wrap: wrap;
+ .list-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: -15px;
+  flex-wrap: wrap;
 
-        
-    
-
-        .form-input{
-            margin: 0 0 5px 0;
-            position: relative;
-            
-            
-            .input-label{
-                font-size: var(--font-size-label);
-                height: var(--height-label);
-            }
-            
-            .input{
-                width: calc(100% - var(--width-eye));
-                float: left;
-                border-radius:6px;
-                outline: none;
-                border: 1px solid #ccc;
-                width: 100%;
-                height: var(--height-input);
-                padding-left: var(--padding-left);
-                font-size: 1.6rem;
-                cursor: pointer;
-                position: relative;
-                z-index: 1;
-                background-color:transparent;
-            }
-            .input[name='idItems']{
-                text-transform: uppercase;
-            }
-            .input[type='file']{
-                padding: 0;
-                
-                &::-webkit-file-upload-button {
-                    visibility: hidden;
-                }
+  .form-input {
+   margin: 0 0 5px 0;
+   position: relative;
 
 
-                &::before {
-                    content: 'Select some files';
-                    display: inline-block;
-                    background: var(var(--color-BTN-manage));
-                    width: 25%;
-                    border-right: 1px solid rgb(153, 153, 153);
-                    border-radius: 3px;
-                    padding: 10px 8px;
-                    outline: none;
-                    white-space: nowrap;
-                    text-align: center;
-                    -webkit-user-select: none;
-                    cursor: pointer;
-                    color: rgb(255, 255, 255);
-                    text-shadow: 1px 1px rgb(0, 0, 0);
-                    font-weight: 500;
-                    font-size: 1.6rem;
-                    height: 100%;
-                }
+   .input-label {
+    font-size: var(--font-size-label);
+    height: var(--height-label);
+   }
 
-            
-                &:active::before {
-                    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-                }
-                &:disabled {
-                    &::before {  
-                        background: rgb(72, 72, 72);
-                    }
-                }
-            }
-            
-            .planceholder_input{
-                position: absolute;
-                top: calc(50% );
-                transform: translateY(-50%);
-                width: calc(100% - var(--width-eye) );
-                left: calc(var(--padding-left) * 2);
-                font-size: var(--font-size-label);
-                color:rgb(159, 157, 157);
-            }
-            .err{
-                color: red;
-                display: block;
-                width: 100%;
-                font-size: var(--font-size-label);
-                height: var(--height-label);
-            }
-
-
-        }
-        .form-input.password{
-            .input[name='password']{
-                width: calc(100% - var(--width-eye));
-                border-right: transparent;
-                border-top-right-radius: 0 ;
-                border-bottom-right-radius: 0 ;
-                float: left;
-            }
-            .eye-password{
-                position: relative;
-                z-index: 2;
-                display: flex;
-                width: var(--width-eye);
-                font-size: var(--font-size-label);
-                height: var(--height-input);
-                float: right;
-                align-items: center;
-                justify-content:center;
-                border: 1px solid #ccc;
-                border-radius:6px;
-                border-left: 0px;
-                border-top-left-radius: 0 ;
-                border-bottom-left-radius: 0 ;
-            }
-        }
-    
-        .form-input.full{
-            margin: 0 0 20px 0;
-            width: 100%;
-        }
-
-    }
-
-    .list-input.size{
-        justify-content: flex-start;
-
-        .list-input-size{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            border-right:1px solid #ccc;
-        
-            
-            
-            
-            
-            .input {
-                width: calc(100% - var(--width-eye));
-                float: left;
-                border-radius:6px;
-                outline: none;
-                border: 1px solid #ccc;
-                width: 100%;
-                height: var(--height-input);
-                padding-left: var(--padding-left);
-                font-size: 1.6rem;
-                cursor: pointer;
-                position: relative;
-                z-index: 999;
-                background-color:transparent;
-                font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-            }
-            .input-check{
-                height: 20px;
-                width: 20px;
-            }
-
-        }
-    }
-
-   
-    
-   
-}   
-
-.pewview-img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+   .input {
+    width: calc(100% - var(--width-eye));
+    float: left;
+    border-radius: 6px;
+    outline: none;
     border: 1px solid #ccc;
-    padding: 8px;
-    margin-top: 30px;
+    width: 100%;
+    height: var(--height-input);
+    padding-left: var(--padding-left);
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+   }
 
-    .pewview-border-img{
-        width: 250px;
-        height: 250px;
-        overflow: hidden;
-        border-radius: 50%;
-        margin: auto;
-        display: block;
+   .input[name='idItems'] {
+    text-transform: uppercase;
+   }
 
-        .avata-img{
-            width: 100%;
-        }
+   .input[type='file'] {
+    padding: 0;
+
+    &::-webkit-file-upload-button {
+     visibility: hidden;
     }
+
+
+    &::before {
+     content: 'Select some files';
+     display: inline-block;
+     background: var(var(--color-BTN-manage));
+     width: 25%;
+     border-right: 1px solid rgb(153, 153, 153);
+     border-radius: 3px;
+     padding: 10px 8px;
+     outline: none;
+     white-space: nowrap;
+     text-align: center;
+     -webkit-user-select: none;
+     cursor: pointer;
+     color: rgb(255, 255, 255);
+     text-shadow: 1px 1px rgb(0, 0, 0);
+     font-weight: 500;
+     font-size: 1.6rem;
+     height: 100%;
+    }
+
+
+    &:active::before {
+     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+
+    &:disabled {
+     &::before {
+      background: rgb(72, 72, 72);
+     }
+    }
+   }
+
+   .planceholder_input {
+    position: absolute;
+    top: calc(50%);
+    transform: translateY(-50%);
+    width: calc(100% - var(--width-eye));
+    left: calc(var(--padding-left) * 2);
+    font-size: var(--font-size-label);
+    color: rgb(159, 157, 157);
+   }
+
+   .err {
+    color: red;
+    display: block;
+    width: 100%;
+    font-size: var(--font-size-label);
+    height: var(--height-label);
+   }
+
+
+  }
+
+  .form-input.password {
+   .input[name='password'] {
+    width: calc(100% - var(--width-eye));
+    border-right: transparent;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    float: left;
+   }
+
+   .eye-password {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: var(--width-eye);
+    font-size: var(--font-size-label);
+    height: var(--height-input);
+    float: right;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    border-left: 0px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+   }
+  }
+
+  .form-input.full {
+   margin: 0 0 20px 0;
+   width: 100%;
+  }
+
+ }
+
+ .list-input.size {
+  justify-content: flex-start;
+
+  .list-input-size {
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   border-right: 1px solid #ccc;
+
+
+
+
+
+   .input {
+    width: calc(100% - var(--width-eye));
+    float: left;
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: var(--height-input);
+    padding-left: var(--padding-left);
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 999;
+    background-color: transparent;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+   }
+
+   .input-check {
+    height: 20px;
+    width: 20px;
+   }
+
+  }
+ }
+
+
+
+
 }
 
+.pewview-img {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: auto;
+ border: 1px solid #ccc;
+ padding: 8px;
+ margin-top: 30px;
 
+ .pewview-border-img {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
 
+  .avata-img {
+   width: 100%;
+  }
+ }
+}

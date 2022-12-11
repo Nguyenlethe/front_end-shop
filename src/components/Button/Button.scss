@@ -1,309 +1,310 @@
-.btn-primary{
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    box-shadow: 0px 0px 2px rgb(202, 202, 202);
-    text-align: center;
-    overflow: hidden;
-    margin: 0 12px;
-    transition: all .25s ease;
-    
-    .btn-primary-link{
-        display: block;
-        font-weight: var(--font-weight);
-        padding: 7px 20px;
-        // font-size: var(--font-size-btn);
-        font-size: 1.4rem;
-        text-decoration: none;
-        min-width: 120px;
-        color: var(--color-frimary-btn-LG);
-        background-color: var(--BGR-frimary-btn-LG);
-        transition: all .25s ease;
-        font-family: var(--font-family-primary);
-        text-transform: uppercase;
-        
+.btn-primary {
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	box-shadow: 0px 0px 2px rgb(202, 202, 202);
+	text-align: center;
+	overflow: hidden;
+	margin: 0 12px;
+	transition: all .25s ease;
+
+	.btn-primary-link {
+		display: block;
+		font-weight: var(--font-weight);
+		padding: 7px 20px;
+		// font-size: var(--font-size-btn);
+		font-size: 1.4rem;
+		text-decoration: none;
+		min-width: 120px;
+		color: var(--color-frimary-btn-LG);
+		background-color: var(--BGR-frimary-btn-LG);
+		transition: all .25s ease;
+		font-family: var(--font-family-primary);
+		text-transform: uppercase;
 
 
-        &:hover{
-            background-color: var(--BGR-frimary-btn-hover-LG);
-            transition: all .25s ease;
 
-        }
-    }
+		&:hover {
+			background-color: var(--BGR-frimary-btn-hover-LG);
+			transition: all .25s ease;
+
+		}
+	}
 }
 
 
-.btn-close{
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    box-shadow: 0px 0px 2px rgb(209, 209, 209);
-    text-align: center;
-    overflow: hidden;
-    margin: 0 12px;
-    transition: all .25s ease;
+.btn-close {
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	box-shadow: 0px 0px 2px rgb(209, 209, 209);
+	text-align: center;
+	overflow: hidden;
+	margin: 0 12px;
+	transition: all .25s ease;
 
 
-    .btn-close-link{
-        display: block;
-        font-weight: var(--font-weight);
-        padding: 5px 20px;
-        font-size: var(--font-size-btn);
-        text-decoration: none;
-        min-width: 120px;
-        color: var(--color-close-btn-LG);
-        background-color: var(--BGR-close-btn-LG);
-        transition: all .25s ease;
-        font-family: var(--font-family-primary);
-        text-transform: uppercase;
-        
+	.btn-close-link {
+		display: block;
+		font-weight: var(--font-weight);
+		padding: 5px 20px;
+		font-size: var(--font-size-btn);
+		text-decoration: none;
+		min-width: 120px;
+		color: var(--color-close-btn-LG);
+		background-color: var(--BGR-close-btn-LG);
+		transition: all .25s ease;
+		font-family: var(--font-family-primary);
+		text-transform: uppercase;
 
 
-        &:hover{
-            color: var(--color-close-btn-hover-LG);
-            transition: all .25s ease;
-            background-color: var(--BGR-close-btn-hover-LG);
-        }
-    }
+
+		&:hover {
+			color: var(--color-close-btn-hover-LG);
+			transition: all .25s ease;
+			background-color: var(--BGR-close-btn-hover-LG);
+		}
+	}
 }
 
 
-.btn-close-transparent{
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    box-shadow: 0px 0px 2px rgb(209, 209, 209);
-    text-align: center;
-    overflow: hidden;
-    margin: 0 12px;
-    background:var(--BGR-close-transparent-btn-LG);
-    transition: all .25s ease;
+.btn-close-transparent {
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	box-shadow: 0px 0px 2px rgb(209, 209, 209);
+	text-align: center;
+	overflow: hidden;
+	margin: 0 12px;
+	background: var(--BGR-close-transparent-btn-LG);
+	transition: all .25s ease;
 
 
-    .btn-close-transparent-link{
-        display: block;
-        font-weight: var(--font-weight);
-        padding: 7px 20px;
-         // font-size: var(--font-size-btn);
-         font-size: 1.4rem;
-        text-decoration: none;
-        min-width: 120px;
-        color: var(--color-close-transparent-btn-LG);
-        background-color: var(--BGR-close-transparent-btn-LG);
-        transition: all .25s ease;
-        font-family: var(--font-family-primary);
-        text-transform: uppercase;
-        
-
-
-        &:hover{
-            color: var(--color-close-transparent-btn-hover-LG);
-            transition: all .25s ease;
-            background-color: var(--BGR-close-transparent-btn-hover-LG);
-        }
-    }
-}
+	.btn-close-transparent-link {
+		display: block;
+		font-weight: var(--font-weight);
+		padding: 7px 20px;
+		// font-size: var(--font-size-btn);
+		font-size: 1.4rem;
+		text-decoration: none;
+		min-width: 120px;
+		color: var(--color-close-transparent-btn-LG);
+		background-color: var(--BGR-close-transparent-btn-LG);
+		transition: all .25s ease;
+		font-family: var(--font-family-primary);
+		text-transform: uppercase;
 
 
 
-
-
-.btn-submit{
-    border: none;
-    outline: none;
-    border-radius: 50px;
-    box-shadow: 0px 0px 2px rgb(209, 209, 209);
-    text-align: center;
-    overflow: hidden;
-    background:var(--BGR-btn-submit-LG);
-    transition: all .2s ease;
-    width: 100%;
-    margin: 20px 0;
-
-    .btn-submit-link{
-        display: block;
-        font-weight: var(--font-weight);
-        padding: 6px 20px;
-        font-size: var(--font-size-btn-submit);
-        text-decoration: none;
-        width: 100%;
-        color: var(--color-btn-submit-LG);
-        background-color: var(--BGR-btn-submit-LG) ;
-        transition: all .2s ease;
-        font-family: var(--font-family-primary);
-        text-transform: uppercase;
-        
-
-
-        &:hover{
-            color: var(--color-btn-submit-hover-LG);
-            transition: all .2s ease;
-            background-color: var(--BGR-btn-submit-hover-LG);
-        }
-    }
-}
-
-
-
-.btn-ban{
-    border: none;
-    outline: none;
-    border-radius: 50px;
-    box-shadow: 0px 0px 2px rgb(209, 209, 209);
-    text-align: center;
-    overflow: hidden;
-    background:var(--BGR-btn-ban-LG);
-    transition: all .2s ease;
-    width: 100%;
-    margin: 20px 0;
-
-    .btn-ban-link{
-        // cursor: no-drop;
-        display: block;
-        font-weight: var(--font-weight);
-        padding: 6px 20px;
-        font-size: var(--font-size-btn-submit);
-        font-family: var(--font-family-primary);
-        text-transform: uppercase;
-        text-decoration: none;
-        width: 100%;
-        color: var(--color-btn-ban-LG);
-        background-color: var(--BGR-btn-ban-LG) ;
-        transition: all .2s ease;
-
-
-        &:hover{
-            transition: all .2s ease;
-        }
-    }
-}
-
-
-.btn-form-input{
-    border: none;
-    outline: none;
-    border-radius: 50px;
-    text-align: center;
-    overflow: hidden;
-    background:var(--BGR-btn-ban-LG);
-    transition: all .2s ease;
-    min-width: 120px;
-
-    .content-btn-form-input{
-        font-size: var(--font-size-btn);
-        text-transform: uppercase;
-        background-color: var(--BGR-color-btn-manageuser);
-        color: white;
-        font-weight: 500;
-        border-radius: 50px;
-        box-shadow: 1px 1px 10px rgb(173, 172, 172);
-        cursor: pointer;
-        border: none;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        display: block;
-        text-align: center;
-        padding: 8px 20px;
-        opacity: .8;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-
-        .icon-user{
-            margin-left:14px;
-        }
-
-        &:hover{
-            opacity: 1
-        }
-    }
-    
-    .content-btn-form-input.edit{
-        background-color: var(--BGR-color-btn-manageuser-edit);
-    }
-
-    .content-btn-form-input.close{
-        background-color: var(--BGR-color-btn-manageuser-close);
-    }
-
-    .content-btn-form-input.ban{
-        background-color: var(--BGR-btn-ban-LG);
-    }
+		&:hover {
+			color: var(--color-close-transparent-btn-hover-LG);
+			transition: all .25s ease;
+			background-color: var(--BGR-close-transparent-btn-hover-LG);
+		}
+	}
 }
 
 
 
 
-.craete-input{
-    border: none;
-    outline: none;
-    border-radius: 79px;
-    text-align: center;
-    overflow: hidden;
-    background:var(--BGR-close-btn-LG);
-    transition: all .2s ease;
-    min-width: 120px;
-    display: flex;
-    align-items: center;
-    font-size: var(--font-size-btn);
-    color: var(--default-color-iconSVG);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
-    .content-btn-form-input.create{
-        padding: 8px 10px 8px 20px;
-        text-transform: uppercase;
-    }
-    svg{
-        margin-right: 20px;
-    }
+.btn-submit {
+	border: none;
+	outline: none;
+	border-radius: 50px;
+	box-shadow: 0px 0px 2px rgb(209, 209, 209);
+	text-align: center;
+	overflow: hidden;
+	background: var(--BGR-btn-submit-LG);
+	transition: all .2s ease;
+	width: 100%;
+	margin: 20px 0;
 
-    &:hover{
-        color: var(--color-btn-ban-hover-LG);
-        background: var(--BGR-color-btn-manageuser);
-    }
-}
+	.btn-submit-link {
+		display: block;
+		font-weight: var(--font-weight);
+		padding: 6px 20px;
+		font-size: var(--font-size-btn-submit);
+		text-decoration: none;
+		width: 100%;
+		color: var(--color-btn-submit-LG);
+		background-color: var(--BGR-btn-submit-LG);
+		transition: all .2s ease;
+		font-family: var(--font-family-primary);
+		text-transform: uppercase;
 
-.submit_voucher{
-    cursor: pointer;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    text-align: center;
-    overflow: hidden;
-    text-transform: uppercase;
-    background: var(--BGR-voucher);
-    transition: all 0.2s ease;
-    min-width: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    margin-left: auto;
-    margin-right: 12px;
-    margin-top: 29%;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    
-    
-    .voucher_items{
-        font-size: var(--font-size-btn);
-        padding: 7px 0;
-        display: block;
-        width: 100%;
-    }
+
+
+		&:hover {
+			color: var(--color-btn-submit-hover-LG);
+			transition: all .2s ease;
+			background-color: var(--BGR-btn-submit-hover-LG);
+		}
+	}
 }
 
 
-.href-link{
-    cursor: pointer;
-    text-decoration: none;
-    text-transform: uppercase;
-    margin-left: auto;
-    margin-top: auto;
-    color: var(--iconSVG-hover);
-        
-    span{
-        font-size: 1.35rem !important;
-        padding: 2px 12px 0px 12px;
-        display: block;
-    }
+
+.btn-ban {
+	border: none;
+	outline: none;
+	border-radius: 50px;
+	box-shadow: 0px 0px 2px rgb(209, 209, 209);
+	text-align: center;
+	overflow: hidden;
+	background: var(--BGR-btn-ban-LG);
+	transition: all .2s ease;
+	width: 100%;
+	margin: 20px 0;
+
+	.btn-ban-link {
+		// cursor: no-drop;
+		display: block;
+		font-weight: var(--font-weight);
+		padding: 6px 20px;
+		font-size: var(--font-size-btn-submit);
+		font-family: var(--font-family-primary);
+		text-transform: uppercase;
+		text-decoration: none;
+		width: 100%;
+		color: var(--color-btn-ban-LG);
+		background-color: var(--BGR-btn-ban-LG);
+		transition: all .2s ease;
+
+
+		&:hover {
+			transition: all .2s ease;
+		}
+	}
+}
+
+
+.btn-form-input {
+	border: none;
+	outline: none;
+	border-radius: 50px;
+	text-align: center;
+	overflow: hidden;
+	background: var(--BGR-btn-ban-LG);
+	transition: all .2s ease;
+	min-width: 120px;
+
+	.content-btn-form-input {
+		font-size: var(--font-size-btn);
+		text-transform: uppercase;
+		background-color: var(--BGR-color-btn-manageuser);
+		color: white;
+		font-weight: 500;
+		border-radius: 50px;
+		box-shadow: 1px 1px 10px rgb(173, 172, 172);
+		cursor: pointer;
+		border: none;
+		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		display: block;
+		text-align: center;
+		padding: 8px 20px;
+		opacity: .8;
+		justify-content: center;
+		display: flex;
+		align-items: center;
+
+		.icon-user {
+			margin-left: 14px;
+		}
+
+		&:hover {
+			opacity: 1
+		}
+	}
+
+	.content-btn-form-input.edit {
+		background-color: var(--BGR-color-btn-manageuser-edit);
+	}
+
+	.content-btn-form-input.close {
+		background-color: var(--BGR-color-btn-manageuser-close);
+	}
+
+	.content-btn-form-input.ban {
+		background-color: var(--BGR-btn-ban-LG);
+	}
+}
+
+
+
+
+.craete-input {
+	border: none;
+	outline: none;
+	border-radius: 79px;
+	text-align: center;
+	overflow: hidden;
+	background: var(--BGR-close-btn-LG);
+	transition: all .2s ease;
+	min-width: 120px;
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-btn);
+	color: var(--default-color-iconSVG);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+	.content-btn-form-input.create {
+		padding: 8px 10px 8px 20px;
+		text-transform: uppercase;
+	}
+
+	svg {
+		margin-right: 20px;
+	}
+
+	&:hover {
+		color: var(--color-btn-ban-hover-LG);
+		background: var(--BGR-color-btn-manageuser);
+	}
+}
+
+.submit_voucher {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	text-align: center;
+	overflow: hidden;
+	text-transform: uppercase;
+	background: var(--BGR-voucher);
+	transition: all 0.2s ease;
+	min-width: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--white);
+	margin-left: auto;
+	margin-right: 12px;
+	margin-top: 29%;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+
+	.voucher_items {
+		font-size: var(--font-size-btn);
+		padding: 7px 0;
+		display: block;
+		width: 100%;
+	}
+}
+
+
+.href-link {
+	cursor: pointer;
+	text-decoration: none;
+	text-transform: uppercase;
+	margin-left: auto;
+	margin-top: auto;
+	color: var(--iconSVG-hover);
+
+	span {
+		font-size: 1.35rem !important;
+		padding: 2px 12px 0px 12px;
+		display: block;
+	}
 
 }

@@ -1,303 +1,333 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import SwitchLanguage from '../../../SwitchLanguage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faMagnifyingGlass,faSpinner,faCircleXmark,faCaretDown} from '@fortawesome/free-solid-svg-icons';
-import {languages,DISCOUNTTEXT,ITEMS, path} from '../../../utils/constant';
-import { Link } from 'react-router-dom';
-import appService from '../../../services/appService';
-import notItems from '../../../assets/image/NOT_PRODUCT.png';
+import SwitchLanguage from "../../../SwitchLanguage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMagnifyingGlass,
+  faSpinner,
+  faCircleXmark,
+  faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { languages, DISCOUNTTEXT, ITEMS, path } from "../../../utils/constant";
+import { Link } from "react-router-dom";
+import appService from "../../../services/appService";
+import notItems from "../../../assets/image/NOT_PRODUCT.png";
+import ListItemsSearch from "../../Items/ListItemsSearch";
 
-import ListItemsSearch from '../../Items/ListItemsSearch'
-
-
-import'./InputSearchNav.scss';
+import "./InputSearchNav.scss";
 
 class InputSearchNav extends Component {
-    constructor(props){
-        super(props);
-        this.listOptions = React.createRef();
-        this.inputSearch = React.createRef();
-        this.listResultDataSearch = React.createRef();
-        this.state = {
-            isShowOptionsSearchNav: false,
-            isHideOptionsSearchNav: false,
-            isLoad :false,
-            isHideFormDataOptionsSearch: false,
-            isAccept: true,
+  constructor(props) {
+    super(props);
+    this.listOptions = React.createRef();
+    this.inputSearch = React.createRef();
+    this.listResultDataSearch = React.createRef();
+    this.state = {
+      isShowOptionsSearchNav: false,
+      isHideOptionsSearchNav: false,
+      isLoad: false,
+      isHideFormDataOptionsSearch: false,
+      isAccept: true,
 
-            numberItems: 0,
-            valueInput: '',
-            dataSearchInput: [],
-            dataOptionsSearch: [
-                {
-                    idShop: 'EMPTY',
-                    category: 'All',
-                    type: 'EMPTY',
-                    valueTextInputEN: 'Full floor',
-                    valueTextInputVI: 'Toàn sàn',
-                },
-            ]
-        }
-    }
-    
-    // Component DidMount 
-    componentDidMount = async() => {
-        let {} = this.props
-        let {} = this.state
+      numberItems: 0,
+      valueInput: "",
+      dataSearchInput: [],
+      dataOptionsSearch: [
+        {
+          idShop: "EMPTY",
+          category: "All",
+          type: "EMPTY",
+          valueTextInputEN: "Full floor",
+          valueTextInputVI: "Toàn sàn",
+        },
+      ],
+    };
+  }
 
-    }
+  // Component DidMount
+  componentDidMount = async () => {
+    let {} = this.props;
+    let {} = this.state;
+  };
 
-    // Component Update
-    componentDidUpdate = async(prevProps, prevState) => {
-        let {dataOptionsSearch} = this.state
-        let {} = this.props
+  // Component Update
+  componentDidUpdate = async (prevProps, prevState) => {
+    let { dataOptionsSearch } = this.state;
+    let {} = this.props;
 
-        // Khi language thay đổi
-        if(prevProps.language !== this.props.language){
-
-        }
-
-        // Khi data options thay đổi
-        if(prevProps.dataOptions !== this.props.dataOptions){
-            let newDataOptionsSearch = [this.props.dataOptions,dataOptionsSearch[0]]
-
-            this.setState({
-                dataOptionsSearch: newDataOptionsSearch
-            })
-        }
+    // Khi language thay đổi
+    if (prevProps.language !== this.props.language) {
     }
 
-    // Click edd options
-    handleAddOptionsSearchNav = (option) => {
-        let {dataOptionsSearch} = this.state
-        let optionSelect = dataOptionsSearch.filter(item => item.type !== option.type)
-        let newDataOptionsSearch = [option,optionSelect[0]]
+    // Khi data options thay đổi
+    if (prevProps.dataOptions !== this.props.dataOptions) {
+      let newDataOptionsSearch = [this.props.dataOptions, dataOptionsSearch[0]];
 
+      this.setState({
+        dataOptionsSearch: newDataOptionsSearch,
+      });
+    }
+  };
+
+  // Click edd options
+  handleAddOptionsSearchNav = (option) => {
+    let { dataOptionsSearch } = this.state;
+    let optionSelect = dataOptionsSearch.filter(
+      (item) => item.type !== option.type
+    );
+    let newDataOptionsSearch = [option, optionSelect[0]];
+
+    this.setState({
+      isShowOptionsSearchNav: false,
+      dataOptionsSearch: newDataOptionsSearch,
+    });
+  };
+
+  // handleHoverOptionsSearch
+  handleHoverOptionsSearch = () => {
+    let { dataOptionsSearch } = this.state;
+
+    if (dataOptionsSearch.length > 1) {
+      this.setState({
+        isShowOptionsSearchNav: true,
+      });
+    }
+  };
+
+  // Handle hide options
+  handleHideOptionsSearch = () => {
+    let { dataOptionsSearch } = this.state;
+
+    if (dataOptionsSearch.length > 1) {
+      const listOptions = this.listOptions.current;
+      listOptions.classList.remove("keyfame");
+      listOptions.classList.remove("keyfameOut");
+      listOptions.classList.add("keyfameOut");
+
+      setTimeout(() => {
         this.setState({
-            isShowOptionsSearchNav: false,
-            dataOptionsSearch: newDataOptionsSearch
-        })
-    } 
-
-    // handleHoverOptionsSearch
-    handleHoverOptionsSearch = () => {
-        let {dataOptionsSearch} = this.state
-
-        if(dataOptionsSearch.length > 1){
-            this.setState({
-                isShowOptionsSearchNav: true
-            })
-        }
+          isShowOptionsSearchNav: false,
+        });
+      }, 300);
     }
+  };
 
-    // Handle hide options
-    handleHideOptionsSearch = () => {
-        let {dataOptionsSearch} = this.state
+  // Change input
+  handleChangeInputSearchNav = async (value) => {
+    let { dataOptionsSearch } = this.state;
 
-        if(dataOptionsSearch.length > 1){
-            const listOptions = this.listOptions.current
-            listOptions.classList.remove('keyfame')
-            listOptions.classList.remove('keyfameOut')
-            listOptions.classList.add('keyfameOut')
-    
-            setTimeout(() => {
-                this.setState({
-                    isShowOptionsSearchNav: false
-                })
-            },300)
-        }
-    }
+    this.setState({
+      isHideFormDataOptionsSearch: true,
+      isLoad: true,
+      valueInput: value,
+    });
 
-    // Change input
-    handleChangeInputSearchNav = async(value) => {
-        let {dataOptionsSearch} = this.state
-     
+    if (value !== "") {
+      let res = await appService.searchItemsNameNav({
+        idShop: dataOptionsSearch[0].idShop,
+        category: dataOptionsSearch[0].category,
+        type: dataOptionsSearch[0].type,
+        language: this.props.language,
+        value: value,
+        limit: ITEMS.LIMIT_SHOW_SEARCH,
+        page: 1,
+      });
+
+      if (res && res.data && res.data.errCode === 0) {
         this.setState({
-            isHideFormDataOptionsSearch: true,
-            isLoad : true,
-            valueInput: value,
-        })
-        
+          numberItems: res.data.count,
+          isLoad: false,
+          dataSearchInput: res.data.data,
+        });
+      }
 
-        if(value !== ''){
-
-            let res = await appService.searchItemsNameNav({
-                idShop: dataOptionsSearch[0].idShop, 
-                category: dataOptionsSearch[0].category, 
-                type: dataOptionsSearch[0].type,
-                language: this.props.language, value: value, 
-                limit: ITEMS.LIMIT_SHOW_SEARCH, 
-                page: 1,
-            })
-
-            
-            if(res && res.data && res.data.errCode === 0){
-                this.setState({
-                    numberItems: res.data.count,
-                    isLoad : false,
-                    dataSearchInput: res.data.data
-                })
-            }
-    
-            if(res && res.data && res.data.errCode !== 0){
-                this.setState({
-                    isLoad : false,
-                    dataSearchInput: [],
-                    numberItems: 0,
-                })
-            }
-        }
-
-        if(value === ''){
-            
-            this.setState({
-                isLoad : false,
-                dataSearchInput: [],
-                numberItems: 0,
-                isHideFormDataOptionsSearch: false,
-            })
-        }
+      if (res && res.data && res.data.errCode !== 0) {
+        this.setState({
+          isLoad: false,
+          dataSearchInput: [],
+          numberItems: 0,
+        });
+      }
     }
 
-    
-    // Hide list options data search
-    handleShowHideListDataOptions = async (type) => {
-        let {valueInput} = this.state
-        let isShowHide = false
-        let isAcceptInput = true
-        const nodeInpt = this.inputSearch.current
-      
+    if (value === "") {
+      this.setState({
+        isLoad: false,
+        dataSearchInput: [],
+        numberItems: 0,
+        isHideFormDataOptionsSearch: false,
+      });
+    }
+  };
 
-        if(type === 'FOCUS' && valueInput !== ''){
-            isShowHide = true
-            isAcceptInput = true
+  // Hide list options data search
+  handleShowHideListDataOptions = async (type) => {
+    let { valueInput } = this.state;
+    let isShowHide = false;
+    let isAcceptInput = true;
+    const nodeInpt = this.inputSearch.current;
 
-            this.setState({
-                isHideFormDataOptionsSearch: isShowHide,
-                isAccept: isAcceptInput
-            })
-        }
+    if (type === "FOCUS" && valueInput !== "") {
+      isShowHide = true;
+      isAcceptInput = true;
 
-
-        if(type === 'SEARCH_ICON'){
-            isAcceptInput = false
-            isShowHide = true
-
-            
-            this.setState({
-                isHideFormDataOptionsSearch: isShowHide,
-                isAccept: isAcceptInput
-            })
-        }
-
-
-
-        if(!type){
-            this.setState({
-                isHideFormDataOptionsSearch: isShowHide,
-                isAccept: isAcceptInput
-            })
-        }
-
+      this.setState({
+        isHideFormDataOptionsSearch: isShowHide,
+        isAccept: isAcceptInput,
+      });
     }
 
+    if (type === "SEARCH_ICON") {
+      isAcceptInput = false;
+      isShowHide = true;
 
-    render() {
+      this.setState({
+        isHideFormDataOptionsSearch: isShowHide,
+        isAccept: isAcceptInput,
+      });
+    }
 
-    let {dataOptionsSearch,isShowOptionsSearchNav,isLoad,valueInput,dataSearchInput,isHideFormDataOptionsSearch,numberItems,isAccept} = this.state
-    let {language,isCartPage} = this.props
+    if (!type) {
+      this.setState({
+        isHideFormDataOptionsSearch: isShowHide,
+        isAccept: isAcceptInput,
+      });
+    }
+  };
 
-
-
+  render() {
+    let {
+      dataOptionsSearch,
+      isShowOptionsSearchNav,
+      isLoad,
+      valueInput,
+      dataSearchInput,
+      isHideFormDataOptionsSearch,
+      numberItems,
+      isAccept,
+    } = this.state;
+    let { language, isCartPage } = this.props;
 
     return (
-        <div className='border-input-search-nav'>
-            <input  type='text' name='search'
-                value={valueInput} onBlur={() => isAccept && setTimeout(() => {this.handleShowHideListDataOptions()},200)} onFocus={() => isAccept && this.handleShowHideListDataOptions('FOCUS')}
-                placeholder={languages.EN === language ? 'Search product...' : 'Tìm kiếm sản phẩm...'}  autoComplete="off"
-                onChange={(e) => this.handleChangeInputSearchNav(e.target.value)}  ref={this.inputSearch}
+      <div className="border-input-search-nav">
+        <input
+          type="text"
+          name="search"
+          value={valueInput}
+          onBlur={() =>
+            isAccept &&
+            setTimeout(() => {
+              this.handleShowHideListDataOptions();
+            }, 200)
+          }
+          onFocus={() =>
+            isAccept && this.handleShowHideListDataOptions("FOCUS")
+          }
+          placeholder={
+            languages.EN === language
+              ? "Search product..."
+              : "Tìm kiếm sản phẩm..."
+          }
+          autoComplete="off"
+          onChange={(e) => this.handleChangeInputSearchNav(e.target.value)}
+          ref={this.inputSearch}
+        />
+
+        <div className="list-icon-input">
+          {isLoad && <FontAwesomeIcon className="icon-load" icon={faSpinner} />}
+          {valueInput !== "" && !isLoad && (
+            <FontAwesomeIcon
+              onClick={() => this.handleChangeInputSearchNav("")}
+              className="icon-close"
+              icon={faCircleXmark}
             />
-
-            <div className='list-icon-input'>
-                {isLoad && 
-                    <FontAwesomeIcon className='icon-load' icon={faSpinner} /> 
-                }
-                {valueInput !== '' && !isLoad &&  <FontAwesomeIcon onClick={() => this.handleChangeInputSearchNav('')} className='icon-close' icon={faCircleXmark} /> } 
-            </div>
-
-            {isCartPage !== true &&
-                <>
-                    <span style={{color: 'var(--sub-text)'}}>{' | '}</span>
-
-                    <div className='select-type-search' onMouseOver={() => this.handleHoverOptionsSearch()} onMouseLeave={() => this.handleHideOptionsSearch()}>
-                        <option className='options' value={dataOptionsSearch[0].type}>{languages.EN === language ? 
-                            dataOptionsSearch[0].valueTextInputEN.length > 13 ? dataOptionsSearch[0].valueTextInputEN.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputEN  : 
-                            dataOptionsSearch[0].valueTextInputVI.length > 13 ? dataOptionsSearch[0].valueTextInputVI.slice(0, 13) + '...' : dataOptionsSearch[0].valueTextInputVI }
-                        </option>
-                        <FontAwesomeIcon className='icon-select ' icon={faCaretDown} />  
-
-                        {isShowOptionsSearchNav && dataOptionsSearch.length > 1 &&
-                            <div className='list-options keyfame' ref={this.listOptions}>
-                                {dataOptionsSearch.map(option =>{
-                                    return (
-                                        <option className='options' value={option.type} key={option.type} onClick={() => this.handleAddOptionsSearchNav(option)}>
-                                            {languages.EN === language ? 
-                                            option.valueTextInputEN.length > 13 ? option.valueTextInputEN.slice(0, 13) + '...' : option.valueTextInputEN  : 
-                                            option.valueTextInputVI.length > 13 ? option.valueTextInputVI.slice(0, 13) + '...' : option.valueTextInputVI }
-                                        </option>
-                                    )
-                                })}
-                            </div>
-                        }
-                    </div>
-                </>
-            }
-
-
-            <ListItemsSearch 
-                isHideFormDataOptionsSearch={isHideFormDataOptionsSearch}   
-                numberItems={numberItems}  
-                limitShowItems={ITEMS.LIMIT_SHOW_SEARCH}  
-                handleShowHideListDataOptions={this.handleShowHideListDataOptions}
-                dataSearchInput={dataSearchInput}
-                valueInput={valueInput}
-                dataOptionsSearch={dataOptionsSearch}
-            />
-
-
-            <div className='border-icon-search'>
-                <FontAwesomeIcon className='icon-search'
-                    icon={faMagnifyingGlass} 
-                />
-                <input type='text' onMouseDown={() => this.handleShowHideListDataOptions('SEARCH_ICON')}
-                    onBlur={() => setTimeout(() => {this.handleShowHideListDataOptions()},200)}
-                />
-            </div>
-
+          )}
         </div>
-    )}
-} 
 
+        {isCartPage !== true && (
+          <>
+            <span style={{ color: "var(--sub-text)" }}>{" | "}</span>
 
-const mapStateToProps = state => {
-    
-    return {
-        language: state.app.language,
-        dataOptions: state.app.dataOptions,
+            <div
+              className="select-type-search"
+              onMouseOver={() => this.handleHoverOptionsSearch()}
+              onMouseLeave={() => this.handleHideOptionsSearch()}
+            >
+              <option className="options" value={dataOptionsSearch[0].type}>
+                {languages.EN === language
+                  ? dataOptionsSearch[0].valueTextInputEN.length > 13
+                    ? dataOptionsSearch[0].valueTextInputEN.slice(0, 13) + "..."
+                    : dataOptionsSearch[0].valueTextInputEN
+                  : dataOptionsSearch[0].valueTextInputVI.length > 13
+                  ? dataOptionsSearch[0].valueTextInputVI.slice(0, 13) + "..."
+                  : dataOptionsSearch[0].valueTextInputVI}
+              </option>
+              <FontAwesomeIcon className="icon-select " icon={faCaretDown} />
 
-    }
+              {isShowOptionsSearchNav && dataOptionsSearch.length > 1 && (
+                <div className="list-options keyfame" ref={this.listOptions}>
+                  {dataOptionsSearch.map((option) => {
+                    return (
+                      <option
+                        className="options"
+                        value={option.type}
+                        key={option.type}
+                        onClick={() => this.handleAddOptionsSearchNav(option)}
+                      >
+                        {languages.EN === language
+                          ? option.valueTextInputEN.length > 13
+                            ? option.valueTextInputEN.slice(0, 13) + "..."
+                            : option.valueTextInputEN
+                          : option.valueTextInputVI.length > 13
+                          ? option.valueTextInputVI.slice(0, 13) + "..."
+                          : option.valueTextInputVI}
+                      </option>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        <ListItemsSearch
+          isHideFormDataOptionsSearch={isHideFormDataOptionsSearch}
+          numberItems={numberItems}
+          limitShowItems={ITEMS.LIMIT_SHOW_SEARCH}
+          handleShowHideListDataOptions={this.handleShowHideListDataOptions}
+          dataSearchInput={dataSearchInput}
+          valueInput={valueInput}
+          dataOptionsSearch={dataOptionsSearch}
+        />
+
+        <div className="border-icon-search">
+          <FontAwesomeIcon className="icon-search" icon={faMagnifyingGlass} />
+          <input
+            type="text"
+            onMouseDown={() =>
+              this.handleShowHideListDataOptions("SEARCH_ICON")
+            }
+            onBlur={() =>
+              setTimeout(() => {
+                this.handleShowHideListDataOptions();
+              }, 200)
+            }
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-       
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    language: state.app.language,
+    dataOptions: state.app.dataOptions,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputSearchNav);
-
-
-
-
-

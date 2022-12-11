@@ -1,62 +1,81 @@
+.tippy {
+  position: relative;
+  display: inline-block;
+
+  .contents {
+    bottom: calc(-100%);
+    right: 50%;
+    transform: translateX(50%) translateY(5px);
+    position: absolute;
+    text-align: center;
+    display: none;
+    width: 200px;
+    opacity: 0;
+    animation: hideTippy .2s linear forwards;
+    height: calc(var(--font-size-tippy) + 18px);
 
 
+    span {
+      display: inline-block;
+      opacity: 1;
+      color: rgb(255, 255, 255);
+      background-color: rgb(67, 67, 67);
+      padding: 4px 18px;
+      border-radius: 50px;
+      font-size: var(--font-size-tippy);
 
-.tippy{
-    position: relative;
-    display: inline-block;
-
-    .contents{
-        bottom: calc(-100% );
-        right: 50%;
-        transform: translateX(50%) translateY(5px);
+      &::after {
+        z-index: 1;
+        content: "";
         position: absolute;
-        text-align: center;
-        display: none;
-        width: 200px;
-        opacity: 0;
-        animation: hideTippy .2s linear forwards;
-        height: calc(var(--font-size-tippy) + 18px);
+        top: -6.7px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 7px 7px;
+        border-style: solid;
+        border-color: transparent transparent rgba(0, 0, 0, 0.753) transparent;
+      }
+    }
+  }
 
 
-        span{
-            display: inline-block;
-            opacity: 1;
-            color: rgb(255, 255, 255);
-            background-color: rgb(67, 67, 67);
-            padding: 4px 18px;
-            border-radius: 50px;
-            font-size: var(--font-size-tippy);
-    
-            &::after{
-                z-index: 1;
-                content: "";
-                position: absolute;
-                top: -6.7px;
-                left: 50%;
-                transform: translateX(-50%);
-                border-width: 0 7px 7px;
-                border-style: solid;
-                border-color: transparent transparent rgba(0, 0, 0, 0.753) transparent;
-            }
-        }
+  .contents.keyfame {
+    animation: showTippy .17s linear forwards;
+  }
+
+  @keyframes showTippy {
+    0% {
+      opacity: .0;
     }
 
-
-    .contents.keyfame{
-        animation:showTippy .17s linear forwards;
+    50% {
+      opacity: .5;
     }
 
-    @keyframes showTippy {
-        0%   {opacity: .0;}
-        50%  {opacity: .5;}
-        70%  {opacity: .7;}
-        100% {opacity: 1;}
+    70% {
+      opacity: .7;
     }
 
-    @keyframes hideTippy {
-        0%   {opacity: 1;}
-        50%  {opacity: .7;}
-        70%  {opacity: .5;}
-        100% {opacity: 0;}
+    100% {
+      opacity: 1;
     }
+  }
+
+  @keyframes hideTippy {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .7;
+    }
+
+    70% {
+      opacity: .5;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
 }

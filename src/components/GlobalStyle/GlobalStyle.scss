@@ -1,300 +1,308 @@
 @import 'normalize.css';
 
-:root{
-    --primary: #fe2c55;
-    --color-primary-items: #ee4d2d;
-    --black : #000;
-    --white : #fff;
-    --color-text: #333;
-    --sub-text: #ccc;
-    --color-hover:  #f1f1f1;
+:root {
+  --primary: #fe2c55;
+  --color-primary-items: #ee4d2d;
+  --black: #000;
+  --white: #fff;
+  --color-text: #333;
+  --sub-text: #ccc;
+  --color-hover: #f1f1f1;
 
-    // Layout default 
-    --BGR-color-nav-top: linear-gradient( #ee9ca700,#ffdde100);
-    --height-top-nav: 40px;
-    --height-nav-center: 60px;
-    --height-input-search-nav: 40px;
-
-
-    //input 
-    --padding-left: 12px;
-    --height-label: 1.9rem; 
-    --font-size-label: 1.6rem;
-    --height-input: 40px;
-    --color-plh: rgb(159, 157, 157);
-    
-    // Tippy
-    --font-size-tippy: 1.4rem;
-    --height-tippy-nav: 70px;
-    
-    // ManageUser
-    --default-color-iconSVG: #65676B;
-    --iconSVG-hover: #2b72ff;
-    --iconSVG-active: #1B74E4;
-    --size-heading-manage: 22px;
-    --heightHeader: 50px;
-    --BGR-header: #fff;
-    --BGR-color-btn-manageuser: rgb(0, 123, 195);
-    --BGR-color-FB-login: rgb(59, 89, 152);
-    --BGR-color-TW-login: rgb(85, 172, 238);
-
-    --BGR-color-btn-manageuser-edit: rgb(255, 153, 0);
-    
-    // select 
-    --font-size: 1.6rem;
-
-    // Mắt
-    --width-eye: 40px;
-
-    // --font-size-btn: 1.6rem;
-    --font-size-btn: 1.4rem;
-
-    --BGR-frimary-btn-LG: rgba(254, 44, 85, 1.0);
-    --color-frimary-btn-LG: rgba(255, 255, 255, 1.0);
-    --BGR-frimary-btn-hover-LG:rgb(242, 47, 86);
-    --font-weight: 500;
-
-    --BGR-close-btn-LG: rgb(240, 240, 240);
-    --color-close-btn-LG: rgb(44, 44, 44);
-    --BGR-close-btn-hover-LG:rgb(242, 47, 86);
-    --color-close-btn-hover-LG: #fff ;
-    
-    --BGR-close-transparent-btn-LG: rgba(0, 213, 255, 0.048);
-    --color-close-transparent-btn-LG: rgb(255, 255, 255);
-    --BGR-close-transparent-btn-hover-LG:rgb(242, 47, 86);
-    --color-close-transparent-btn-hover-LG: #fff ;
-    
-    --BGR-color-btn-manageuser-close: rgba(153, 152, 152, 0.692);
-    
-    
-    // BTN submit login 
-    --font-size-btn-submit: 2rem;
-    --BGR-btn-submit-LG:  linear-gradient( rgba(254, 44, 85, 1.0),rgb(144, 12, 38));
-    --color-btn-submit-LG: rgb(255, 255, 255);
-    --BGR-btn-submit-hover-LG: rgba(254, 44, 85, 1.0);
-    --color-btn-submit-hover-LG: #fff ;
-
-    --BGR-btn-ban-LG: rgba(159, 224, 255, 0.44);
-    --color-btn-ban-LG: rgb(255, 255, 255);
-    --color-btn-ban-hover-LG: #fff ;
+  // Layout default 
+  --BGR-color-nav-top: linear-gradient(#ee9ca700, #ffdde100);
+  --height-top-nav: 40px;
+  --height-nav-center: 60px;
+  --height-input-search-nav: 40px;
 
 
-    // Form system
-    --width-form-system: 450px;
-    --font-size-heading: 2.9rem;
-    --color-heading: rgb(0, 73, 145);
-    --font-size-label:1.6rem;
+  //input 
+  --padding-left: 12px;
+  --height-label: 1.9rem;
+  --font-size-label: 1.6rem;
+  --height-input: 40px;
+  --color-plh: rgb(159, 157, 157);
+
+  // Tippy
+  --font-size-tippy: 1.4rem;
+  --height-tippy-nav: 70px;
+
+  // ManageUser
+  --default-color-iconSVG: #65676B;
+  --iconSVG-hover: #2b72ff;
+  --iconSVG-active: #1B74E4;
+  --size-heading-manage: 22px;
+  --heightHeader: 50px;
+  --BGR-header: #fff;
+  --BGR-color-btn-manageuser: rgb(0, 123, 195);
+  --BGR-color-FB-login: rgb(59, 89, 152);
+  --BGR-color-TW-login: rgb(85, 172, 238);
+
+  --BGR-color-btn-manageuser-edit: rgb(255, 153, 0);
+
+  // select 
+  --font-size: 1.6rem;
+
+  // Mắt
+  --width-eye: 40px;
+
+  // --font-size-btn: 1.6rem;
+  --font-size-btn: 1.4rem;
+
+  --BGR-frimary-btn-LG: rgba(254, 44, 85, 1.0);
+  --color-frimary-btn-LG: rgba(255, 255, 255, 1.0);
+  --BGR-frimary-btn-hover-LG: rgb(242, 47, 86);
+  --font-weight: 500;
+
+  --BGR-close-btn-LG: rgb(240, 240, 240);
+  --color-close-btn-LG: rgb(44, 44, 44);
+  --BGR-close-btn-hover-LG: rgb(242, 47, 86);
+  --color-close-btn-hover-LG: #fff;
+
+  --BGR-close-transparent-btn-LG: rgba(0, 213, 255, 0.048);
+  --color-close-transparent-btn-LG: rgb(255, 255, 255);
+  --BGR-close-transparent-btn-hover-LG: rgb(242, 47, 86);
+  --color-close-transparent-btn-hover-LG: #fff;
+
+  --BGR-color-btn-manageuser-close: rgba(153, 152, 152, 0.692);
 
 
-    // link
-    --color-hover-link: rgb(6, 67, 136);
+  // BTN submit login 
+  --font-size-btn-submit: 2rem;
+  --BGR-btn-submit-LG: linear-gradient(rgba(254, 44, 85, 1.0), rgb(144, 12, 38));
+  --color-btn-submit-LG: rgb(255, 255, 255);
+  --BGR-btn-submit-hover-LG: rgba(254, 44, 85, 1.0);
+  --color-btn-submit-hover-LG: #fff;
+
+  --BGR-btn-ban-LG: rgba(159, 224, 255, 0.44);
+  --color-btn-ban-LG: rgb(255, 255, 255);
+  --color-btn-ban-hover-LG: #fff;
 
 
-    // Font family btn
-    --font-family-primary:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  // Form system
+  --width-form-system: 450px;
+  --font-size-heading: 2.9rem;
+  --color-heading: rgb(0, 73, 145);
+  --font-size-label: 1.6rem;
 
 
-    // Login or Register
-    --font-size-label-form-login: 1.8rem;   // Font size input + laybel + icon + plancehoder 
-    --color-text-forgot: rgb(100, 100, 100);
-    --height-input-form-login: 4rem;      // height input + btn submit
-
-    // items
-    --color-sub-price: rgb(124, 123, 123);
-    --svg-search: 60px;
-    --items_active: rgb(122, 217, 255);
-    --color-BTN-manage: #d04262;
-    --height-img-child-detail-items: 62.39px;
-    --font-size-name-detail-items: 2rem;
-    --color-price: rgb(233, 66, 37);
-    --bgr-color-detail-items: rgb(240, 237, 237);
-    --btn-add-new-cart: #ffeee8;
+  // link
+  --color-hover-link: rgb(6, 67, 136);
 
 
-    // number page
-    --width-number-page: 30px;
-    --height-number-page: 30px;
-    --margin-number-page: 0 5px;
+  // Font family btn
+  --font-family-primary: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 
-    // voucher
-    --BGR-voucher: #ee4d2d;
+  // Login or Register
+  --font-size-label-form-login: 1.8rem; // Font size input + laybel + icon + plancehoder 
+  --color-text-forgot: rgb(100, 100, 100);
+  --height-input-form-login: 4rem; // height input + btn submit
 
-    // views
-    --BGR-color-nav: linear-gradient(180deg, rgba(255, 15, 15, 0.89), rgb(255 79 46 / 76%));
+  // items
+  --color-sub-price: rgb(124, 123, 123);
+  --svg-search: 60px;
+  --items_active: rgb(122, 217, 255);
+  --color-BTN-manage: #d04262;
+  --height-img-child-detail-items: 62.39px;
+  --font-size-name-detail-items: 2rem;
+  --color-price: rgb(233, 66, 37);
+  --bgr-color-detail-items: rgb(240, 237, 237);
+  --btn-add-new-cart: #ffeee8;
+
+
+  // number page
+  --width-number-page: 30px;
+  --height-number-page: 30px;
+  --margin-number-page: 0 5px;
+
+
+  // voucher
+  --BGR-voucher: #ee4d2d;
+
+  // views
+  --BGR-color-nav: linear-gradient(180deg, rgba(255, 15, 15, 0.89), rgb(255 79 46 / 76%));
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
 
-html{
-    font-size: 62.5%;
+html {
+  font-size: 62.5%;
 }
 
-body{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    text-rendering: optimizeSpeed; 
-    overflow-y: overlay;
+body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  overflow-y: overlay;
 
-    // -moz-user-select: none !important;
-    // -webkit-touch-callout: none!important;
-    // -webkit-user-select: none!important;
-    // -khtml-user-select: none!important;
-    // -moz-user-select: none!important;
-    // -ms-user-select: none!important;
-    // user-select: none!important;
+  // -moz-user-select: none !important;
+  // -webkit-touch-callout: none!important;
+  // -webkit-user-select: none!important;
+  // -khtml-user-select: none!important;
+  // -moz-user-select: none!important;
+  // -ms-user-select: none!important;
+  // user-select: none!important;
 }
 
 
 
 
 html *::-webkit-scrollbar {
-    border-radius: 0;
-    width: 8px;
+  border-radius: 0;
+  width: 8px;
 }
+
 html *::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .15);
 }
+
 html *::-webkit-scrollbar-track {
-    border-radius: 0;
-    background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 
-.heading-manage-user{
-    text-align: center;
-    font-size: var(--size-heading-manage);
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: 500;
-    color: #1b74e4;
+.heading-manage-user {
+  text-align: center;
+  font-size: var(--size-heading-manage);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  color: #1b74e4;
 }
 
-.list-input{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 10px;
+.list-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.css-2613qy-menu{
-    color: red !important ;
-}
-.note{
-    color: red;
+.css-2613qy-menu {
+  color: red !important;
 }
 
-button{
-    font-family: var(--font-family-primary);
+.note {
+  color: red;
+}
+
+button {
+  font-family: var(--font-family-primary);
 }
 
 .rc-md-editor .editor-container {
-    flex: 1 1;
-    display: flex;
-    width: 100%;
-    height: 100% !important;
-    min-height: 0;
-    position: relative;
+  flex: 1 1;
+  display: flex;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0;
+  position: relative;
 }
 
-.list-btn-price{
-    display: flex;
-    justify-content: space-around;
+.list-btn-price {
+  display: flex;
+  justify-content: space-around;
 }
 
-.labels-discount{
-    background: var(--color-price);
-    text-align: center;
-    color: white;
-    padding: 2px 10px;
-    border-radius: 2px;
-    margin-right: 6px;
-    font-size: 1.6rem;
-    line-height: 1.6rem;
+.labels-discount {
+  background: var(--color-price);
+  text-align: center;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 2px;
+  margin-right: 6px;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
 }
 
 
-.list-count-items{
-    display: flex;
-    align-items: flex-end;
-    width: 100%;
+.list-count-items {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
 }
 
-.list-price-tems-detail{
-    margin-top: 15px;
-    display: flex;
-    align-items: flex-end;
-    padding: 8px 12px;
-    background: var(--bgr-color-detail-items);
-    width: 100%;
-    border-radius: 4px;
+.list-price-tems-detail {
+  margin-top: 15px;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 12px;
+  background: var(--bgr-color-detail-items);
+  width: 100%;
+  border-radius: 4px;
 
-    
-    p{
-        font-size: 2rem;
-        line-height: 2rem;
-        text-decoration: line-through;
-        color: #737171;
 
-    }
-    .sub-price{
-        font-size: 1.4rem;
-        text-decoration: none;
-        line-height: 1.4rem;
-        margin-left: 3px;
-    }
+  p {
+    font-size: 2rem;
+    line-height: 2rem;
+    text-decoration: line-through;
+    color: #737171;
 
-    .sub-price.new{
-        font-size: 2.2rem;
-        text-decoration: none;
-        line-height: 2.2rem;
-        margin-left: 3px;
-        margin-bottom: -1px;
-        color: var(--color-price);
-        margin-right: 20px;
-    }
+  }
 
-    .discount-items{
-        margin: 0 0 -2px 20px;
-        font-size: 3rem;
-        line-height: 3rem;
-        color: var(--color-price);
-        font-weight: 600;
-    }
+  .sub-price {
+    font-size: 1.4rem;
+    text-decoration: none;
+    line-height: 1.4rem;
+    margin-left: 3px;
+  }
+
+  .sub-price.new {
+    font-size: 2.2rem;
+    text-decoration: none;
+    line-height: 2.2rem;
+    margin-left: 3px;
+    margin-bottom: -1px;
+    color: var(--color-price);
+    margin-right: 20px;
+  }
+
+  .discount-items {
+    margin: 0 0 -2px 20px;
+    font-size: 3rem;
+    line-height: 3rem;
+    color: var(--color-price);
+    font-weight: 600;
+  }
 }
 
-.grt-20{
-    margin-top: 20px;
+.grt-20 {
+  margin-top: 20px;
 }
 
-.grt-12{
-    margin-top: 12px;
+.grt-12 {
+  margin-top: 12px;
 }
 
-.mgl-12{
-    margin-left: 12px;
+.mgl-12 {
+  margin-left: 12px;
 }
-.mgl-4{
-    margin-left: 4px;
+
+.mgl-4 {
+  margin-left: 4px;
 }
-.mgr-12{
-    margin-right: 12px;
+
+.mgr-12 {
+  margin-right: 12px;
 }
-.mgl-20{
-    margin-left: 20px;
+
+.mgl-20 {
+  margin-left: 20px;
 }
-.mgb-20{
-    margin-bottom: 20px;
+
+.mgb-20 {
+  margin-bottom: 20px;
 }
